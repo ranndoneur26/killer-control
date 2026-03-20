@@ -28,8 +28,8 @@ const AppleIcon = () => (
 /* ── Toast ──────────────────────────────── */
 function ToastItem({ toast, onDismiss }) {
   const s = {
-    success: 'bg-[#ECFDF5] border-[#10B981]/40 text-[#065F46]',
-    error:   'bg-[#FEF2F2] border-[#EF4444]/40 text-[#991B1B]',
+    success: 'bg-[#10B981]/10 border-[#10B981]/40 text-[#10B981]',
+    error:   'bg-[#EF4444]/10 border-[#EF4444]/40 text-[#EF4444]',
   };
   const Icon = toast.type === 'success' ? CheckCircle2 : XCircle;
   return (
@@ -51,9 +51,9 @@ function ToastItem({ toast, onDismiss }) {
 function AuthButton({ loading, disabled, onClick, type = 'button', variant = 'primary', children }) {
   const base = 'w-full flex items-center justify-center gap-2 font-bold rounded-full py-3.5 transition shadow-sm';
   const variants = {
-    primary: `bg-[#4F46E5] text-white hover:bg-[#4338CA] ${(loading || disabled) ? 'opacity-70 cursor-not-allowed' : ''}`,
-    white:   `bg-white text-[#0F172A] border border-[#E2E8F0] hover:bg-[#F8FAFC] ${loading ? 'opacity-70 cursor-not-allowed' : ''}`,
-    dark:    `bg-[#0F172A] text-white hover:bg-black ${loading ? 'opacity-70 cursor-not-allowed' : ''}`,
+    primary: `bg-[var(--primary)] text-white hover:opacity-90 ${(loading || disabled) ? 'opacity-70 cursor-not-allowed' : ''}`,
+    white:   `bg-[var(--bg-surface)] text-[var(--text-primary)] border border-[var(--border)] hover:bg-[var(--bg-elevated)] ${loading ? 'opacity-70 cursor-not-allowed' : ''}`,
+    dark:    `bg-black text-white hover:bg-gray-900 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`,
   };
   return (
     <button type={type} onClick={onClick} disabled={loading || disabled} className={`${base} ${variants[variant]}`}>
@@ -74,7 +74,7 @@ export default function Login() {
   const [showPrivacy, setShowPrivacy] = useState(false);
 
   return (
-    <div className="relative flex flex-col min-h-screen bg-[#F8FAFC] text-[#0F172A]">
+    <div className="relative flex flex-col min-h-screen bg-[var(--bg)] text-[var(--text-primary)]">
       <HeroHeader />
       <TermsModal open={showTerms} onClose={() => setShowTerms(false)} />
       <PrivacyModal open={showPrivacy} onClose={() => setShowPrivacy(false)} />
@@ -91,7 +91,7 @@ export default function Login() {
 
         {/* Logo */}
         <div className="flex justify-center mb-8">
-          <div className="w-16 h-16 bg-[#4F46E5] rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-100">
+          <div className="w-16 h-16 bg-[var(--primary)] rounded-2xl flex items-center justify-center shadow-lg shadow-[var(--primary)]/20">
             <div className="w-8 h-8 border-2 border-white rounded relative flex items-center justify-center">
               <div className="w-4 h-1 bg-white rounded-full absolute" />
               <div className="w-1 h-3 bg-white rounded-full absolute" />
@@ -109,10 +109,10 @@ export default function Login() {
             transition={{ duration: 0.2 }}
             className="text-center mb-8"
           >
-            <h1 className="text-3xl font-bold mb-3 text-[#0F172A]">
+            <h1 className="text-3xl font-bold mb-3 text-[var(--text-primary)]">
               {auth.isLogin ? 'Bienvenido de nuevo' : <>Crea Tu cuenta <span className="text-[#F59E0B]">Killer</span></>}
             </h1>
-            <p className="text-[#64748B] text-sm leading-relaxed font-medium">
+            <p className="text-[var(--text-secondary)] text-sm leading-relaxed font-medium">
               {auth.isLogin
                 ? 'Inicia sesión para acceder a tus suscripciones.'
                 : <>Únete a <span className="text-[#F59E0B]">Killer</span> Control y toma el control de tus gastos.</>}
@@ -142,11 +142,11 @@ export default function Login() {
 
         {/* ── Divider ── */}
         <div className="flex items-center mb-6">
-          <div className="flex-1 border-t border-[#E2E8F0]" />
-          <span className="px-4 text-xs text-[#94A3B8] font-bold tracking-wider uppercase">
+          <div className="flex-1 border-t border-[var(--border)]" />
+          <span className="px-4 text-xs text-[var(--text-muted)] font-bold tracking-wider uppercase">
             O con tu email
           </span>
-          <div className="flex-1 border-t border-[#E2E8F0]" />
+          <div className="flex-1 border-t border-[var(--border)]" />
         </div>
 
         {/* ── Email → Password flow ── */}
@@ -165,8 +165,8 @@ export default function Login() {
                 onChange={e => { auth.setEmail(e.target.value); auth.setEmailError(''); }}
                 placeholder="tu@email.com"
                 disabled={auth.step === 'password' || anyLoading}
-                className={`w-full bg-white text-[#0F172A] rounded-2xl py-4 px-5 pr-12 outline-none border border-[#E2E8F0] shadow-sm
-                  focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5] transition placeholder-[#94A3B8] font-medium
+                className={`w-full bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-2xl py-4 px-5 pr-12 outline-none border border-[var(--border)] shadow-sm
+                  focus:ring-2 focus:ring-[var(--primary)]/20 focus:border-[var(--primary)] transition placeholder-[var(--text-muted)] font-medium
                   disabled:opacity-60 disabled:cursor-default
                   ${auth.emailError ? 'border-red-500 ring-2 ring-red-500/10' : ''}`}
               />
@@ -205,14 +205,14 @@ export default function Login() {
                     placeholder={auth.isLogin ? 'Tu contraseña' : 'Crea una contraseña (mín. 8 caracteres)'}
                     autoFocus
                     disabled={anyLoading}
-                    className={`w-full bg-white text-[#0F172A] rounded-2xl py-4 px-5 pr-12 outline-none border border-[#E2E8F0] shadow-sm
-                      focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5] transition placeholder-[#94A3B8] font-medium
+                    className={`w-full bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-2xl py-4 px-5 pr-12 outline-none border border-[var(--border)] shadow-sm
+                      focus:ring-2 focus:ring-[var(--primary)]/20 focus:border-[var(--primary)] transition placeholder-[var(--text-muted)] font-medium
                       disabled:opacity-60 ${auth.passError ? 'border-red-500 ring-2 ring-red-500/10' : ''}`}
                   />
                   <button
                     type="button"
                     onClick={() => auth.setShowPassword(v => !v)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[#94A3B8] hover:text-[#4F46E5] transition"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)] hover:text-[var(--primary)] transition"
                   >
                     {auth.showPassword ? <EyeOff size={19} /> : <Eye size={19} />}
                   </button>
@@ -225,7 +225,7 @@ export default function Login() {
                     <button 
                       type="button" 
                       onClick={() => auth.handleForgotPassword()}
-                      className="text-xs text-[#4F46E5] font-bold hover:underline"
+                      className="text-xs text-[var(--primary)] font-bold hover:underline"
                     >
                       ¿Olvidaste tu contraseña?
                     </button>
@@ -251,20 +251,20 @@ export default function Login() {
 
         {/* ── Legal & Toggle ── */}
         <div className="mt-8 text-center space-y-5 pb-4">
-          <p className="text-xs text-[#94A3B8] leading-relaxed font-medium">
+          <p className="text-xs text-[var(--text-muted)] leading-relaxed font-medium">
             Al continuar, aceptas nuestros{' '}
-            <button type="button" onClick={() => setShowTerms(true)} className="text-[#4F46E5] hover:underline font-bold">
+            <button type="button" onClick={() => setShowTerms(true)} className="text-[var(--primary)] hover:underline font-bold">
               Términos y Condiciones
             </button>
             {' '}y{' '}
-            <button type="button" onClick={() => setShowPrivacy(true)} className="text-[#4F46E5] hover:underline font-bold">Política de Privacidad</button>.
+            <button type="button" onClick={() => setShowPrivacy(true)} className="text-[var(--primary)] hover:underline font-bold">Política de Privacidad</button>.
           </p>
-          <p className="text-sm text-[#64748B] font-medium">
+          <p className="text-sm text-[var(--text-secondary)] font-medium">
             {auth.isLogin ? '¿No tienes cuenta? ' : '¿Ya tienes cuenta? '}
             <button
               type="button"
               onClick={auth.toggleMode}
-              className="text-[#0F172A] font-bold hover:text-[#4F46E5] transition"
+              className="text-[var(--text-primary)] font-bold hover:text-[var(--primary)] transition"
             >
               {auth.isLogin ? 'Regístrate gratis' : 'Inicia sesión'}
             </button>

@@ -54,12 +54,12 @@ export default function UserManualModal({ open, onClose }) {
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
-          className="relative w-full max-w-2xl bg-[#111A2C] border border-[#1e293b] rounded-[2.5rem] shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
+          className="relative w-full max-w-2xl bg-[var(--bg-surface)] border border-[var(--border)] rounded-[2.5rem] shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
         >
           {/* Header */}
-          <div className="sticky top-0 z-10 bg-[#111A2C]/80 backdrop-blur-xl border-b border-[#1e293b] px-8 py-6 flex items-center justify-between">
+          <div className="sticky top-0 z-10 bg-[var(--bg-surface)]/80 backdrop-blur-xl border-b border-[var(--border)] px-8 py-6 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+              <div className="w-12 h-12 rounded-2xl bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)]">
                 <BookOpen size={24} />
               </div>
               <div>
@@ -86,8 +86,8 @@ export default function UserManualModal({ open, onClose }) {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {ADVANTAGES.map((adv, i) => (
-                  <div key={i} className="bg-[#07101E] border border-[#1e293b] p-5 rounded-3xl group hover:border-primary/30 transition shadow-lg shadow-black/20">
-                    <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition">
+                  <div key={i} className="bg-[var(--bg)] border border-[var(--border)] p-5 rounded-3xl group hover:border-[var(--primary)]/30 transition shadow-lg shadow-black/20">
+                    <div className="w-10 h-10 rounded-xl bg-[var(--primary)]/20 flex items-center justify-center text-[var(--primary)] mb-4 group-hover:scale-110 transition">
                       <adv.icon size={20} />
                     </div>
                     <h3 className="font-bold text-white mb-2">{adv.title}</h3>
@@ -98,15 +98,15 @@ export default function UserManualModal({ open, onClose }) {
             </section>
 
             {/* How to use */}
-            <section className="bg-gradient-to-br from-primary/10 to-transparent p-8 rounded-[2rem] border border-primary/10">
+            <section className="bg-gradient-to-br from-[var(--primary)]/10 to-transparent p-8 rounded-[2rem] border border-[var(--primary)]/10">
               <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
-                <MousePointer2 size={20} className="text-primary" />
+                <MousePointer2 size={20} className="text-[var(--primary)]" />
                 Cómo empezar en 3 pasos
               </h3>
               <div className="space-y-6">
                 {STEPS.map((step, i) => (
                   <div key={i} className="flex gap-4 items-start">
-                    <div className="w-8 h-8 rounded-full bg-primary text-[#07101E] font-black flex items-center justify-center text-xs shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-[var(--primary)] text-[var(--bg)] font-black flex items-center justify-center text-xs shrink-0">
                       {i + 1}
                     </div>
                     <div className="pt-1">
@@ -119,7 +119,7 @@ export default function UserManualModal({ open, onClose }) {
             </section>
 
             {/* Pro Tip */}
-            <section className="bg-[#07101E] border border-dashed border-[#1e293b] p-6 rounded-3xl flex items-center gap-4">
+            <section className="bg-[var(--bg)] border border-dashed border-[var(--border)] p-6 rounded-3xl flex items-center gap-4">
               <div className="bg-yellow-500/10 p-3 rounded-2xl text-yellow-500">
                 <Zap size={24} />
               </div>
@@ -134,10 +134,10 @@ export default function UserManualModal({ open, onClose }) {
           </div>
 
           {/* Footer */}
-          <div className="p-6 bg-[#07101E]/50 border-t border-[#1e293b] flex justify-center">
+          <div className="p-6 bg-[var(--bg)]/50 border-t border-[var(--border)] flex justify-center">
             <button 
               onClick={onClose}
-              className="bg-primary text-[#07101E] px-8 py-3 rounded-2xl font-bold text-sm hover:scale-105 active:scale-95 transition shadow-lg shadow-primary/20"
+              className="bg-[var(--primary)] text-[var(--bg)] px-8 py-3 rounded-2xl font-bold text-sm hover:scale-105 active:scale-95 transition shadow-lg shadow-[var(--primary)]/20"
             >
               ¡Entendido, vamos allá!
             </button>

@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 const SECTIONS = [
   {
     n: '1', title: 'Responsable del tratamiento',
-    body: `El responsable del tratamiento de los datos personales recabados a través de Killer Control es [NOMBRE COMPLETO O RAZÓN SOCIAL], con domicilio en [DIRECCIÓN COMPLETA], NIF/CIF [NIF/CIF], y correo electrónico [EMAIL DE PRIVACIDAD O CONTACTO].`,
+    body: `El responsable del tratamiento de los datos personales recabados a través de Killer Control es Marc Xicola Tugas, con domicilio en C/ Pau Claris 15, baixos. 08100 Mollet del Vallès, NIF/CIF 52172995w, y correo electrónico digitalformacio@gmail.com.`,
   },
   {
     n: '2', title: 'Finalidad del tratamiento',
@@ -21,7 +21,7 @@ const SECTIONS = [
   },
   {
     n: '5', title: 'Base jurídica del tratamiento',
-    body: `Tratamos los datos personales con base en:\n• La ejecución del contrato o de medidas precontractuales, cuando el usuario se registra o utiliza el servicio.\n• El consentimiento del usuario, cuando sea necesario.\n• El cumplimiento de obligaciones legales.\n• El interés legítimo de [NOMBRE LEGAL / TITULAR], por ejemplo, para mejorar la seguridad, prevenir abusos u optimizar el servicio, siempre que dicho interés no prevalezca sobre los derechos del usuario.`,
+    body: `Tratamos los datos personales con base en:\n• La ejecución del contrato o de medidas precontractuales, cuando el usuario se registra o utiliza el servicio.\n• El consentimiento del usuario, cuando sea necesario.\n• El cumplimiento de obligaciones legales.\n• El interés legítimo de Marc Xicola, por ejemplo, para mejorar la seguridad, prevenir abusos u optimizar el servicio, siempre que dicho interés no prevalezca sobre los derechos del usuario.`,
   },
   {
     n: '6', title: 'Conservación de los datos',
@@ -33,19 +33,19 @@ const SECTIONS = [
   },
   {
     n: '8', title: 'Transferencias internacionales',
-    body: `En caso de utilizar proveedores ubicados fuera del Espacio Económico Europeo, los datos podrán ser objeto de transferencias internacionales.\n\n[NOMBRE LEGAL / TITULAR] adoptará las garantías adecuadas exigidas por la normativa aplicable, como cláusulas contractuales tipo o mecanismos equivalentes.`,
+    body: `En caso de utilizar proveedores ubicados fuera del Espacio Económico Europeo, los datos podrán ser objeto de transferencias internacionales.\n\nMarc Xicola adoptará las garantías adecuadas exigidas por la normativa aplicable, como cláusulas contractuales tipo o mecanismos equivalentes.`,
   },
   {
     n: '9', title: 'Derechos del usuario',
-    body: `El usuario puede ejercer sus derechos de:\n• Acceso\n• Rectificación\n• Supresión ("derecho al olvido")\n• Oposición\n• Limitación del tratamiento\n• Portabilidad\n• Retirada del consentimiento en cualquier momento\n\nPara ejercerlos, escribe a [EMAIL DE PRIVACIDAD] indicando tu nombre completo, el derecho que deseas ejercer y los datos identificativos de tu cuenta.\n\nAsimismo, puedes presentar una reclamación ante la autoridad de control competente en tu país.`,
+    body: `El usuario puede ejercer sus derechos de:\n• Acceso\n• Rectificación\n• Supresión ("derecho al olvido")\n• Oposición\n• Limitación del tratamiento\n• Portabilidad\n• Retirada del consentimiento en cualquier momento\n\nPara ejercerlos, escribe a digitalformacio@gmail.com indicando tu nombre completo, el derecho que deseas ejercer y los datos identificativos de tu cuenta.\n\nAsimismo, puedes presentar una reclamación ante la autoridad de control competente en tu país.`,
   },
   {
     n: '10', title: 'Seguridad de la información',
-    body: `[NOMBRE LEGAL / TITULAR] aplica medidas técnicas y organizativas razonables para proteger los datos personales contra pérdida, acceso no autorizado, alteración o divulgación indebida.\n\nNo obstante, el usuario reconoce que ninguna medida de seguridad en internet es absolutamente infalible.`,
+    body: `Marc Xicola aplica medidas técnicas y organizativas razonables para proteger los datos personales contra pérdida, acceso no autorizado, alteración o divulgación indebida.\n\nNo obstante, el usuario reconoce que ninguna medida de seguridad en internet es absolutamente infalible.`,
   },
   {
     n: '11', title: 'Menores de edad',
-    body: `La plataforma no está dirigida a menores de 18 años, salvo que se indique expresamente lo contrario.\n\nSi [NOMBRE LEGAL / TITULAR] detecta que ha recopilado datos de un menor sin base legítima suficiente, podrá proceder a su eliminación.`,
+    body: `La plataforma no está dirigida a menores de 18 años, salvo que se indique expresamente lo contrario.\n\nSi Marc Xicola detecta que ha recopilado datos de un menor sin base legítima suficiente, podrá proceder a su eliminación.`,
   },
   {
     n: '12', title: 'Cookies y tecnologías similares',
@@ -53,7 +53,7 @@ const SECTIONS = [
   },
   {
     n: '13', title: 'Comunicaciones comerciales',
-    body: `Solo se enviarán comunicaciones comerciales cuando:\n• El usuario haya dado su consentimiento.\n• Exista una relación previa y la normativa aplicable lo permita.\n• Se ofrezca en todo momento un mecanismo sencillo para darse de baja.\n\nEl usuario podrá retirar su consentimiento escribiendo a [EMAIL DE CONTACTO] o usando el enlace incluido en cada comunicación.`,
+    body: `Solo se enviarán comunicaciones comerciales cuando:\n• El usuario haya dado su consentimiento.\n• Exista una relación previa y la normativa aplicable lo permita.\n• Se ofrezca en todo momento un mecanismo sencillo para darse de baja.\n\nEl usuario podrá retirar su consentimiento escribiendo a Killercontrolsupport@gmail.com o usando el enlace incluido en cada comunicación.`,
   },
   {
     n: '14', title: 'Decisiones automatizadas y perfiles',
@@ -61,11 +61,11 @@ const SECTIONS = [
   },
   {
     n: '15', title: 'Cambios en esta política',
-    body: `[NOMBRE LEGAL / TITULAR] podrá actualizar esta Política de Privacidad para adaptarla a cambios normativos, técnicos o funcionales.\n\nCuando los cambios sean relevantes, se comunicarán por medios razonables: aviso en la web, dentro de la app o por correo electrónico.`,
+    body: `Marc Xicola podrá actualizar esta Política de Privacidad para adaptarla a cambios normativos, técnicos o funcionales.\n\nCuando los cambios sean relevantes, se comunicarán por medios razonables: aviso en la web, dentro de la app o por correo electrónico.`,
   },
   {
     n: '16', title: 'Contacto',
-    body: `Para cualquier consulta sobre privacidad o protección de datos:\n\n• Responsable: [NOMBRE LEGAL / TITULAR]\n• Email de privacidad: [EMAIL DE PRIVACIDAD]\n• Dirección: [DIRECCIÓN COMPLETA]`,
+    body: `Para cualquier consulta sobre privacidad o protección de datos:\n\n• Responsable: Marc Xicola\n• Email de privacidad: digitalformacio@gmail.com\n• Dirección: C/ Pau Claris 15, baixos. 08100 Mollet del Vallès`,
   },
 ];
 

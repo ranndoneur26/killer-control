@@ -35,10 +35,10 @@ export default function AvatarSelectorModal({ open, currentAvatar, onSelect, onC
           initial={{ opacity: 0, scale: 0.9, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 30 }}
-          className="relative w-full max-w-lg bg-[#111A2C] border border-[#1e293b] rounded-[2.5rem] shadow-2xl overflow-hidden"
+          className="relative w-full max-w-lg bg-[var(--bg-surface)] border border-[var(--border)] rounded-[2.5rem] shadow-2xl overflow-hidden"
         >
           {/* Header */}
-          <div className="bg-[#111A2C]/80 backdrop-blur-xl border-b border-[#1e293b] px-8 py-6 flex items-center justify-between">
+          <div className="bg-[var(--bg-surface)]/80 backdrop-blur-xl border-b border-[var(--border)] px-8 py-6 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400">
                 <Sparkles size={20} />
@@ -69,8 +69,8 @@ export default function AvatarSelectorModal({ open, currentAvatar, onSelect, onC
                   <div className={`
                     relative w-full aspect-square rounded-2xl overflow-hidden border-2 transition-all
                     ${currentAvatar === avatar.url 
-                      ? 'border-primary ring-4 ring-primary/20 bg-primary/10 shadow-[0_0_20px_rgba(0,255,0,0.3)]' 
-                      : 'border-[#1e293b] bg-[#07101E] group-hover:border-primary/50 group-hover:shadow-lg'}
+                      ? 'border-[var(--primary)] ring-4 ring-[var(--primary)]/20 bg-[var(--primary)]/10 shadow-[var(--primary)]/30' 
+                      : 'border-[var(--border)] bg-[var(--bg)] group-hover:border-[var(--primary)]/50 group-hover:shadow-lg'}
                   `}>
                     <img 
                       src={avatar.url} 
@@ -79,7 +79,7 @@ export default function AvatarSelectorModal({ open, currentAvatar, onSelect, onC
                       onError={(e) => { e.target.src = 'https://ui-avatars.com/api/?name=' + avatar.name + '&background=random'; }}
                     />
                   </div>
-                  <span className={`text-[10px] font-bold truncate w-full text-center ${currentAvatar === avatar.url ? 'text-primary' : 'text-gray-500 font-medium'}`}>
+                  <span className={`text-[10px] font-bold truncate w-full text-center ${currentAvatar === avatar.url ? 'text-[var(--primary)]' : 'text-gray-500 font-medium'}`}>
                     {avatar.name}
                   </span>
                 </button>
@@ -88,7 +88,7 @@ export default function AvatarSelectorModal({ open, currentAvatar, onSelect, onC
           </div>
 
           {/* Footer Info */}
-          <div className="bg-[#07101E]/50 px-8 py-5 border-t border-[#1e293b]">
+          <div className="bg-[var(--bg)]/50 px-8 py-5 border-t border-[var(--border)]">
             <p className="text-[10px] text-gray-500 font-medium leading-relaxed italic text-center">
               "En <span className="text-[#F59E0B]">Killer</span> Control, tú eres el protagonista de tu libertad financiera. Elige el rostro que mejor te represente."
             </p>

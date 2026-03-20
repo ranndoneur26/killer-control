@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 const SECTIONS = [
   {
     n: '1', title: 'Información General',
-    body: `En cumplimiento del deber de información recogido en el artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y del Comercio Electrónico (LSSI-CE), se facilitan los siguientes datos informativos:\n\n• Titular: [TU NOMBRE O EMPRESA]\n• CIF/NIF: [TU NIF]\n• Domicilio: [TU DIRECCIÓN]\n• Email: soporte@killercontrol.app`,
+    body: `En cumplimiento del deber de información recogido en el artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y del Comercio Electrónico (LSSI-CE), se facilitan los siguientes datos informativos:\n\n• Titular: Marc Xicola\n• CIF/NIF: 52172995w\n• Domicilio:  C/ Pau Claris 15, baixos. 08100 Mollet del Vallès\n• Email: Killercontrolsupport@gmail.com`,
   },
   {
     n: '2', title: 'Propiedad Intelectual',
@@ -33,12 +33,12 @@ export default function LegalNoticeModal({ open, onClose }) {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 40, opacity: 0 }}
             transition={{ type: 'spring', damping: 30, stiffness: 320 }}
-            className="bg-[#07101E] border border-[#1e293b] rounded-t-3xl sm:rounded-3xl w-full sm:max-w-xl flex flex-col max-h-[85vh]"
+            className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-t-3xl sm:rounded-3xl w-full sm:max-w-xl flex flex-col max-h-[85vh]"
           >
             {/* Header */}
-            <div className="flex items-center gap-4 px-6 py-5 border-b border-[#1e293b] shrink-0 text-white">
-              <div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center shrink-0">
-                <Scale size={20} className="text-purple-400" />
+            <div className="flex items-center gap-4 px-6 py-5 border-b border-[var(--border)] shrink-0 text-white">
+              <div className="w-10 h-10 rounded-xl bg-[var(--primary)]/10 flex items-center justify-center shrink-0">
+                <Scale size={20} className="text-[var(--primary)]" />
               </div>
               <div className="flex-1 min-w-0">
                 <h2 className="font-bold text-lg leading-tight">Aviso Legal</h2>
@@ -54,8 +54,8 @@ export default function LegalNoticeModal({ open, onClose }) {
 
             {/* Body */}
             <div className="overflow-y-auto flex-1 px-6 py-6 space-y-6 no-scrollbar text-white">
-              <div className="flex items-start gap-3 bg-purple-500/5 border border-purple-500/15 rounded-2xl px-4 py-3">
-                <FileText size={16} className="text-purple-400 shrink-0 mt-0.5" />
+              <div className="flex items-start gap-3 bg-[var(--primary)]/5 border border-[var(--primary)]/15 rounded-2xl px-4 py-3">
+                <FileText size={16} className="text-[var(--primary)] shrink-0 mt-0.5" />
                 <p className="text-xs text-gray-300 leading-relaxed">
                   Información legal requerida para la prestación de servicios digitales en el territorio español y la UE.
                 </p>
@@ -64,10 +64,10 @@ export default function LegalNoticeModal({ open, onClose }) {
               {SECTIONS.map(s => (
                 <div key={s.n} className="space-y-2">
                   <h3 className="font-bold text-white text-sm flex items-center gap-2">
-                    <span className="text-[10px] text-purple-400 bg-purple-400/10 px-1.5 py-0.5 rounded">{s.n}</span>
+                    <span className="text-[10px] text-[var(--primary)] bg-[var(--primary)]/10 px-1.5 py-0.5 rounded">{s.n}</span>
                     {s.title}
                   </h3>
-                  <div className="text-sm text-gray-400 leading-relaxed pl-6 border-l border-[#1e293b]">
+                  <div className="text-sm text-gray-400 leading-relaxed pl-6 border-l border-[var(--border)]">
                     {s.body.split('Killer').map((part, i, arr) => (
                       <React.Fragment key={i}>
                         {part}
@@ -80,10 +80,10 @@ export default function LegalNoticeModal({ open, onClose }) {
             </div>
 
             {/* Footer */}
-            <div className="px-6 py-4 border-t border-[#1e293b] shrink-0">
+            <div className="px-6 py-4 border-t border-[var(--border)] shrink-0">
               <button
                 onClick={onClose}
-                className="w-full bg-purple-500/10 text-purple-400 border border-purple-500/20 font-bold rounded-2xl py-3.5 hover:bg-purple-500/20 transition text-sm"
+                className="w-full bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/20 font-bold rounded-2xl py-3.5 hover:bg-[var(--primary)]/20 transition text-sm"
               >
                 Cerrar
               </button>

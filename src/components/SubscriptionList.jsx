@@ -58,22 +58,22 @@ export default function SubscriptionList() {
   const totalMonthly = filteredSubs.reduce((acc, s) => acc + s.price, 0);
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] pb-28">
+    <div className="min-h-screen bg-[var(--bg)] text-[var(--text-primary)] pb-28">
       <HeroHeader />
       <div className="p-6 max-w-lg mx-auto">
         <header className="mb-6 flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-black mb-1">Tus suscripciones <span className="text-[#F59E0B]">Killer</span></h1>
-            <p className="text-[#64748B] text-sm font-medium">Gestiona tus gastos recurrentes</p>
+            <p className="text-[var(--text-secondary)] text-sm font-medium">Gestiona tus gastos recurrentes</p>
           </div>
           <div className="group relative">
             <button 
               onClick={() => navigate('/add')}
-              className="w-10 h-10 rounded-full bg-[#4F46E5] flex items-center justify-center text-white shadow-lg shadow-indigo-100 hover:scale-110 active:scale-95 transition-all cursor-pointer"
+              className="w-10 h-10 rounded-full bg-[var(--primary)] flex items-center justify-center text-white shadow-lg shadow-[var(--primary)]/20 hover:scale-110 active:scale-95 transition-all cursor-pointer"
             >
               <Pencil size={18} strokeWidth={3} />
             </button>
-            <span className="absolute right-0 top-full mt-2 w-max bg-[#0F172A] text-white text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20 shadow-xl">
+            <span className="absolute right-0 top-full mt-2 w-max bg-[var(--text-primary)] text-[var(--bg)] text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20 shadow-xl">
               añadir datos o nueva suscripcion
             </span>
           </div>
@@ -86,13 +86,13 @@ export default function SubscriptionList() {
               placeholder="Buscar suscripción..." 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-white border border-[#E2E8F0] rounded-xl py-3 pl-11 pr-4 outline-none focus:border-[#4F46E5] focus:ring-4 focus:ring-[#4F46E5]/10 shadow-sm transition font-bold text-[#0F172A] placeholder:text-[#94A3B8] placeholder:font-medium"
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border)] rounded-xl py-3 pl-11 pr-4 outline-none focus:border-[var(--primary)] focus:ring-4 focus:ring-[var(--primary)]/10 shadow-sm transition font-bold text-[var(--text-primary)] placeholder:text-[var(--text-muted)] placeholder:font-medium"
             />
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[#94A3B8]" size={18} />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" size={18} />
           </div>
           <button 
             onClick={() => setSortBy(prev => prev === 'price' ? 'name' : 'price')}
-            className={`w-12 h-12 bg-white border rounded-xl flex items-center justify-center transition shadow-sm ${sortBy !== 'date' ? 'text-[#4F46E5] border-[#4F46E5]' : 'text-[#64748B] border-[#E2E8F0] hover:border-[#4F46E5] hover:text-[#4F46E5]'}`}
+            className={`w-12 h-12 bg-[var(--bg-surface)] border rounded-xl flex items-center justify-center transition shadow-sm ${sortBy !== 'date' ? 'text-[var(--primary)] border-[var(--primary)]' : 'text-[var(--text-secondary)] border-[var(--border)] hover:border-[var(--primary)] hover:text-[var(--primary)]'}`}
           >
             <Filter size={20} />
           </button>
@@ -101,13 +101,13 @@ export default function SubscriptionList() {
         {/* Total Indicator */}
         <div className="flex items-end justify-between mb-8 px-2">
             <div className="space-y-1">
-                <p className="text-[10px] text-[#94A3B8] font-black uppercase tracking-[0.2em]">Total proyectado</p>
-                <p className="text-2xl font-black text-[#0F172A]">{totalMonthly.toFixed(2)}€<span className="text-[#64748B] text-xs ml-1 font-bold">/mes</span></p>
+                <p className="text-[10px] text-[var(--text-muted)] font-black uppercase tracking-[0.2em]">Total proyectado</p>
+                <p className="text-2xl font-black text-[var(--text-primary)]">{totalMonthly.toFixed(2)}€<span className="text-[var(--text-secondary)] text-xs ml-1 font-bold">/mes</span></p>
             </div>
             {searchTerm && (
                 <button 
                     onClick={() => setSearchTerm('')}
-                    className="text-xs text-[#4F46E5] font-black uppercase tracking-widest hover:underline"
+                    className="text-xs text-[var(--primary)] font-black uppercase tracking-widest hover:underline"
                 >
                     Limpiar
                 </button>
@@ -118,20 +118,20 @@ export default function SubscriptionList() {
         <div className="relative mb-8">
           <button
             onClick={() => setIsCategoryOpen(!isCategoryOpen)}
-            className="w-full bg-white border border-[#E2E8F0] rounded-[2rem] p-5 flex items-center justify-between group hover:border-[#4F46E5]/30 transition-all shadow-xl shadow-indigo-100/20"
+            className="w-full bg-[var(--bg-surface)] border border-[var(--border)] rounded-[2rem] p-5 flex items-center justify-between group hover:border-[var(--primary)]/30 transition-all shadow-xl shadow-[var(--primary)]/10"
           >
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-[#EEF2FF] flex items-center justify-center text-[#4F46E5] shadow-sm group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 rounded-2xl bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] shadow-sm group-hover:scale-110 transition-transform">
                 {activeCategory?.icon ? <activeCategory.icon size={26} /> : <Filter size={26} />}
               </div>
               <div className="text-left">
-                <p className="text-[10px] uppercase tracking-[0.25em] font-black text-[#94A3B8] mb-0.5">Filtrar Colección</p>
-                <p className="font-black text-xl text-[#0F172A] tracking-tight">
+                <p className="text-[10px] uppercase tracking-[0.25em] font-black text-[var(--text-muted)] mb-0.5">Filtrar Colección</p>
+                <p className="font-black text-xl text-[var(--text-primary)] tracking-tight">
                   {activeCategory?.label || 'Todas'}
                 </p>
               </div>
             </div>
-            <div className={`w-10 h-10 rounded-full bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-center transition-all duration-300 ${isCategoryOpen ? 'rotate-180 bg-[#4F46E5] text-white border-transparent shadow-lg shadow-indigo-100' : 'text-[#64748B]'}`}>
+            <div className={`w-10 h-10 rounded-full bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center transition-all duration-300 ${isCategoryOpen ? 'rotate-180 bg-[var(--primary)] text-white border-transparent shadow-lg shadow-[var(--primary)]/20' : 'text-[var(--text-secondary)]'}`}>
               <ChevronDown size={22} />
             </div>
           </button>
@@ -142,7 +142,7 @@ export default function SubscriptionList() {
                 initial={{ opacity: 0, y: -10, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                className="absolute top-[calc(100%+12px)] left-0 right-0 z-20 bg-white border border-[#E2E8F0] rounded-[2.5rem] shadow-2xl shadow-indigo-100 p-6 overflow-hidden"
+                className="absolute top-[calc(100%+12px)] left-0 right-0 z-20 bg-[var(--bg-surface)] border border-[var(--border)] rounded-[2.5rem] shadow-2xl shadow-black/50 p-6 overflow-hidden"
               >
                 <div className="grid grid-cols-2 gap-4">
                   {CATEGORIES.map(category => (
@@ -154,12 +154,12 @@ export default function SubscriptionList() {
                       }}
                       className={`flex items-center gap-3 p-4 rounded-2xl transition-all ${
                         activeTab === category.id 
-                          ? 'bg-[#4F46E5] text-white shadow-lg shadow-indigo-100' 
-                          : 'bg-[#F8FAFC] text-[#64748B] border border-[#E2E8F0] hover:border-[#4F46E5]/50 hover:bg-[#EEF2FF]/30'
+                          ? 'bg-[var(--primary)] text-white shadow-lg shadow-[var(--primary)]/20' 
+                          : 'bg-[var(--bg)] text-[var(--text-secondary)] border border-[var(--border)] hover:border-[var(--primary)]/50 hover:bg-[var(--bg-elevated)]'
                       }`}
                     >
                       <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
-                        activeTab === category.id ? 'bg-white/20' : 'bg-white border border-[#E2E8F0]'
+                        activeTab === category.id ? 'bg-white/20' : 'bg-[var(--bg-surface)] border border-[var(--border)]'
                       }`}>
                         {category.icon ? <category.icon size={20} /> : <Filter size={20} />}
                       </div>
@@ -183,17 +183,17 @@ export default function SubscriptionList() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
                 onClick={() => navigate(`/subscriptions/${sub.id}`)}
-                className="bg-white flex items-center gap-4 p-4 rounded-2xl cursor-pointer hover:bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#4F46E5] shadow-sm transition-all"
+                className="bg-[var(--bg-surface)] flex items-center gap-4 p-4 rounded-2xl cursor-pointer hover:bg-[var(--bg-elevated)] border border-[var(--border)] hover:border-[var(--primary)] shadow-sm transition-all"
               >
-                <div className={`w-12 h-12 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-center ${sub.color}`}>
+                <div className={`w-12 h-12 rounded-xl bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center ${sub.color}`}>
                   <Icon size={24} />
                 </div>
                 
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-black text-[#0F172A] truncate">{sub.name}</h3>
-                  <div className="text-[10px] font-black uppercase tracking-widest text-[#94A3B8] mt-1 flex items-center gap-2">
+                  <h3 className="font-black text-[var(--text-primary)] truncate">{sub.name}</h3>
+                  <div className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] mt-1 flex items-center gap-2">
                     <span>{sub.cycle}</span>
-                    <span className="w-1 h-1 bg-[#E2E8F0] rounded-full"></span>
+                    <span className="w-1 h-1 bg-[var(--border)] rounded-full"></span>
                     <span className={sub.nextBilling === 'Mañana' ? 'text-[#EF4444]' : ''}>
                       {sub.nextBilling}
                     </span>
@@ -201,17 +201,17 @@ export default function SubscriptionList() {
                 </div>
 
                 <div className="text-right">
-                  <div className="font-black text-[#0F172A] text-sm">{sub.price} €</div>
+                  <div className="font-black text-[var(--text-primary)] text-sm">{sub.price} €</div>
                 </div>
               </motion.div>
             )
           }) : (
             <div className="py-20 text-center">
-              <div className="w-20 h-20 bg-white border border-[#E2E8F0] rounded-3xl flex items-center justify-center mx-auto mb-4 opacity-50 shadow-sm">
-                <Search size={32} className="text-[#94A3B8]" />
+              <div className="w-20 h-20 bg-[var(--bg-surface)] border border-[var(--border)] rounded-3xl flex items-center justify-center mx-auto mb-4 opacity-50 shadow-sm">
+                <Search size={32} className="text-[var(--text-muted)]" />
               </div>
-              <h3 className="text-lg font-black text-[#64748B]">Sin resultados</h3>
-              <p className="text-sm text-[#94A3B8] mt-1 font-medium">Prueba con otra búsqueda o categoría.</p>
+              <h3 className="text-lg font-black text-[var(--text-secondary)]">Sin resultados</h3>
+              <p className="text-sm text-[var(--text-muted)] mt-1 font-medium">Prueba con otra búsqueda o categoría.</p>
             </div>
           )}
         </div>

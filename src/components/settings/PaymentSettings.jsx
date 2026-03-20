@@ -12,9 +12,9 @@ import { useToast } from '../../hooks/useToast';
 ══════════════════════════════════════════════ */
 function ToastItem({ toast, onDismiss }) {
   const styles = {
-    success: 'bg-[#EEF2FF] border-[#4F46E5]/20 text-[#4F46E5]',
-    error:   'bg-[#FEF2F2] border-[#EF4444]/20 text-[#EF4444]',
-    info:    'bg-[#F8FAFC] border-[#E2E8F0] text-[#64748B]',
+    success: 'bg-[var(--primary)]/10 border-[var(--primary)]/20 text-[var(--primary)]',
+    error:   'bg-red-500/10 border-red-500/20 text-red-500',
+    info:    'bg-[var(--bg-elevated)] border-[var(--border)] text-[var(--text-secondary)]',
   };
   const Icon = toast.type === 'success' ? CheckCircle2 : toast.type === 'info' ? Clock : XCircle;
   return (
@@ -27,7 +27,7 @@ function ToastItem({ toast, onDismiss }) {
     >
       <Icon size={17} className="shrink-0 mt-0.5" />
       <span className="flex-1">{toast.msg}</span>
-      <button onClick={() => onDismiss(toast.id)} className="text-[#94A3B8] hover:text-[#4F46E5] transition shrink-0 mt-0.5">
+      <button onClick={() => onDismiss(toast.id)} className="text-[var(--text-muted)] hover:text-[var(--primary)] transition shrink-0 mt-0.5">
         <X size={15} />
       </button>
     </motion.div>
@@ -55,15 +55,15 @@ function ConfirmDeleteDialog({ card, onConfirm, onCancel }) {
       exit={{ opacity: 0, scale: 0.96 }}
       className="mt-3 p-4 bg-red-500/10 border border-red-500/30 rounded-2xl space-y-3"
     >
-      <div className="flex items-start gap-2 text-[#EF4444] text-sm font-medium">
+      <div className="flex items-start gap-2 text-red-500 text-sm font-medium">
         <AlertTriangle size={16} className="shrink-0 mt-0.5" />
         <p>¿Eliminar la tarjeta <strong>{card.brand} •••• {card.last4}</strong>? Esta acción no se puede deshacer.</p>
       </div>
       <div className="flex gap-2">
-        <button onClick={onCancel} className="flex-1 py-2 rounded-xl border border-[#E2E8F0] text-[#64748B] hover:bg-white text-sm font-black uppercase tracking-widest transition">
+        <button onClick={onCancel} className="flex-1 py-2 rounded-xl border border-[var(--border)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] text-sm font-black uppercase tracking-widest transition">
           Cancelar
         </button>
-        <button onClick={onConfirm} className="flex-1 py-2 rounded-xl bg-[#EF4444] text-white text-sm font-black uppercase tracking-widest hover:bg-[#DC2626] transition shadow-lg shadow-red-100">
+        <button onClick={onConfirm} className="flex-1 py-2 rounded-xl bg-red-500 text-white text-sm font-black uppercase tracking-widest hover:bg-red-600 transition shadow-lg shadow-red-500/20">
           Sí, eliminar
         </button>
       </div>
@@ -75,10 +75,10 @@ function ConfirmDeleteDialog({ card, onConfirm, onCancel }) {
    SUB-COMPONENT: PaymentCard
 ══════════════════════════════════════════════ */
 const BRAND_COLOR = {
-  Visa:       'text-[#4F46E5]',
+  Visa:       'text-[var(--primary)]',
   Mastercard: 'text-[#F59E0B]',
   Amex:       'text-[#10B981]',
-  Tarjeta:    'text-[#64748B]',
+  Tarjeta:    'text-[var(--text-secondary)]',
 };
 
 function PaymentCard({ card, loadingKey, confirmId, onSetDefault, onRemove, onConfirmRemove, onCancelRemove }) {
@@ -87,24 +87,24 @@ function PaymentCard({ card, loadingKey, confirmId, onSetDefault, onRemove, onCo
   const isConfirming     = confirmId  === card.id;
 
   return (
-    <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 transition shadow-sm">
+    <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl p-5 transition shadow-sm">
       <div className="flex items-center gap-4">
         {/* Icon */}
-        <div className={`w-11 h-11 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-center ${BRAND_COLOR[card.brand] ?? 'text-[#64748B]'}`}>
+        <div className={`w-11 h-11 rounded-xl bg-[var(--bg-elevated)] border border-[var(--border)] flex items-center justify-center ${BRAND_COLOR[card.brand] ?? 'text-[var(--text-secondary)]'}`}>
           <CreditCard size={22} />
         </div>
 
         {/* Info */}
         <div className="flex-1 min-w-0">
           <div className="flex flex-wrap items-center gap-2 mb-0.5">
-            <span className="font-black text-[#0F172A] text-sm">{card.brand} •••• {card.last4}</span>
+            <span className="font-black text-[var(--text-primary)] text-sm">{card.brand} •••• {card.last4}</span>
             {card.isDefault && (
-              <span className="inline-flex items-center gap-1 text-[10px] font-black bg-[#EEF2FF] text-[#4F46E5] px-2 py-0.5 rounded-full uppercase tracking-tighter border border-[#4F46E5]/10">
+              <span className="inline-flex items-center gap-1 text-[10px] font-black bg-[var(--primary)]/10 text-[var(--primary)] px-2 py-0.5 rounded-full uppercase tracking-tighter border border-[var(--primary)]/10">
                 <Star size={9} fill="currentColor" /> Predeterminada
               </span>
             )}
           </div>
-          <span className="text-xs text-[#64748B] font-medium">Caduca {card.expiry}</span>
+          <span className="text-xs text-[var(--text-secondary)] font-medium">Caduca {card.expiry}</span>
         </div>
 
         {/* Actions */}
@@ -113,7 +113,7 @@ function PaymentCard({ card, loadingKey, confirmId, onSetDefault, onRemove, onCo
             <button
               onClick={() => onSetDefault(card.id)}
               disabled={!!loadingKey}
-              className="text-[10px] font-black uppercase tracking-widest text-[#64748B] hover:text-[#4F46E5] px-3 py-1.5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl transition disabled:opacity-50"
+              className="text-[10px] font-black uppercase tracking-widest text-[var(--text-secondary)] hover:text-[var(--primary)] px-3 py-1.5 bg-[var(--bg-elevated)] border border-[var(--border)] rounded-xl transition disabled:opacity-50"
             >
               {isSettingDefault ? <Loader2 size={14} className="animate-spin" /> : 'Establecer principal'}
             </button>
@@ -121,10 +121,10 @@ function PaymentCard({ card, loadingKey, confirmId, onSetDefault, onRemove, onCo
           <button
             onClick={() => onRemove(card.id)}
             disabled={!!loadingKey || card.isDefault}
-            className="p-2 text-[#94A3B8] hover:text-[#EF4444] hover:bg-[#FEF2F2] rounded-xl transition disabled:opacity-30 disabled:cursor-not-allowed"
+            className="p-2 text-[var(--text-muted)] hover:text-red-500 hover:bg-red-500/10 rounded-xl transition disabled:opacity-30 disabled:cursor-not-allowed"
             title={card.isDefault ? 'No puedes eliminar la tarjeta predeterminada' : 'Eliminar'}
           >
-            {isRemoving ? <Loader2 size={16} className="animate-spin text-[#EF4444]" /> : <Trash2 size={16} />}
+            {isRemoving ? <Loader2 size={16} className="animate-spin text-red-500" /> : <Trash2 size={16} />}
           </button>
         </div>
       </div>
@@ -147,9 +147,9 @@ function PaymentCard({ card, loadingKey, confirmId, onSetDefault, onRemove, onCo
    SUB-COMPONENT: BillingRow
 ══════════════════════════════════════════════ */
 const STATUS_META = {
-  paid: { label: 'Pagada',  cls: 'text-[#4F46E5] bg-[#EEF2FF] border border-[#4F46E5]/10', Icon: CheckCircle2 },
-  free: { label: 'Gratuita', cls: 'text-[#64748B] bg-[#F8FAFC] border border-[#E2E8F0]',    Icon: Clock },
-  fail: { label: 'Fallida',  cls: 'text-[#EF4444] bg-[#FEF2F2] border border-[#EF4444]/10', Icon: XCircle },
+  paid: { label: 'Pagada',  cls: 'text-[var(--primary)] bg-[var(--primary)]/10 border border-[var(--primary)]/10', Icon: CheckCircle2 },
+  free: { label: 'Gratuita', cls: 'text-[var(--text-secondary)] bg-[var(--bg-elevated)] border border-[var(--border)]',    Icon: Clock },
+  fail: { label: 'Fallida',  cls: 'text-red-500 bg-red-500/10 border border-red-500/10', Icon: XCircle },
 };
 
 function BillingRow({ inv, downloading, onDownload }) {
@@ -157,13 +157,13 @@ function BillingRow({ inv, downloading, onDownload }) {
   const isDownloading = downloading === inv.id;
 
   return (
-    <div className="flex items-center gap-4 px-5 py-4 border-b border-[#E2E8F0] last:border-0 hover:bg-[#F8FAFC] transition-colors">
+    <div className="flex items-center gap-4 px-5 py-4 border-b border-[var(--border)] last:border-0 hover:bg-[var(--bg-elevated)] transition-colors">
       <div className="flex-1 min-w-0">
-        <p className="font-black text-[#0F172A] text-sm leading-snug">{inv.concept}</p>
-        <p className="text-xs text-[#64748B] font-medium mt-0.5">{inv.date}</p>
+        <p className="font-black text-[var(--text-primary)] text-sm leading-snug">{inv.concept}</p>
+        <p className="text-xs text-[var(--text-secondary)] font-medium mt-0.5">{inv.date}</p>
       </div>
       <div className="text-right shrink-0 flex flex-col items-end gap-1.5">
-        <span className="font-black text-[#0F172A] text-sm">{inv.amount}</span>
+        <span className="font-black text-[var(--text-primary)] text-sm">{inv.amount}</span>
         <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-tighter ${meta.cls}`}>
           <meta.Icon size={10} /> {meta.label}
         </span>
@@ -250,8 +250,8 @@ function AddCardModal({ onClose, onSubmit, isSubmitting }) {
         </div>
 
         {/* Card preview */}
-        <div className="h-40 bg-gradient-to-br from-[#1E1B4B] to-[#0F172A] rounded-2xl p-6 flex flex-col justify-between border border-white/10 shadow-xl relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 blur-2xl group-hover:bg-indigo-500/10 transition-colors duration-700" />
+        <div className="h-40 bg-gradient-to-br from-[#1E1B4B] to-[#0f0f14] rounded-2xl p-6 flex flex-col justify-between border border-white/10 shadow-xl relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 blur-2xl group-hover:bg-[var(--primary)]/10 transition-colors duration-700" />
           <div className="flex justify-between items-start relative z-10">
             <div className="w-12 h-8 bg-gradient-to-br from-amber-400/80 to-amber-200/50 rounded-md backdrop-blur-sm border border-white/20" />
             <span className="text-[10px] font-black text-white/40 uppercase tracking-[0.2em]">
@@ -283,53 +283,53 @@ function AddCardModal({ onClose, onSubmit, isSubmitting }) {
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Cardholder */}
           <div>
-            <label className="block text-xs font-black text-[#64748B] mb-2 uppercase tracking-widest ml-1">Titular</label>
+            <label className="block text-xs font-black text-[var(--text-secondary)] mb-2 uppercase tracking-widest ml-1">Titular</label>
             <input
               value={form.name}
               onChange={handle('name')}
               placeholder="Ej. Juan Pérez"
-              className={`w-full bg-white border rounded-xl py-3 px-4 outline-none text-[#0F172A] font-bold uppercase placeholder:normal-case placeholder:text-[#94A3B8] transition shadow-sm ${errors.name ? 'border-[#EF4444] focus:ring-2 focus:ring-[#EF4444]/10' : 'border-[#E2E8F0] focus:ring-2 focus:ring-[#4F46E5]/10 focus:border-[#4F46E5]'}`}
+              className={`w-full bg-[var(--bg-surface)] border rounded-xl py-3 px-4 outline-none text-[var(--text-primary)] font-bold uppercase placeholder:normal-case placeholder:text-[var(--text-muted)] transition shadow-sm ${errors.name ? 'border-red-500 focus:ring-2 focus:ring-red-500/10' : 'border-[var(--border)] focus:ring-2 focus:ring-[var(--primary)]/10 focus:border-[var(--primary)]'}`}
             />
-            {errors.name && <p className="text-xs text-[#EF4444] mt-1 ml-1 font-bold">{errors.name}</p>}
+            {errors.name && <p className="text-xs text-red-500 mt-1 ml-1 font-bold">{errors.name}</p>}
           </div>
 
           {/* Card number */}
           <div>
-            <label className="block text-xs font-black text-[#64748B] mb-2 uppercase tracking-widest ml-1">Número de tarjeta</label>
+            <label className="block text-xs font-black text-[var(--text-secondary)] mb-2 uppercase tracking-widest ml-1">Número de tarjeta</label>
             <input
               inputMode="numeric"
               value={form.number}
               onChange={handle('number', formatCardNumber)}
               placeholder="4242 4242 4242 4242"
-              className={`w-full bg-white border rounded-xl py-3 px-4 outline-none text-[#0F172A] font-mono font-bold tracking-wider placeholder:font-sans placeholder:tracking-normal placeholder:text-[#94A3B8] transition shadow-sm ${errors.number ? 'border-[#EF4444] focus:ring-2 focus:ring-[#EF4444]/10' : 'border-[#E2E8F0] focus:ring-2 focus:ring-[#4F46E5]/10 focus:border-[#4F46E5]'}`}
+              className={`w-full bg-[var(--bg-surface)] border rounded-xl py-3 px-4 outline-none text-[var(--text-primary)] font-mono font-bold tracking-wider placeholder:font-sans placeholder:tracking-normal placeholder:text-[var(--text-muted)] transition shadow-sm ${errors.number ? 'border-red-500 focus:ring-2 focus:ring-red-500/10' : 'border-[var(--border)] focus:ring-2 focus:ring-[var(--primary)]/10 focus:border-[var(--primary)]'}`}
             />
-            {errors.number && <p className="text-xs text-[#EF4444] mt-1 ml-1 font-bold">{errors.number}</p>}
+            {errors.number && <p className="text-xs text-red-500 mt-1 ml-1 font-bold">{errors.number}</p>}
           </div>
 
           {/* Expiry + CVC */}
           <div className="flex gap-3">
             <div className="flex-1">
-              <label className="block text-xs font-black text-[#64748B] mb-2 uppercase tracking-widest ml-1">Caducidad</label>
+              <label className="block text-xs font-black text-[var(--text-secondary)] mb-2 uppercase tracking-widest ml-1">Caducidad</label>
               <input
                 inputMode="numeric"
                 value={form.expiry}
                 onChange={handle('expiry', formatExpiry)}
                 placeholder="MM/AA"
-                className={`w-full bg-white border rounded-xl py-3 px-4 outline-none text-[#0F172A] font-mono font-bold placeholder:font-sans placeholder:text-[#94A3B8] transition shadow-sm ${errors.expiry ? 'border-[#EF4444] focus:ring-2 focus:ring-[#EF4444]/10' : 'border-[#E2E8F0] focus:ring-2 focus:ring-[#4F46E5]/10 focus:border-[#4F46E5]'}`}
+                className={`w-full bg-[var(--bg-surface)] border rounded-xl py-3 px-4 outline-none text-[var(--text-primary)] font-mono font-bold placeholder:font-sans placeholder:text-[var(--text-muted)] transition shadow-sm ${errors.expiry ? 'border-red-500 focus:ring-2 focus:ring-red-500/10' : 'border-[var(--border)] focus:ring-2 focus:ring-[var(--primary)]/10 focus:border-[var(--primary)]'}`}
               />
-              {errors.expiry && <p className="text-xs text-[#EF4444] mt-1 ml-1 font-bold">{errors.expiry}</p>}
+              {errors.expiry && <p className="text-xs text-red-500 mt-1 ml-1 font-bold">{errors.expiry}</p>}
             </div>
             <div className="w-28">
-              <label className="block text-xs font-black text-[#64748B] mb-2 uppercase tracking-widest ml-1">CVC</label>
+              <label className="block text-xs font-black text-[var(--text-secondary)] mb-2 uppercase tracking-widest ml-1">CVC</label>
               <input
                 inputMode="numeric"
                 value={form.cvc}
                 onChange={handle('cvc', v => v.replace(/\D/g, '').slice(0, 4))}
                 placeholder="•••"
                 type="password"
-                className={`w-full bg-white border rounded-xl py-3 px-4 outline-none text-[#0F172A] font-bold transition shadow-sm ${errors.cvc ? 'border-[#EF4444] focus:ring-2 focus:ring-[#EF4444]/10' : 'border-[#E2E8F0] focus:ring-2 focus:ring-[#4F46E5]/10 focus:border-[#4F46E5]'}`}
+                className={`w-full bg-[var(--bg-surface)] border rounded-xl py-3 px-4 outline-none text-[var(--text-primary)] font-bold transition shadow-sm ${errors.cvc ? 'border-red-500 focus:ring-2 focus:ring-red-500/10' : 'border-[var(--border)] focus:ring-2 focus:ring-[var(--primary)]/10 focus:border-[var(--primary)]'}`}
               />
-              {errors.cvc && <p className="text-xs text-[#EF4444] mt-1 ml-1 font-bold">{errors.cvc}</p>}
+              {errors.cvc && <p className="text-xs text-red-500 mt-1 ml-1 font-bold">{errors.cvc}</p>}
             </div>
           </div>
 
@@ -339,8 +339,8 @@ function AddCardModal({ onClose, onSubmit, isSubmitting }) {
             disabled={isSubmitting}
             className={`w-full flex items-center justify-center gap-2 py-4 rounded-xl font-black uppercase tracking-widest transition shadow-xl
               ${isSubmitting
-                ? 'bg-[#F1F5F9] text-[#94A3B8] cursor-wait'
-                : 'bg-[#4F46E5] text-white hover:bg-[#4338CA] shadow-indigo-100'}`}
+                ? 'bg-[var(--bg-elevated)] text-[var(--text-muted)] cursor-wait'
+                : 'bg-[var(--primary)] text-white hover:opacity-90 shadow-[var(--primary)]/20'}`}
           >
             {isSubmitting
               ? <><Loader2 size={18} className="animate-spin" /> Verificando…</>
@@ -382,8 +382,8 @@ export default function PaymentSettings() {
       <section className="space-y-8">
         {/* Header */}
         <div>
-          <h2 className="text-xl font-black text-[#0F172A]">Métodos de Pago</h2>
-          <p className="text-sm text-[#64748B] font-medium">Gestiona tus tarjetas y consulta el historial de facturación.</p>
+          <h2 className="text-xl font-black text-[var(--text-primary)]">Métodos de Pago</h2>
+          <p className="text-sm text-[var(--text-secondary)] font-medium">Gestiona tus tarjetas y consulta el historial de facturación.</p>
         </div>
 
         {/* Cards List */}
@@ -413,7 +413,7 @@ export default function PaymentSettings() {
           {/* Add card button */}
           <button
             onClick={() => setShowModal(true)}
-            className="w-full flex items-center justify-center gap-2 py-5 rounded-2xl border-2 border-dashed border-[#E2E8F0] text-[#64748B] hover:border-[#4F46E5] hover:text-[#4F46E5] hover:bg-[#EEF2FF]/30 transition-all font-black uppercase tracking-widest text-xs"
+            className="w-full flex items-center justify-center gap-2 py-5 rounded-2xl border-2 border-dashed border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--primary)] hover:text-[var(--primary)] hover:bg-[var(--primary)]/10 transition-all font-black uppercase tracking-widest text-xs"
           >
             <Plus size={18} /> Añadir nuevo método de pago
           </button>
@@ -421,8 +421,8 @@ export default function PaymentSettings() {
 
         {/* Billing History */}
         <div>
-          <h3 className="font-black text-[#0F172A] text-lg mb-4">Historial de Facturación</h3>
-          <div className="bg-white border border-[#E2E8F0] rounded-2xl overflow-hidden shadow-sm">
+          <h3 className="font-black text-[var(--text-primary)] text-lg mb-4">Historial de Facturación</h3>
+          <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl overflow-hidden shadow-sm">
             {billing.map(inv => (
               <BillingRow
                 key={inv.id}

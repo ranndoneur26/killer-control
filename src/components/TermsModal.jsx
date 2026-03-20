@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 const SECTIONS = [
   {
     n: '1', title: 'Identificación del titular',
-    body: `Los presentes Términos y Condiciones regulan el acceso, navegación y uso del sitio web, aplicación y servicios asociados a Killer Control, titularidad de [NOMBRE COMPLETO O RAZÓN SOCIAL], con domicilio en [DIRECCIÓN COMPLETA], NIF/CIF [NIF/CIF], y correo electrónico de contacto [EMAIL DE CONTACTO].`,
+    body: `Los presentes Términos y Condiciones regulan el acceso, navegación y uso del sitio web, aplicación y servicios asociados a Killer Control, titularidad de Marc Xicola Tugas, con domicilio en C/ Pau Claris 15, baixos. 08100 Mollet del Vallès, NIF/CIF 52172995w, y correo electrónico de contacto Killercontrolsupport@gmail.com.`,
   },
   {
     n: '2', title: 'Objeto del servicio',
@@ -21,7 +21,7 @@ const SECTIONS = [
   },
   {
     n: '5', title: 'Registro de cuenta',
-    body: `Algunas funcionalidades pueden requerir la creación de una cuenta mediante correo electrónico y contraseña, inicio de sesión con terceros o cualquier otro sistema habilitado por la plataforma.\n\nEl usuario se compromete a: no suplantar a terceros, no crear cuentas falsas, mantener actualizados sus datos, y notificar de inmediato cualquier acceso no autorizado a [EMAIL DE CONTACTO].`,
+    body: `Algunas funcionalidades pueden requerir la creación de una cuenta mediante correo electrónico y contraseña, inicio de sesión con terceros o cualquier otro sistema habilitado por la plataforma.\n\nEl usuario se compromete a: no suplantar a terceros, no crear cuentas falsas, mantener actualizados sus datos, y notificar de inmediato cualquier acceso no autorizado a Killercontrolsupport@gmail.com.`,
   },
   {
     n: '6', title: 'Descripción y límites del servicio',
@@ -41,7 +41,7 @@ const SECTIONS = [
   },
   {
     n: '10', title: 'Propiedad intelectual e industrial',
-    body: `Todos los contenidos, diseños, textos, logotipos, bases de datos, interfaces, código fuente, nombres comerciales y demás elementos de Killer Control son titularidad de [NOMBRE LEGAL / TITULAR] o se utilizan con autorización suficiente.\n\nQueda prohibida la reproducción, distribución, transformación, comunicación pública o explotación total o parcial sin autorización previa y por escrito.`,
+    body: `Todos los contenidos, diseños, textos, logotipos, bases de datos, interfaces, código fuente, nombres comerciales y demás elementos de Killer Control son titularidad de Marc Xicola o se utilizan con autorización suficiente.\n\nQueda prohibida la reproducción, distribución, transformación, comunicación pública o explotación total o parcial sin autorización previa y por escrito.`,
   },
   {
     n: '11', title: 'Servicios y enlaces de terceros',
@@ -49,11 +49,11 @@ const SECTIONS = [
   },
   {
     n: '12', title: 'Exclusión de garantías',
-    body: `La plataforma se ofrece "tal cual" y según disponibilidad.\n\n[NOMBRE LEGAL / TITULAR] no garantiza que: el servicio esté libre de errores o interrupciones, el acceso sea ininterrumpido o completamente seguro, las recomendaciones de ahorro sean exactas en todos los casos, ni que los datos proporcionados por terceros sean completos, permanentes o actualizados.`,
+    body: `La plataforma se ofrece "tal cual" y según disponibilidad.\n\nMarc Xicola no garantiza que: el servicio esté libre de errores o interrupciones, el acceso sea ininterrumpido o completamente seguro, las recomendaciones de ahorro sean exactas en todos los casos, ni que los datos proporcionados por terceros sean completos, permanentes o actualizados.`,
   },
   {
     n: '13', title: 'Limitación de responsabilidad',
-    body: `En la máxima medida permitida por la ley, [NOMBRE LEGAL / TITULAR] no será responsable por daños indirectos, lucro cesante, pérdida de datos, pérdida de oportunidades o perjuicios derivados del uso o imposibilidad de uso de la plataforma, errores introducidos por el usuario, decisiones económicas adoptadas por el usuario, o actuaciones de terceros proveedores.\n\nNada de lo anterior limitará la responsabilidad cuando legalmente no pueda excluirse.`,
+    body: `En la máxima medida permitida por la ley, Marc Xicola no será responsable por daños indirectos, lucro cesante, pérdida de datos, pérdida de oportunidades o perjuicios derivados del uso o imposibilidad de uso de la plataforma, errores introducidos por el usuario, decisiones económicas adoptadas por el usuario, o actuaciones de terceros proveedores.\n\nNada de lo anterior limitará la responsabilidad cuando legalmente no pueda excluirse.`,
   },
   {
     n: '14', title: 'Suspensión o cancelación de cuentas',
@@ -65,15 +65,15 @@ const SECTIONS = [
   },
   {
     n: '16', title: 'Modificaciones',
-    body: `[NOMBRE LEGAL / TITULAR] podrá modificar estos Términos y Condiciones en cualquier momento por motivos legales, técnicos, operativos o comerciales.\n\nCuando los cambios sean relevantes, se informará al usuario por medios razonables: aviso en la web, dentro de la app o por correo electrónico.`,
+    body: `Marc Xicola podrá modificar estos Términos y Condiciones en cualquier momento por motivos legales, técnicos, operativos o comerciales.\n\nCuando los cambios sean relevantes, se informará al usuario por medios razonables: aviso en la web, dentro de la app o por correo electrónico.`,
   },
   {
     n: '17', title: 'Legislación aplicable y jurisdicción',
-    body: `Estos Términos y Condiciones se regirán por la legislación de España.\n\nPara cualquier controversia, las partes se someten a los juzgados y tribunales de [CIUDAD / PROVINCIA], salvo que la normativa de consumo aplicable establezca otro fuero imperativo.`,
+    body: `Estos Términos y Condiciones se regirán por la legislación de España.\n\nPara cualquier controversia, las partes se someten a los juzgados y tribunales de Mollet del Vallès, salvo que la normativa de consumo aplicable establezca otro fuero imperativo.`,
   },
   {
     n: '18', title: 'Contacto',
-    body: `Para cualquier consulta sobre estos Términos y Condiciones:\n\n• Titular: [NOMBRE LEGAL / TITULAR]\n• Email: [EMAIL DE CONTACTO]\n• Dirección: [DIRECCIÓN COMPLETA]`,
+    body: `Para cualquier consulta sobre estos Términos y Condiciones:\n\n• Titular: Marc Xicola\n• Email: Killercontrolsupport@gmail.com\n• Dirección: C/ Pau Claris 15, baixos. 08100 Mollet del Vallès`,
   },
 ];
 
@@ -93,10 +93,10 @@ export default function TermsModal({ open, onClose }) {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 40, opacity: 0 }}
             transition={{ type: 'spring', damping: 30, stiffness: 320 }}
-            className="bg-[#07101E] border border-[#1e293b] rounded-t-3xl sm:rounded-3xl w-full sm:max-w-2xl flex flex-col max-h-[92vh]"
+            className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-t-3xl sm:rounded-3xl w-full sm:max-w-2xl flex flex-col max-h-[92vh]"
           >
             {/* ── Header ── */}
-            <div className="flex items-center gap-4 px-6 py-5 border-b border-[#1e293b] shrink-0">
+            <div className="flex items-center gap-4 px-6 py-5 border-b border-[var(--border)] shrink-0">
               <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                 <ScrollText size={20} className="text-primary" />
               </div>
@@ -116,8 +116,8 @@ export default function TermsModal({ open, onClose }) {
             {/* ── Scrollable body ── */}
             <div className="overflow-y-auto flex-1 px-6 py-6 space-y-6 no-scrollbar">
               {/* Intro badge */}
-              <div className="flex items-start gap-3 bg-primary/5 border border-primary/15 rounded-2xl px-4 py-3">
-                <Shield size={16} className="text-primary shrink-0 mt-0.5" />
+              <div className="flex items-start gap-3 bg-[var(--primary)]/5 border border-[var(--primary)]/15 rounded-2xl px-4 py-3">
+                <Shield size={16} className="text-[var(--primary)] shrink-0 mt-0.5" />
                 <p className="text-xs text-gray-300 leading-relaxed">
                   Lee detenidamente estos términos antes de usar <span className="text-[#F59E0B]">Killer</span> Control. Al acceder o usar la plataforma, aceptas estas condiciones en su totalidad.
                 </p>
@@ -127,12 +127,12 @@ export default function TermsModal({ open, onClose }) {
               {SECTIONS.map(s => (
                 <div key={s.n} className="space-y-2">
                   <div className="flex items-baseline gap-3">
-                    <span className="text-[11px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full shrink-0">
+                    <span className="text-[11px] font-bold text-[var(--primary)] bg-[var(--primary)]/10 px-2 py-0.5 rounded-full shrink-0">
                       Art. {s.n}
                     </span>
                     <h3 className="font-bold text-white text-sm">{s.title}</h3>
                   </div>
-                  <div className="pl-0 text-sm text-gray-400 leading-relaxed whitespace-pre-line border-l-2 border-[#1e293b] pl-4">
+                  <div className="pl-0 text-sm text-gray-400 leading-relaxed whitespace-pre-line border-l-2 border-[var(--border)] pl-4">
                     {s.body.split('Killer').map((part, i, arr) => (
                       <React.Fragment key={i}>
                         {part}
@@ -145,10 +145,10 @@ export default function TermsModal({ open, onClose }) {
             </div>
 
             {/* ── Footer ── */}
-            <div className="px-6 py-4 border-t border-[#1e293b] shrink-0">
+            <div className="px-6 py-4 border-t border-[var(--border)] shrink-0">
               <button
                 onClick={onClose}
-                className="w-full bg-primary text-[#07101E] font-bold rounded-2xl py-3.5 hover:bg-[#00e600] transition text-sm"
+                className="w-full bg-[var(--primary)] text-[var(--bg)] font-bold rounded-2xl py-3.5 hover:opacity-90 transition text-sm"
               >
                 Entendido, cerrar
               </button>

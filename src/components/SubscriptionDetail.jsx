@@ -100,23 +100,23 @@ export default function SubscriptionDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] flex flex-col">
+    <div className="min-h-screen bg-[var(--bg)] text-[var(--text-primary)] flex flex-col">
       <HeroHeader />
       <div className="p-6 max-w-lg mx-auto pb-24 pt-20 flex-1">
         
         {/* Header Actions */}
         <header className="flex items-center justify-between mb-8">
-          <button onClick={() => isEditing ? setIsEditing(false) : navigate(-1)} className="p-2 -ml-2 hover:bg-white rounded-xl transition text-[#64748B]">
+          <button onClick={() => isEditing ? setIsEditing(false) : navigate(-1)} className="p-2 -ml-2 hover:bg-[var(--bg-surface)] rounded-xl transition text-[var(--text-secondary)]">
             {isEditing ? <X size={24} /> : <ArrowLeft size={24} />}
           </button>
           
           <div className="flex gap-2">
             {isEditing ? (
-              <button onClick={handleSave} className="px-4 py-2 bg-[#4F46E5] text-white font-black rounded-xl flex items-center gap-2 hover:bg-[#4338CA] transition shadow-lg shadow-indigo-100">
+              <button onClick={handleSave} className="px-4 py-2 bg-[var(--primary)] text-white font-black rounded-xl flex items-center gap-2 hover:opacity-90 transition shadow-lg shadow-[var(--primary)]/20">
                  <Check size={18} /> Guardar
               </button>
             ) : (
-              <button onClick={() => setIsEditing(true)} className="p-2 bg-white border border-[#E2E8F0] hover:bg-[#F8FAFC] rounded-xl transition text-[#64748B] shadow-sm">
+              <button onClick={() => setIsEditing(true)} className="p-2 bg-[var(--bg-surface)] border border-[var(--border)] hover:bg-[var(--bg-elevated)] rounded-xl transition text-[var(--text-secondary)] shadow-sm">
                 <Edit3 size={20} />
               </button>
             )}
@@ -141,40 +141,40 @@ export default function SubscriptionDetail() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             {/* Hero Info */}
             <div className="flex flex-col items-center mb-10 text-center">
-              <div className={`w-24 h-24 rounded-3xl ${subData.color} flex items-center justify-center text-white text-3xl font-black shadow-xl mb-4 border-4 border-white`}>
+              <div className={`w-24 h-24 rounded-3xl ${subData.color} flex items-center justify-center text-white text-3xl font-black shadow-xl mb-4 border-4 border-[var(--bg)]`}>
                 {subData.name.charAt(0)}
               </div>
-              <h1 className="text-3xl font-black mb-1 text-[#0F172A]">{subData.name}</h1>
-              <div className="text-[#64748B] font-black bg-[#EEF2FF] px-4 py-1.5 rounded-full text-xs uppercase tracking-widest border border-[#4F46E5]/10">
+              <h1 className="text-3xl font-black mb-1 text-[var(--text-primary)]">{subData.name}</h1>
+              <div className="text-[var(--primary)] font-black bg-[var(--primary)]/10 px-4 py-1.5 rounded-full text-xs uppercase tracking-widest border border-[var(--primary)]/10">
                 {subData.category}
               </div>
             </div>
 
             {/* Price Big KPI */}
-            <div className="bg-white border border-[#E2E8F0] rounded-3xl p-6 mb-8 flex justify-between items-end relative overflow-hidden shadow-sm">
-              <div className="absolute top-0 right-0 p-4 opacity-[0.03] text-[#4F46E5]">
+            <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-3xl p-6 mb-8 flex justify-between items-end relative overflow-hidden shadow-sm">
+              <div className="absolute top-0 right-0 p-4 opacity-[0.05] text-[var(--primary)]">
                 <CreditCard size={80} />
               </div>
               <div className="relative z-10">
-                <p className="text-xs text-[#64748B] font-black uppercase tracking-widest mb-2">Gasto actual</p>
-                <div className="text-5xl font-black text-[#0F172A] tracking-tight">{subData.price}€<span className="text-lg text-[#64748B] font-medium ml-1">/{subData.cycle.toLowerCase() === 'anual' ? 'año' : 'mes'}</span></div>
+                <p className="text-xs text-[var(--text-secondary)] font-black uppercase tracking-widest mb-2">Gasto actual</p>
+                <div className="text-5xl font-black text-[var(--text-primary)] tracking-tight">{subData.price}€<span className="text-lg text-[var(--text-secondary)] font-medium ml-1">/{subData.cycle.toLowerCase() === 'anual' ? 'año' : 'mes'}</span></div>
               </div>
               <div className="text-right relative z-10">
-                <p className="text-[10px] text-[#64748B] font-black uppercase tracking-tighter mb-1">Gasto Anual Proyectado</p>
+                <p className="text-[10px] text-[var(--text-secondary)] font-black uppercase tracking-tighter mb-1">Gasto Anual Proyectado</p>
                 <p className="font-black text-[#10B981] text-lg">{subData.annualPrice}€</p>
               </div>
             </div>
 
             {/* Intelligent Insights (Dark Pattern detection) */}
             {subData.hikeDetected && (
-              <div className="bg-[#FFFBEB] border border-[#F59E0B]/20 rounded-2xl p-4 mb-8 flex gap-4 items-start shadow-sm">
-                <ShieldAlert size={24} className="text-[#F59E0B] shrink-0 mt-0.5" />
+              <div className="bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4 mb-8 flex gap-4 items-start shadow-sm">
+                <ShieldAlert size={24} className="text-amber-500 shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-black text-[#F59E0B] text-sm mb-1 uppercase tracking-tight">Subida de precio detectada</h4>
-                  <p className="text-sm text-[#92400E] mb-3 font-medium">Han aumentado la cuota un 23% desde Marzo. ¿Todavía le sacas partido?</p>
+                  <h4 className="font-black text-amber-500 text-sm mb-1 uppercase tracking-tight">Subida de precio detectada</h4>
+                  <p className="text-sm text-amber-200/80 mb-3 font-medium">Han aumentado la cuota un 23% desde Marzo. ¿Todavía le sacas partido?</p>
                   <button 
                     onClick={() => navigate(`/alternatives/${id}`)}
-                    className="bg-[#F59E0B] text-white text-xs font-black px-4 py-2 rounded-lg hover:bg-[#D97706] transition shadow-md shadow-amber-100"
+                    className="bg-amber-600 text-white text-xs font-black px-4 py-2 rounded-lg hover:bg-amber-700 transition shadow-md shadow-amber-900/20"
                   >
                     Ver alternativas más baratas
                   </button>
@@ -184,24 +184,24 @@ export default function SubscriptionDetail() {
 
             {/* Vibe Chart */}
             <div className="mb-8">
-              <h3 className="font-black text-xs uppercase tracking-widest text-[#64748B] mb-4 flex items-center gap-2">
-                <TrendingUp size={18} className="text-[#4F46E5]" /> Historial de Costes
+              <h3 className="font-black text-xs uppercase tracking-widest text-[var(--text-secondary)] mb-4 flex items-center gap-2">
+                <TrendingUp size={18} className="text-[var(--primary)]" /> Historial de Costes
               </h3>
               <div className="h-40 w-full ml-[-1rem]">
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={mockHistoryData}>
                     <defs>
                       <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#4F46E5" stopOpacity={0.15}/>
-                        <stop offset="95%" stopColor="#4F46E5" stopOpacity={0}/>
+                        <stop offset="5%" stopColor="var(--primary)" stopOpacity={0.15}/>
+                        <stop offset="95%" stopColor="var(--primary)" stopOpacity={0}/>
                       </linearGradient>
                     </defs>
-                    <XAxis dataKey="month" stroke="#94A3B8" fontSize={11} tickLine={false} axisLine={false} />
+                    <XAxis dataKey="month" stroke="var(--text-muted)" fontSize={11} tickLine={false} axisLine={false} />
                     <Tooltip 
-                      contentStyle={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
-                      itemStyle={{ color: '#4F46E5', fontWeight: 'bold' }}
+                      contentStyle={{ backgroundColor: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: '12px', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.5)' }}
+                      itemStyle={{ color: 'var(--primary)', fontWeight: 'bold' }}
                     />
-                    <Area type="stepAfter" dataKey="price" stroke="#4F46E5" strokeWidth={3} fillOpacity={1} fill="url(#colorPrice)" />
+                    <Area type="stepAfter" dataKey="price" stroke="var(--primary)" strokeWidth={3} fillOpacity={1} fill="url(#colorPrice)" />
                   </AreaChart>
                 </ResponsiveContainer>
               </div>
@@ -210,73 +210,73 @@ export default function SubscriptionDetail() {
             {/* Details List */}
             <div className="space-y-4 mb-10">
               {subData.webUrl && (
-                <div className="flex items-center justify-between py-4 border-b border-[#E2E8F0]">
-                  <div className="flex items-center gap-3 text-[#64748B]">
+                <div className="flex items-center justify-between py-4 border-b border-[var(--border)]">
+                  <div className="flex items-center gap-3 text-[var(--text-secondary)]">
                     <span className="font-black text-xs uppercase tracking-widest">Web</span>
                   </div>
                   <a 
                     href={subData.webUrl.startsWith('http') ? subData.webUrl : `https://${subData.webUrl}`} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="font-black text-[#4F46E5] text-sm hover:underline block truncate max-w-[200px] text-right"
+                    className="font-black text-[var(--primary)] text-sm hover:underline block truncate max-w-[200px] text-right"
                   >
                     {subData.webUrl.replace('https://', '').replace('http://', '')}
                   </a>
                 </div>
               )}
               {subData.startDate && (
-                <div className="flex items-center justify-between py-4 border-b border-[#E2E8F0]">
-                  <div className="flex items-center gap-3 text-[#64748B]">
+                <div className="flex items-center justify-between py-4 border-b border-[var(--border)]">
+                  <div className="flex items-center gap-3 text-[var(--text-secondary)]">
                     <Calendar size={18} />
                     <span className="font-black text-xs uppercase tracking-widest">Suscrito desde</span>
                   </div>
-                  <span className="font-black text-[#0F172A] text-sm block">{new Date(subData.startDate).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                  <span className="font-black text-[var(--text-primary)] text-sm block">{new Date(subData.startDate).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
                 </div>
               )}
-              <div className="flex items-center justify-between py-4 border-b border-[#E2E8F0]">
-                <div className="flex items-center gap-3 text-[#64748B]">
+              <div className="flex items-center justify-between py-4 border-b border-[var(--border)]">
+                <div className="flex items-center gap-3 text-[var(--text-secondary)]">
                   <Calendar size={18} />
                   <span className="font-black text-xs uppercase tracking-widest">Próximo Cargo</span>
                 </div>
                 <div className="text-right">
-                  <span className="font-black text-[#0F172A] text-sm block">{new Date(subData.nextChargeDate).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })}</span>
-                  <span className="text-[10px] font-black uppercase text-[#4F46E5]">{subData.noticeDays}</span>
+                  <span className="font-black text-[var(--text-primary)] text-sm block">{new Date(subData.nextChargeDate).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })}</span>
+                  <span className="text-[10px] font-black uppercase text-[var(--primary)]">{subData.noticeDays}</span>
                 </div>
               </div>
-              <div className="flex items-center justify-between py-4 border-b border-[#E2E8F0]">
-                <div className="flex items-center gap-3 text-[#64748B]">
+              <div className="flex items-center justify-between py-4 border-b border-[var(--border)]">
+                <div className="flex items-center gap-3 text-[var(--text-secondary)]">
                   <CreditCard size={18} />
                   <span className="font-black text-xs uppercase tracking-widest">Método de pago</span>
                 </div>
-                <span className="font-black text-[#0F172A] text-sm">{subData.card}</span>
+                <span className="font-black text-[var(--text-primary)] text-sm">{subData.card}</span>
               </div>
                             {/* Dynamic Read-only Fields */}
               {(subData.category === 'streaming' || subData.category === 'music' || subData.category === 'gaming') && (
-                <div className="flex items-center justify-between py-4 border-b border-[#E2E8F0]">
-                  <div className="flex items-center gap-3 text-[#64748B]">
-                    <Sparkles size={18} className="text-[#4F46E5]" />
+                <div className="flex items-center justify-between py-4 border-b border-[var(--border)]">
+                  <div className="flex items-center gap-3 text-[var(--text-secondary)]">
+                    <Sparkles size={18} className="text-[var(--primary)]" />
                     <span className="font-black text-xs uppercase tracking-widest">Plan Actual</span>
                   </div>
                   <div className="text-right">
-                    <span className="font-black text-[#0F172A] text-sm block">{subData.planType || 'Estándar'}</span>
-                    <span className="text-[10px] font-black text-[#64748B] uppercase tracking-tighter">{subData.familySlots || 1} Perfiles / Slots</span>
+                    <span className="font-black text-[var(--text-primary)] text-sm block">{subData.planType || 'Estándar'}</span>
+                    <span className="text-[10px] font-black text-[var(--text-secondary)] uppercase tracking-tighter">{subData.familySlots || 1} Perfiles / Slots</span>
                   </div>
                 </div>
               )}
 
               {subData.category === 'health' && subData.permanenceEnd && (
-                <div className="flex items-center justify-between py-4 border-b border-[#E2E8F0]">
-                  <div className="flex items-center gap-3 text-[#EF4444]">
+                <div className="flex items-center justify-between py-4 border-b border-[var(--border)]">
+                  <div className="flex items-center gap-3 text-red-400">
                     <ShieldAlert size={18} />
                     <span className="font-black text-xs uppercase tracking-widest">Fin Permanencia</span>
                   </div>
-                  <span className="font-black text-[#0F172A] text-sm">{new Date(subData.permanenceEnd).toLocaleDateString()}</span>
+                  <span className="font-black text-[var(--text-primary)] text-sm">{new Date(subData.permanenceEnd).toLocaleDateString()}</span>
                 </div>
               )}
 
               {subData.category === 'press' && subData.isPromo && (
-                <div className="flex items-center justify-between py-4 border-b border-[#E2E8F0]">
-                  <div className="flex items-center gap-3 text-[#F59E0B]">
+                <div className="flex items-center justify-between py-4 border-b border-[var(--border)]">
+                  <div className="flex items-center gap-3 text-amber-500">
                     <Sparkles size={18} />
                     <span className="font-black text-xs uppercase tracking-widest">Promo Activa</span>
                   </div>
@@ -289,20 +289,20 @@ export default function SubscriptionDetail() {
 
               {subData.category === 'telecom' && (
                 <>
-                  <div className="flex items-center justify-between py-4 border-b border-[#E2E8F0]">
-                    <div className="flex items-center gap-3 text-[#64748B]">
+                  <div className="flex items-center justify-between py-4 border-b border-[var(--border)]">
+                    <div className="flex items-center gap-3 text-[var(--text-secondary)]">
                       <ShieldAlert size={18} />
                       <span className="font-black text-xs uppercase tracking-widest">Permanencia</span>
                     </div>
-                    <span className="font-black text-[#0F172A] text-sm">{subData.permanenceEnd ? new Date(subData.permanenceEnd).toLocaleDateString() : 'Sin permanencia'}</span>
+                    <span className="font-black text-[var(--text-primary)] text-sm">{subData.permanenceEnd ? new Date(subData.permanenceEnd).toLocaleDateString() : 'Sin permanencia'}</span>
                   </div>
                   {subData.packServices && (
-                    <div className="flex items-center justify-between py-4 border-b border-[#E2E8F0]">
-                      <div className="flex items-center gap-3 text-[#64748B] w-1/3">
-                         <Sparkles size={18} className="text-[#4F46E5]" />
+                    <div className="flex items-center justify-between py-4 border-b border-[var(--border)]">
+                      <div className="flex items-center gap-3 text-[var(--text-secondary)] w-1/3">
+                         <Sparkles size={18} className="text-[var(--primary)]" />
                          <span className="font-black text-xs uppercase tracking-widest">Pack</span>
                       </div>
-                      <span className="text-sm font-black text-right text-[#64748B] truncate w-2/3">{subData.packServices}</span>
+                      <span className="text-sm font-black text-right text-[var(--text-secondary)] truncate w-2/3">{subData.packServices}</span>
                     </div>
                   )}
                 </>
@@ -312,7 +312,7 @@ export default function SubscriptionDetail() {
             {/* Killer Action */}
             <button 
               onClick={() => navigate(`/guide/${id}`)}
-              className="w-full bg-[#FEF2F2] text-[#EF4444] border border-[#FECACA] font-black uppercase tracking-widest rounded-2xl py-4 flex items-center justify-center gap-2 hover:bg-[#EF4444] hover:text-white transition shadow-sm"
+              className="w-full bg-red-950/20 text-red-400 border border-red-900/30 font-black uppercase tracking-widest rounded-3xl py-4 flex items-center justify-center gap-2 hover:bg-red-900 hover:text-white transition shadow-sm"
             >
               <Trash2 size={20} /> Iniciar Proceso de Baja
             </button>

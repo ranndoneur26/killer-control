@@ -12,9 +12,9 @@ const MOCK_SESSIONS = [
 /* ─── Small reusable Alert ─────────────────────── */
 function Alert({ type, children }) {
   const styles = {
-    success: 'bg-[#EEF2FF] border-[#4F46E5]/20 text-[#4F46E5]',
-    error:   'bg-[#FEF2F2] border-[#EF4444]/20 text-[#EF4444]',
-    info:    'bg-[#F8FAFC] border-[#E2E8F0] text-[#64748B]',
+    success: 'bg-[var(--primary)]/10 border-[var(--primary)]/20 text-[var(--primary)]',
+    error:   'bg-red-500/10 border-red-500/20 text-red-500',
+    info:    'bg-[var(--bg-elevated)] border-[var(--border)] text-[var(--text-secondary)]',
   };
   const Icon = type === 'success' ? CheckCircle2 : AlertCircle;
   return (
@@ -29,15 +29,15 @@ function Alert({ type, children }) {
 function StrengthBar({ results }) {
   const passed = results.filter(r => r.passed).length;
   const pct = (passed / results.length) * 100;
-  const color = pct <= 25 ? 'bg-[#EF4444]' : pct <= 50 ? 'bg-[#F59E0B]' : pct <= 75 ? 'bg-[#FBBF24]' : 'bg-[#4F46E5]';
+  const color = pct <= 25 ? 'bg-red-500' : pct <= 50 ? 'bg-[#F59E0B]' : pct <= 75 ? 'bg-[#FBBF24]' : 'bg-[var(--primary)]';
   return (
     <div className="space-y-2 mt-3">
-      <div className="h-1.5 w-full bg-[#F1F5F9] rounded-full overflow-hidden">
+      <div className="h-1.5 w-full bg-[var(--bg-elevated)] rounded-full overflow-hidden">
         <div className={`h-full rounded-full transition-all duration-300 ${color}`} style={{ width: `${pct}%` }} />
       </div>
       <ul className="grid grid-cols-2 gap-x-4 gap-y-1">
         {results.map(r => (
-          <li key={r.id} className={`flex items-center gap-1.5 text-xs font-bold ${r.passed ? 'text-[#4F46E5]' : 'text-[#94A3B8]'}`}>
+          <li key={r.id} className={`flex items-center gap-1.5 text-xs font-bold ${r.passed ? 'text-[var(--primary)]' : 'text-[var(--text-muted)]'}`}>
             <Check size={11} className={r.passed ? 'opacity-100' : 'opacity-30'} />
             {r.label}
           </li>
@@ -51,8 +51,8 @@ function StrengthBar({ results }) {
 function PasswordField({ label, name, value, onChange, show, onToggleShow, error, required }) {
   return (
     <div>
-      <label className="block text-xs font-black uppercase tracking-widest text-[#64748B] mb-2 ml-1">
-        {label} {required && <span className="text-[#4F46E5]">*</span>}
+      <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-secondary)] mb-2 ml-1">
+        {label} {required && <span className="text-[var(--primary)]">*</span>}
       </label>
       <div className="relative">
         <input
@@ -61,18 +61,18 @@ function PasswordField({ label, name, value, onChange, show, onToggleShow, error
           value={value}
           onChange={onChange}
           placeholder="••••••••"
-          className={`w-full bg-white border rounded-xl py-3 px-4 pr-12 outline-none text-[#0F172A] transition shadow-sm font-bold
-            ${error ? 'border-[#EF4444] focus:ring-2 focus:ring-[#EF4444]/10' : 'border-[#E2E8F0] focus:ring-2 focus:ring-[#4F46E5]/10 focus:border-[#4F46E5]'}`}
+          className={`w-full bg-[var(--bg-surface)] border rounded-xl py-3 px-4 pr-12 outline-none text-[var(--text-primary)] transition shadow-sm font-bold
+            ${error ? 'border-red-500 focus:ring-2 focus:ring-red-500/10' : 'border-[var(--border)] focus:ring-2 focus:ring-[var(--primary)]/10 focus:border-[var(--primary)]'}`}
         />
         <button
           type="button"
           onClick={onToggleShow}
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-[#94A3B8] hover:text-[#4F46E5] transition"
+          className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)] hover:text-[var(--primary)] transition"
         >
           {show ? <EyeOff size={18} /> : <Eye size={18} />}
         </button>
       </div>
-      {error && <p className="text-xs text-[#EF4444] mt-1.5 ml-1 font-bold">{error}</p>}
+      {error && <p className="text-xs text-red-500 mt-1.5 ml-1 font-bold">{error}</p>}
     </div>
   );
 }
@@ -87,7 +87,7 @@ function Toggle({ enabled, onChange, disabled }) {
       disabled={disabled}
       onClick={onChange}
       className={`relative inline-flex h-7 w-12 shrink-0 items-center rounded-full transition-colors focus:outline-none
-        ${enabled ? 'bg-[#4F46E5]' : 'bg-[#E2E8F0]'} ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+        ${enabled ? 'bg-[var(--primary)]' : 'bg-[var(--border)]'} ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
     >
       <span className={`inline-block h-5 w-5 transform rounded-full bg-white shadow-md transition-transform
         ${enabled ? 'translate-x-6' : 'translate-x-1'}`} />
@@ -112,17 +112,17 @@ export default function SecuritySettings() {
     <section className="space-y-8">
       {/* ── SECTION HEADER ── */}
       <div>
-        <h2 className="text-xl font-black text-[#0F172A]">Privacidad y Seguridad</h2>
-        <p className="text-sm text-[#64748B] font-medium">Protege tu cuenta y controla el acceso desde múltiples dispositivos.</p>
+        <h2 className="text-xl font-black text-[var(--text-primary)]">Privacidad y Seguridad</h2>
+        <p className="text-sm text-[var(--text-secondary)] font-medium">Protege tu cuenta y controla el acceso desde múltiples dispositivos.</p>
       </div>
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
           1. CAMBIAR CONTRASEÑA
       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 md:p-6 space-y-5 shadow-sm">
+      <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl p-5 md:p-6 space-y-5 shadow-sm">
         <div className="flex items-center gap-3">
-          <Lock size={18} className="text-[#4F46E5]" />
-          <h3 className="font-black text-[#0F172A] text-lg">Cambiar Contraseña</h3>
+          <Lock size={18} className="text-[var(--primary)]" />
+          <h3 className="font-black text-[var(--text-primary)] text-lg">Cambiar Contraseña</h3>
         </div>
 
         {/* Status Alerts */}
@@ -170,8 +170,8 @@ export default function SecuritySettings() {
             disabled={!pw.formOk || pw.status === 'loading'}
             className={`w-full flex items-center justify-center gap-2 font-black uppercase tracking-widest rounded-xl py-3.5 transition shadow-lg
               ${pw.formOk && pw.status !== 'loading'
-                ? 'bg-[#4F46E5] text-white hover:bg-[#4338CA] shadow-indigo-100'
-                : 'bg-[#F1F5F9] text-[#94A3B8] cursor-not-allowed shadow-none'}`}
+                ? 'bg-[var(--primary)] text-white hover:opacity-90 shadow-[var(--primary)]/20'
+                : 'bg-[var(--bg-elevated)] text-[var(--text-muted)] cursor-not-allowed shadow-none'}`}
           >
             {pw.status === 'loading'
               ? <><Loader2 size={18} className="animate-spin" /> Actualizando…</>
@@ -183,14 +183,14 @@ export default function SecuritySettings() {
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
           2. AUTENTICACIÓN 2FA
       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      <div className="bg-white border border-[#E2E8F0] rounded-2xl overflow-hidden shadow-sm">
+      <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl overflow-hidden shadow-sm">
         {/* Header row */}
         <div className="flex items-center justify-between px-5 md:px-6 py-5">
           <div className="flex items-center gap-3">
-            <Shield size={18} className={tfa.enabled ? 'text-[#10B981]' : 'text-[#94A3B8]'} />
+            <Shield size={18} className={tfa.enabled ? 'text-[#10B981]' : 'text-[var(--text-muted)]'} />
             <div>
-              <h3 className="font-black text-[#0F172A] leading-tight">Autenticación de Dos Factores</h3>
-              <p className="text-xs text-[#64748B] font-medium mt-0.5">
+              <h3 className="font-black text-[var(--text-primary)] leading-tight">Autenticación de Dos Factores</h3>
+              <p className="text-xs text-[var(--text-secondary)] font-medium mt-0.5">
                 {tfa.enabled ? '✅ Activo — tu cuenta tiene una capa extra de protección.' : 'Inactivo — actívala para proteger tu cuenta.'}
               </p>
             </div>
@@ -204,7 +204,7 @@ export default function SecuritySettings() {
 
         {/* ── SETUP FLOW ── */}
         {(tfa.stage === 'setup' || tfa.stage === 'verifying') && (
-          <div className="border-t border-[#E2E8F0] px-5 md:px-6 py-5 space-y-5 bg-[#F8FAFC]">
+          <div className="border-t border-[var(--border)] px-5 md:px-6 py-5 space-y-5 bg-[var(--bg-elevated)]">
             <Alert type="info">
               Escanea el código QR con <strong>Google Authenticator</strong> o <strong>Authy</strong> y luego introduce el código de 6 dígitos.
             </Alert>
@@ -227,10 +227,10 @@ export default function SecuritySettings() {
                 )}
               </div>
               <div className="flex-1 space-y-3 text-center sm:text-left">
-                <p className="text-sm font-black text-[#0F172A]">¿No puedes escanear el QR?</p>
-                <p className="text-xs text-[#64748B] font-medium">Introduce este código manualmente en tu app de autenticación:</p>
+                <p className="text-sm font-black text-[var(--text-primary)]">¿No puedes escanear el QR?</p>
+                <p className="text-xs text-[var(--text-secondary)] font-medium">Introduce este código manualmente en tu app de autenticación:</p>
                 {tfa.qrData && (
-                  <code className="block bg-white text-[#4F46E5] font-mono text-sm px-3 py-2 rounded-xl tracking-widest border border-[#4F46E5]/20 select-all font-bold shadow-sm">
+                  <code className="block bg-[var(--bg-surface)] text-[var(--primary)] font-mono text-sm px-3 py-2 rounded-xl tracking-widest border border-[var(--primary)]/20 select-all font-bold shadow-sm">
                     {tfa.qrData.secret}
                   </code>
                 )}
@@ -239,8 +239,8 @@ export default function SecuritySettings() {
 
             {/* OTP Input */}
             <div>
-              <label className="block text-xs font-black uppercase tracking-widest text-[#64748B] mb-2 ml-1">
-                Código de verificación <span className="text-[#4F46E5]">*</span>
+              <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-secondary)] mb-2 ml-1">
+                Código de verificación <span className="text-[var(--primary)]">*</span>
               </label>
               <input
                 type="text"
@@ -249,17 +249,17 @@ export default function SecuritySettings() {
                 placeholder="000000"
                 value={tfa.otp}
                 onChange={tfa.handleOtpChange}
-                className={`w-full bg-white border rounded-xl py-3.5 px-4 text-center text-2xl font-mono font-black tracking-[0.5em] outline-none transition shadow-sm
-                  ${tfa.error2FA ? 'border-[#EF4444] text-[#EF4444]' : 'border-[#E2E8F0] focus:ring-2 focus:ring-[#4F46E5]/10 focus:border-[#4F46E5] text-[#0F172A]'}`}
+                className={`w-full bg-[var(--bg-surface)] border rounded-xl py-3.5 px-4 text-center text-2xl font-mono font-black tracking-[0.5em] outline-none transition shadow-sm
+                  ${tfa.error2FA ? 'border-red-500 text-red-500' : 'border-[var(--border)] focus:ring-2 focus:ring-[var(--primary)]/10 focus:border-[var(--primary)] text-[var(--text-primary)]'}`}
               />
-              {tfa.error2FA && <p className="text-xs text-[#EF4444] mt-1.5 text-center font-bold">{tfa.error2FA}</p>}
+              {tfa.error2FA && <p className="text-xs text-red-500 mt-1.5 text-center font-bold">{tfa.error2FA}</p>}
             </div>
 
             {/* Action Buttons */}
             <div className="flex gap-3">
               <button
                 onClick={tfa.cancel}
-                className="px-5 py-3 rounded-xl border border-[#E2E8F0] text-[#64748B] hover:bg-white transition text-sm font-black uppercase tracking-widest"
+                className="px-5 py-3 rounded-xl border border-[var(--border)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] transition text-sm font-black uppercase tracking-widest"
               >
                 Cancelar
               </button>
@@ -268,8 +268,8 @@ export default function SecuritySettings() {
                 disabled={tfa.otp.length < 6 || tfa.stage === 'verifying'}
                 className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-black text-sm uppercase tracking-widest transition shadow-lg
                   ${tfa.otp.length === 6 && tfa.stage !== 'verifying'
-                    ? 'bg-[#4F46E5] text-white hover:bg-[#4338CA] shadow-indigo-100'
-                    : 'bg-[#F1F5F9] text-[#94A3B8] cursor-not-allowed shadow-none'}`}
+                    ? 'bg-[var(--primary)] text-white hover:opacity-90 shadow-[var(--primary)]/20'
+                    : 'bg-[var(--bg-elevated)] text-[var(--text-muted)] cursor-not-allowed shadow-none'}`}
               >
                 {tfa.stage === 'verifying'
                   ? <><Loader2 size={16} className="animate-spin" /> Verificando…</>
@@ -281,10 +281,10 @@ export default function SecuritySettings() {
 
         {/* ── ACTIVE STATE ── */}
         {tfa.stage === 'active' && (
-          <div className="border-t border-[#E2E8F0] px-5 md:px-6 py-4 flex items-center gap-3 bg-[#EEF2FF]/50">
-            <Smartphone size={16} className="text-[#4F46E5]" />
-            <p className="text-sm text-[#64748B] font-medium">
-              Verificación activa mediante <span className="text-[#4F46E5] font-black">app de autenticación</span>. Para desactivarla, pulsa de nuevo el interruptor.
+          <div className="border-t border-[var(--border)] px-5 md:px-6 py-4 flex items-center gap-3 bg-[var(--primary)]/5">
+            <Smartphone size={16} className="text-[var(--primary)]" />
+            <p className="text-sm text-[var(--text-secondary)] font-medium">
+              Verificación activa mediante <span className="text-[var(--primary)] font-black">app de autenticación</span>. Para desactivarla, pulsa de nuevo el interruptor.
             </p>
           </div>
         )}
@@ -294,30 +294,30 @@ export default function SecuritySettings() {
           3. SESIONES ACTIVAS
       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <div>
-        <h3 className="font-black text-[#0F172A] text-lg mb-4">Sesiones Activas</h3>
+        <h3 className="font-black text-[var(--text-primary)] text-lg mb-4">Sesiones Activas</h3>
         <div className="space-y-3">
           {sessions.map(session => (
-            <div key={session.id} className="bg-white border border-[#E2E8F0] rounded-2xl p-4 md:p-5 flex items-center gap-4 shadow-sm transition-all hover:bg-[#F8FAFC]">
-              <div className="w-10 h-10 rounded-xl bg-[#EEF2FF] flex items-center justify-center text-[#4F46E5] shrink-0 border border-[#4F46E5]/10">
+            <div key={session.id} className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl p-4 md:p-5 flex items-center gap-4 shadow-sm transition-all hover:bg-[var(--bg-elevated)]">
+              <div className="w-10 h-10 rounded-xl bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] shrink-0 border border-[var(--primary)]/10">
                 {session.device.includes('iPhone') || session.device.includes('Android')
                   ? <Smartphone size={20} />
                   : <Monitor size={20} />}
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex flex-wrap items-center gap-2">
-                  <p className="font-black text-[#0F172A] text-sm leading-tight">{session.device}</p>
+                  <p className="font-black text-[var(--text-primary)] text-sm leading-tight">{session.device}</p>
                   {session.isCurrent && (
-                    <span className="text-[10px] font-black bg-[#EEF2FF] text-[#4F46E5] px-2 py-0.5 rounded-full whitespace-nowrap border border-[#4F46E5]/10 uppercase tracking-tighter">
+                    <span className="text-[10px] font-black bg-[var(--primary)]/10 text-[var(--primary)] px-2 py-0.5 rounded-full whitespace-nowrap border border-[var(--primary)]/10 uppercase tracking-tighter">
                       Este dispositivo
                     </span>
                   )}
                 </div>
-                <p className="text-xs text-[#64748B] mt-0.5 truncate font-medium">{session.browser} · {session.location} · {session.ip}</p>
+                <p className="text-xs text-[var(--text-secondary)] mt-0.5 truncate font-medium">{session.browser} · {session.location} · {session.ip}</p>
               </div>
               {!session.isCurrent && (
                 <button
                   onClick={() => revokeSession(session.id)}
-                  className="p-2 text-[#94A3B8] hover:text-[#EF4444] hover:bg-[#FEF2F2] rounded-xl transition shrink-0"
+                  className="p-2 text-[var(--text-muted)] hover:text-red-500 hover:bg-red-500/10 rounded-xl transition shrink-0"
                   title="Cerrar sesión en este dispositivo"
                 >
                   <X size={18} />
@@ -329,7 +329,7 @@ export default function SecuritySettings() {
         {sessions.length > 1 && (
           <button
             onClick={() => setSessions(prev => prev.filter(s => s.isCurrent))}
-            className="mt-4 w-full text-sm text-[#EF4444] font-black uppercase tracking-widest py-3.5 hover:bg-[#FEF2F2] rounded-xl border border-[#FECACA] transition shadow-sm"
+            className="mt-4 w-full text-sm text-red-500 font-black uppercase tracking-widest py-3.5 hover:bg-red-500/10 rounded-xl border border-red-500/20 transition shadow-sm"
           >
             Cerrar sesión en todos los demás dispositivos ({sessions.filter(s => !s.isCurrent).length})
           </button>

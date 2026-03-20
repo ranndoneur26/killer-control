@@ -15,7 +15,7 @@ import {
   Plus,
   PlayCircle
 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, Link } from 'react-router-dom';
 import HeroHeader from './HeroHeader';
 import TermsModal from './TermsModal';
@@ -24,6 +24,8 @@ import CookiesModal from './CookiesModal';
 import LegalNoticeModal from './LegalNoticeModal';
 import ContactModal from './ContactModal';
 import DemoModal from './DemoModal';
+import CookieConsent from './CookieConsent';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -33,6 +35,8 @@ const LandingPage = () => {
   const [showLegal, setShowLegal] = useState(false);
   const [showContact, setShowContact] = useState(false);
   const [showDemo, setShowDemo] = useState(false);
+  const [activeFAQ, setActiveFAQ] = useState(null);
+  const { t } = useLanguage();
 
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
@@ -40,12 +44,8 @@ const LandingPage = () => {
     transition: { duration: 0.6 }
   };
 
-  const staggerContainer = {
-    animate: {
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
+  const toggleFAQ = (index) => {
+    setActiveFAQ(activeFAQ === index ? null : index);
   };
 
   return (
@@ -59,30 +59,31 @@ const LandingPage = () => {
             <motion.div {...fadeIn}>
               <div className="inline-flex items-center gap-2 bg-[#EEF2FF] border border-[#E0E7FF] text-[#4F46E5] px-3 py-1 rounded-full text-xs font-bold mb-6 uppercase tracking-wider">
                 <Zap size={14} fill="currentColor" />
-                Nueva era en control de gastos
+                {t('hero.badge')}
               </div>
               <h1 className="text-5xl lg:text-6xl font-black tracking-tight text-[#0F172A] mb-6 leading-[1.1]">
-                Controla tus suscripciones antes de que ellas <span className="text-[#4F46E5]">controlen tu cuenta</span>
+                {t('hero.title1')} <span className="text-[#4F46E5]">{t('hero.title2')}</span>
               </h1>
               <p className="text-xl text-[#64748B] mb-10 leading-relaxed max-w-xl">
-                Detecta subidas de precio, promociones que terminan y servicios que ya no compensan. Todo en un solo lugar.
+                {t('hero.subtitle')}
               </p>
               <div className="flex flex-col sm:flex-row items-center gap-4">
                 <button onClick={() => navigate('/login')} className="w-full sm:w-auto px-10 py-4 bg-[#4F46E5] text-white font-bold rounded-2xl hover:bg-[#4338CA] active:scale-95 transition-all shadow-lg shadow-indigo-100">
-                  Empezar gratis
+                  {t('hero.cta_primary')}
                 </button>
                 <button 
                   onClick={() => setShowDemo(true)} 
                   className="w-full sm:w-auto px-10 py-4 bg-white border border-[#E2E8F0] text-[#0F172A] font-bold rounded-2xl hover:bg-[#F8FAFC] transition-all flex items-center justify-center gap-2"
                 >
                   <PlayCircle size={18} className="text-[#4F46E5]" />
-                  Ver demostración
+                  {t('hero.cta_secondary')}
                 </button>
               </div>
               <p className="mt-4 text-sm text-[#94A3B8] font-medium ml-1">
-                Sin tarjeta para empezar
+                {t('hero.no_card')}
               </p>
             </motion.div>
+
 
             <motion.div 
               initial={{ opacity: 0, x: 100 }}
@@ -201,7 +202,6 @@ const LandingPage = () => {
       </section>
 
       {/* ─── Solution Section ─────────────────────────────── */}
-      {/* ─── Solution Section ─────────────────────────────── */}
       <section id="features" className="py-24 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:flex items-center gap-16">
@@ -211,7 +211,6 @@ const LandingPage = () => {
               
               <div className="space-y-6">
                 {[
-                  { title: "Alertas de subidas de precio", text: "Te avisamos antes del cobro si tu plataforma ha subido la tarifa." },
                   { title: "Avisos de fin de promoción", text: "No vuelvas a pagar el precio completo por despiste." },
                   { title: "Próximos cargos centralizados", text: "Una vista única para saber qué se cobra mañana, la semana que viene o el próximo mes." },
                   { title: "Recomendaciones de ahorro", text: "Descubre alternativas más baratas o planes compartidos que te convengan." }
@@ -269,11 +268,11 @@ const LandingPage = () => {
           <div className="grid md:grid-cols-3 gap-12 text-center">
             {[
               { num: "01", title: "Añade tus servicios", text: "Introduce tus suscripciones una a una o sincroniza tus facturas." },
-              { num: "02", title: "Recibe alertas", text: "Deja que <span className=\"text-[#F59E0B]\">Killer</span> Control vigile precios y promociones por ti 24/7." },
+              { num: "02", title: "Recibe alertas", text: "Deja que <span className=\"text-[#F59E0B]\">Killer</span> Control te avise con atelación por ti 24/7." },
               { num: "03", title: "Decide y ahorra", text: "Con toda la información en mano, elige qué mantener y qué cancelar." }
             ].map((step, i) => (
               <div key={i} className="relative group px-4">
-                <div className="text-5xl font-black text-[#E2E8F0] mb-6 group-hover:text-[#4F46E5]/10 transition-colors duration-500">{step.num}</div>
+                <div className="text-5xl font-black text-[#F59E0B] mb-6 transition-colors duration-500">{step.num}</div>
                 <h3 className="text-xl font-bold mb-4 text-[#0F172A]">{step.title}</h3>
                 <p className="text-[#64748B] text-sm leading-relaxed font-medium" dangerouslySetInnerHTML={{ __html: step.text }}></p>
                 {i < 2 && (
@@ -306,7 +305,7 @@ const LandingPage = () => {
               <p className="text-[#64748B] mb-8 font-semibold">Empieza a controlar tus suscripciones sin coste.</p>
               
               <ul className="space-y-4 mb-10 w-full text-left">
-                {["Hasta 5 suscripciones", "Vista mensual del gasto", "Recordatorios básicos", "Alertas limitadas", "Histórico de 3 meses"].map((f, i) => (
+                {["Hasta 3 suscripciones", "Vista mensual del gasto", "Recordatorios básicos", "Alertas limitadas", "Histórico de 3 meses"].map((f, i) => (
                   <li key={i} className="flex gap-3 text-sm text-[#64748B] font-medium">
                     <Check size={18} className="text-[#4F46E5]" /> {f}
                   </li>
@@ -335,7 +334,7 @@ const LandingPage = () => {
               <p className="text-[#64748B] mb-8 font-semibold">Para quienes quieren ahorrar de verdad.</p>
               
               <ul className="space-y-4 mb-10 w-full text-left">
-                {["Suscripciones ilimitadas", "Alertas inteligentes Pro", "Subidas de precio en tiempo real", "Avisos de fin de promoción", "Recomendaciones de IA", "Informes CSV/PDF", "Soporte prioritario"].map((f, i) => (
+                {["Suscripciones ilimitadas", "Subidas de precio en tiempo real", "Avisos de fin de promoción", "Informes CSV/PDF", "Soporte prioritario"].map((f, i) => (
                   <li key={i} className="flex gap-3 text-sm text-[#0F172A] font-semibold">
                     <Check size={18} className="text-[#4F46E5]" /> {f}
                   </li>
@@ -379,24 +378,34 @@ const LandingPage = () => {
 
       <section id="faq" className="py-24 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12 text-[#0F172A]">Preguntas frecuentes</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-[#0F172A]">{t('faq.title')}</h2>
           <div className="space-y-4">
-            {[
-              { q: "¿Puedo usar <span className=\"text-[#F59E0B]\">Killer</span> Control gratis?", a: "Sí, el plan gratuito permite gestionar hasta 5 suscripciones con alertas básicas. Es perfecto para empezar." },
-              { q: "¿Qué incluye Premium?", a: "Suscripciones ilimitadas, alertas inteligentes en tiempo real, histórico completo de precios, recomendaciones avanzadas de ahorro y exportación de datos." },
-              { q: "¿Puedo cancelar cuando quiera?", a: "Totalmente. No hay permanencias en ningún plan. Si cancelas Premium, volverás al plan gratuito al finalizar el periodo pagado." },
-              { q: "¿Necesito tarjeta para empezar?", a: "Para el plan gratuito no pedimos ninguna forma de pago. Queremos que pruebes el valor del producto primero." },
-              { q: "¿Cómo se detectan las oportunidades de ahorro?", a: "Analizamos más de 500 plataformas y comparamos tus cuotas con los planes actuales y competidores para ofrecerte la mejor alternativa." }
-            ].map((item, i) => (
-              <details key={i} className="group border border-[#E2E8F0] rounded-2xl overflow-hidden hover:border-[#CBD5E1] transition-colors bg-white">
-                 <summary className="p-6 list-none flex justify-between items-center cursor-pointer font-bold text-[#0F172A]">
-                    <span dangerouslySetInnerHTML={{ __html: item.q }}></span>
-                    <Plus size={20} className="group-open:rotate-45 transition-transform text-[#4F46E5]" />
-                 </summary>
-                 <div className="p-6 pt-0 text-[#64748B] text-sm leading-relaxed font-medium">
-                    {item.a}
-                 </div>
-              </details>
+            {[1, 2, 3, 4, 5].map((num, i) => (
+              <div key={i} className="group border border-[#E2E8F0] rounded-2xl overflow-hidden hover:border-[#CBD5E1] transition-colors bg-white">
+                 <button 
+                  onClick={() => toggleFAQ(i)}
+                  className="w-full p-6 list-none flex justify-between items-center cursor-pointer font-bold text-[#0F172A] text-left"
+                 >
+                    <span dangerouslySetInnerHTML={{ __html: t(`faq.q${num}`) }}></span>
+                    <motion.div animate={{ rotate: activeFAQ === i ? 45 : 0 }} transition={{ duration: 0.2 }}>
+                      <Plus size={20} className="text-[#4F46E5]" />
+                    </motion.div>
+                 </button>
+                 <AnimatePresence>
+                   {activeFAQ === i && (
+                     <motion.div 
+                      initial={{ height: 0, opacity: 0 }} 
+                      animate={{ height: 'auto', opacity: 1 }} 
+                      exit={{ height: 0, opacity: 0 }} 
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                     >
+                       <div className="p-6 pt-0 text-[#64748B] text-sm leading-relaxed font-medium">
+                          {t(`faq.a${num}`)}
+                       </div>
+                     </motion.div>
+                   )}
+                 </AnimatePresence>
+              </div>
             ))}
           </div>
         </div>
@@ -425,18 +434,18 @@ const LandingPage = () => {
       {/* ─── Footer ─────────────────────────────── */}
       <footer className="py-20 bg-white border-t border-[#E2E8F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-           <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-[10px] font-black uppercase tracking-[0.2em] text-[#94A3B8] text-center md:text-left mb-12">
+           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 text-[10px] font-black uppercase tracking-[0.2em] text-[#94A3B8] text-center md:text-left mb-12">
               <div className="flex flex-col gap-3">
                 <span className="text-gray-400 mb-1 pb-2 border-b border-[#f1f5f9]">Legal</span>
-                <button onClick={() => setShowLegal(true)} className="hover:text-[#4F46E5] transition-colors text-left uppercase">Aviso Legal</button>
-                <button onClick={() => setShowPrivacy(true)} className="hover:text-[#4F46E5] transition-colors text-left uppercase">Privacidad</button>
-                <button onClick={() => setShowTerms(true)} className="hover:text-[#4F46E5] transition-colors text-left uppercase">Términos</button>
-                <button onClick={() => setShowCookies(true)} className="hover:text-[#4F46E5] transition-colors text-left uppercase">Cookies</button>
+                <button onClick={() => setShowLegal(true)} className="hover:text-[#4F46E5] transition-colors md:text-left uppercase">Aviso Legal</button>
+                <button onClick={() => setShowPrivacy(true)} className="hover:text-[#4F46E5] transition-colors md:text-left uppercase">Privacidad</button>
+                <button onClick={() => setShowTerms(true)} className="hover:text-[#4F46E5] transition-colors md:text-left uppercase">Términos</button>
+                <button onClick={() => setShowCookies(true)} className="hover:text-[#4F46E5] transition-colors md:text-left uppercase">Cookies</button>
               </div>
               <div className="flex flex-col gap-3">
                 <span className="text-gray-400 mb-1 pb-2 border-b border-[#f1f5f9]">Soporte</span>
-                <button onClick={() => setShowContact(true)} className="hover:text-[#4F46E5] transition-colors text-left uppercase">Contacto</button>
-                <a href="mailto:soporte@killercontrol.app" className="hover:text-[#4F46E5] transition-colors text-left uppercase">Email</a>
+                <button onClick={() => setShowContact(true)} className="hover:text-[#4F46E5] transition-colors md:text-left uppercase">Contacto</button>
+                <a href="mailto:soporte@killercontrol.app" className="hover:text-[#4F46E5] transition-colors md:text-left uppercase">Email</a>
               </div>
               <div className="flex flex-col gap-3">
                 <span className="text-gray-400 mb-1 pb-2 border-b border-[#f1f5f9]">Explorar</span>
@@ -468,6 +477,9 @@ const LandingPage = () => {
       <LegalNoticeModal open={showLegal} onClose={() => setShowLegal(false)} />
       <ContactModal open={showContact} onClose={() => setShowContact(false)} />
       <DemoModal open={showDemo} onClose={() => setShowDemo(false)} />
+      
+      {/* Cookie Consent Banner */}
+      <CookieConsent onOpenPolicy={() => setShowCookies(true)} />
     </div>
   );
 };

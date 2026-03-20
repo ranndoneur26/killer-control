@@ -19,9 +19,9 @@ function Toggle({ enabled, onChange, loading }) {
       className={`
         relative inline-flex h-7 w-12 shrink-0 rounded-full p-0.5
         transition-colors duration-300 ease-in-out focus-visible:outline-none
-        focus-visible:ring-2 focus-visible:ring-[#4F46E5] focus-visible:ring-offset-2
-        focus-visible:ring-offset-white
-        ${enabled ? 'bg-[#4F46E5]' : 'bg-[#E2E8F0]'}
+        focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2
+        focus-visible:ring-offset-[var(--bg)]
+        ${enabled ? 'bg-[var(--primary)]' : 'bg-[var(--border)]'}
         ${loading ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'}
       `}
     >
@@ -32,7 +32,7 @@ function Toggle({ enabled, onChange, loading }) {
           ${enabled ? 'translate-x-5' : 'translate-x-0'}
         `}
       >
-        {loading && <Loader2 size={12} className="animate-spin text-[#94A3B8]" />}
+        {loading && <Loader2 size={12} className="animate-spin text-[var(--text-muted)]" />}
       </span>
     </button>
   );
@@ -41,13 +41,13 @@ function Toggle({ enabled, onChange, loading }) {
 /* ─── Single preference row ─────────────────── */
 function PrefRow({ icon: Icon, color, label, description, prefKey, prefs, saving, onToggle }) {
   return (
-    <div className="flex items-start gap-4 py-4 border-b border-[#E2E8F0] last:border-0 hover:bg-[#F8FAFC]/50 transition-colors px-2 -mx-2 rounded-xl">
+    <div className="flex items-start gap-4 py-4 border-b border-[var(--border)] last:border-0 hover:bg-[var(--bg-elevated)]/50 transition-colors px-2 -mx-2 rounded-xl">
       <div className={`mt-0.5 shrink-0 ${color}`}>
         <Icon size={18} />
       </div>
       <div className="flex-1 min-w-0">
-        <p className="font-black text-[#0F172A] text-sm leading-snug">{label}</p>
-        {description && <p className="text-xs text-[#64748B] mt-0.5 leading-relaxed font-medium">{description}</p>}
+        <p className="font-black text-[var(--text-primary)] text-sm leading-snug">{label}</p>
+        {description && <p className="text-xs text-[var(--text-secondary)] mt-0.5 leading-relaxed font-medium">{description}</p>}
       </div>
       <Toggle
         enabled={prefs[prefKey]}
@@ -61,10 +61,10 @@ function PrefRow({ icon: Icon, color, label, description, prefKey, prefs, saving
 /* ─── Category card wrapper ─────────────────── */
 function CategoryCard({ icon: Icon, iconColor, title, children }) {
   return (
-    <div className="bg-white border border-[#E2E8F0] rounded-2xl px-5 shadow-sm">
-      <div className={`flex items-center gap-2 pt-5 pb-3 border-b border-[#E2E8F0]`}>
+    <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl px-5 shadow-sm">
+      <div className={`flex items-center gap-2 pt-5 pb-3 border-b border-[var(--border)]`}>
         <Icon size={16} className={iconColor} />
-        <h3 className="font-black text-[10px] uppercase tracking-[0.15em] text-[#94A3B8]">{title}</h3>
+        <h3 className="font-black text-[10px] uppercase tracking-[0.15em] text-[var(--text-muted)]">{title}</h3>
       </div>
       {children}
     </div>
@@ -85,8 +85,8 @@ function Toast({ toast, onDismiss }) {
         flex items-start gap-3 px-4 py-3 rounded-2xl shadow-xl border text-sm font-black
         max-w-sm w-full pointer-events-auto transition-all uppercase tracking-widest
         ${isSuccess
-          ? 'bg-[#EEF2FF] border-[#4F46E5]/20 text-[#4F46E5]'
-          : 'bg-[#FEF2F2] border-[#EF4444]/20 text-[#EF4444]'}
+          ? 'bg-[var(--primary)]/10 border-[var(--primary)]/20 text-[var(--primary)]'
+          : 'bg-red-500/10 border-red-500/20 text-red-500'}
       `}
     >
       {isSuccess
@@ -124,21 +124,21 @@ const EMAIL_ROWS = [
   {
     prefKey: 'emailNews',
     icon: Bell,
-    color: 'text-[#4F46E5]',
+    color: 'text-[var(--primary)]',
     label: <>Novedades de <span className="text-[#F59E0B]">Killer</span> Control</>,
     description: 'Nuevas funciones, mejoras y actualizaciones del producto.',
   },
   {
     prefKey: 'emailSummary',
     icon: Mail,
-    color: 'text-[#4F46E5]',
+    color: 'text-[var(--primary)]',
     label: 'Resúmenes mensuales de facturación',
     description: 'Un resumen mensual de cuánto gastaste en suscripciones.',
   },
   {
     prefKey: 'emailRenewals',
     icon: Bell,
-    color: 'text-[#4F46E5]',
+    color: 'text-[var(--primary)]',
     label: 'Alertas de próximos cargos',
     description: 'Aviso con X días de antelación antes de cada renovación.',
   },
@@ -165,14 +165,14 @@ const SECURITY_ROWS = [
   {
     prefKey: 'alertLogin',
     icon: Lock,
-    color: 'text-[#EF4444]',
+    color: 'text-red-500',
     label: 'Nuevos inicios de sesión',
     description: 'Alerta si se inicia sesión desde un dispositivo no reconocido.',
   },
   {
     prefKey: 'alertAccountChange',
     icon: Shield,
-    color: 'text-[#EF4444]',
+    color: 'text-red-500',
     label: 'Cambios en la cuenta',
     description: 'Aviso si se modifica tu contraseña, email o método de pago.',
   },
@@ -191,14 +191,14 @@ export default function NotificationSettings() {
       <section className="space-y-6">
         {/* Header */}
         <div>
-          <h2 className="text-xl font-black text-[#0F172A]">Notificaciones y Alertas</h2>
-          <p className="text-sm text-[#64748B] font-medium">
+          <h2 className="text-xl font-black text-[var(--text-primary)]">Notificaciones y Alertas</h2>
+          <p className="text-sm text-[var(--text-secondary)] font-medium">
             Los cambios se guardan al instante. Si hay un error, el ajuste se restaura automáticamente.
           </p>
         </div>
 
         {/* Email Category */}
-        <CategoryCard icon={Mail} iconColor="text-[#4F46E5]" title="Correos Electrónicos">
+        <CategoryCard icon={Mail} iconColor="text-[var(--primary)]" title="Correos Electrónicos">
           {EMAIL_ROWS.map(r => <PrefRow key={r.prefKey} {...r} {...rowProps} />)}
         </CategoryCard>
 
@@ -206,19 +206,19 @@ export default function NotificationSettings() {
         <CategoryCard icon={Bell} iconColor="text-[#F59E0B]" title="Notificaciones Push">
           {PUSH_ROWS.map(r => <PrefRow key={r.prefKey} {...r} {...rowProps} />)}
           {!prefs.pushEnabled && (
-            <p className="text-xs text-[#94A3B8] py-3 italic font-medium px-2">
+            <p className="text-xs text-[var(--text-muted)] py-3 italic font-medium px-2">
               Activa las notificaciones push para gestionar las alertas de renovación.
             </p>
           )}
         </CategoryCard>
 
         {/* Security Category */}
-        <CategoryCard icon={Shield} iconColor="text-[#EF4444]" title="Alertas de Seguridad">
+        <CategoryCard icon={Shield} iconColor="text-red-500" title="Alertas de Seguridad">
           {SECURITY_ROWS.map(r => <PrefRow key={r.prefKey} {...r} {...rowProps} />)}
         </CategoryCard>
 
         {/* Summary of currently enabled */}
-        <div className="text-xs text-[#94A3B8] text-center font-black uppercase tracking-widest">
+        <div className="text-xs text-[var(--text-muted)] text-center font-black uppercase tracking-widest">
           {Object.values(prefs).filter(Boolean).length} de {Object.keys(prefs).length} preferencias activas
         </div>
       </section>

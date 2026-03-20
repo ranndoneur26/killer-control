@@ -3,29 +3,37 @@
 /* ─── Design tokens ─────────────────────────────── */
 @theme {
   --color-primary: #4F46E5;
-  --color-background: #F8FAFC;
-  --color-surface: #ffffff;
+  --color-background: #F9FAFB;
+  --color-surface: #FFFFFF;
   --font-sans: "Inter", system-ui, sans-serif;
 }
 
-/* ─── CSS custom properties: Premium Dark & Orange ── */
+/* ─── Custom Variant for Class-based Dark Mode ─── */
+@custom-variant dark (&:where(.dark, .dark *));
+
 html {
   scroll-behavior: smooth;
 }
 
+/* ─── CSS custom properties: LIGHT MODE (Default) ── */
 :root {
-  --bg: #F8FAFC;          
-  --bg-surface: #ffffff;  
-  --bg-elevated: #EEF2FF; 
-  --text-primary: #0F172A; 
-  --text-secondary: #64748B;
-  --text-muted: #94A3B8;
-  --border: #E2E8F0;      
-  --primary: #4F46E5;     
-  --primary-soft: #EEF2FF;
-  --success: #10B981;
-  --warning: #F59E0B;
-  --danger: #EF4444;
+  /* LIGHT Theme Colors (Prompt: bg-gray-50, text-gray-900 etc) */
+  --bg: #F9FAFB;          /* gray-50 */
+  --bg-surface: #FFFFFF;  /* white */
+  --bg-elevated: #F3F4F6; /* gray-100 */
+  
+  --text-primary: #111827;   /* gray-900 */
+  --text-secondary: #6B7280; /* gray-500 */
+  --text-muted: #9CA3AF;     /* gray-400 (hints) */
+  
+  --border: #E5E7EB;      /* gray-200 */
+  
+  --primary: #4F46E5;     /* indigo-600 */
+  --primary-soft: rgba(79, 70, 229, 0.1);
+  
+  --success: #10B981;     /* emerald-500 */
+  --warning: #F59E0B;     /* amber-500 */
+  --danger: #EF4444;      /* red-500 */
 
   /* Density spacing scale */
   --space-card: 1.25rem;   
@@ -34,19 +42,35 @@ html {
   --text-base: 0.9375rem;  
 }
 
-/* ─── Light mode ─────────────────────────────────── */
-html.light {
-  --bg: #f0f4f8;
-  --bg-surface: #ffffff;
-  --bg-elevated: #e8edf3;
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --border: #d1dae8;
+/* ─── CSS custom properties: DARK MODE ── */
+:root.dark {
+  /* DARK Theme Colors (Prompt: bg-[#0A0F1E], text-gray-50 etc) */
+  --bg: #0A0F1E;          /* dark background */
+  --bg-surface: #131929;  /* dark cards primary */
+  --bg-elevated: #1a2035; /* dark cards secondary / inputs */
+  
+  --text-primary: #F9FAFB;   /* gray-50 */
+  --text-secondary: #9CA3AF; /* gray-400 */
+  --text-muted: #6B7280;     /* gray-500 (hints) */
+  
+  --border: #374151;      /* gray-700 */
+  
+  --primary: #818CF8;     /* indigo-400 */
+  --primary-soft: rgba(129, 140, 248, 0.15);
+  
+  --success: #6EE7B7;     /* emerald-300 */
+  --warning: #FCD34D;     /* amber-300 */
+  --danger: #F87171;      /* red-400 */
 }
 
-html.light body {
+/* ─── Apply variables to body ────────────────────── */
+body {
   background-color: var(--bg);
   color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  /* Removed transition to avoid FOUC or lag, or keep it short if preferred */
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* ─── Density: Compact ───────────────────────────── */
@@ -63,15 +87,6 @@ html[data-density="comfortable"] {
   --space-item: 1.375rem;
   --space-gap: 1rem;
   --text-base: 1rem;
-}
-
-/* ─── Base styles ────────────────────────────────── */
-body {
-  background-color: var(--bg);
-  color: var(--text-primary);
-  font-family: var(--font-sans);
-  font-size: var(--text-base);
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ─── Apply density to app cards / lists ─────────── */

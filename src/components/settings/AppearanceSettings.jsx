@@ -1,111 +1,99 @@
 import React, { useState } from 'react';
 import { Moon, Sun, Monitor } from 'lucide-react';
 import { useAppearance } from '../../contexts/AppearanceContext';
-
-const THEMES = [
-  {
-    id: 'dark',
-    label: 'Oscuro',
-    description: 'Fondo profundo, ideal para trabajar de noche.',
-    icon: Moon,
-    preview: 'bg-[#0F172A] border-slate-700',
-    dot: 'bg-slate-800',
-  },
-  {
-    id: 'light',
-    label: 'Claro',
-    description: 'Interfaz luminosa para entornos bien iluminados.',
-    icon: Sun,
-    preview: 'bg-white border-slate-200',
-    dot: 'bg-slate-100',
-  },
-  {
-    id: 'system',
-    label: 'Sistema',
-    description: 'Sigue automáticamente los ajustes de tu SO.',
-    icon: Monitor,
-    preview: 'bg-gradient-to-br from-[#0F172A] to-slate-200 border-slate-300',
-    dot: 'bg-slate-400',
-  },
-];
-
-const LANGUAGES = [
-  { code: 'es', label: '🇪🇸 Español' },
-  { code: 'en', label: '🇬🇧 English' },
-  { code: 'fr', label: '🇫🇷 Français' },
-  { code: 'de', label: '🇩🇪 Deutsch' },
-  { code: 'ca', label: '🏳️ Català' },
-];
-
-const DENSITIES = [
-  { id: 'compact',     label: 'Compacta',  description: 'Más contenido en menos espacio.' },
-  { id: 'normal',      label: 'Normal',    description: 'Balance óptimo entre espacio y legibilidad.' },
-  { id: 'comfortable', label: 'Cómoda',    description: 'Más espacio en blanco, lectura relajada.' },
-];
+import { useLanguage } from '../../contexts/LanguageContext';
 
 export default function AppearanceSettings() {
   const { theme, setTheme, density, setDensity } = useAppearance();
-  const [language, setLanguage] = useState('es');
+  const { t, locale, setLocale } = useLanguage();
+
+  const THEMES = [
+    {
+      id: 'light',
+      label: t('appearance.light').toUpperCase(),
+      icon: Sun,
+      preview: 'bg-white border-gray-200',
+      dot: 'bg-indigo-600',
+    },
+    {
+      id: 'dark',
+      label: t('appearance.dark').toUpperCase(),
+      icon: Moon,
+      preview: 'bg-[#0f0f14] border-[#1e1e2e]',
+      dot: 'bg-indigo-600',
+    },
+  ];
+
+  const LANGUAGES = [
+    { code: 'es', label: '🇪🇸 Español', active: true },
+    { code: 'en', label: '🇬🇧 English', active: true },
+    { code: 'fr', label: '🇫🇷 Français', active: false },
+    { code: 'de', label: '🇩🇪 Deutsch', active: false },
+    { code: 'ca', label: '🏳️ Català', active: false },
+  ];
+
+  const DENSITIES = [
+    { id: 'compact',     label: t('appearance.compact'),  description: t('appearance.compact_desc') },
+    { id: 'normal',      label: t('appearance.normal'),    description: t('appearance.normal_desc') },
+    { id: 'comfortable', label: t('appearance.comfort'),    description: t('appearance.comfort_desc') },
+  ];
 
   return (
     <section className="space-y-8">
       <div>
-        <h2 className="text-xl font-black text-[#0F172A]">Apariencia</h2>
-        <p className="text-sm text-[#64748B] font-medium">
-          Los cambios son inmediatos y se guardan automáticamente.
+        <h2 className="text-xl font-black text-[var(--text-primary)]">{t('appearance.title')}</h2>
+        <p className="text-sm text-[var(--text-secondary)] font-medium">
+          {t('appearance.subtitle')}
         </p>
       </div>
 
       {/* ── THEME ── */}
       <div>
-        <h3 className="font-black text-[#0F172A] text-lg mb-4">Tema de la Interfaz</h3>
-        <div className="grid grid-cols-3 gap-3">
-          {THEMES.map(t => {
-            const isActive = theme === t.id;
+        <h3 className="font-black text-[var(--text-primary)] text-lg mb-4">{t('appearance.theme_title')}</h3>
+        <div className="grid grid-cols-2 gap-3">
+          {THEMES.map(t_item => {
+            const isActive = theme === t_item.id;
             return (
               <button
-                key={t.id}
-                onClick={() => setTheme(t.id)}
+                key={t_item.id}
+                onClick={() => setTheme(t_item.id)}
                 role="radio"
                 aria-checked={isActive}
-                className={`relative flex flex-col items-center text-center gap-2.5 p-4 rounded-2xl border transition-all ${
+                className={`relative flex flex-col items-center text-center gap-2.5 p-4 rounded-2xl transition-all duration-200 ${
                   isActive
-                    ? 'bg-[#EEF2FF] border-[#4F46E5] shadow-lg shadow-indigo-100'
-                    : 'bg-white border-[#E2E8F0] hover:border-[#CBD5E1] active:scale-95 shadow-sm'
+                    ? 'bg-indigo-50 dark:bg-indigo-900/20 border-2 border-indigo-600'
+                    : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-indigo-300'
                 }`}
               >
                 {/* Active indicator */}
                 {isActive && (
-                  <span className="absolute top-2.5 right-2.5 w-4 h-4 rounded-full bg-[#4F46E5] flex items-center justify-center">
+                  <span className="absolute top-2.5 right-2.5 w-4 h-4 rounded-full bg-indigo-600 flex items-center justify-center">
                     <span className="w-2 h-2 bg-white rounded-full" />
                   </span>
                 )}
                 {/* Mini preview */}
-                <div className={`w-full h-10 rounded-xl border ${t.preview} flex items-center justify-center gap-1.5`}>
-                  <span className={`w-2.5 h-2.5 rounded-full ${t.dot}`} />
-                  <span className={`w-5 h-1 rounded-full ${t.dot} opacity-60`} />
+                <div className={`w-full h-10 rounded-xl border ${t_item.preview} flex items-center justify-center gap-1.5`}>
+                  <span className={`w-2.5 h-2.5 rounded-full ${t_item.dot}`} />
+                  <span className={`w-5 h-1 rounded-full ${t_item.dot} opacity-60`} />
                 </div>
                 {/* Label */}
                 <div className="flex flex-col items-center gap-1">
-                  <div className={`${isActive ? 'text-[#4F46E5]' : 'text-[#64748B]'}`}>
-                    <t.icon size={14} />
+                  <div className={`${isActive ? 'text-indigo-600' : 'text-gray-400 dark:text-gray-500'}`}>
+                    <t_item.icon size={20} />
                   </div>
-                  <p className={`text-xs font-black leading-none uppercase tracking-widest ${isActive ? 'text-[#4F46E5]' : 'text-[#0F172A]'}`}>
-                    {t.label}
+                  <p className={`text-xs font-black leading-none uppercase tracking-widest ${isActive ? 'text-indigo-600' : 'text-gray-600 dark:text-gray-300'}`}>
+                    {t_item.label}
                   </p>
                 </div>
               </button>
             );
           })}
         </div>
-        <p className="text-xs text-[#64748B] font-medium mt-2 pl-1">
-          {THEMES.find(t => t.id === theme)?.description}
-        </p>
       </div>
 
       {/* ── DENSITY ── */}
       <div>
-        <h3 className="font-black text-[#0F172A] text-lg mb-4">Densidad de Interfaz</h3>
+        <h3 className="font-black text-[var(--text-primary)] text-lg mb-4">{t('appearance.density_title')}</h3>
         <div className="space-y-2">
           {DENSITIES.map(d => {
             const isActive = density === d.id;
@@ -115,45 +103,45 @@ export default function AppearanceSettings() {
                 onClick={() => setDensity(d.id)}
                 className={`w-full flex items-center gap-4 p-4 rounded-2xl border text-left transition-all active:scale-[0.99] shadow-sm ${
                   isActive
-                    ? 'bg-[#EEF2FF] border-[#4F46E5]/30'
-                    : 'bg-white border-[#E2E8F0] hover:border-[#CBD5E1]'
+                    ? 'bg-[var(--primary)]/10 border-[var(--primary)]/30'
+                    : 'bg-[var(--bg-surface)] border-[var(--border)] hover:border-[var(--text-muted)]'
                 }`}
               >
                 {/* Radio circle */}
                 <div className={`w-5 h-5 rounded-full border-2 shrink-0 flex items-center justify-center transition ${
-                  isActive ? 'border-[#4F46E5]' : 'border-slate-300'
+                  isActive ? 'border-[var(--primary)]' : 'border-[var(--border)]'
                 }`}>
-                  {isActive && <span className="w-2.5 h-2.5 rounded-full bg-[#4F46E5]" />}
+                  {isActive && <span className="w-2.5 h-2.5 rounded-full bg-[var(--primary)]" />}
                 </div>
                 {/* Density visual preview */}
                 <div className="w-10 shrink-0 space-y-1">
                   {d.id === 'compact' && (
                     <>
-                      <div className="h-0.5 bg-slate-300 rounded w-full" />
-                      <div className="h-0.5 bg-slate-300 rounded w-full" />
-                      <div className="h-0.5 bg-slate-300 rounded w-3/4" />
-                      <div className="h-0.5 bg-slate-300 rounded w-full" />
+                      <div className="h-0.5 bg-[var(--border)] rounded w-full" />
+                      <div className="h-0.5 bg-[var(--border)] rounded w-full" />
+                      <div className="h-0.5 bg-[var(--border)] rounded w-3/4" />
+                      <div className="h-0.5 bg-[var(--border)] rounded w-full" />
                     </>
                   )}
                   {d.id === 'normal' && (
                     <>
-                      <div className="h-1 bg-slate-300 rounded w-full" />
-                      <div className="h-1 bg-slate-300 rounded w-3/4" />
-                      <div className="h-1 bg-slate-300 rounded w-full" />
+                      <div className="h-1 bg-[var(--border)] rounded w-full" />
+                      <div className="h-1 bg-[var(--border)] rounded w-3/4" />
+                      <div className="h-1 bg-[var(--border)] rounded w-full" />
                     </>
                   )}
                   {d.id === 'comfortable' && (
                     <>
-                      <div className="h-1.5 bg-slate-300 rounded w-full" />
-                      <div className="h-1.5 bg-slate-300 rounded w-2/3" />
+                      <div className="h-1.5 bg-[var(--border)] rounded w-full" />
+                      <div className="h-1.5 bg-[var(--border)] rounded w-2/3" />
                     </>
                   )}
                 </div>
                 <div>
-                  <p className={`font-black text-sm leading-none ${isActive ? 'text-[#4F46E5]' : 'text-[#0F172A]'}`}>
+                  <p className={`font-black text-sm leading-none ${isActive ? 'text-[var(--primary)]' : 'text-[var(--text-primary)]'}`}>
                     {d.label}
                   </p>
-                  <p className="text-xs text-[#64748B] font-medium mt-1">{d.description}</p>
+                  <p className="text-xs text-[var(--text-secondary)] font-medium mt-1">{d.description}</p>
                 </div>
               </button>
             );
@@ -162,22 +150,38 @@ export default function AppearanceSettings() {
       </div>
 
       {/* ── LANGUAGE ── */}
-      <div className="bg-white border border-[#E2E8F0] rounded-3xl p-6 shadow-sm">
-        <h3 className="font-black text-[#0F172A] mb-4">Idioma</h3>
+      <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-3xl p-6 shadow-sm">
+        <h3 className="font-black text-[var(--text-primary)] mb-4">{t('appearance.language_title')}</h3>
         <div className="grid grid-cols-2 gap-2">
-          {LANGUAGES.map(lang => (
-            <button
-              key={lang.code}
-              onClick={() => setLanguage(lang.code)}
-              className={`py-3 px-4 rounded-xl text-sm font-black transition active:scale-95 border ${
-                language === lang.code
-                  ? 'bg-[#EEF2FF] border-[#4F46E5] text-[#4F46E5]'
-                  : 'bg-white border-[#E2E8F0] text-[#64748B] hover:border-[#CBD5E1]'
-              }`}
-            >
-              {lang.label}
-            </button>
-          ))}
+          {LANGUAGES.map(lang => {
+            const isActive = locale === lang.code;
+            
+            if (!lang.active) {
+               return (
+                <div
+                  key={lang.code}
+                  title={`${t('appearance.coming_soon')} / Coming soon`}
+                  className="py-3 px-4 rounded-xl text-sm font-black border bg-[var(--bg-surface)] border-[var(--border)] text-[var(--text-secondary)] opacity-40 cursor-not-allowed flex items-center justify-center"
+                >
+                  {lang.label}
+                </div>
+               );
+            }
+
+            return (
+              <button
+                key={lang.code}
+                onClick={() => setLocale(lang.code)}
+                className={`py-3 px-4 rounded-xl text-sm font-black transition-all duration-150 border flex items-center justify-center ${
+                  isActive
+                    ? 'border-2 border-indigo-600 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300'
+                    : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:border-indigo-300'
+                }`}
+              >
+                {lang.label}
+              </button>
+            );
+          })}
         </div>
       </div>
     </section>
