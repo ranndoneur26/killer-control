@@ -12,26 +12,26 @@ const GUIDES = {
     steps: [
       {
         id: 1,
-        text: 'Abre un navegador web y ve a Netflix.com. Inicia sesión con tu cuenta.',
-        darkPatternAlert: 'Netflix desactiva el botón de baja en su app móvil y en SmartTV a propósito. Solo funciona desde el navegador web.'
+        text: 'Open a web browser and go to Netflix.com. Log in to your account.',
+        darkPatternAlert: 'Netflix disables the cancellation button in its mobile app and SmartTV on purpose. It only works from the web browser.'
       },
       {
         id: 2,
-        text: 'Haz clic en tu perfil (esquina superior derecha) y selecciona "Cuenta".'
+        text: 'Click on your profile (top right corner) and select "Account".'
       },
       {
         id: 3,
-        text: 'En la sección "Membresía y Facturación", pulsa el botón gris "Cancelar membresía".',
-        darkPatternAlert: 'En esta pantalla aparecerán ofertas de descuento o pausa de cuenta. Ignóralas y continúa.'
+        text: 'In the "Membership & Billing" section, click the gray "Cancel Membership" button.',
+        darkPatternAlert: 'On this screen, discount offers or account pause options will appear. Ignore them and continue.'
       },
       {
         id: 4,
-        text: 'Netflix te mostrará una pantalla de retención emocional con tus series favoritas. Haz clic en "Completar cancelación".',
-        darkPatternAlert: 'Esta pantalla está diseñada para hacerte sentir que pierdes algo. No te dejes llevar.'
+        text: 'Netflix will show you an emotional retention screen with your favorite series. Click "Finish Cancellation".',
+        darkPatternAlert: 'This screen is designed to make you feel like you are losing something. Don\'t be swayed.'
       },
       {
         id: 5,
-        text: 'Recibirás un email de confirmación. Seguirás teniendo acceso hasta el final del período ya pagado.'
+        text: 'You will receive a confirmation email. You will continue to have access until the end of the paid period.'
       }
     ]
   },
@@ -43,25 +43,25 @@ const GUIDES = {
     steps: [
       {
         id: 1,
-        text: 'Ve a spotify.com desde un navegador web. Inicia sesión y accede a "Cuenta" > "Tu plan".',
-        darkPatternAlert: 'La app móvil de Spotify no permite cancelar directamente. Solo desde la web.'
+        text: 'Go to spotify.com from a web browser. Log in and go to "Account" > "Your plan".',
+        darkPatternAlert: 'The Spotify mobile app does not allow canceling directly. Only from the web.'
       },
       {
         id: 2,
-        text: 'Desplázate hacia abajo y haz clic en "Cambiar o cancelar".'
+        text: 'Scroll down and click on "Change or cancel".'
       },
       {
         id: 3,
-        text: 'Selecciona "Cancelar Premium".',
-        darkPatternAlert: 'Spotify ofrecerá pausar la suscripción por 1-3 meses gratis en lugar de cancelar. Es una trampa para que olvides cancelar.',
+        text: 'Select "Cancel Premium".',
+        darkPatternAlert: 'Spotify will offer to pause the subscription for 1-3 months for free instead of canceling. It is a trap so you forget to cancel.',
       },
       {
         id: 4,
-        text: 'Elige el motivo de cancelación (obligatorio) y confirma con "Cancelar Premium".'
+        text: 'Choose the cancellation reason (mandatory) and confirm with "Cancel Premium".'
       },
       {
         id: 5,
-        text: 'Confirma una segunda vez en la ventana emergente. Tu cuenta pasará al plan gratuito con anuncios al final del período.'
+        text: 'Confirm a second time in the pop-up window. Your account will switch to the free plan with ads at the end of the period.'
       }
     ]
   },
@@ -73,55 +73,55 @@ const GUIDES = {
     steps: [
       {
         id: 1,
-        text: 'Ve a account.microsoft.com/services e inicia sesión con tu cuenta de Microsoft.'
+        text: 'Go to account.microsoft.com/services and log in with your Microsoft account.'
       },
       {
         id: 2,
-        text: 'Localiza "Xbox Game Pass Ultimate" (o tu plan) y haz clic en "Cancelar".',
-        darkPatternAlert: 'Microsoft oculta el botón de cancelación tras varias páginas de servicios. Sé persistente.'
+        text: 'Locate "Xbox Game Pass Ultimate" (or your plan) and click "Cancel".',
+        darkPatternAlert: 'Microsoft hides the cancellation button behind several service pages. Be persistent.'
       },
       {
         id: 3,
-        text: 'Selecciona el motivo de cancelación e ignora los descuentos o extensiones gratuitas que te ofrezcan.',
-        darkPatternAlert: 'Microsoft frecuentemente ofrece 1-3 meses de extensión gratuita para que te olvides de cancelar después.'
+        text: 'Select the cancellation reason and ignore the discounts or free extensions they offer you.',
+        darkPatternAlert: 'Microsoft frequently offers 1-3 months of free extension so you forget to cancel later.'
       },
       {
         id: 4,
-        text: 'Confirma la cancelación. Tendrás acceso hasta la fecha de renovación ya pagada.'
+        text: 'Confirm the cancellation. You will have access until the renewal date already paid.'
       },
       {
         id: 5,
-        text: 'Recibirás un email de confirmación de Microsoft. Guárdalo como comprobante.'
+        text: 'You will receive a confirmation email from Microsoft. Save it as proof.'
       }
     ]
   },
   '4': {
-    name: 'Seguro Dental Sanitas',
+    name: 'Sanitas Dental Insurance',
     color: 'bg-[#005EB8]',
     webUrl: 'https://www.sanitas.es/particulares/atencion-al-cliente/',
     estimatedTime: '10-15 min',
     steps: [
       {
         id: 1,
-        text: 'Comprueba PRIMERO la fecha de fin de permanencia de tu contrato. Si te quedan meses, podrías tener penalización económica por baja anticipada.',
-        darkPatternAlert: 'Sanitas y otros seguros de salud incluyen permanencias de 12 meses. Cancelar antes puede costar hasta 2-3 cuotas adicionales.'
+        text: 'Check FIRST the end date of your contract\'s lock-in period. If you have months left, you could have a financial penalty for early cancellation.',
+        darkPatternAlert: 'Sanitas and other health insurances include 12-month lock-in periods. Canceling earlier can cost up to 2-3 additional installments.'
       },
       {
         id: 2,
-        text: 'Con la permanencia vencida: llama al 91 175 00 00 (atención comercial de Sanitas). Pide explícitamente la "baja del seguro".'
+        text: 'With the lock-in period expired: call 91 175 00 00 (Sanitas commercial attention). Explicitly ask for "insurance cancellation".'
       },
       {
         id: 3,
-        text: 'El agente intentará ofrecerte descuentos, cambios de plan o pausas. Mantén tu decisión y repite: "Quiero dar de baja la póliza número [X]".',
-        darkPatternAlert: 'Los agentes tienen comisión por retención. Es habitual recibir 3-5 intentos de retención en una sola llamada.'
+        text: 'The agent will try to offer you discounts, plan changes, or pauses. Maintain your decision and repeat: "I want to cancel policy number [X]".',
+        darkPatternAlert: 'Agents have a retention commission. It is common to receive 3-5 retention attempts in a single call.'
       },
       {
         id: 4,
-        text: 'Exige un número de referencia y confirmación de la baja por escrito (email o carta). Sin esto, la baja podría no tramitarse.'
+        text: 'Demand a reference number and confirmation of the cancellation in writing (email or letter). Without this, the cancellation might not be processed.'
       },
       {
         id: 5,
-        text: 'Si te niegan la baja telefónica, envía un burofax o carta certificada a Sanitas Seguros, C/ Ribera del Loira 52, Madrid, indicando: número de póliza, tus datos y la fecha de efecto de la baja.'
+        text: 'If they deny telephone cancellation, send a certified fax or letter to Sanitas Seguros, C/ Ribera del Loira 52, Madrid, indicating: policy number, your data, and the effective date of cancellation.'
       }
     ]
   },
@@ -133,26 +133,26 @@ const GUIDES = {
     steps: [
       {
         id: 1,
-        text: 'Revisa tu contrato para verificar la fecha de fin de permanencia. La permanencia en Movistar suele ser de 18-24 meses en packs.',
-        darkPatternAlert: 'Movistar cobra penalizaciones de hasta 150-300€ por baja anticipada. Verifica en "Mi Movistar" > "Mi contrato".'
+        text: 'Check your contract to verify the end date of the lock-in period. The lock-in period in Movistar is usually 18-24 months in packs.',
+        darkPatternAlert: 'Movistar charges penalties of up to 150-300€ for early cancellation. Verify in "My Movistar" > "My contract".'
       },
       {
         id: 2,
-        text: 'Llama al 1004 (Atención al cliente de Movistar, gratuito). Solicita hablar con el departamento de "Bajas y Cancelaciones".',
-        darkPatternAlert: 'El primer agente intentará transferirte a retención. Pide directamente el departamento de bajas para agilizar.'
+        text: 'Call 1004 (Movistar Customer Service, free). Ask to speak with the "Cancellations" department.',
+        darkPatternAlert: 'The first agent will try to transfer you to retention. Ask directly for the cancellation department to speed up.'
       },
       {
         id: 3,
-        text: 'Indica el servicio que quieres cancelar (Fibra, Móvil, TV). Si es el pack completo, especifica "baja de todos los servicios".',
-        darkPatternAlert: 'Ofrecerán descuentos de hasta el 50% durante 3-6 meses o servicios gratuitos. Es válido aceptarlo si quieres, pero si quieres irte, no cedes.'
+        text: 'Indicate the service you want to cancel (Fiber, Mobile, TV). If it is the complete pack, specify "cancellation of all services".',
+        darkPatternAlert: 'They will offer discounts of up to 50% for 3-6 months or free services. It is valid to accept if you want, but if you want to leave, don\'t yield.'
       },
       {
         id: 4,
-        text: 'Si hay permanencia activa, negocia la penalización. Menciona que hay mejores ofertas en la competencia; es habitual que reduzcan o eliminen la penalización.'
+        text: 'If there is an active lock-in period, negotiate the penalty. Mention that there are better offers in the competition; it is common for them to reduce or eliminate the penalty.'
       },
       {
         id: 5,
-        text: 'Solicita el número de referencia de la solicitud de baja y confirma la fecha efectiva. Anótalo. La baja tarda 24-48 horas laborales.'
+        text: 'Request the reference number of the cancellation request and confirm the effective date. Write it down. The cancellation takes 24-48 business hours.'
       }
     ]
   },
@@ -164,55 +164,55 @@ const GUIDES = {
     steps: [
       {
         id: 1,
-        text: 'Entra en nytimes.com con tu cuenta y ve a "Account" > "Manage subscription".',
-        darkPatternAlert: 'El enlace de cancelación no es visible directamente. Tienes que navegar a "Manage subscription" y buscar el botón "Cancel Subscription".'
+        text: 'Log in to nytimes.com with your account and go to "Account" > "Manage subscription".',
+        darkPatternAlert: 'The cancellation link is not directly visible. You have to navigate to "Manage subscription" and look for the "Cancel Subscription" button.'
       },
       {
         id: 2,
-        text: 'Haz clic en "Cancel Subscription". Aparecerá un formulario con el motivo de cancelación.',
-        darkPatternAlert: '¡ATENCIÓN PROMO! Si estás en tarifa promocional (1€/mes), cancela ANTES de la fecha de fin de promo. Un día después te cobrarán el precio completo (hasta 17€/mes).'
+        text: 'Click "Cancel Subscription". A form with the cancellation reason will appear.',
+        darkPatternAlert: 'PROMO WARNING! If you are on a promotional rate ($1/month), cancel BEFORE the promo end date. One day later they will charge you the full price (up to $17/month).'
       },
       {
         id: 3,
-        text: 'Indica el motivo (puede ser en inglés). NYT ofrecerá pausar la suscripción 8 semanas. Selecciona "No thanks, cancel" para continuar.',
-        darkPatternAlert: 'La pausa de 8 semanas es inocua, pero reiniciará automáticamente al precio completo cuando finalice.'
+        text: 'Indicate the reason. NYT will offer to pause the subscription for 8 weeks. Select "No thanks, cancel" to continue.',
+        darkPatternAlert: 'The 8-week pause is harmless, but it will automatically restart at full price when it ends.'
       },
       {
         id: 4,
-        text: 'Confirma la cancelación. Recibirás acceso hasta el final del período pagado.'
+        text: 'Confirm the cancellation. You will receive access until the end of the paid period.'
       },
       {
         id: 5,
-        text: 'Comprueba tu email. Recibirás la confirmación de cancelación desde do-not-reply@nytimes.com. Guárdalo.'
+        text: 'Check your email. You will receive the cancellation confirmation from do-not-reply@nytimes.com. Save it.'
       }
     ]
   },
   '7': {
-    name: 'Gestor de Contraseñas',
+    name: 'Password Manager',
     color: 'bg-gray-600',
     webUrl: 'https://vault.bitwarden.com/#/settings/subscription',
     estimatedTime: '3 min',
     steps: [
       {
         id: 1,
-        text: 'ANTES DE CANCELAR: exporta todas tus contraseñas. En Bitwarden: ve a "Tools" > "Export Vault". Guarda el archivo en lugar seguro.',
-        darkPatternAlert: 'Si cancelas sin exportar, perderás el acceso a tus contraseñas premium. El plan gratuito conserva contraseñas básicas pero pierde funciones premium.'
+        text: 'BEFORE CANCELING: export all your passwords. In Bitwarden: go to "Tools" > "Export Vault". Save the file in a secure place.',
+        darkPatternAlert: 'If you cancel without exporting, you will lose access to your premium passwords. The free plan keeps basic passwords but loses premium features.'
       },
       {
         id: 2,
-        text: 'Ve a vault.bitwarden.com e inicia sesión. Accede a "Settings" > "Subscription".'
+        text: 'Go to vault.bitwarden.com and log in. Go to "Settings" > "Subscription".'
       },
       {
         id: 3,
-        text: 'Pulsa "Cancel Premium". Bitwarden te confirmará que pasas al plan gratuito.'
+        text: 'Click "Cancel Premium". Bitwarden will confirm that you switch to the free plan.'
       },
       {
         id: 4,
-        text: 'Confirma la cancelación. Tu cuenta premium continuará activa hasta el final del período facturado.'
+        text: 'Confirm the cancellation. Your premium account will continue active until the end of the billed period.'
       },
       {
         id: 5,
-        text: 'Recibirás un email de confirmación. El plan gratuito de Bitwarden es generoso y sigue siendo seguro y funcional.'
+        text: 'You will receive a confirmation email. Bitwarden\'s free plan is generous and remains secure and functional.'
       }
     ]
   }
@@ -242,14 +242,14 @@ export default function CancellationGuide() {
         <button onClick={() => navigate(-1)} className="p-2 -ml-2 hover:bg-[#E2E8F0] rounded-xl transition text-[#0F172A]">
           <ArrowLeft size={24} />
         </button>
-        <h1 className="text-xl font-black tracking-tight">Guía de Baja Definitiva</h1>
+        <h1 className="text-xl font-black tracking-tight">Definitive Cancellation Guide</h1>
       </header>
 
       {/* Provider Info */}
       <div className={`${guide.color} text-white p-6 rounded-3xl mb-8 flex items-center justify-between shadow-lg`}>
         <div>
           <h2 className="text-2xl font-bold mb-1">{guide.name}</h2>
-          <p className="opacity-90 text-sm font-medium">Tiempo est. {guide.estimatedTime}</p>
+          <p className="opacity-90 text-sm font-medium">Est. time {guide.estimatedTime}</p>
         </div>
         <a
           href={guide.webUrl}
@@ -257,15 +257,15 @@ export default function CancellationGuide() {
           rel="noopener noreferrer"
           className="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-xl font-semibold backdrop-blur-sm transition flex gap-2 items-center shrink-0"
         >
-          Abrir Web <ExternalLink size={16} />
+          Open Web <ExternalLink size={16} />
         </a>
       </div>
 
       {/* Steps */}
       <div className="flex-1">
         <div className="mb-4 flex justify-between items-end">
-          <h3 className="font-black text-lg text-[#0F172A]">Paso a paso</h3>
-          <span className="text-xs text-[#64748B] font-bold uppercase tracking-wider">{currentStep}/{guide.steps.length} Completado</span>
+          <h3 className="font-black text-lg text-[#0F172A]">Step by step</h3>
+          <span className="text-xs text-[#64748B] font-bold uppercase tracking-wider">{currentStep}/{guide.steps.length} Completed</span>
         </div>
 
         {/* Progress bar */}
@@ -311,7 +311,7 @@ export default function CancellationGuide() {
                       {step.darkPatternAlert && (isActive || isPast) && (
                         <div className="mt-3 bg-[#FEF2F2] border border-[#EF4444]/20 text-[#EF4444] p-3 rounded-2xl flex gap-2 items-start text-sm group">
                           <AlertTriangle size={16} className="shrink-0 mt-0.5" />
-                          <p className="leading-snug"><strong className="font-black uppercase tracking-tight text-[10px] block mb-0.5 opacity-80">Cuidado con la manipulación</strong> {step.darkPatternAlert}</p>
+                          <p className="leading-snug"><strong className="font-black uppercase tracking-tight text-[10px] block mb-0.5 opacity-80">Beware of manipulation</strong> {step.darkPatternAlert}</p>
                         </div>
                       )}
 
@@ -320,7 +320,7 @@ export default function CancellationGuide() {
                           onClick={handleNext}
                           className="mt-4 px-6 py-3 bg-[#4F46E5] text-white font-black rounded-2xl flex items-center gap-2 hover:bg-[#4338CA] transition shadow-lg shadow-indigo-100 uppercase tracking-tight text-sm"
                         >
-                          Hecho, siguiente <ChevronRight size={16} />
+                          Done, next <ChevronRight size={16} />
                         </button>
                       )}
                     </div>
@@ -343,13 +343,13 @@ export default function CancellationGuide() {
             <div className="w-16 h-16 bg-[#EEF2FF] text-[#4F46E5] rounded-full flex items-center justify-center mx-auto mb-4 shadow-inner">
               <CheckCircle2 size={32} />
             </div>
-            <h3 className="text-2xl font-black text-[#0F172A] mb-2 tracking-tight">¡Baja Completada!</h3>
-            <p className="text-sm text-[#64748B] font-medium mb-6">Un gasto menos. Más dinero para lo que importa.</p>
+            <h3 className="text-2xl font-black text-[#0F172A] mb-2 tracking-tight">Cancellation Completed!</h3>
+            <p className="text-sm text-[#64748B] font-medium mb-6">One less expense. More money for what matters.</p>
             <button
               onClick={handleFinish}
               className="w-full bg-[#0F172A] border border-[#0F172A] font-black uppercase tracking-widest text-[11px] rounded-2xl py-4 text-white hover:bg-black transition shadow-lg"
             >
-              Volver a mis suscripciones
+              Back to my subscriptions
             </button>
           </motion.div>
         )}

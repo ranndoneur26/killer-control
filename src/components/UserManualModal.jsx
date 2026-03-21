@@ -8,30 +8,30 @@ import { motion, AnimatePresence } from 'framer-motion';
 const ADVANTAGES = [
   {
     icon: Zap,
-    title: 'Control Total e Instantáneo',
-    desc: 'Centraliza todas tus suscripciones en un solo panel. Olvida revisar extractos bancarios para saber qué estás pagando.'
+    title: 'Instant Total Control',
+    desc: 'Centralize all your subscriptions in one dashboard. Forget checking bank statements to know what you are paying for.'
   },
   {
     icon: BellRing,
-    title: 'Alertas Inteligentes',
-    desc: 'Te avisamos antes de que acaben tus promociones y detectamos subidas de precio inesperadas para que no pagues de más.'
+    title: 'Smart Alerts',
+    desc: 'We warn you before your promotions end and detect unexpected price hikes so you don\'t overpay.'
   },
   {
     icon: TrendingUp,
-    title: 'Oportunidades de Ahorro',
-    desc: 'Nuestro motor encuentra alternativas más baratas con las mismas prestaciones, ahorrándote cientos de euros al año.'
+    title: 'Savings Opportunities',
+    desc: 'Our engine finds cheaper alternatives with the same features, saving you hundreds of dollars a year.'
   },
   {
     icon: ShieldCheck,
-    title: 'Guías de Baja Real',
-    desc: 'No más laberintos para cancelar. Te damos los pasos exactos y trucos para darte de baja en segundos.'
+    title: 'Real Cancellation Guides',
+    desc: 'No more mazes to cancel. We give you the exact steps and tricks to unsubscribe in seconds.'
   }
 ];
 
 const STEPS = [
-  { title: 'Añade tus servicios', desc: 'Registra tus suscripciones actuales indicando el precio y la fecha de renovación.' },
-  { title: 'Vigila las alertas', desc: 'Revisa las notificaciones de inteligencia en tu Dashboard sobre subidas o promociones.' },
-  { title: 'Optimiza y ahorra', desc: 'Usa nuestras comparativas para encontrar mejores planes o guías para cancelar lo que no usas.' }
+  { title: 'Add your services', desc: 'Register your current subscriptions indicating the price and renewal date.' },
+  { title: 'Watch the alerts', desc: 'Check the intelligence notifications on your Dashboard about hikes or promotions.' },
+  { title: 'Optimize and save', desc: 'Use our comparisons to find better plans or guides to cancel what you don\'t use.' }
 ];
 
 export default function UserManualModal({ open, onClose }) {
@@ -63,8 +63,8 @@ export default function UserManualModal({ open, onClose }) {
                 <BookOpen size={24} />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-white">Guía de Usuario</h2>
-                <p className="text-xs text-gray-400">Domina tu libertad financiera</p>
+                <h2 className="text-xl font-bold text-white">User Guide</h2>
+                <p className="text-xs text-gray-400">Master your financial freedom</p>
               </div>
             </div>
             <button 
@@ -82,7 +82,7 @@ export default function UserManualModal({ open, onClose }) {
             <section>
               <div className="flex items-center gap-2 mb-6 text-[#F59E0B] uppercase tracking-widest text-[10px] font-black">
                 <Sparkles size={14} />
-                <span>¿Por qué utilizar <span className="text-[#F59E0B]">Killer</span> Control?</span>
+                <span>Why use <span className="text-[#F59E0B]">Killer</span> Control?</span>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {ADVANTAGES.map((adv, i) => (
@@ -101,7 +101,7 @@ export default function UserManualModal({ open, onClose }) {
             <section className="bg-gradient-to-br from-[var(--primary)]/10 to-transparent p-8 rounded-[2rem] border border-[var(--primary)]/10">
               <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
                 <MousePointer2 size={20} className="text-[var(--primary)]" />
-                Cómo empezar en 3 pasos
+                How to start in 3 steps
               </h3>
               <div className="space-y-6">
                 {STEPS.map((step, i) => (
@@ -124,9 +124,9 @@ export default function UserManualModal({ open, onClose }) {
                 <Zap size={24} />
               </div>
               <div>
-                <p className="text-xs font-bold text-white">Consejo PRO</p>
+                <p className="text-xs font-bold text-white">PRO Tip</p>
                 <p className="text-[11px] text-gray-400 mt-1">
-                  Revisa el apartado de "Inteligencia" en tu Dashboard semanalmente. Es donde nuestro motor detecta subidas silenciosas de precios de plataformas como Netflix o Adobe.
+                  Check the "Intelligence" section in your Dashboard weekly. It's where our engine detects silent price hikes from platforms like Netflix or Adobe.
                 </p>
               </div>
             </section>
@@ -139,7 +139,7 @@ export default function UserManualModal({ open, onClose }) {
               onClick={onClose}
               className="bg-[var(--primary)] text-[var(--bg)] px-8 py-3 rounded-2xl font-bold text-sm hover:scale-105 active:scale-95 transition shadow-lg shadow-[var(--primary)]/20"
             >
-              ¡Entendido, vamos allá!
+              Got it, let's go!
             </button>
           </div>
 

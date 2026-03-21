@@ -106,32 +106,32 @@ export default function SecuritySettings() {
   const revokeSession = id => setSessions(prev => prev.filter(s => s.id !== id));
 
   /* Computed error messages */
-  const confirmError = pw.fields.confirm && !pw.matchOk ? 'Las contraseñas no coinciden.' : '';
+  const confirmError = pw.fields.confirm && !pw.matchOk ? 'Passwords do not match.' : '';
 
   return (
     <section className="space-y-8">
       {/* ── SECTION HEADER ── */}
       <div>
-        <h2 className="text-xl font-black text-[var(--text-primary)]">Privacidad y Seguridad</h2>
-        <p className="text-sm text-[var(--text-secondary)] font-medium">Protege tu cuenta y controla el acceso desde múltiples dispositivos.</p>
+        <h2 className="text-xl font-black text-[var(--text-primary)]">Privacy & Security</h2>
+        <p className="text-sm text-[var(--text-secondary)] font-medium">Protect your account and control access from multiple devices.</p>
       </div>
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          1. CAMBIAR CONTRASEÑA
+          1. CHANGE PASSWORD
       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl p-5 md:p-6 space-y-5 shadow-sm">
         <div className="flex items-center gap-3">
           <Lock size={18} className="text-[var(--primary)]" />
-          <h3 className="font-black text-[var(--text-primary)] text-lg">Cambiar Contraseña</h3>
+          <h3 className="font-black text-[var(--text-primary)] text-lg">Change Password</h3>
         </div>
 
         {/* Status Alerts */}
-        {pw.status === 'success' && <Alert type="success">Contraseña actualizada correctamente.</Alert>}
+        {pw.status === 'success' && <Alert type="success">Password updated successfully.</Alert>}
         {pw.status === 'error'   && <Alert type="error">{pw.errorMsg}</Alert>}
 
         <form onSubmit={pw.handleSubmit} className="space-y-4" noValidate>
           <PasswordField
-            label="Contraseña actual"
+            label="Current Password"
             name="current"
             value={pw.fields.current}
             onChange={pw.update('current')}
@@ -142,7 +142,7 @@ export default function SecuritySettings() {
 
           <div>
             <PasswordField
-              label="Nueva contraseña"
+              label="New Password"
               name="next"
               value={pw.fields.next}
               onChange={pw.update('next')}
@@ -155,7 +155,7 @@ export default function SecuritySettings() {
           </div>
 
           <PasswordField
-            label="Confirmar nueva contraseña"
+            label="Confirm New Password"
             name="confirm"
             value={pw.fields.confirm}
             onChange={pw.update('confirm')}
@@ -174,14 +174,14 @@ export default function SecuritySettings() {
                 : 'bg-[var(--bg-elevated)] text-[var(--text-muted)] cursor-not-allowed shadow-none'}`}
           >
             {pw.status === 'loading'
-              ? <><Loader2 size={18} className="animate-spin" /> Actualizando…</>
-              : 'Actualizar Contraseña'}
+              ? <><Loader2 size={18} className="animate-spin" /> Updating…</>
+              : 'Update Password'}
           </button>
         </form>
       </div>
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          2. AUTENTICACIÓN 2FA
+          2. 2FA AUTHENTICATION
       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl overflow-hidden shadow-sm">
         {/* Header row */}
@@ -189,9 +189,9 @@ export default function SecuritySettings() {
           <div className="flex items-center gap-3">
             <Shield size={18} className={tfa.enabled ? 'text-[#10B981]' : 'text-[var(--text-muted)]'} />
             <div>
-              <h3 className="font-black text-[var(--text-primary)] leading-tight">Autenticación de Dos Factores</h3>
+              <h3 className="font-black text-[var(--text-primary)] leading-tight">Two-Factor Authentication</h3>
               <p className="text-xs text-[var(--text-secondary)] font-medium mt-0.5">
-                {tfa.enabled ? '✅ Activo — tu cuenta tiene una capa extra de protección.' : 'Inactivo — actívala para proteger tu cuenta.'}
+                {tfa.enabled ? '✅ Active — your account has an extra layer of protection.' : 'Inactive — enable it to secure your account.'}
               </p>
             </div>
           </div>
@@ -206,7 +206,7 @@ export default function SecuritySettings() {
         {(tfa.stage === 'setup' || tfa.stage === 'verifying') && (
           <div className="border-t border-[var(--border)] px-5 md:px-6 py-5 space-y-5 bg-[var(--bg-elevated)]">
             <Alert type="info">
-              Escanea el código QR con <strong>Google Authenticator</strong> o <strong>Authy</strong> y luego introduce el código de 6 dígitos.
+              Scan the QR code with <strong>Google Authenticator</strong> or <strong>Authy</strong> and then enter the 6-digit code.
             </Alert>
 
             {/* QR Code */}
@@ -215,7 +215,7 @@ export default function SecuritySettings() {
                 {tfa.qrData ? (
                   <img
                     src={tfa.qrData.qrUrl}
-                    alt="Código QR para 2FA"
+                    alt="QR Code for 2FA"
                     width={160}
                     height={160}
                     className="rounded-2xl border-4 border-white bg-white"
@@ -227,8 +227,8 @@ export default function SecuritySettings() {
                 )}
               </div>
               <div className="flex-1 space-y-3 text-center sm:text-left">
-                <p className="text-sm font-black text-[var(--text-primary)]">¿No puedes escanear el QR?</p>
-                <p className="text-xs text-[var(--text-secondary)] font-medium">Introduce este código manualmente en tu app de autenticación:</p>
+                <p className="text-sm font-black text-[var(--text-primary)]">Can't scan the QR?</p>
+                <p className="text-xs text-[var(--text-secondary)] font-medium">Enter this code manually in your auth app:</p>
                 {tfa.qrData && (
                   <code className="block bg-[var(--bg-surface)] text-[var(--primary)] font-mono text-sm px-3 py-2 rounded-xl tracking-widest border border-[var(--primary)]/20 select-all font-bold shadow-sm">
                     {tfa.qrData.secret}
@@ -240,7 +240,7 @@ export default function SecuritySettings() {
             {/* OTP Input */}
             <div>
               <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-secondary)] mb-2 ml-1">
-                Código de verificación <span className="text-[var(--primary)]">*</span>
+                Verification Code <span className="text-[var(--primary)]">*</span>
               </label>
               <input
                 type="text"
@@ -261,7 +261,7 @@ export default function SecuritySettings() {
                 onClick={tfa.cancel}
                 className="px-5 py-3 rounded-xl border border-[var(--border)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] transition text-sm font-black uppercase tracking-widest"
               >
-                Cancelar
+                Cancel
               </button>
               <button
                 onClick={tfa.handleVerify}
@@ -272,8 +272,8 @@ export default function SecuritySettings() {
                     : 'bg-[var(--bg-elevated)] text-[var(--text-muted)] cursor-not-allowed shadow-none'}`}
               >
                 {tfa.stage === 'verifying'
-                  ? <><Loader2 size={16} className="animate-spin" /> Verificando…</>
-                  : <><Check size={16} /> Verificar y Activar</>}
+                  ? <><Loader2 size={16} className="animate-spin" /> Verifying…</>
+                  : <><Check size={16} /> Verify & Activate</>}
               </button>
             </div>
           </div>
@@ -284,17 +284,17 @@ export default function SecuritySettings() {
           <div className="border-t border-[var(--border)] px-5 md:px-6 py-4 flex items-center gap-3 bg-[var(--primary)]/5">
             <Smartphone size={16} className="text-[var(--primary)]" />
             <p className="text-sm text-[var(--text-secondary)] font-medium">
-              Verificación activa mediante <span className="text-[var(--primary)] font-black">app de autenticación</span>. Para desactivarla, pulsa de nuevo el interruptor.
+              Verification active via <span className="text-[var(--primary)] font-black">auth app</span>. To disable, toggle the switch again.
             </p>
           </div>
         )}
       </div>
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          3. SESIONES ACTIVAS
+          3. ACTIVE SESSIONS
       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <div>
-        <h3 className="font-black text-[var(--text-primary)] text-lg mb-4">Sesiones Activas</h3>
+        <h3 className="font-black text-[var(--text-primary)] text-lg mb-4">Active Sessions</h3>
         <div className="space-y-3">
           {sessions.map(session => (
             <div key={session.id} className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl p-4 md:p-5 flex items-center gap-4 shadow-sm transition-all hover:bg-[var(--bg-elevated)]">
@@ -308,7 +308,7 @@ export default function SecuritySettings() {
                   <p className="font-black text-[var(--text-primary)] text-sm leading-tight">{session.device}</p>
                   {session.isCurrent && (
                     <span className="text-[10px] font-black bg-[var(--primary)]/10 text-[var(--primary)] px-2 py-0.5 rounded-full whitespace-nowrap border border-[var(--primary)]/10 uppercase tracking-tighter">
-                      Este dispositivo
+                      This device
                     </span>
                   )}
                 </div>
@@ -318,7 +318,7 @@ export default function SecuritySettings() {
                 <button
                   onClick={() => revokeSession(session.id)}
                   className="p-2 text-[var(--text-muted)] hover:text-red-500 hover:bg-red-500/10 rounded-xl transition shrink-0"
-                  title="Cerrar sesión en este dispositivo"
+                  title="Logout device"
                 >
                   <X size={18} />
                 </button>
@@ -331,7 +331,7 @@ export default function SecuritySettings() {
             onClick={() => setSessions(prev => prev.filter(s => s.isCurrent))}
             className="mt-4 w-full text-sm text-red-500 font-black uppercase tracking-widest py-3.5 hover:bg-red-500/10 rounded-xl border border-red-500/20 transition shadow-sm"
           >
-            Cerrar sesión en todos los demás dispositivos ({sessions.filter(s => !s.isCurrent).length})
+            Log out from all other devices ({sessions.filter(s => !s.isCurrent).length})
           </button>
         )}
       </div>

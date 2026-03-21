@@ -4,29 +4,29 @@ import { useState, useCallback } from 'react';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const validateEmail = (v) => {
-  if (!v.trim()) return 'El correo es obligatorio.';
-  if (!EMAIL_RE.test(v)) return 'Formato de correo no válido.';
+  if (!v.trim()) return 'Email is required.';
+  if (!EMAIL_RE.test(v)) return 'Invalid email format.';
   return '';
 };
 
 const validatePassword = (v, isLogin) => {
-  if (!v) return 'La contraseña es obligatoria.';
-  if (!isLogin && v.length < 8) return 'Mínimo 8 caracteres.';
+  if (!v) return 'Password is required.';
+  if (!isLogin && v.length < 8) return 'Minimum 8 characters.';
   return '';
 };
 
 /* ── Mock APIs ── */
 async function mockOAuth(provider) {
   await new Promise(r => setTimeout(r, 1500));
-  if (Math.random() < 0.07) throw new Error(`Error de conexión con ${provider}. Inténtalo de nuevo.`);
+  if (Math.random() < 0.07) throw new Error(`Connection error with ${provider}. Please try again.`);
   return { user: { email: `user@${provider.toLowerCase()}.com` } };
 }
 
 async function mockEmailAuth(email, password, isLogin) {
   await new Promise(r => setTimeout(r, 1200));
   // Simulate known bad password for demo
-  if (password === 'wrong') throw new Error('Contraseña incorrecta. Inténtalo de nuevo.');
-  if (!isLogin && Math.random() < 0.05) throw new Error('Este correo ya está registrado.');
+  if (password === 'wrong') throw new Error('Incorrect password. Please try again.');
+  if (!isLogin && Math.random() < 0.05) throw new Error('This email is already registered.');
   return { user: { email } };
 }
 
@@ -77,8 +77,16 @@ export function useAuth(addToast, navigate) {
     setLoadingBtn('email');
     try {
       await mockEmailAuth(email, password, isLogin);
-      addToast('success', isLogin ? '¡Bienvenido de nuevo!' : '¡Cuenta creada correctamente!');
-      setTimeout(() => navigate('/dashboard'), 600);
+      addToast('success', isLogin ? 'Welcome back!' : 'Account created successfully!');
+      
+      setTimeout(() => {
+        const plan = sessionStorage.getItem('selected_plan');
+        if (plan === 'premium') {
+          navigate('/checkout');
+        } else {
+          navigate('/dashboard');
+        }
+      }, 600);
     } catch (ex) {
       addToast('error', ex.message);
     } finally {
@@ -90,8 +98,16 @@ export function useAuth(addToast, navigate) {
     setLoadingBtn(provider.toLowerCase());
     try {
       await mockOAuth(provider);
-      addToast('success', `Sesión iniciada con ${provider}.`);
-      setTimeout(() => navigate('/dashboard'), 600);
+      addToast('success', `Session started with ${provider}.`);
+      
+      setTimeout(() => {
+        const plan = sessionStorage.getItem('selected_plan');
+        if (plan === 'premium') {
+          navigate('/checkout');
+        } else {
+          navigate('/dashboard');
+        }
+      }, 600);
     } catch (ex) {
       addToast('error', ex.message);
     } finally {
@@ -101,13 +117,13 @@ export function useAuth(addToast, navigate) {
 
   const handleForgotPassword = useCallback(() => {
     if (!email) {
-      setEmailError('Introduce tu email para recuperar la contraseña.');
+      setEmailError('Enter your email to recover your password.');
       return;
     }
     setLoadingBtn('email');
     setTimeout(() => {
       setLoadingBtn(null);
-      addToast('success', 'Te hemos enviado un email para restablecer tu contraseña.');
+      addToast('success', 'We have sent you an email to reset your password.');
     }, 1000);
   }, [email, addToast]);
 

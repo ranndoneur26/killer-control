@@ -58,7 +58,7 @@ const HeroHeader = () => {
             </button>
 
             {isHomePage ? (
-              <Link to="/login" className="text-sm font-bold bg-[var(--primary)] text-white px-6 py-2.5 rounded-full hover:opacity-90 transition-all shadow-sm">
+              <Link to="/login" className="text-sm font-bold bg-amber-500 text-white px-6 py-2.5 rounded-full hover:bg-amber-400 transition-all shadow-sm">
                 {t('nav.login')}
               </Link>
             ) : (
@@ -99,7 +99,7 @@ const HeroHeader = () => {
             </a>
           ))}
           {isHomePage ? (
-            <Link to="/login" onClick={handleLinkClick} className="block text-center bg-[#4F46E5] text-white px-5 py-3 rounded-xl font-bold">
+            <Link to="/login" onClick={handleLinkClick} className="block text-center bg-amber-500 hover:bg-amber-400 text-white px-5 py-3 rounded-xl font-bold">
               {t('nav.login')}
             </Link>
           ) : (

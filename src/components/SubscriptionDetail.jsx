@@ -8,10 +8,10 @@ import HeroHeader from './HeroHeader';
 
 // Mock data until DB is connected
 const mockHistoryData = [
-  { month: 'Ene', price: 12.99 },
+  { month: 'Jan', price: 12.99 },
   { month: 'Feb', price: 12.99 },
   { month: 'Mar', price: 15.99 }, // Price hike detected
-  { month: 'Abr', price: 15.99 },
+  { month: 'Apr', price: 15.99 },
   { month: 'May', price: 15.99 },
 ];
 
@@ -24,58 +24,58 @@ export default function SubscriptionDetail() {
   const MOCK_DATA = {
     // STREAMING - Netflix
     '1': {
-      name: 'Netflix', price: 15.99, cycle: 'Mensual', webUrl: 'https://netflix.com',
+      name: 'Netflix', price: 15.99, cycle: 'Monthly', webUrl: 'https://netflix.com',
       startDate: '2021-03-10', annualPrice: 191.88, category: 'streaming',
       card: 'Visa •••• 4242', color: 'bg-red-600', hikeDetected: true,
       planType: 'Premium', familySlots: 4, altPlanCost: 119.88,
-      noticeDays: '3 Días antes', currency: 'EUR (€)', nextChargeDate: '2026-05-14'
+      noticeDays: '3 Days before', currency: 'EUR (€)', nextChargeDate: '2026-05-14'
     },
     // MUSIC - Spotify
     '2': {
-      name: 'Spotify', price: 10.99, cycle: 'Mensual', webUrl: 'https://spotify.com',
+      name: 'Spotify', price: 10.99, cycle: 'Monthly', webUrl: 'https://spotify.com',
       startDate: '2020-07-15', annualPrice: 131.88, category: 'music',
       card: 'Mastercard •••• 8810', color: 'bg-green-600', hikeDetected: false,
       planType: 'Individual Premium', familySlots: 1, altPlanCost: 99.99,
-      noticeDays: '3 Días antes', currency: 'EUR (€)', nextChargeDate: '2026-05-12'
+      noticeDays: '3 Days before', currency: 'EUR (€)', nextChargeDate: '2026-05-12'
     },
     // GAMING - Xbox Game Pass
     '3': {
-      name: 'Xbox Game Pass', price: 14.99, cycle: 'Mensual', webUrl: 'https://xbox.com',
+      name: 'Xbox Game Pass', price: 14.99, cycle: 'Monthly', webUrl: 'https://xbox.com',
       startDate: '2023-01-01', annualPrice: 179.88, category: 'gaming',
       card: 'Visa •••• 4242', color: 'bg-green-500', hikeDetected: false,
       planType: 'Ultimate', familySlots: 1, altPlanCost: 129.99,
-      noticeDays: '1 Día antes', currency: 'EUR (€)', nextChargeDate: '2026-05-15'
+      noticeDays: '1 Day before', currency: 'EUR (€)', nextChargeDate: '2026-05-15'
     },
     // HEALTH - Seguro Dental
     '4': {
-      name: 'Seguro Dental Sanitas', price: 18.50, cycle: '28 Días', webUrl: 'https://sanitas.es',
+      name: 'Sanitas Dental Insurance', price: 18.50, cycle: '28 Days', webUrl: 'https://sanitas.es',
       startDate: '2025-12-01', annualPrice: 240.50, category: 'health',
-      card: 'Cuenta Bankia ES12', color: 'bg-blue-400', hikeDetected: false,
+      card: 'Bank Account ES12', color: 'bg-blue-400', hikeDetected: false,
       permanenceEnd: '2026-12-01',
-      noticeDays: '7 Días antes', currency: 'EUR (€)', nextChargeDate: '2026-05-25'
+      noticeDays: '7 Days before', currency: 'EUR (€)', nextChargeDate: '2026-05-25'
     },
     // TELECOM - Movistar
     '5': {
-      name: 'Movistar Fusion+', price: 65.00, cycle: 'Mensual', webUrl: 'https://movistar.es',
+      name: 'Movistar Fusion+', price: 65.00, cycle: 'Monthly', webUrl: 'https://movistar.es',
       startDate: '2024-03-01', annualPrice: 780.00, category: 'telecom',
-      card: 'Dom. bancaria BBVA', color: 'bg-blue-600', hikeDetected: true,
-      permanenceEnd: '2026-03-01', packServices: 'Fibra 1Gb + 2 Líneas Móviles + TV',
-      noticeDays: '7 Días antes', currency: 'EUR (€)', nextChargeDate: '2026-06-01'
+      card: 'Bank Debit BBVA', color: 'bg-blue-600', hikeDetected: true,
+      permanenceEnd: '2026-03-01', packServices: 'Fiber 1Gb + 2 Mobile Lines + TV',
+      noticeDays: '7 Days before', currency: 'EUR (€)', nextChargeDate: '2026-06-01'
     },
     // PRESS - New York Times
     '6': {
-      name: 'The New York Times', price: 1.00, cycle: 'Mensual', webUrl: 'https://nytimes.com',
+      name: 'The New York Times', price: 1.00, cycle: 'Monthly', webUrl: 'https://nytimes.com',
       startDate: '2026-01-01', annualPrice: 12.00, category: 'press',
       card: 'PayPal', color: 'bg-gray-700', hikeDetected: false,
       isPromo: true, postPromoPrice: 15.99, promoEnd: '2026-07-01',
-      noticeDays: '3 Días antes', currency: 'USD ($)', nextChargeDate: '2026-06-01'
+      noticeDays: '3 Days before', currency: 'USD ($)', nextChargeDate: '2026-06-01'
     },
     // OTHER - Gestor de Contraseñas
     '7': {
-      name: 'Gestor de Contraseñas', price: 2.99, cycle: 'Mensual', webUrl: 'https://bitwarden.com',
+      name: 'Password Manager', price: 2.99, cycle: 'Monthly', webUrl: 'https://bitwarden.com',
       startDate: '2025-06-01', annualPrice: 35.88, category: 'other',
       card: 'Visa •••• 4242', color: 'bg-gray-600', hikeDetected: false,
-      noticeDays: '3 Días antes', currency: 'EUR (€)', nextChargeDate: '2026-06-10'
+      noticeDays: '3 Days before', currency: 'EUR (€)', nextChargeDate: '2026-06-10'
     },
   };
 
@@ -113,7 +113,7 @@ export default function SubscriptionDetail() {
           <div className="flex gap-2">
             {isEditing ? (
               <button onClick={handleSave} className="px-4 py-2 bg-[var(--primary)] text-white font-black rounded-xl flex items-center gap-2 hover:opacity-90 transition shadow-lg shadow-[var(--primary)]/20">
-                 <Check size={18} /> Guardar
+                 <Check size={18} /> Save
               </button>
             ) : (
               <button onClick={() => setIsEditing(true)} className="p-2 bg-[var(--bg-surface)] border border-[var(--border)] hover:bg-[var(--bg-elevated)] rounded-xl transition text-[var(--text-secondary)] shadow-sm">
@@ -133,7 +133,7 @@ export default function SubscriptionDetail() {
                 setIsEditing(false);
               }}
               onCancel={() => setIsEditing(false)}
-              title={<>Editar Registro <span className="text-[#F59E0B]">Killer</span></>}
+              title={<>Edit <span className="text-[#F59E0B]">Killer</span> Record</>}
             />
           </motion.div>
         ) : (
@@ -156,11 +156,11 @@ export default function SubscriptionDetail() {
                 <CreditCard size={80} />
               </div>
               <div className="relative z-10">
-                <p className="text-xs text-[var(--text-secondary)] font-black uppercase tracking-widest mb-2">Gasto actual</p>
-                <div className="text-5xl font-black text-[var(--text-primary)] tracking-tight">{subData.price}€<span className="text-lg text-[var(--text-secondary)] font-medium ml-1">/{subData.cycle.toLowerCase() === 'anual' ? 'año' : 'mes'}</span></div>
+                <p className="text-xs text-[var(--text-secondary)] font-black uppercase tracking-widest mb-2">Current spend</p>
+                <div className="text-5xl font-black text-[var(--text-primary)] tracking-tight">{subData.price}€<span className="text-lg text-[var(--text-secondary)] font-medium ml-1">/{subData.cycle.toLowerCase() === 'annual' ? 'year' : 'mo'}</span></div>
               </div>
               <div className="text-right relative z-10">
-                <p className="text-[10px] text-[var(--text-secondary)] font-black uppercase tracking-tighter mb-1">Gasto Anual Proyectado</p>
+                <p className="text-[10px] text-[var(--text-secondary)] font-black uppercase tracking-tighter mb-1">Projected Annual Spend</p>
                 <p className="font-black text-[#10B981] text-lg">{subData.annualPrice}€</p>
               </div>
             </div>
@@ -170,13 +170,13 @@ export default function SubscriptionDetail() {
               <div className="bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4 mb-8 flex gap-4 items-start shadow-sm">
                 <ShieldAlert size={24} className="text-amber-500 shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-black text-amber-500 text-sm mb-1 uppercase tracking-tight">Subida de precio detectada</h4>
-                  <p className="text-sm text-amber-200/80 mb-3 font-medium">Han aumentado la cuota un 23% desde Marzo. ¿Todavía le sacas partido?</p>
+                  <h4 className="font-black text-amber-500 text-sm mb-1 uppercase tracking-tight">Price hike detected</h4>
+                  <p className="text-sm text-amber-200/80 mb-3 font-medium">They raised the fee by 23% since March. Is it still worth it?</p>
                   <button 
                     onClick={() => navigate(`/alternatives/${id}`)}
                     className="bg-amber-600 text-white text-xs font-black px-4 py-2 rounded-lg hover:bg-amber-700 transition shadow-md shadow-amber-900/20"
                   >
-                    Ver alternativas más baratas
+                    See cheaper alternatives
                   </button>
                 </div>
               </div>
@@ -185,7 +185,7 @@ export default function SubscriptionDetail() {
             {/* Vibe Chart */}
             <div className="mb-8">
               <h3 className="font-black text-xs uppercase tracking-widest text-[var(--text-secondary)] mb-4 flex items-center gap-2">
-                <TrendingUp size={18} className="text-[var(--primary)]" /> Historial de Costes
+                <TrendingUp size={18} className="text-[var(--primary)]" /> Cost History
               </h3>
               <div className="h-40 w-full ml-[-1rem]">
                 <ResponsiveContainer width="100%" height="100%">
@@ -228,25 +228,25 @@ export default function SubscriptionDetail() {
                 <div className="flex items-center justify-between py-4 border-b border-[var(--border)]">
                   <div className="flex items-center gap-3 text-[var(--text-secondary)]">
                     <Calendar size={18} />
-                    <span className="font-black text-xs uppercase tracking-widest">Suscrito desde</span>
+                    <span className="font-black text-xs uppercase tracking-widest">Subscribed since</span>
                   </div>
-                  <span className="font-black text-[var(--text-primary)] text-sm block">{new Date(subData.startDate).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                  <span className="font-black text-[var(--text-primary)] text-sm block">{new Date(subData.startDate).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
                 </div>
               )}
               <div className="flex items-center justify-between py-4 border-b border-[var(--border)]">
                 <div className="flex items-center gap-3 text-[var(--text-secondary)]">
                   <Calendar size={18} />
-                  <span className="font-black text-xs uppercase tracking-widest">Próximo Cargo</span>
+                  <span className="font-black text-xs uppercase tracking-widest">Next Charge</span>
                 </div>
                 <div className="text-right">
-                  <span className="font-black text-[var(--text-primary)] text-sm block">{new Date(subData.nextChargeDate).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })}</span>
+                  <span className="font-black text-[var(--text-primary)] text-sm block">{new Date(subData.nextChargeDate).toLocaleDateString('en-US', { day: 'numeric', month: 'short' })}</span>
                   <span className="text-[10px] font-black uppercase text-[var(--primary)]">{subData.noticeDays}</span>
                 </div>
               </div>
               <div className="flex items-center justify-between py-4 border-b border-[var(--border)]">
                 <div className="flex items-center gap-3 text-[var(--text-secondary)]">
                   <CreditCard size={18} />
-                  <span className="font-black text-xs uppercase tracking-widest">Método de pago</span>
+                  <span className="font-black text-xs uppercase tracking-widest">Payment Method</span>
                 </div>
                 <span className="font-black text-[var(--text-primary)] text-sm">{subData.card}</span>
               </div>
@@ -255,11 +255,11 @@ export default function SubscriptionDetail() {
                 <div className="flex items-center justify-between py-4 border-b border-[var(--border)]">
                   <div className="flex items-center gap-3 text-[var(--text-secondary)]">
                     <Sparkles size={18} className="text-[var(--primary)]" />
-                    <span className="font-black text-xs uppercase tracking-widest">Plan Actual</span>
+                    <span className="font-black text-xs uppercase tracking-widest">Current Plan</span>
                   </div>
                   <div className="text-right">
-                    <span className="font-black text-[var(--text-primary)] text-sm block">{subData.planType || 'Estándar'}</span>
-                    <span className="text-[10px] font-black text-[var(--text-secondary)] uppercase tracking-tighter">{subData.familySlots || 1} Perfiles / Slots</span>
+                    <span className="font-black text-[var(--text-primary)] text-sm block">{subData.planType || 'Standard'}</span>
+                    <span className="text-[10px] font-black text-[var(--text-secondary)] uppercase tracking-tighter">{subData.familySlots || 1} Profiles / Slots</span>
                   </div>
                 </div>
               )}
@@ -268,7 +268,7 @@ export default function SubscriptionDetail() {
                 <div className="flex items-center justify-between py-4 border-b border-[var(--border)]">
                   <div className="flex items-center gap-3 text-red-400">
                     <ShieldAlert size={18} />
-                    <span className="font-black text-xs uppercase tracking-widest">Fin Permanencia</span>
+                    <span className="font-black text-xs uppercase tracking-widest">Lock-in End</span>
                   </div>
                   <span className="font-black text-[var(--text-primary)] text-sm">{new Date(subData.permanenceEnd).toLocaleDateString()}</span>
                 </div>
@@ -278,11 +278,11 @@ export default function SubscriptionDetail() {
                 <div className="flex items-center justify-between py-4 border-b border-[var(--border)]">
                   <div className="flex items-center gap-3 text-amber-500">
                     <Sparkles size={18} />
-                    <span className="font-black text-xs uppercase tracking-widest">Promo Activa</span>
+                    <span className="font-black text-xs uppercase tracking-widest">Active Promo</span>
                   </div>
                   <div className="text-right">
-                    <span className="font-black text-[#0F172A] text-sm block">Hasta {new Date(subData.promoEnd).toLocaleDateString()}</span>
-                    <span className="text-[10px] font-black text-[#EF4444] uppercase tracking-tighter">Luego {subData.postPromoPrice}€</span>
+                    <span className="font-black text-[#0F172A] text-sm block">Until {new Date(subData.promoEnd).toLocaleDateString()}</span>
+                    <span className="text-[10px] font-black text-[#EF4444] uppercase tracking-tighter">Then {subData.postPromoPrice}€</span>
                   </div>
                 </div>
               )}
@@ -292,9 +292,9 @@ export default function SubscriptionDetail() {
                   <div className="flex items-center justify-between py-4 border-b border-[var(--border)]">
                     <div className="flex items-center gap-3 text-[var(--text-secondary)]">
                       <ShieldAlert size={18} />
-                      <span className="font-black text-xs uppercase tracking-widest">Permanencia</span>
+                      <span className="font-black text-xs uppercase tracking-widest">Lock-in Period</span>
                     </div>
-                    <span className="font-black text-[var(--text-primary)] text-sm">{subData.permanenceEnd ? new Date(subData.permanenceEnd).toLocaleDateString() : 'Sin permanencia'}</span>
+                    <span className="font-black text-[var(--text-primary)] text-sm">{subData.permanenceEnd ? new Date(subData.permanenceEnd).toLocaleDateString() : 'No lock-in'}</span>
                   </div>
                   {subData.packServices && (
                     <div className="flex items-center justify-between py-4 border-b border-[var(--border)]">
@@ -314,7 +314,7 @@ export default function SubscriptionDetail() {
               onClick={() => navigate(`/guide/${id}`)}
               className="w-full bg-red-950/20 text-red-400 border border-red-900/30 font-black uppercase tracking-widest rounded-3xl py-4 flex items-center justify-center gap-2 hover:bg-red-900 hover:text-white transition shadow-sm"
             >
-              <Trash2 size={20} /> Iniciar Proceso de Baja
+              <Trash2 size={20} /> Start Cancellation Process
             </button>
           </motion.div>
         )}

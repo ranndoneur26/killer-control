@@ -4,76 +4,76 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 const SECTIONS = [
   {
-    n: '1', title: 'Identificación del titular',
-    body: `Los presentes Términos y Condiciones regulan el acceso, navegación y uso del sitio web, aplicación y servicios asociados a Killer Control, titularidad de Marc Xicola Tugas, con domicilio en C/ Pau Claris 15, baixos. 08100 Mollet del Vallès, NIF/CIF 52172995w, y correo electrónico de contacto Killercontrolsupport@gmail.com.`,
+    n: '1', title: 'Owner Identification',
+    body: `These Terms and Conditions regulate the access, navigation, and use of the website, application, and services associated with Killer Control, owned by Marc Xicola Tugas, located at C/ Pau Claris 15, baixos. 08100 Mollet del Vallès, NIF/CIF 52172995w, and contact email Killercontrolsupport@gmail.com.`,
   },
   {
-    n: '2', title: 'Objeto del servicio',
-    body: `Killer Control es una plataforma digital orientada a ayudar a los usuarios a centralizar, visualizar, analizar y gestionar sus suscripciones, gastos recurrentes, avisos de renovación y procesos informativos de cancelación.\n\nLa plataforma puede ofrecer funcionalidades como: registro manual de suscripciones, paneles de control y estadísticas, alertas y recordatorios, recomendaciones de optimización de gasto, guías informativas para cancelar servicios, y acceso a funcionalidades premium de pago, en su caso.\n\nEl uso de la plataforma no supone asesoramiento financiero, legal ni fiscal profesional, salvo que se indique expresamente lo contrario.`,
+    n: '2', title: 'Service Object',
+    body: `Killer Control is a digital platform designed to help users centralize, visualize, analyze, and manage their subscriptions, recurring expenses, renewal alerts, and cancellation information processes.\n\nThe platform may offer features such as: manual subscription tracking, control panels and statistics, alerts and reminders, spending optimization recommendations, informative guides for cancelling services, and access to premium paid features, where applicable.\n\nThe use of the platform does not constitute professional financial, legal, or tax advice, unless expressly stated otherwise.`,
   },
   {
-    n: '3', title: 'Aceptación de las condiciones',
-    body: `El acceso o uso de la plataforma atribuye la condición de usuario e implica la aceptación plena de estos Términos y Condiciones, así como de la Política de Privacidad.\n\nSi el usuario no está de acuerdo con estos textos, deberá abstenerse de utilizar la plataforma.`,
+    n: '3', title: 'Acceptance of Conditions',
+    body: `Access to or use of the platform attributes the condition of user and implies full acceptance of these Terms and Conditions, as well as the Privacy Policy.\n\nIf the user does not agree with these texts, they must refrain from using the platform.`,
   },
   {
-    n: '4', title: 'Requisitos de uso',
-    body: `Para utilizar determinados servicios, el usuario deberá:\n• Ser mayor de 18 años, o contar con autorización válida de sus representantes legales.\n• Proporcionar información veraz, actual y completa.\n• Custodiar de forma diligente sus credenciales de acceso.\n• No utilizar la plataforma con fines ilícitos, fraudulentos o contrarios a la buena fe.\n\nEl usuario es responsable de todas las actividades realizadas desde su cuenta, salvo prueba de uso no autorizado por terceros.`,
+    n: '4', title: 'Usage Requirements',
+    body: `To use certain services, the user must:\n• Be over 18 years old, or have valid authorization from their legal representatives.\n• Provide truthful, current, and complete information.\n• Diligently safeguard their access credentials.\n• Not use the platform for illicit, fraudulent, or bad faith purposes.\n\nThe user is responsible for all activities carried out from their account, unless there is proof of unauthorized use by third parties.`,
   },
   {
-    n: '5', title: 'Registro de cuenta',
-    body: `Algunas funcionalidades pueden requerir la creación de una cuenta mediante correo electrónico y contraseña, inicio de sesión con terceros o cualquier otro sistema habilitado por la plataforma.\n\nEl usuario se compromete a: no suplantar a terceros, no crear cuentas falsas, mantener actualizados sus datos, y notificar de inmediato cualquier acceso no autorizado a Killercontrolsupport@gmail.com.`,
+    n: '5', title: 'Account Registration',
+    body: `Some features may require creating an account using an email and password, third-party login, or any other system enabled by the platform.\n\nThe user agrees to: not impersonate third parties, not create false accounts, keep their data updated, and immediately notify of any unauthorized access to Killercontrolsupport@gmail.com.`,
   },
   {
-    n: '6', title: 'Descripción y límites del servicio',
-    body: `La plataforma tiene carácter informativo, organizativo y de apoyo a la gestión personal de suscripciones.\n\nSalvo que se indique expresamente:\n• Killer Control no actúa como entidad bancaria.\n• Killer Control no ejecuta cancelaciones en nombre del usuario frente a terceros.\n• Killer Control no garantiza que todos los proveedores externos mantengan invariables sus condiciones, precios, interfaces o procesos de baja.\n• Killer Control no sustituye la revisión directa de los contratos suscritos por el usuario con terceros.\n\nLas guías, alertas, cálculos y recomendaciones se ofrecen como ayuda orientativa.`,
+    n: '6', title: 'Service Description and Limits',
+    body: `The platform is informative, organizational, and supportive of personal subscription management.\n\nUnless expressly stated:\n• Killer Control does not act as a banking entity.\n• Killer Control does not execute cancellations on behalf of the user regarding third parties.\n• Killer Control does not guarantee that all external providers keep their conditions, prices, interfaces, or cancellation processes unchanged.\n• Killer Control does not replace the direct review of contracts signed by the user with third parties.\n\nGuides, alerts, calculations, and recommendations are offered as guidance.`,
   },
   {
-    n: '7', title: 'Planes, precios y pagos',
-    body: `El acceso a determinadas funcionalidades puede estar sujeto al pago de una suscripción o tarifa.\n\nEn tal caso:\n• El precio aplicable será el publicado en el momento de la contratación.\n• La periodicidad del cobro será mensual o anual según el plan seleccionado.\n• Los pagos se procesarán a través de Stripe o el proveedor que se indique en cada momento.\n• El usuario autoriza el cobro recurrente cuando contrate un plan de suscripción.\n\nSalvo indicación contraria, los importes se expresan en euros e incluyen los impuestos aplicables según se informe en el proceso de compra.`,
+    n: '7', title: 'Plans, Prices, and Payments',
+    body: `Access to certain features may be subject to payment of a subscription or fee.\n\nIn such case:\n• The applicable price will be the one published at the time of contracting.\n• The billing frequency will be monthly or annual according to the selected plan.\n• Payments will be processed through Stripe or the provider indicated at any time.\n• The user authorizes recurring billing when contracting a subscription plan.\n\nUnless stated otherwise, amounts are expressed in Euros and include applicable taxes as informed during the purchase process.`,
   },
   {
-    n: '8', title: 'Renovación, cancelación y reembolsos',
-    body: `Las suscripciones de pago se renovarán automáticamente al final de cada periodo, salvo cancelación previa por parte del usuario dentro del plazo indicado en la plataforma.\n\nEl usuario podrá cancelar su plan desde la sección "Mi Cuenta" de la aplicación.\n\nLa cancelación impedirá futuros cobros, pero no supondrá necesariamente el reembolso automático de cantidades ya abonadas, salvo que lo exija la legislación aplicable, exista un error de cobro verificable, o se indique expresamente una política comercial distinta.`,
+    n: '8', title: 'Renewal, Cancellation, and Refunds',
+    body: `Paid subscriptions will automatically renew at the end of each period, unless previously cancelled by the user within the period indicated on the platform.\n\nThe user may cancel their plan from the "My Account" section of the application.\n\nCancellation will prevent future charges but will not necessarily imply the automatic refund of amounts already paid, unless required by applicable law, there is a verifiable billing error, or a different commercial policy is expressly indicated.`,
   },
   {
-    n: '9', title: 'Obligaciones del usuario',
-    body: `El usuario se compromete a no:\n• Introducir datos falsos o de terceros sin autorización.\n• Interferir con el funcionamiento técnico de la plataforma.\n• Intentar acceder a áreas restringidas.\n• Copiar, revender o explotar comercialmente el servicio sin autorización escrita.\n• Utilizar la plataforma para fines ilícitos o que vulneren derechos de terceros.`,
+    n: '9', title: 'User Obligations',
+    body: `The user agrees not to:\n• Introduce false or third-party data without authorization.\n• Interfere with the technical operation of the platform.\n• Attempt to access restricted areas.\n• Copy, resell, or commercially exploit the service without written authorization.\n• Use the platform for illicit purposes or purposes that violate third-party rights.`,
   },
   {
-    n: '10', title: 'Propiedad intelectual e industrial',
-    body: `Todos los contenidos, diseños, textos, logotipos, bases de datos, interfaces, código fuente, nombres comerciales y demás elementos de Killer Control son titularidad de Marc Xicola o se utilizan con autorización suficiente.\n\nQueda prohibida la reproducción, distribución, transformación, comunicación pública o explotación total o parcial sin autorización previa y por escrito.`,
+    n: '10', title: 'Intellectual and Industrial Property',
+    body: `All contents, designs, texts, logos, databases, interfaces, source code, trade names, and other elements of Killer Control are owned by Marc Xicola or are used with sufficient authorization.\n\nReproduction, distribution, transformation, public communication, or total or partial exploitation without prior written authorization is prohibited.`,
   },
   {
-    n: '11', title: 'Servicios y enlaces de terceros',
-    body: `La plataforma puede mostrar, integrar o enlazar servicios de terceros, incluidos proveedores de pago, autenticación, analítica o enlaces a webs externas.\n\nKiller Control no controla ni asume responsabilidad por la disponibilidad de dichos servicios, sus políticas de privacidad, sus condiciones contractuales, ni los cambios en sus precios, interfaces o procedimientos.`,
+    n: '11', title: 'Third-Party Services and Links',
+    body: `The platform may show, integrate, or link to third-party services, including payment providers, authentication, analytics, or links to external websites.\n\nKiller Control does not control or assume responsibility for the availability of such services, their privacy policies, their contractual conditions, or changes in their prices, interfaces, or procedures.`,
   },
   {
-    n: '12', title: 'Exclusión de garantías',
-    body: `La plataforma se ofrece "tal cual" y según disponibilidad.\n\nMarc Xicola no garantiza que: el servicio esté libre de errores o interrupciones, el acceso sea ininterrumpido o completamente seguro, las recomendaciones de ahorro sean exactas en todos los casos, ni que los datos proporcionados por terceros sean completos, permanentes o actualizados.`,
+    n: '12', title: 'Exclusion of Guarantees',
+    body: `The platform is offered "as is" and subject to availability.\n\nMarc Xicola does not guarantee that: the service is free of errors or interruptions, access is uninterrupted or completely secure, savings recommendations are accurate in all cases, or that data provided by third parties is complete, permanent, or updated.`,
   },
   {
-    n: '13', title: 'Limitación de responsabilidad',
-    body: `En la máxima medida permitida por la ley, Marc Xicola no será responsable por daños indirectos, lucro cesante, pérdida de datos, pérdida de oportunidades o perjuicios derivados del uso o imposibilidad de uso de la plataforma, errores introducidos por el usuario, decisiones económicas adoptadas por el usuario, o actuaciones de terceros proveedores.\n\nNada de lo anterior limitará la responsabilidad cuando legalmente no pueda excluirse.`,
+    n: '13', title: 'Limitation of Liability',
+    body: `To the maximum extent permitted by law, Marc Xicola shall not be liable for indirect damages, lost profits, loss of data, loss of opportunities, or damages derived from the use or inability to use the platform, errors introduced by the user, economic decisions adopted by the user, or actions of third-party providers.\n\nNothing in the foregoing shall limit liability when it cannot be legally excluded.`,
   },
   {
-    n: '14', title: 'Suspensión o cancelación de cuentas',
-    body: `Killer Control podrá suspender o cancelar cuentas, de forma temporal o definitiva, si detecta: incumplimiento de estos Términos, uso fraudulento o abusivo, riesgo para la seguridad del sistema, o requerimiento legal o administrativo.`,
+    n: '14', title: 'Account Suspension or Cancellation',
+    body: `Killer Control may suspend or cancel accounts, temporarily or permanently, if it detects: breach of these Terms, fraudulent or abusive use, risk to system security, or legal or administrative requirement.`,
   },
   {
-    n: '15', title: 'Protección de datos',
-    body: `El tratamiento de datos personales se rige por la Política de Privacidad de la plataforma, que forma parte integrante de estos Términos y Condiciones.`,
+    n: '15', title: 'Data Protection',
+    body: `The processing of personal data is governed by the platform's Privacy Policy, which forms an integral part of these Terms and Conditions.`,
   },
   {
-    n: '16', title: 'Modificaciones',
-    body: `Marc Xicola podrá modificar estos Términos y Condiciones en cualquier momento por motivos legales, técnicos, operativos o comerciales.\n\nCuando los cambios sean relevantes, se informará al usuario por medios razonables: aviso en la web, dentro de la app o por correo electrónico.`,
+    n: '16', title: 'Modifications',
+    body: `Marc Xicola may modify these Terms and Conditions at any time for legal, technical, operational, or commercial reasons.\n\nWhen changes are relevant, the user will be informed by reasonable means: notice on the web, within the app, or by email.`,
   },
   {
-    n: '17', title: 'Legislación aplicable y jurisdicción',
-    body: `Estos Términos y Condiciones se regirán por la legislación de España.\n\nPara cualquier controversia, las partes se someten a los juzgados y tribunales de Mollet del Vallès, salvo que la normativa de consumo aplicable establezca otro fuero imperativo.`,
+    n: '17', title: 'Applicable Legislation and Jurisdiction',
+    body: `These Terms and Conditions shall be governed by the legislation of Spain.\n\nFor any controversy, the parties submit to the courts and tribunals of Mollet del Vallès, unless applicable consumer regulations establish another mandatory forum.`,
   },
   {
-    n: '18', title: 'Contacto',
-    body: `Para cualquier consulta sobre estos Términos y Condiciones:\n\n• Titular: Marc Xicola\n• Email: Killercontrolsupport@gmail.com\n• Dirección: C/ Pau Claris 15, baixos. 08100 Mollet del Vallès`,
+    n: '18', title: 'Contact',
+    body: `For any questions about these Terms and Conditions:\n\n• Owner: Marc Xicola\n• Email: Killercontrolsupport@gmail.com\n• Address: C/ Pau Claris 15, baixos. 08100 Mollet del Vallès`,
   },
 ];
 
@@ -101,13 +101,13 @@ export default function TermsModal({ open, onClose }) {
                 <ScrollText size={20} className="text-primary" />
               </div>
               <div className="flex-1 min-w-0">
-                <h2 className="font-bold text-lg leading-tight">Términos y Condiciones</h2>
-                <p className="text-xs text-gray-500 mt-0.5"><span className="text-[#F59E0B]">Killer</span> Control · Última actualización: Marzo 2026</p>
+                <h2 className="font-bold text-lg leading-tight">Terms & Conditions</h2>
+                <p className="text-xs text-gray-500 mt-0.5"><span className="text-[#F59E0B]">Killer</span> Control · Last update: March 2026</p>
               </div>
               <button
                 onClick={onClose}
                 className="p-2 text-gray-500 hover:text-white hover:bg-white/5 rounded-xl transition shrink-0"
-                aria-label="Cerrar"
+                aria-label="Close"
               >
                 <X size={20} />
               </button>
@@ -119,7 +119,7 @@ export default function TermsModal({ open, onClose }) {
               <div className="flex items-start gap-3 bg-[var(--primary)]/5 border border-[var(--primary)]/15 rounded-2xl px-4 py-3">
                 <Shield size={16} className="text-[var(--primary)] shrink-0 mt-0.5" />
                 <p className="text-xs text-gray-300 leading-relaxed">
-                  Lee detenidamente estos términos antes de usar <span className="text-[#F59E0B]">Killer</span> Control. Al acceder o usar la plataforma, aceptas estas condiciones en su totalidad.
+                  Please read these terms carefully before using <span className="text-[#F59E0B]">Killer</span> Control. By accessing or using the platform, you agree to these conditions in their entirety.
                 </p>
               </div>
 
@@ -150,7 +150,7 @@ export default function TermsModal({ open, onClose }) {
                 onClick={onClose}
                 className="w-full bg-[var(--primary)] text-[var(--bg)] font-bold rounded-2xl py-3.5 hover:opacity-90 transition text-sm"
               >
-                Entendido, cerrar
+                Understood, close
               </button>
             </div>
           </motion.div>

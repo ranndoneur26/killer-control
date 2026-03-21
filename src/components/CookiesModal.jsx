@@ -4,20 +4,20 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 const SECTIONS = [
   {
-    n: '1', title: '¿Qué son las cookies?',
-    body: `Las cookies son pequeños archivos de texto que se almacenan en tu dispositivo (ordenador, tablet o móvil) cuando visitas un sitio web. Se utilizan para que el sitio funcione correctamente, sea más seguro y para proporcionar información a los propietarios del sitio sobre cómo se utiliza.`,
+    n: '1', title: 'What are cookies?',
+    body: `Cookies are small text files that are stored on your device (computer, tablet, or mobile) when you visit a website. They are used to make the site work correctly, be more secure, and to provide information to site owners about how it is used.`,
   },
   {
-    n: '2', title: 'Tipos de cookies que utilizamos',
-    body: `En Killer Control utilizamos las siguientes categorías de cookies:\n\n• Cookies Técnicas: Necesarias para el funcionamiento de la plataforma, como la gestión de sesiones o preferencias de seguridad.\n• Cookies de Análisis: Nos permiten medir el tráfico y entender qué secciones son las más visitadas para mejorar el servicio.\n• Cookies de Preferencias: Guardan configuraciones como el idioma o el tema visual.`,
+    n: '2', title: 'Types of cookies we use',
+    body: `In Killer Control we use the following categories of cookies:\n\n• Technical Cookies: Necessary for the operation of the platform, such as session management or security preferences.\n• Analysis Cookies: Allow us to measure traffic and understand which sections are the most visited to improve the service.\n• Preference Cookies: Save settings such as language or visual theme.`,
   },
   {
-    n: '3', title: 'Gestión y desactivación',
-    body: `Puedes configurar tu navegador para bloquear o alertarte sobre estas cookies, pero algunas partes del sitio dejarán de funcionar. La mayoría de los navegadores permiten gestionar las preferencias de cookies a través de su configuración de ajustes o privacidad.`,
+    n: '3', title: 'Management and deactivation',
+    body: `You can configure your browser to block or alert you about these cookies, but some parts of the site will stop working. Most browsers allow you to manage cookie preferences through their settings or privacy configuration.`,
   },
   {
-    n: '4', title: 'Actualizaciones de la política',
-    body: `Podemos actualizar esta Política de Cookies en el futuro. Te recomendamos revisarla periódicamente para estar informado sobre cómo protegemos tu privacidad.`,
+    n: '4', title: 'Policy updates',
+    body: `We may update this Cookie Policy in the future. We recommend reviewing it periodically to be informed about how we protect your privacy.`,
   }
 ];
 
@@ -45,8 +45,8 @@ export default function CookiesModal({ open, onClose }) {
                 <Cookie size={20} className="text-orange-400" />
               </div>
               <div className="flex-1 min-w-0">
-                <h2 className="font-bold text-lg leading-tight text-white">Política de Cookies</h2>
-                <p className="text-xs text-gray-500 mt-0.5"><span className="text-[#F59E0B]">Killer</span> Control · Transparencia total</p>
+                <h2 className="font-bold text-lg leading-tight text-white">Cookie Policy</h2>
+                <p className="text-xs text-gray-500 mt-0.5"><span className="text-[#F59E0B]">Killer</span> Control · Full transparency</p>
               </div>
               <button
                 onClick={onClose}
@@ -61,7 +61,7 @@ export default function CookiesModal({ open, onClose }) {
               <div className="flex items-start gap-3 bg-orange-500/5 border border-orange-500/15 rounded-2xl px-4 py-3 text-white">
                 <ShieldCheck size={16} className="text-orange-400 shrink-0 mt-0.5" />
                 <p className="text-xs text-gray-300 leading-relaxed">
-                  Utilizamos cookies mínimas para garantizar la mejor experiencia técnica y analítica en Killer Control.
+                  We use minimal cookies to ensure the best technical and analytical experience in Killer Control.
                 </p>
               </div>
 
@@ -89,7 +89,7 @@ export default function CookiesModal({ open, onClose }) {
                 onClick={onClose}
                 className="w-full bg-[#F59E0B]/10 text-[#F59E0B] border border-[#F59E0B]/20 font-bold rounded-2xl py-3.5 hover:bg-[#F59E0B]/20 transition text-sm"
               >
-                Entendido
+                Understood
               </button>
             </div>
           </motion.div>

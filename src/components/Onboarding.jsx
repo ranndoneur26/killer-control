@@ -58,12 +58,12 @@ export default function Onboarding() {
       {/* Content Area */}
       <div className="text-center pb-8">
         <h2 className="text-3xl font-bold mb-4">
-          Bienvenido a <span className="text-[#F59E0B] font-bold">Killer</span><br />
+          Welcome to <span className="text-[#F59E0B] font-bold">Killer</span><br />
           <span className="text-[#F59E0B] font-bold">Control</span>
         </h2>
         
         <p className="text-[var(--text-secondary)] mb-8 mx-auto max-w-[280px]">
-          Controla tus suscripciones, el gasto y elimina las que no usas.
+          Control your subscriptions, track spending, and eliminate what you don't use.
         </p>
 
         {/* Pagination Dots */}
@@ -77,7 +77,7 @@ export default function Onboarding() {
           onClick={() => navigate('/login')}
           className="w-full bg-[var(--primary)] text-white font-bold rounded-full py-4 flex items-center justify-center gap-2 hover:opacity-90 transition group"
         >
-          Siguiente <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+          Next <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
     </div>

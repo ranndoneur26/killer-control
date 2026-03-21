@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { ArrowRight, ArrowLeft, Mail, Eye, EyeOff, Loader2, CheckCircle2, XCircle, X } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { ArrowRight, ArrowLeft, Mail, Eye, EyeOff, Loader2, CheckCircle2, XCircle, X, Crown } from 'lucide-react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAuth } from '../hooks/useAuth';
 import { useToast } from '../hooks/useToast';
@@ -67,6 +67,16 @@ function AuthButton({ loading, disabled, onClick, type = 'button', variant = 'pr
 ══════════════════════════════════════════ */
 export default function Login() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const plan = searchParams.get('plan');
+  const isPremium = plan === 'premium';
+
+  useEffect(() => {
+    if (plan) {
+      sessionStorage.setItem('selected_plan', plan);
+    }
+  }, [plan]);
+
   const { toasts, addToast, dismissToast } = useToast();
   const auth = useAuth(addToast, navigate);
   const anyLoading = !!auth.loadingBtn;
@@ -109,13 +119,25 @@ export default function Login() {
             transition={{ duration: 0.2 }}
             className="text-center mb-8"
           >
+            {isPremium && !auth.isLogin && (
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-bold uppercase tracking-wider mb-4 border border-amber-200">
+                <Crown size={14} className="fill-amber-500 text-amber-600" />
+                Premium Plan Selected
+              </div>
+            )}
             <h1 className="text-3xl font-bold mb-3 text-[var(--text-primary)]">
-              {auth.isLogin ? 'Bienvenido de nuevo' : <>Crea Tu cuenta <span className="text-[#F59E0B]">Killer</span></>}
+              {auth.isLogin 
+                ? 'Welcome back' 
+                : isPremium 
+                  ? 'Start your Premium trial'
+                  : <>Create your <span className="text-[#F59E0B]">Killer</span> account</>}
             </h1>
             <p className="text-[var(--text-secondary)] text-sm leading-relaxed font-medium">
               {auth.isLogin
-                ? 'Inicia sesión para acceder a tus suscripciones.'
-                : <>Únete a <span className="text-[#F59E0B]">Killer</span> Control y toma el control de tus gastos.</>}
+                ? 'Log in to access your subscriptions.'
+                : isPremium
+                  ? 'Sign up to activate all Pro features. 4.99€/mo after trial.'
+                  : <>Join <span className="text-[#F59E0B]">Killer</span> Control and take charge of your expenses.</>}
             </p>
           </motion.div>
         </AnimatePresence>
@@ -128,7 +150,7 @@ export default function Login() {
             disabled={anyLoading}
             onClick={() => auth.handleOAuth('Google')}
           >
-            <GoogleIcon /> {auth.isLogin ? 'Iniciar sesión con Google' : 'Continuar con Google'}
+            <GoogleIcon /> {auth.isLogin ? 'Log in with Google' : 'Continue with Google'}
           </AuthButton>
           <AuthButton
             variant="dark"
@@ -136,7 +158,7 @@ export default function Login() {
             disabled={anyLoading}
             onClick={() => auth.handleOAuth('Apple')}
           >
-            <AppleIcon /> {auth.isLogin ? 'Iniciar sesión con Apple' : 'Continuar con Apple'}
+            <AppleIcon /> {auth.isLogin ? 'Log in with Apple' : 'Continue with Apple'}
           </AuthButton>
         </div>
 
@@ -144,7 +166,7 @@ export default function Login() {
         <div className="flex items-center mb-6">
           <div className="flex-1 border-t border-[var(--border)]" />
           <span className="px-4 text-xs text-[var(--text-muted)] font-bold tracking-wider uppercase">
-            O con tu email
+            OR WITH EMAIL
           </span>
           <div className="flex-1 border-t border-[var(--border)]" />
         </div>
@@ -163,7 +185,7 @@ export default function Login() {
                 inputMode="email"
                 value={auth.email}
                 onChange={e => { auth.setEmail(e.target.value); auth.setEmailError(''); }}
-                placeholder="tu@email.com"
+                placeholder="you@email.com"
                 disabled={auth.step === 'password' || anyLoading}
                 className={`w-full bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-2xl py-4 px-5 pr-12 outline-none border border-[var(--border)] shadow-sm
                   focus:ring-2 focus:ring-[var(--primary)]/20 focus:border-[var(--primary)] transition placeholder-[var(--text-muted)] font-medium
@@ -176,7 +198,7 @@ export default function Login() {
                     type="button"
                     onClick={auth.backToEmail}
                     className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white transition"
-                    title="Cambiar email"
+                    title="Change email"
                   >
                     <ArrowLeft size={18} />
                   </button>
@@ -202,7 +224,7 @@ export default function Login() {
                     type={auth.showPassword ? 'text' : 'password'}
                     value={auth.password}
                     onChange={e => { auth.setPassword(e.target.value); auth.setPassError(''); }}
-                    placeholder={auth.isLogin ? 'Tu contraseña' : 'Crea una contraseña (mín. 8 caracteres)'}
+                    placeholder={auth.isLogin ? 'Your password' : 'Create a password (min. 8 chars)'}
                     autoFocus
                     disabled={anyLoading}
                     className={`w-full bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-2xl py-4 px-5 pr-12 outline-none border border-[var(--border)] shadow-sm
@@ -227,7 +249,7 @@ export default function Login() {
                       onClick={() => auth.handleForgotPassword()}
                       className="text-xs text-[var(--primary)] font-bold hover:underline"
                     >
-                      ¿Olvidaste tu contraseña?
+                      Forgot your password?
                     </button>
                   </div>
                 )}
@@ -243,8 +265,8 @@ export default function Login() {
             disabled={anyLoading && auth.loadingBtn !== 'email'}
           >
             {auth.step === 'email'
-              ? <>Continuar <ArrowRight size={18} /></>
-              : auth.isLogin ? 'Iniciar Sesión' : 'Crear Cuenta'
+              ? <>Continue <ArrowRight size={18} /></>
+              : auth.isLogin ? 'Log In' : 'Create Account'
             }
           </AuthButton>
         </form>
@@ -252,21 +274,21 @@ export default function Login() {
         {/* ── Legal & Toggle ── */}
         <div className="mt-8 text-center space-y-5 pb-4">
           <p className="text-xs text-[var(--text-muted)] leading-relaxed font-medium">
-            Al continuar, aceptas nuestros{' '}
+            By continuing, you agree to our{' '}
             <button type="button" onClick={() => setShowTerms(true)} className="text-[var(--primary)] hover:underline font-bold">
-              Términos y Condiciones
+              Terms & Conditions
             </button>
-            {' '}y{' '}
-            <button type="button" onClick={() => setShowPrivacy(true)} className="text-[var(--primary)] hover:underline font-bold">Política de Privacidad</button>.
+            {' '}and{' '}
+            <button type="button" onClick={() => setShowPrivacy(true)} className="text-[var(--primary)] hover:underline font-bold">Privacy Policy</button>.
           </p>
           <p className="text-sm text-[var(--text-secondary)] font-medium">
-            {auth.isLogin ? '¿No tienes cuenta? ' : '¿Ya tienes cuenta? '}
+            {auth.isLogin ? "Don't have an account? " : 'Already have an account? '}
             <button
               type="button"
               onClick={auth.toggleMode}
               className="text-[var(--text-primary)] font-bold hover:text-[var(--primary)] transition"
             >
-              {auth.isLogin ? 'Regístrate gratis' : 'Inicia sesión'}
+              {auth.isLogin ? 'Sign up for free' : 'Log in'}
             </button>
           </p>
         </div>

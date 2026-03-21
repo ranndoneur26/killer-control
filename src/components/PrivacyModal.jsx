@@ -4,68 +4,68 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 const SECTIONS = [
   {
-    n: '1', title: 'Responsable del tratamiento',
-    body: `El responsable del tratamiento de los datos personales recabados a través de Killer Control es Marc Xicola Tugas, con domicilio en C/ Pau Claris 15, baixos. 08100 Mollet del Vallès, NIF/CIF 52172995w, y correo electrónico digitalformacio@gmail.com.`,
+    n: '1', title: 'Data Controller',
+    body: `The data controller for personal data collected through Killer Control is Marc Xicola Tugas, located at C/ Pau Claris 15, baixos. 08100 Mollet del Vallès, NIF/CIF 52172995w, and email digitalformacio@gmail.com.`,
   },
   {
-    n: '2', title: 'Finalidad del tratamiento',
-    body: `Los datos personales del usuario podrán ser tratados para las siguientes finalidades:\n• Crear y gestionar su cuenta de usuario.\n• Permitir el acceso a la plataforma y sus funcionalidades.\n• Registrar y organizar sus suscripciones y gastos recurrentes.\n• Enviar alertas, recordatorios y notificaciones relacionadas con renovaciones, pagos o vencimientos.\n• Gestionar contrataciones, pagos, facturación y planes premium.\n• Prestar soporte técnico y atención al usuario.\n• Mejorar la seguridad, rendimiento y experiencia de uso.\n• Cumplir obligaciones legales.\n• Enviar comunicaciones informativas o comerciales, cuando exista consentimiento o base legal suficiente.`,
+    n: '2', title: 'Purpose of Processing',
+    body: `The user's personal data may be processed for the following purposes:\n• Create and manage their user account.\n• Allow access to the platform and its features.\n• Register and organize their subscriptions and recurring expenses.\n• Send alerts, reminders, and notifications related to renewals, payments, or expirations.\n• Manage hiring, payments, billing, and premium plans.\n• Provide technical support and user assistance.\n• Improve security, performance, and user experience.\n• Comply with legal obligations.\n• Send informative or commercial communications, when there is consent or sufficient legal basis.`,
   },
   {
-    n: '3', title: 'Datos que recopilamos',
-    body: `Podemos recopilar las siguientes categorías de datos:\n• Datos identificativos: nombre, apellidos, alias o nombre de usuario.\n• Datos de contacto: correo electrónico y, en su caso, teléfono.\n• Datos de acceso: contraseña cifrada, identificadores de sesión o datos de autenticación mediante terceros.\n• Datos de uso: actividad en la plataforma, preferencias, eventos, logs técnicos, IP, navegador, dispositivo y OS.\n• Datos de suscripciones: nombre del servicio, categoría, importe, periodicidad, fechas de alta y renovación, método de pago asociado, alertas configuradas y notas del usuario.\n• Datos de facturación: dirección fiscal, historial de pagos y estado de la suscripción premium.\n• Comunicaciones: consultas, incidencias o solicitudes remitidas por el usuario.`,
+    n: '3', title: 'Data We Collect',
+    body: `We may collect the following categories of data:\n• Identification data: name, surname, alias, or username.\n• Contact data: email and, where applicable, telephone.\n• Access data: encrypted password, session identifiers, or third-party authentication data.\n• Usage data: activity on the platform, preferences, events, technical logs, IP, browser, device, and OS.\n• Subscription data: service name, category, amount, frequency, registration and renewal dates, associated payment method, configured alerts, and user notes.\n• Billing data: tax address, payment history, and premium subscription status.\n• Communications: queries, incidents, or requests submitted by the user.`,
   },
   {
-    n: '4', title: 'Origen de los datos',
-    body: `Los datos pueden proceder de:\n• La información facilitada directamente por el usuario.\n• El uso de la plataforma.\n• Proveedores de autenticación como Google u otros.\n• Proveedores de pago como Stripe u otros.\n• Integraciones activadas expresamente por el usuario.`,
+    n: '4', title: 'Data Origin',
+    body: `Data may come from:\n• Information provided directly by the user.\n• Use of the platform.\n• Authentication providers such as Google or others.\n• Payment providers such as Stripe or others.\n• Integrations expressly activated by the user.`,
   },
   {
-    n: '5', title: 'Base jurídica del tratamiento',
-    body: `Tratamos los datos personales con base en:\n• La ejecución del contrato o de medidas precontractuales, cuando el usuario se registra o utiliza el servicio.\n• El consentimiento del usuario, cuando sea necesario.\n• El cumplimiento de obligaciones legales.\n• El interés legítimo de Marc Xicola, por ejemplo, para mejorar la seguridad, prevenir abusos u optimizar el servicio, siempre que dicho interés no prevalezca sobre los derechos del usuario.`,
+    n: '5', title: 'Legal Basis for Processing',
+    body: `We process personal data based on:\n• The execution of the contract or pre-contractual measures, when the user registers or uses the service.\n• The user's consent, when necessary.\n• Compliance with legal obligations.\n• The legitimate interest of Marc Xicola, for example, to improve security, prevent abuse, or optimize the service, provided that such interest does not prevail over the user's rights.`,
   },
   {
-    n: '6', title: 'Conservación de los datos',
-    body: `Los datos se conservarán durante el tiempo necesario para cumplir la finalidad para la que fueron recogidos.\n\nPosteriormente, podrán mantenerse bloqueados durante los plazos legales exigibles para atender posibles responsabilidades.\n\nCuando el usuario solicite la supresión de su cuenta, sus datos serán eliminados o anonimizados salvo aquellos que deban conservarse por obligación legal.`,
+    n: '6', title: 'Data Retention',
+    body: `Data will be kept for the time necessary to fulfill the purpose for which they were collected.\n\nSubsequently, they may be kept blocked during the legal periods required to address possible liabilities.\n\nWhen the user requests the deletion of their account, their data will be deleted or anonymized except for those that must be kept by legal obligation.`,
   },
   {
-    n: '7', title: 'Destinatarios y encargados del tratamiento',
-    body: `Los datos podrán ser accesibles por proveedores que prestan servicios necesarios para el funcionamiento de la plataforma, tales como:\n• Alojamiento e infraestructura cloud.\n• Autenticación.\n• Analítica.\n• Correo electrónico y notificaciones.\n• Atención al cliente.\n• Pagos y facturación.\n• Almacenamiento y bases de datos.\n\nEntre dichos proveedores pueden encontrarse Firebase, Google Cloud, Stripe, Resend, PostHog u otros. Estos terceros actuarán como encargados del tratamiento o responsables independientes, según corresponda.`,
+    n: '7', title: 'Recipients and Data Processors',
+    body: `Data may be accessible by providers who provide services necessary for the operation of the platform, such as:\n• Hosting and cloud infrastructure.\n• Authentication.\n• Analytics.\n• Email and notifications.\n• Customer service.\n• Payments and billing.\n• Storage and databases.\n\nAmong such providers may be Firebase, Google Cloud, Stripe, Resend, PostHog, or others. These third parties will act as data processors or independent controllers, as appropriate.`,
   },
   {
-    n: '8', title: 'Transferencias internacionales',
-    body: `En caso de utilizar proveedores ubicados fuera del Espacio Económico Europeo, los datos podrán ser objeto de transferencias internacionales.\n\nMarc Xicola adoptará las garantías adecuadas exigidas por la normativa aplicable, como cláusulas contractuales tipo o mecanismos equivalentes.`,
+    n: '8', title: 'International Transfers',
+    body: `In case of using providers located outside the European Economic Area, data may be subject to international transfers.\n\nMarc Xicola will adopt the appropriate guarantees required by applicable regulations, such as standard contractual clauses or equivalent mechanisms.`,
   },
   {
-    n: '9', title: 'Derechos del usuario',
-    body: `El usuario puede ejercer sus derechos de:\n• Acceso\n• Rectificación\n• Supresión ("derecho al olvido")\n• Oposición\n• Limitación del tratamiento\n• Portabilidad\n• Retirada del consentimiento en cualquier momento\n\nPara ejercerlos, escribe a digitalformacio@gmail.com indicando tu nombre completo, el derecho que deseas ejercer y los datos identificativos de tu cuenta.\n\nAsimismo, puedes presentar una reclamación ante la autoridad de control competente en tu país.`,
+    n: '9', title: 'User Rights',
+    body: `The user can exercise their rights of:\n• Access\n• Rectification\n• Deletion ("right to be forgotten")\n• Opposition\n• Limitation of processing\n• Portability\n• Withdrawal of consent at any time\n\nTo exercise them, write to digitalformacio@gmail.com indicating your full name, the right you wish to exercise, and your account identification data.\n\nLikewise, you can file a claim with the competent supervisory authority in your country.`,
   },
   {
-    n: '10', title: 'Seguridad de la información',
-    body: `Marc Xicola aplica medidas técnicas y organizativas razonables para proteger los datos personales contra pérdida, acceso no autorizado, alteración o divulgación indebida.\n\nNo obstante, el usuario reconoce que ninguna medida de seguridad en internet es absolutamente infalible.`,
+    n: '10', title: 'Information Security',
+    body: `Marc Xicola applies reasonable technical and organizational measures to protect personal data against loss, unauthorized access, alteration, or improper disclosure.\n\nHowever, the user acknowledges that no security measure on the internet is absolutely infallible.`,
   },
   {
-    n: '11', title: 'Menores de edad',
-    body: `La plataforma no está dirigida a menores de 18 años, salvo que se indique expresamente lo contrario.\n\nSi Marc Xicola detecta que ha recopilado datos de un menor sin base legítima suficiente, podrá proceder a su eliminación.`,
+    n: '11', title: 'Minors',
+    body: `The platform is not directed at minors under 18 years of age, unless expressly stated otherwise.\n\nIf Marc Xicola detects that it has collected data from a minor without sufficient legitimate basis, it may proceed to its deletion.`,
   },
   {
-    n: '12', title: 'Cookies y tecnologías similares',
-    body: `La plataforma puede utilizar cookies o tecnologías similares para fines técnicos, analíticos, de personalización o medición.\n\nEl usuario puede obtener más información en la Política de Cookies de la plataforma.`,
+    n: '12', title: 'Cookies and Similar Technologies',
+    body: `The platform may use cookies or similar technologies for technical, analytical, personalization, or measurement purposes.\n\nThe user can obtain more information in the platform's Cookie Policy.`,
   },
   {
-    n: '13', title: 'Comunicaciones comerciales',
-    body: `Solo se enviarán comunicaciones comerciales cuando:\n• El usuario haya dado su consentimiento.\n• Exista una relación previa y la normativa aplicable lo permita.\n• Se ofrezca en todo momento un mecanismo sencillo para darse de baja.\n\nEl usuario podrá retirar su consentimiento escribiendo a Killercontrolsupport@gmail.com o usando el enlace incluido en cada comunicación.`,
+    n: '13', title: 'Commercial Communications',
+    body: `Commercial communications will only be sent when:\n• The user has given their consent.\n• There is a prior relationship and applicable regulations allow it.\n• A simple mechanism to unsubscribe is offered at all times.\n\nThe user may withdraw their consent by writing to Killercontrolsupport@gmail.com or using the link included in each communication.`,
   },
   {
-    n: '14', title: 'Decisiones automatizadas y perfiles',
-    body: `La plataforma puede utilizar lógica automatizada para ofrecer recomendaciones de ahorro, alertas de renovación o priorización de información basada en el historial de suscripciones del usuario.\n\nEn tales casos, los datos utilizados son los introducidos por el usuario en la plataforma, con la finalidad de optimizar su gestión de gastos recurrentes, sin que ello genere efectos jurídicos negativos sobre el usuario.`,
+    n: '14', title: 'Automated Decisions and Profiling',
+    body: `The platform may use automated logic to offer savings recommendations, renewal alerts, or prioritization of information based on the user's subscription history.\n\nIn such cases, the data used are those entered by the user on the platform, with the purpose of optimizing their recurring expense management, without generating negative legal effects on the user.`,
   },
   {
-    n: '15', title: 'Cambios en esta política',
-    body: `Marc Xicola podrá actualizar esta Política de Privacidad para adaptarla a cambios normativos, técnicos o funcionales.\n\nCuando los cambios sean relevantes, se comunicarán por medios razonables: aviso en la web, dentro de la app o por correo electrónico.`,
+    n: '15', title: 'Changes to this Policy',
+    body: `Marc Xicola may update this Privacy Policy to adapt it to regulatory, technical, or functional changes.\n\nWhen changes are relevant, they will be communicated by reasonable means: notice on the web, within the app, or by email.`,
   },
   {
-    n: '16', title: 'Contacto',
-    body: `Para cualquier consulta sobre privacidad o protección de datos:\n\n• Responsable: Marc Xicola\n• Email de privacidad: digitalformacio@gmail.com\n• Dirección: C/ Pau Claris 15, baixos. 08100 Mollet del Vallès`,
+    n: '16', title: 'Contact',
+    body: `For any questions about privacy or data protection:\n\n• Controller: Marc Xicola\n• Privacy Email: digitalformacio@gmail.com\n• Address: C/ Pau Claris 15, baixos. 08100 Mollet del Vallès`,
   },
 ];
 
@@ -93,13 +93,13 @@ export default function PrivacyModal({ open, onClose }) {
                 <Lock size={20} className="text-blue-400" />
               </div>
               <div className="flex-1 min-w-0">
-                <h2 className="font-bold text-lg leading-tight">Política de Privacidad</h2>
-                <p className="text-xs text-gray-500 mt-0.5"><span className="text-[#F59E0B]">Killer</span> Control · Última actualización: [FECHA]</p>
+                <h2 className="font-bold text-lg leading-tight">Privacy Policy</h2>
+                <p className="text-xs text-gray-500 mt-0.5"><span className="text-[#F59E0B]">Killer</span> Control · Last update: March 2026</p>
               </div>
               <button
                 onClick={onClose}
                 className="p-2 text-gray-500 hover:text-white hover:bg-white/5 rounded-xl transition shrink-0"
-                aria-label="Cerrar"
+                aria-label="Close"
               >
                 <X size={20} />
               </button>
@@ -111,7 +111,7 @@ export default function PrivacyModal({ open, onClose }) {
               <div className="flex items-start gap-3 bg-blue-500/5 border border-blue-500/15 rounded-2xl px-4 py-3">
                 <ShieldCheck size={16} className="text-blue-400 shrink-0 mt-0.5" />
                 <p className="text-xs text-gray-300 leading-relaxed">
-                  Tu privacidad es importante para nosotros. Este documento explica qué datos recopilamos, cómo los usamos y qué derechos tienes sobre ellos.
+                  Your privacy is important to us. This document explains what data we collect, how we use it, and what rights you have over it.
                 </p>
               </div>
 
@@ -141,7 +141,7 @@ export default function PrivacyModal({ open, onClose }) {
                 onClick={onClose}
                 className="w-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-bold rounded-2xl py-3.5 hover:bg-blue-500/20 transition text-sm"
               >
-                Entendido, cerrar
+                Understood, close
               </button>
             </div>
           </motion.div>

@@ -35,9 +35,9 @@ export default function CookieConsent({ onOpenPolicy }) {
               <Cookie size={24} className="text-[#F59E0B]" />
             </div>
             <div>
-              <h3 className="font-bold text-lg mb-1">Valoramos tu privacidad</h3>
+              <h3 className="font-bold text-lg mb-1">We value your privacy</h3>
               <p className="text-[#94A3B8] text-sm leading-relaxed">
-                Utilizamos cookies propias y de terceros para mejorar tu experiencia y analizar el uso de la web. 
+                We use our own and third-party cookies to improve your experience and analyze web usage.
               </p>
             </div>
           </div>
@@ -46,13 +46,13 @@ export default function CookieConsent({ onOpenPolicy }) {
               onClick={onOpenPolicy}
               className="px-6 py-3 rounded-xl border border-white/10 text-sm font-bold text-white hover:bg-white/5 transition-colors whitespace-nowrap"
             >
-              Ver política
+              See policy
             </button>
             <button
               onClick={handleAccept}
               className="px-8 py-3 rounded-xl bg-[#4F46E5] text-sm font-bold text-white hover:bg-[#4338CA] transition-colors shadow-lg shadow-indigo-500/20 whitespace-nowrap"
             >
-              Aceptar todas
+              Accept all
             </button>
           </div>
         </div>

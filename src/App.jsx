@@ -10,7 +10,12 @@ import SubscriptionList from './components/SubscriptionList';
 import SubscriptionDetail from './components/SubscriptionDetail';
 import AddSubscription from './components/AddSubscription';
 import Profile from './components/Profile';
+import Checkout from './components/Checkout';
 import Alternatives from './components/Alternatives';
+import CheckEmailPage from './components/CheckEmailPage';
+import VerifyEmailPage from './components/VerifyEmailPage';
+import SignupPage from './components/SignupPage';
+import CookieBanner from './components/CookieBanner';
 
 function App() {
   return (
@@ -21,6 +26,10 @@ function App() {
           <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/check-email" element={<CheckEmailPage />} />
+          <Route path="/verify-email" element={<VerifyEmailPage />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/guide/:id" element={<CancellationGuide />} />
           <Route path="/subscriptions" element={<SubscriptionList />} />
@@ -30,6 +39,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           </Routes>
           </div>
+          <CookieBanner />
         </Router>
       </LanguageProvider>
     </AppearanceProvider>

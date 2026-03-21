@@ -86,7 +86,7 @@ export default function Dashboard() {
         
         <div className="flex items-center gap-2 text-[#10B981] font-bold text-sm">
           <TrendingDown size={16} />
-          <span>-12.5% bajada respecto abril</span>
+          <span>-12.5% vs April</span>
         </div>
       </button>
       {/* Alertas de Inteligencia */}
@@ -175,7 +175,7 @@ export default function Dashboard() {
                 <div className="flex-1">
                   <div className="font-bold text-[var(--text-primary)]">{sub.name}</div>
                   <div className="text-xs text-[var(--text-secondary)] flex items-center gap-1 mt-1 font-medium">
-                    <Calendar size={12} /> {sub.renewalDate ? new Date(sub.renewalDate).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' }) : t('subscriptions.tomorrow')}
+                    <Calendar size={12} /> {sub.renewalDate ? new Date(sub.renewalDate).toLocaleDateString('en-US', { day: 'numeric', month: 'short' }) : t('subscriptions.tomorrow')}
                   </div>
                 </div>
                 <div className="text-right">

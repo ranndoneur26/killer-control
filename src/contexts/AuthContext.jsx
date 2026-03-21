@@ -1,35 +1,43 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { auth } from '../lib/firebase';
-import { onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from 'firebase/auth';
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
-      setLoading(false);
-    });
-
-    return unsubscribe;
+    // Check for existing session token in localStorage on mount
+    const token = localStorage.getItem('auth_token');
+    if (token) {
+      // In a real app, you might validate this token with the backend here
+      // For now, we assume if token exists, user is logged in (simplified)
+      const storedUser = localStorage.getItem('auth_user');
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+    }
+    setLoading(false);
   }, []);
 
-  const loginWithGoogle = () => {
-    const provider = new GoogleAuthProvider();
-    return signInWithPopup(auth, provider);
+  const login = (userData, token) => {
+    setUser(userData);
+    localStorage.setItem('auth_token', token);
+    localStorage.setItem('auth_user', JSON.stringify(userData));
   };
 
   const logout = () => {
-    return signOut(auth);
+    setUser(null);
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('auth_user');
   };
 
   const value = {
-    currentUser,
-    loginWithGoogle,
-    logout
+    user,
+    loading,
+    login,
+    logout,
+    isAuthenticated: !!user
   };
 
   return (

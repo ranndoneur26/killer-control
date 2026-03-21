@@ -13,11 +13,16 @@ import {
   Zap,
   Star,
   Plus,
-  PlayCircle
+  PlayCircle,
+  Gem,
+  XCircle,
+  Search
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, Link } from 'react-router-dom';
 import HeroHeader from './HeroHeader';
+import HeroCopy from './HeroCopy';
+import HeroSlider from './HeroSlider';
 import TermsModal from './TermsModal';
 import PrivacyModal from './PrivacyModal';
 import CookiesModal from './CookiesModal';
@@ -35,7 +40,7 @@ const LandingPage = () => {
   const [showLegal, setShowLegal] = useState(false);
   const [showContact, setShowContact] = useState(false);
   const [showDemo, setShowDemo] = useState(false);
-  const [activeFAQ, setActiveFAQ] = useState(null);
+  const [activeFAQ, setActiveFAQ] = useState(0); // Open first by default
   const { t } = useLanguage();
 
   const fadeIn = {
@@ -48,40 +53,21 @@ const LandingPage = () => {
     setActiveFAQ(activeFAQ === index ? null : index);
   };
 
+  const faqIcons = [Zap, Gem, XCircle, CreditCard, Search];
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] font-sans selection:bg-[#4F46E5]/10 transition-colors duration-500">
       <HeroHeader />
 
       {/* ─── Hero Section ─────────────────────────────── */}
-      <section className="pt-32 pb-20 overflow-hidden bg-white">
+      <section className="pt-32 pb-20 overflow-hidden bg-slate-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div {...fadeIn}>
-              <div className="inline-flex items-center gap-2 bg-[#EEF2FF] border border-[#E0E7FF] text-[#4F46E5] px-3 py-1 rounded-full text-xs font-bold mb-6 uppercase tracking-wider">
-                <Zap size={14} fill="currentColor" />
-                {t('hero.badge')}
-              </div>
-              <h1 className="text-5xl lg:text-6xl font-black tracking-tight text-[#0F172A] mb-6 leading-[1.1]">
-                {t('hero.title1')} <span className="text-[#4F46E5]">{t('hero.title2')}</span>
-              </h1>
-              <p className="text-xl text-[#64748B] mb-10 leading-relaxed max-w-xl">
-                {t('hero.subtitle')}
-              </p>
-              <div className="flex flex-col sm:flex-row items-center gap-4">
-                <button onClick={() => navigate('/login')} className="w-full sm:w-auto px-10 py-4 bg-[#4F46E5] text-white font-bold rounded-2xl hover:bg-[#4338CA] active:scale-95 transition-all shadow-lg shadow-indigo-100">
-                  {t('hero.cta_primary')}
-                </button>
-                <button 
-                  onClick={() => setShowDemo(true)} 
-                  className="w-full sm:w-auto px-10 py-4 bg-white border border-[#E2E8F0] text-[#0F172A] font-bold rounded-2xl hover:bg-[#F8FAFC] transition-all flex items-center justify-center gap-2"
-                >
-                  <PlayCircle size={18} className="text-[#4F46E5]" />
-                  {t('hero.cta_secondary')}
-                </button>
-              </div>
-              <p className="mt-4 text-sm text-[#94A3B8] font-medium ml-1">
-                {t('hero.no_card')}
-              </p>
+              <HeroCopy 
+                onStart={() => navigate('/signup?plan=free')} 
+                onDemo={() => setShowDemo(true)} 
+              />
             </motion.div>
 
 
@@ -91,82 +77,7 @@ const LandingPage = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              {/* Dashboard Preview Mockup */}
-              <div className="bg-black rounded-3xl p-4 shadow-2xl border-4 border-white/5 rotate-1 transform hover:rotate-0 transition-transform duration-500 scale-105 lg:scale-110">
-                <div className="flex justify-between items-center mb-6">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-red-400"></div>
-                    <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
-                    <div className="w-2 h-2 rounded-full bg-green-400"></div>
-                  </div>
-                  <div className="text-[10px] text-gray-500 font-mono">APP PREVIEW</div>
-                </div>
-
-                {/* KPI Card */}
-                <div className="bg-[#111111] border border-white/5 rounded-2xl p-5 mb-4 shadow-sm">
-                  <div className="text-gray-500 text-[10px] font-black uppercase mb-1">Gasto Mensual</div>
-                  <div className="text-2xl font-black text-white">124,50 €</div>
-                  <div className="flex items-center gap-1 text-primary text-[10px] mt-1 font-black">
-                    <TrendingUp size={10} /> -12.5% vs abril
-                  </div>
-                </div>
-
-                {/* Alert Card */}
-                <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-4 mb-4">
-                  <div className="flex gap-3">
-                    <div className="text-red-500 mt-1"><Bell size={16} /></div>
-                    <div>
-                      <div className="flex justify-between">
-                        <span className="text-white font-bold text-xs">Netflix</span>
-                        <span className="text-red-500 text-[8px] font-bold uppercase">Aumento de Precio</span>
-                      </div>
-                      <p className="text-[10px] text-gray-300 mt-1 leading-tight">Tu suscripción subirá de 14.99€ a 17.99€ el próximo mes.</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Upcoming */}
-                <div className="space-y-2">
-                  <div className="text-[10px] font-bold text-gray-500 uppercase mb-2">Próximos cargos</div>
-                  <div className="flex items-center justify-between bg-white/5 p-3 rounded-xl">
-                    <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 bg-green-500 rounded flex items-center justify-center text-[10px] font-bold">S</div>
-                      <span className="text-white text-xs font-medium">Spotify</span>
-                    </div>
-                    <span className="text-white text-xs font-bold">11.99€</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating Badges */}
-              <motion.div 
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity }}
-                className="absolute top-10 -left-10 bg-[#111111] shadow-2xl rounded-2xl p-4 border border-white/5 hidden lg:block"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-primary/10 text-primary rounded-full flex items-center justify-center">
-                    <TrendingUp size={20} />
-                  </div>
-                  <div>
-                    <div className="text-[10px] text-gray-500 font-bold uppercase">Ahorro Mensual</div>
-                    <div className="text-lg font-black text-white">45,20 €</div>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 5, repeat: Infinity, delay: 1 }}
-                className="absolute -bottom-6 -right-6 bg-[#111111] shadow-2xl rounded-2xl p-4 border border-white/5 hidden lg:block"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-primary/10 text-primary rounded-full flex items-center justify-center">
-                    <ShieldCheck size={20} />
-                  </div>
-                  <div className="font-black text-sm text-white">100% Bajo Control</div>
-                </div>
-              </motion.div>
+              <HeroSlider />
             </motion.div>
           </div>
         </div>
@@ -176,23 +87,23 @@ const LandingPage = () => {
       <section className="py-24 bg-[#F8FAFC] border-y border-[#E2E8F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-[#0F172A] mb-4">Cada mes pagas más de lo que crees</h2>
-            <p className="text-lg text-[#64748B] max-w-2xl mx-auto">Suscripciones olvidadas y subidas silenciosas que drenan tu cuenta poco a poco.</p>
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#0F172A] mb-4">Pagas más de lo que imaginas cada mes.</h2>
+            <p className="text-lg text-[#64748B] max-w-2xl mx-auto">Suscripciones olvidadas, subidas de precio ocultas y promociones que caducan sin avisar… poco a poco vacían tu cuenta.</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: <Clock size={24} />, title: "Servicios Olvidados", text: "Esa aplicación que usaste una vez y sigues pagando cada mes." },
-              { icon: <TrendingUp size={24} />, title: "Subidas Silenciosas", text: "Aumentos de precio de los que apenas te informan por email." },
-              { icon: <Timer size={24} />, title: "Promociones que caducan", text: "El mes gratis que se convierte en una cuota anual por sorpresa." },
-              { icon: <CreditCard size={24} />, title: "Pequeños goteos", text: "Cuotas de 5€ o 10€ que sumadas suponen cientos de euros al año." }
+              { icon: <Clock size={48} />, title: "Servicios olvidados", text: "Esa app que probaste una vez, pero que sigues pagando cada mes sin darte cuenta." },
+              { icon: <TrendingUp size={48} />, title: "Subidas silenciosas", text: "Pequeños aumentos de precio escondidos en un correo que nunca leíste." },
+              { icon: <Timer size={48} />, title: "Promociones que caducan", text: "El mes gratis que, de repente, se convierte en una cuota anual." },
+              { icon: <CreditCard size={48} />, title: "Goteos invisibles", text: "Pagos de 5 € o 10 € que, sumados, cuestan cientos de euros al año." }
             ].map((card, i) => (
               <motion.div 
                 key={i}
                 whileHover={{ y: -5 }}
                 className="bg-white p-8 rounded-[2.5rem] border border-[#E2E8F0] shadow-sm hover:shadow-md transition-all"
               >
-                <div className="mb-4 text-[#64748B]">{card.icon}</div>
+                <div className="mb-4 text-amber-500">{card.icon}</div>
                 <h3 className="text-lg font-bold mb-2 text-[#0F172A]">{card.title}</h3>
                 <p className="text-[#64748B] text-sm leading-relaxed font-medium">{card.text}</p>
               </motion.div>
@@ -290,7 +201,7 @@ const LandingPage = () => {
       <section id="pricing" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-[#0F172A] mb-4">Elige cómo empezar</h2>
+            <h2 className="text-4xl font-bold text-amber-500 mb-4">Elige cómo empezar</h2>
             <p className="text-lg text-[#64748B] font-medium">Empieza gratis. Pásate a Premium cuando quieras más control.</p>
           </div>
 
@@ -307,21 +218,21 @@ const LandingPage = () => {
               <ul className="space-y-4 mb-10 w-full text-left">
                 {["Hasta 3 suscripciones", "Vista mensual del gasto", "Recordatorios básicos", "Alertas limitadas", "Histórico de 3 meses"].map((f, i) => (
                   <li key={i} className="flex gap-3 text-sm text-[#64748B] font-medium">
-                    <Check size={18} className="text-[#4F46E5]" /> {f}
+                    <Check size={18} className="text-amber-500" /> {f}
                   </li>
                 ))}
               </ul>
 
-              <button onClick={() => navigate('/login')} className="mt-auto w-full py-4 px-6 bg-white border border-[#E2E8F0] text-[#4F46E5] rounded-2xl font-bold hover:bg-[#F8FAFC] transition-all">
+              <button onClick={() => navigate('/signup?plan=free')} className="mt-auto w-full py-4 px-6 bg-white border border-[#E2E8F0] text-amber-500 rounded-2xl font-bold hover:bg-[#F8FAFC] transition-all">
                 Empezar gratis
               </button>
             </div>
 
             {/* Premium Plan */}
-            <div className="bg-[#EEF2FF] p-10 rounded-[2.5rem] border-2 border-[#4F46E5] shadow-xl relative overflow-hidden flex flex-col items-center text-center group translate-y-[-10px]">
+            <div className="bg-[#FFF8E1] p-10 rounded-[2.5rem] border-2 border-amber-500 shadow-xl relative overflow-hidden flex flex-col items-center text-center group translate-y-[-10px]">
               <div className="absolute top-0 right-0 bg-[#0F172A] text-white text-[10px] font-bold px-4 py-2 rounded-bl-2xl">MÁS ELEGIDO</div>
               
-              <span className="text-[#4F46E5] font-bold uppercase tracking-widest text-[10px] mb-4 flex items-center gap-1">
+              <span className="text-amber-500 font-bold uppercase tracking-widest text-[10px] mb-4 flex items-center gap-1">
                 <ShieldCheck size={14} /> <span translate="no">Premium</span>
               </span>
               <div className="flex flex-col items-center mb-6">
@@ -329,19 +240,19 @@ const LandingPage = () => {
                     <span className="text-5xl font-black text-[#0F172A]">4,99€</span>
                     <span className="text-[#64748B] ml-2 font-medium">/mes</span>
                  </div>
-                 <span className="text-[#10B981] text-xs font-bold mt-2 px-3 py-1 bg-[#ECFDF5] rounded-full">Anual: 44,99€ (Ahorra 15€)</span>
+                 <span className="text-amber-600 text-xs font-bold mt-2 px-3 py-1 bg-amber-100 rounded-full">Anual: 44,99€ (Ahorra 15€)</span>
               </div>
               <p className="text-[#64748B] mb-8 font-semibold">Para quienes quieren ahorrar de verdad.</p>
               
               <ul className="space-y-4 mb-10 w-full text-left">
                 {["Suscripciones ilimitadas", "Subidas de precio en tiempo real", "Avisos de fin de promoción", "Informes CSV/PDF", "Soporte prioritario"].map((f, i) => (
                   <li key={i} className="flex gap-3 text-sm text-[#0F172A] font-semibold">
-                    <Check size={18} className="text-[#4F46E5]" /> {f}
+                    <Check size={18} className="text-amber-500" /> {f}
                   </li>
                 ))}
               </ul>
 
-              <button onClick={() => navigate('/login')} className="mt-auto w-full py-4 px-6 bg-[#4F46E5] text-white rounded-2xl font-bold hover:bg-[#4338CA] transition-all shadow-lg shadow-indigo-100">
+              <button onClick={() => navigate('/signup?plan=premium')} className="mt-auto w-full py-4 px-6 bg-amber-500 text-white rounded-2xl font-bold hover:bg-amber-400 transition-all shadow-lg shadow-amber-500/30">
                 Probar Premium
               </button>
             </div>
@@ -376,37 +287,78 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <section id="faq" className="py-24 bg-white">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12 text-[#0F172A]">{t('faq.title')}</h2>
-          <div className="space-y-4">
-            {[1, 2, 3, 4, 5].map((num, i) => (
-              <div key={i} className="group border border-[#E2E8F0] rounded-2xl overflow-hidden hover:border-[#CBD5E1] transition-colors bg-white">
-                 <button 
-                  onClick={() => toggleFAQ(i)}
-                  className="w-full p-6 list-none flex justify-between items-center cursor-pointer font-bold text-[#0F172A] text-left"
-                 >
-                    <span dangerouslySetInnerHTML={{ __html: t(`faq.q${num}`) }}></span>
-                    <motion.div animate={{ rotate: activeFAQ === i ? 45 : 0 }} transition={{ duration: 0.2 }}>
-                      <Plus size={20} className="text-[#4F46E5]" />
-                    </motion.div>
-                 </button>
-                 <AnimatePresence>
-                   {activeFAQ === i && (
-                     <motion.div 
-                      initial={{ height: 0, opacity: 0 }} 
-                      animate={{ height: 'auto', opacity: 1 }} 
-                      exit={{ height: 0, opacity: 0 }} 
-                      transition={{ duration: 0.3, ease: 'easeInOut' }}
-                     >
-                       <div className="p-6 pt-0 text-[#64748B] text-sm leading-relaxed font-medium">
-                          {t(`faq.a${num}`)}
-                       </div>
-                     </motion.div>
-                   )}
-                 </AnimatePresence>
-              </div>
-            ))}
+      <section id="faq" className="py-24 bg-[#0F0F1A] relative overflow-hidden">
+        {/* Background Texture/Noise */}
+        <div className="absolute inset-0 opacity-20 pointer-events-none mix-blend-overlay" 
+             style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
+        </div>
+        
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0F0F1A] to-[#1A1040] pointer-events-none"></div>
+
+        <div className="max-w-[780px] mx-auto px-6 relative z-10">
+          <h2 className="text-3xl lg:text-4xl font-black text-center mb-12 bg-gradient-to-r from-amber-500 to-amber-300 bg-clip-text text-transparent tracking-tight">
+            {t('faq.title')}
+          </h2>
+          
+          <div className="space-y-3">
+            {[1, 2, 3, 4, 5].map((num, i) => {
+              const Icon = faqIcons[i];
+              const isActive = activeFAQ === i;
+              
+              return (
+                <div 
+                  key={i} 
+                  className={`group rounded-2xl overflow-hidden transition-all duration-300 ${
+                    isActive 
+                      ? 'bg-white/5 border-white/10 shadow-[0_0_20px_rgba(245,158,11,0.15)] border-l-4 border-l-amber-500 border-t border-r border-b' 
+                      : 'bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] hover:shadow-[0_0_20px_rgba(245,158,11,0.15)] border-l border-l-transparent'
+                  } backdrop-blur-md relative`}
+                >
+                  {/* Left Border Glow Animation */}
+                  {isActive && (
+                    <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-amber-500 animate-pulse shadow-[0_0_15px_#F59E0B]"></div>
+                  )}
+
+                  <button 
+                    onClick={() => toggleFAQ(i)}
+                    className="w-full px-6 py-5 flex items-center justify-between cursor-pointer text-left relative z-10"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className={`shrink-0 transition-colors duration-300 ${isActive ? 'text-amber-500' : 'text-slate-400 group-hover:text-white'}`}>
+                        {Icon && <Icon size={20} />}
+                      </div>
+                      <span className="text-white font-bold text-[17px] leading-snug">
+                        {t(`faq.q${num}`)}
+                      </span>
+                    </div>
+                    
+                    <div className={`w-8 h-8 rounded-full border border-white/10 flex items-center justify-center shrink-0 transition-all duration-300 ${
+                      isActive ? 'bg-amber-500 border-amber-500 rotate-45' : 'bg-transparent group-hover:border-white/30'
+                    }`}>
+                      <Plus size={18} className="text-white" />
+                    </div>
+                  </button>
+
+                  <AnimatePresence>
+                    {isActive && (
+                      <motion.div 
+                        initial={{ height: 0, opacity: 0 }} 
+                        animate={{ height: 'auto', opacity: 1 }} 
+                        exit={{ height: 0, opacity: 0 }} 
+                        transition={{ duration: 0.35, ease: [0.04, 0.62, 0.23, 0.98] }}
+                      >
+                        <div 
+                          className="px-6 pb-6 pl-[60px] text-[#CBD5E1] text-[15px] leading-[1.7] font-medium"
+                          dangerouslySetInnerHTML={{ __html: t(`faq.a${num}`) }}
+                        >
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -418,7 +370,7 @@ const LandingPage = () => {
              <div className="relative z-10">
                 <h2 className="text-4xl lg:text-5xl font-black text-white mb-6">Empieza hoy a recuperar el control</h2>
                 <p className="text-[#94A3B8] text-lg mb-10 max-w-2xl mx-auto font-medium">Lo que no controlas, lo sigues pagando. Empieza gratis en menos de un minuto.</p>
-                <button onClick={() => navigate('/login')} className="px-12 py-5 bg-[#4F46E5] text-white font-bold rounded-2xl hover:bg-[#4338CA] active:scale-95 transition-all shadow-xl shadow-indigo-900/40">
+                <button onClick={() => navigate('/signup?plan=free')} className="px-12 py-5 bg-amber-500 text-white font-bold rounded-2xl hover:bg-amber-400 active:scale-95 transition-all shadow-xl shadow-amber-900/40">
                   Crear cuenta gratis
                 </button>
              </div>
@@ -465,7 +417,7 @@ const LandingPage = () => {
            </div>
            
            <div className="pt-8 border-t border-[#f1f5f9] text-center text-[10px] font-bold uppercase tracking-widest text-[#94A3B8]">
-              © 2026 <span className="text-[#F59E0B]" translate="no">Killer</span> <span translate="no">Control</span>. El aliado financiero para tus suscripciones.
+              © 2026 <span className="text-[#F59E0B]" translate="no">Killer</span> <span translate="no">Control</span>. Your financial ally for subscriptions.
            </div>
         </div>
       </footer>

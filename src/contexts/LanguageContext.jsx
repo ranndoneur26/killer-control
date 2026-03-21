@@ -10,14 +10,14 @@ const messages = {
 };
 
 export function LanguageProvider({ children }) {
-  const [locale, setLocaleState] = useState('es');
+  const [locale, setLocaleState] = useState('en');
 
   useEffect(() => {
     const savedLocale = localStorage.getItem('locale');
-    if (savedLocale === 'en') {
-      setLocaleState('en');
-    } else {
+    if (savedLocale === 'es') {
       setLocaleState('es');
+    } else {
+      setLocaleState('en');
     }
   }, []);
 
