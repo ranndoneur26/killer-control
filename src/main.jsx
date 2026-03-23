@@ -1,23 +1,44 @@
-// Diagnostic: catch module-level errors
-const root = document.getElementById('root');
+import { StrictMode, Component } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
 
-async function boot() {
-  try {
-    root.innerHTML = '<p style="font-family:monospace;padding:1rem">Loading...</p>';
-    const { StrictMode, Component } = await import('react');
-    const { createRoot } = await import('react-dom/client');
-    await import('./index.css');
-    const { default: App } = await import('./App.jsx');
-    createRoot(root).render(
-      <StrictMode><App /></StrictMode>
-    );
-  } catch (err) {
-    root.innerHTML = `<div style="font-family:monospace;padding:2rem;background:#fee;color:#c00;white-space:pre-wrap;word-break:break-word">
-      <h2>Module Error</h2>
-      <p>${err.message}</p>
-      <pre>${err.stack}</pre>
-    </div>`;
+class ErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+  componentDidCatch(error, info) {
+    console.error('App crashed:', error, info);
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{
+          padding: '2rem',
+          fontFamily: 'monospace',
+          background: '#fee',
+          color: '#c00',
+          whiteSpace: 'pre-wrap',
+          wordBreak: 'break-word'
+        }}>
+          <h2>App Error</h2>
+          <p>{this.state.error?.message}</p>
+          <pre>{this.state.error?.stack}</pre>
+        </div>
+      );
+    }
+    return this.props.children;
   }
 }
 
-boot();
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
+  </StrictMode>,
+)
