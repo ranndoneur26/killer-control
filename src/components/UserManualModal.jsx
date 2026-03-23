@@ -1,9 +1,11 @@
 import React from 'react';
-import { 
-  X, BookOpen, Zap, TrendingUp, ShieldCheck, 
-  MousePointer2, BellRing, Sparkles, ChevronRight 
+import {
+  X, BookOpen, Zap, TrendingUp, ShieldCheck,
+  MousePointer2, BellRing, Sparkles, ChevronRight
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+import Logo from './Logo';
 
 const ADVANTAGES = [
   {
@@ -41,7 +43,7 @@ export default function UserManualModal({ open, onClose }) {
     <AnimatePresence>
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
         {/* Backdrop */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -50,7 +52,7 @@ export default function UserManualModal({ open, onClose }) {
         />
 
         {/* Modal */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -63,11 +65,11 @@ export default function UserManualModal({ open, onClose }) {
                 <BookOpen size={24} />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-white">User Guide</h2>
-                <p className="text-xs text-gray-400">Master your financial freedom</p>
+                <Logo className="h-6 mb-1" darkBackground={true} />
+                <p className="text-[10px] text-gray-400 uppercase tracking-widest font-black">User Guide</p>
               </div>
             </div>
-            <button 
+            <button
               onClick={onClose}
               className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition"
             >
@@ -77,7 +79,7 @@ export default function UserManualModal({ open, onClose }) {
 
           {/* Content */}
           <div className="flex-1 overflow-y-auto p-8 space-y-10 custom-scrollbar">
-            
+
             {/* Intro / Advantage Section */}
             <section>
               <div className="flex items-center gap-2 mb-6 text-[#F59E0B] uppercase tracking-widest text-[10px] font-black">
@@ -135,7 +137,7 @@ export default function UserManualModal({ open, onClose }) {
 
           {/* Footer */}
           <div className="p-6 bg-[var(--bg)]/50 border-t border-[var(--border)] flex justify-center">
-            <button 
+            <button
               onClick={onClose}
               className="bg-[var(--primary)] text-[var(--bg)] px-8 py-3 rounded-2xl font-bold text-sm hover:scale-105 active:scale-95 transition shadow-lg shadow-[var(--primary)]/20"
             >

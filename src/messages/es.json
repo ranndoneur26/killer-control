@@ -2,7 +2,7 @@
   "nav": {
     "features": "Características",
     "pricing": "Precios",
-    "faq": "Preguntas frecuentes",
+    "faq": "FAQ",
     "login": "Entrar",
     "logout": "Salir",
     "home": "Inicio",
@@ -10,41 +10,111 @@
     "profile": "Perfil"
   },
   "hero": {
-    "badge": "Nueva era en control de gastos",
-    "title1": "Controla tus suscripciones",
-    "title2": "antes de que ellas controlen tu cuenta",
+    "badge": "NUEVA ERA EN CONTROL DE GASTOS",
+    "title": "Controla tus suscripciones antes de que ellas controlen tu cuenta",
     "subtitle": "Detecta subidas de precio, promociones que terminan y servicios que ya no compensan. Todo en un solo lugar.",
+    "bullet1": "Detecta subidas de precio al instante.",
+    "bullet2": "Centraliza todos tus próximos cargos.",
+    "bullet3": "Encuentra qué puedes cancelar o cambiar para ahorrar.",
     "cta_primary": "Empezar gratis",
     "cta_secondary": "Ver demostración",
-    "no_card": "Sin tarjeta para empezar"
+    "no_card": "Sin tarjeta para empezar."
+  },
+  "pain": {
+    "title": "Pagas más de lo que crees cada mes.",
+    "subtitle": "Suscripciones olvidadas, subidas ocultas y promociones que caducan sin previo aviso... drenando tu cuenta.",
+    "forgotten_title": "Servicios olvidados",
+    "forgotten_desc": "Esa app que probaste una vez, pero que sigues pagando cada mes sin darte cuenta.",
+    "silent_title": "Subidas silenciosas",
+    "silent_desc": "Pequeños aumentos de precio ocultos en correos que nunca lees.",
+    "promo_title": "Promociones que caducan",
+    "promo_desc": "El mes gratuito que de repente se convierte en una cuota anual.",
+    "drip_title": "Goteos invisibles",
+    "drip_desc": "Pagos de 5€ o 10€ que, sumados, cuestan cientos de euros al año."
+  },
+  "features": {
+    "title": "Killer Control lo vigila por ti",
+    "subtitle": "La app que te avisa cuando una suscripción merece tu atención, para que solo tú decidas.",
+    "promo_title": "Alertas de fin de promoción",
+    "promo_desc": "No vuelvas a pagar el precio completo por error.",
+    "charges_title": "Próximos cargos centralizados",
+    "charges_desc": "Una vista única para saber qué se cobra mañana, la semana que viene o el próximo mes.",
+    "savings_title": "Recomendaciones de ahorro",
+    "savings_desc": "Descubre alternativas más baratas o planes compartidos que te funcionen."
+  },
+  "how": {
+    "title": "Así de simple",
+    "step1_title": "Añade tus servicios",
+    "step1_desc": "Introduce tus suscripciones una a una o sincroniza tus facturas.",
+    "step2_title": "Recibe alertas",
+    "step2_desc": "Deja que Killer Control te avise con antelación 24/7.",
+    "step3_title": "Decide y ahorra",
+    "step3_desc": "Con toda la información a mano, elige qué mantener y qué cancelar."
+  },
+  "pricing": {
+    "title": "Elige cómo empezar",
+    "subtitle": "Empieza gratis. Cambia a Premium cuando quieras más control.",
+    "freemium_label": "FREEMIUM",
+    "freemium_price": "0€/mes",
+    "freemium_desc": "Empieza a controlar tus suscripciones sin coste.",
+    "freemium_f1": "Hasta 3 suscripciones",
+    "freemium_f2": "Vista general de gasto mensual",
+    "freemium_f3": "Recordatorios básicos",
+    "freemium_f4": "Alertas limitadas",
+    "freemium_f5": "Historial de 3 meses",
+    "freemium_cta": "Empieza gratis",
+    "premium_label": "PREMIUM",
+    "premium_price": "4,99€/mes",
+    "premium_annual": "Anual: 44,99€ (Ahorra 15€)",
+    "premium_desc": "Para quienes realmente quieren ahorrar.",
+    "premium_f1": "Suscripciones ilimitadas",
+    "premium_f2": "Alertas de subida de precio en tiempo real",
+    "premium_f3": "Alertas de fin de promoción",
+    "premium_f4": "Informes CSV/PDF",
+    "premium_f5": "Soporte prioritario",
+    "premium_cta": "Probar Premium"
   },
   "faq": {
     "title": "Preguntas frecuentes",
     "q1": "¿Puedo usar Killer Control gratis?",
     "a1": "Sí, Killer Control tiene un plan gratuito que te permite gestionar hasta 3 suscripciones y recibir alertas básicas. Si necesitas más, nuestros planes Premium desbloquean funciones avanzadas.",
     "q2": "¿Qué incluye el plan Premium?",
-    "a2": "El plan Premium incluye suscripciones ilimitadas, detección automática de subidas de precio, análisis profundo de gastos y sugerencias personalizadas de ahorro.",
-    "q3": "¿Puedo cancelar cuando quiera?",
-    "a3": "Absolutamente. No hay permanencia ni compromisos ocultos. Puedes cancelar tu cuenta en cualquier momento desde tu perfil.",
+    "a1_full": "Sí. El plan gratuito está diseñado para que puedas verificar el valor real de la herramienta sin arriesgar nada. Con él podrás conectar y gestionar hasta 3 suscripciones activas.",
+    "q3": "¿Puedo cancelar en cualquier momento?",
     "q4": "¿Necesito tarjeta para empezar?",
-    "a4": "No. Puedes registrarte y usar el plan gratuito sin introducir ningún dato de pago.",
-    "q5": "¿Cómo se detectan las oportunidades de ahorro?",
-    "a5": "Nuestro algoritmo analiza tus patrones de gasto y compara los precios de tus servicios con alternativas del mercado para sugerirte cambios inteligentes."
+    "q5": "¿Cómo se detectan las oportunidades de ahorro?"
+  },
+  "cta": {
+    "title": "Empieza hoy a recuperar el control.",
+    "subtitle": "Lo que no controlas, lo sigues pagando. Empieza gratis en menos de un minuto.",
+    "button": "Crear cuenta gratis"
+  },
+  "footer": {
+    "legal": "LEGAL",
+    "legal_notice": "AVISO LEGAL",
+    "privacy": "PRIVACIDAD",
+    "terms": "TÉRMINOS",
+    "cookies": "COOKIES",
+    "support": "SOPORTE",
+    "contact": "CONTACTO",
+    "email": "EMAIL",
+    "explore": "EXPLORAR",
+    "tagline": "TU ALIADO FINANCIERO PARA SUSCRIPCIONES."
   },
   "dashboard": {
-    "tagline": "Tus suscripciones a raya",
+    "tagline": "Tus suscripciones bajo control",
     "total_label": "Gasto total (mes)",
-    "alerts_title": "Alertas de Inteligencia",
-    "price_increase": "Aumento de precios",
-    "promo_end": "Final de la promoción",
+    "alerts_title": "Alertas inteligentes",
+    "price_increase": "Subida de precio",
+    "promo_end": "Fin de promoción",
     "see_alternative": "Ver alternativa · ahorra",
-    "upcoming_charges": "Próximos Cargos",
-    "spending_curve": "Curva de Gasto",
+    "upcoming_charges": "Próximos cargos",
+    "spending_curve": "Curva de gasto",
     "savings_opportunity": "Oportunidad de ahorro",
-    "offers_detected": "Detectadas mejores ofertas en {count} servicios",
+    "offers_detected": "Mejores ofertas detectadas en {count} servicios",
     "optimize": "Optimizar",
-    "see_all": "Ver Todos",
-    "auto_cancel": "Auto-Baja",
+    "see_all": "Ver todos",
+    "auto_cancel": "Auto-Cancelación",
     "add_tooltip": "Añadir datos o nueva suscripción"
   },
   "subscriptions": {
@@ -57,20 +127,20 @@
     "tomorrow": "Mañana"
   },
   "add": {
-    "title": "Agregar Suscripción",
+    "title": "Añadir suscripción",
     "search": "Busca un servicio o app...",
     "popular": "Populares",
-    "custom_button": "Nuevo Asesino Personalizado",
-    "form_title": "Registro Asesino",
+    "custom_button": "Nueva suscripción personalizada",
+    "form_title": "Configuración de suscripción",
     "form_subtitle": "Busca un servicio popular o añádelo manualmente.",
     "field_name": "Nombre",
     "field_price": "Precio",
-    "field_cycle": "Ciclo",
-    "field_next": "Próximo cobro",
+    "field_cycle": "Ciclo de facturación",
+    "field_next": "Próximo cargo",
     "cycle_monthly": "Mensual",
     "cycle_annual": "Anual",
-    "details_section": "Detalles de Control Killer",
-    "killer_mode": "Modo Killer (Alertas y Bajas)",
+    "details_section": "Detalles de Killer Control",
+    "killer_mode": "Modo Killer (Alertas y Cancelaciones)",
     "or": "O",
     "gym": "Gimnasio"
   },
@@ -82,15 +152,15 @@
     "cost_history": "Historial de costes"
   },
   "profile": {
-    "personal_data": "Datos Personales",
-    "payments": "Métodos de Pago",
-    "notifications": "Notificaciones y Alertas",
-    "privacy": "Privacidad y Seguridad",
+    "personal_data": "Datos personales",
+    "payments": "Métodos de pago",
+    "notifications": "Notificaciones y alertas",
+    "privacy": "Privacidad y seguridad",
     "appearance": "Apariencia",
-    "manual": "Manual de Usuario",
-    "logout": "Cerrar Sesión",
+    "manual": "Guía de usuario",
+    "logout": "Cerrar sesión",
     "myaccount": "micuenta",
-    "select_section": "Selecciona una sección para comenzar",
+    "select_section": "Selecciona una sección para empezar",
     "user_killer": "Usuario",
     "user_email": "usuario@killercontrol.app",
     "pro_badge": "PRO"
@@ -98,10 +168,10 @@
   "appearance": {
     "title": "Apariencia",
     "subtitle": "Los cambios son inmediatos y se guardan automáticamente.",
-    "theme_title": "Tema de la Interfaz",
+    "theme_title": "Tema de la interfaz",
     "dark": "Oscuro",
     "light": "Claro",
-    "density_title": "Densidad de Interfaz",
+    "density_title": "Densidad de la interfaz",
     "compact": "Compacta",
     "compact_desc": "Más contenido en menos espacio.",
     "normal": "Normal",
@@ -112,41 +182,58 @@
     "coming_soon": "Próximamente"
   },
   "notifications": {
-    "title": "Notificaciones y Alertas",
+    "title": "Notificaciones y alertas",
     "subtitle": "Los cambios se guardan al instante.",
-    "emails_section": "Correos electrónicos",
+    "emails_section": "Notificaciones por email",
     "news": "Novedades de Killer Control",
     "news_desc": "Nuevas funciones, mejoras y actualizaciones.",
     "billing_summary": "Resúmenes mensuales de facturación",
-    "billing_desc": "Un resumen mensual de cuánto gastaste.",
+    "billing_desc": "Un resumen mensual de tu gasto.",
     "upcoming": "Alertas de próximos cargos",
-    "upcoming_desc": "Aviso con X días de antelación.",
+    "upcoming_desc": "Notificado X días antes de cada renovación.",
     "push_section": "Notificaciones Push",
     "push_enable": "Activar notificaciones push",
     "push_desc": "Permite que el navegador envíe alertas.",
-    "renewals": "Empuje de renovaciones",
-    "renewals_desc": "Recibe un push el día anterior a cada carga."
+    "renewals": "Recordatorios de renovación",
+    "renewals_desc": "Recibe una notificación el día antes de cada cargo."
   },
   "privacy": {
-    "title": "Privacidad y Seguridad",
-    "change_password": "Cambiar Contraseña",
+    "title": "Privacidad y seguridad",
+    "change_password": "Cambiar contraseña",
     "current_pass": "Contraseña actual",
     "new_pass": "Nueva contraseña",
     "confirm_pass": "Confirmar nueva contraseña",
     "update_btn": "Actualizar contraseña",
-    "2fa": "Autenticación de Dos Factores",
-    "2fa_inactive": "Inactivo — actívala para proteger tu cuenta.",
-    "sessions_title": "Sesiones Activas"
+    "2fa": "Autenticación de dos factores",
+    "2fa_inactive": "Inactivo — actívalo para asegurar tu cuenta.",
+    "sessions_title": "Sesiones activas"
   },
   "manual": {
-    "title": "Guía de Usuario",
+    "title": "Guía de usuario",
     "subtitle": "Domina tu libertad financiera",
-    "why_title": "¿Por qué utilizar Killer Control?",
-    "feature1_title": "Control Total e Instantáneo",
+    "why_title": "¿Por qué usar Killer Control?",
+    "feature1_title": "Control total e inmediato",
     "feature1_desc": "Centraliza todas tus suscripciones en un solo panel.",
-    "feature2_title": "Alertas Inteligentes",
-    "feature2_desc": "Te avisamos antes de que acaben tus promociones.",
-    "feature3_title": "Oportunidades de Ahorro",
-    "feature3_desc": "Analizamos tus gastos y te sugerimos alternativas más baratas."
-  }
+    "feature2_title": "Alertas inteligentes",
+    "feature2_desc": "Te avisamos antes de que tus promociones caduquen.",
+    "feature3_title": "Oportunidades de ahorro",
+    "feature3_desc": "Analizamos tu gasto y sugerimos alternativas más baratas."
+  },
+  "testimonials": [
+    {
+      "name": "Javier M.",
+      "role": "Autónomo",
+      "quote": "He ahorrado casi 200€ al año tras detectar 3 aplicaciones que ya no usaba. La app es una pasada."
+    },
+    {
+      "name": "Laura S.",
+      "role": "Familia numerosa",
+      "quote": "Con tantas plataformas en casa ya no sabíamos ni lo que pagábamos. <span class=\"text-[#F59E0B]\">Killer</span> Control nos ha puesto orden."
+    },
+    {
+      "name": "Carlos P.",
+      "role": "Software Engineer",
+      "quote": "Me encantan las alertas de subidas de precio. Netflix me subió la cuota y me enteré al momento por la app."
+    }
+  ]
 }

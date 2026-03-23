@@ -3,6 +3,8 @@ import { ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
+import Logo from './Logo';
+
 export default function Onboarding() {
   const navigate = useNavigate();
 
@@ -14,9 +16,9 @@ export default function Onboarding() {
       {/* Graphic Area */}
       <div className="flex justify-center flex-1 items-center relative -mt-8">
         <div className="relative w-64 h-80 flex items-center py-6 justify-center">
-          
+
           {/* Document outline back */}
-          <motion.div 
+          <motion.div
             initial={{ x: 20, y: 10, rotate: 10, opacity: 0 }}
             animate={{ x: 30, y: 0, rotate: 15, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -29,7 +31,7 @@ export default function Onboarding() {
           </motion.div>
 
           {/* Abstract Phone Shape */}
-          <motion.div 
+          <motion.div
             initial={{ scale: 0.9, y: 20 }}
             animate={{ scale: 1, y: 0 }}
             transition={{ type: "spring", stiffness: 100, damping: 20 }}
@@ -37,19 +39,19 @@ export default function Onboarding() {
           >
             {/* Notch */}
             <div className="w-20 h-4 bg-[var(--bg)] rounded-full top-2 absolute"></div>
-            
+
             {/* Scan animation */}
-            <motion.div 
-               animate={{ y: [0, 160, 0] }}
-               transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-               className="w-full h-48 absolute top-8 left-0 rounded-2xl border-2 border-primary/50 bg-primary/5 z-20 pointer-events-none"
+            <motion.div
+              animate={{ y: [0, 160, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              className="w-full h-48 absolute top-8 left-0 rounded-2xl border-2 border-primary/50 bg-primary/5 z-20 pointer-events-none"
             >
               <div className="w-full h-[2px] bg-primary absolute top-1/2 shadow-[0_0_10px_#00ff00]"></div>
             </motion.div>
 
             {/* Glowing inner element */}
             <div className="w-16 h-8 bg-primary/10 rounded-full mt-auto mb-2 border border-primary/20 flex justify-center items-center">
-               <div className="w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_8px_#00ff00]"></div>
+              <div className="w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_8px_#00ff00]"></div>
             </div>
           </motion.div>
         </div>
@@ -57,11 +59,10 @@ export default function Onboarding() {
 
       {/* Content Area */}
       <div className="text-center pb-8">
-        <h2 className="text-3xl font-bold mb-4">
-          Welcome to <span className="text-[#F59E0B] font-bold">Killer</span><br />
-          <span className="text-[#F59E0B] font-bold">Control</span>
-        </h2>
-        
+        <div className="flex justify-center mb-6">
+          <Logo className="h-10" />
+        </div>
+
         <p className="text-[var(--text-secondary)] mb-8 mx-auto max-w-[280px]">
           Control your subscriptions, track spending, and eliminate what you don't use.
         </p>
@@ -73,7 +74,7 @@ export default function Onboarding() {
           <div className="w-2 h-2 bg-[var(--border)] rounded-full"></div>
         </div>
 
-        <button 
+        <button
           onClick={() => navigate('/login')}
           className="w-full bg-[var(--primary)] text-white font-bold rounded-full py-4 flex items-center justify-center gap-2 hover:opacity-90 transition group"
         >

@@ -10,26 +10,96 @@
     "profile": "Profile"
   },
   "hero": {
-    "badge": "A new era in subscription control",
-    "title1": "Take control of your subscriptions",
-    "title2": "before they drain your wallet",
-    "subtitle": "Detect price hikes, expiring deals, and services no longer worth it. All in one place.",
+    "badge": "NEW ERA IN EXPENSE CONTROL",
+    "title": "Control your subscriptions before they control your account",
+    "subtitle": "Detect price increases, expiring promotions and services that no longer make sense. All in one place.",
+    "bullet1": "Detect price increases instantly.",
+    "bullet2": "Centralize all your upcoming charges.",
+    "bullet3": "Find what you can cancel or switch to save.",
     "cta_primary": "Start for free",
     "cta_secondary": "Watch demo",
-    "no_card": "No credit card required"
+    "no_card": "No card required."
+  },
+  "pain": {
+    "title": "You're paying more than you think every month.",
+    "subtitle": "Forgotten subscriptions, hidden price hikes and promotions expiring without warning… slowly draining your account.",
+    "forgotten_title": "Forgotten services",
+    "forgotten_desc": "That app you tried once, but keep paying for every month without noticing.",
+    "silent_title": "Silent price hikes",
+    "silent_desc": "Small price increases hidden in an email you never read.",
+    "promo_title": "Expiring promotions",
+    "promo_desc": "The free month that suddenly turns into an annual fee.",
+    "drip_title": "Invisible drips",
+    "drip_desc": "Payments of €5 or €10 that, added up, cost hundreds of euros a year."
+  },
+  "features": {
+    "title": "Killer Control watches it for you",
+    "subtitle": "The app that alerts you when a subscription deserves your attention, so only you decide.",
+    "promo_title": "End-of-promotion alerts",
+    "promo_desc": "Never pay full price again by mistake.",
+    "charges_title": "Centralized upcoming charges",
+    "charges_desc": "A single view to know what gets charged tomorrow, next week or next month.",
+    "savings_title": "Savings recommendations",
+    "savings_desc": "Discover cheaper alternatives or shared plans that work for you."
+  },
+  "how": {
+    "title": "That simple",
+    "step1_title": "Add your services",
+    "step1_desc": "Enter your subscriptions one by one or sync your invoices.",
+    "step2_title": "Receive alerts",
+    "step2_desc": "Let Killer Control notify you in advance for you 24/7.",
+    "step3_title": "Decide and save",
+    "step3_desc": "With all the information at hand, choose what to keep and what to cancel."
+  },
+  "pricing": {
+    "title": "Choose how to get started",
+    "subtitle": "Start free. Switch to Premium whenever you want more control.",
+    "freemium_label": "FREEMIUM",
+    "freemium_price": "€0/month",
+    "freemium_desc": "Start controlling your subscriptions at no cost.",
+    "freemium_f1": "Up to 3 subscriptions",
+    "freemium_f2": "Monthly spend overview",
+    "freemium_f3": "Basic reminders",
+    "freemium_f4": "Limited alerts",
+    "freemium_f5": "3-month history",
+    "freemium_cta": "Start for free",
+    "premium_label": "PREMIUM",
+    "premium_price": "€4.99/month",
+    "premium_annual": "Annual: €44.99 (Save €15)",
+    "premium_desc": "For those who really want to save.",
+    "premium_f1": "Unlimited subscriptions",
+    "premium_f2": "Real-time price increase alerts",
+    "premium_f3": "End-of-promotion alerts",
+    "premium_f4": "CSV/PDF reports",
+    "premium_f5": "Priority support",
+    "premium_cta": "Try Premium"
   },
   "faq": {
     "title": "Frequently asked questions",
     "q1": "Can I use Killer Control for free?",
-    "a1": "Yes. The free plan is designed so you can verify the tool's real value without risking anything. With it, you can connect and manage up to <strong>5 active subscriptions</strong>, receive basic alerts when a fee changes price, and see a monthly summary of your digital service spending. <br><br>It is not an artificially limited trial plan: it is a functional tier designed for users with few subscriptions who want control without complications. If you ever need more capacity, scale to Premium with a single click without losing any of your data or previous settings.",
+    "a1": "Yes, Killer Control has a free plan that lets you manage up to 3 subscriptions and receive basic alerts. If you need more, our Premium plans unlock advanced features.",
     "q2": "What does the Premium plan include?",
-    "a2": "Premium unlocks the full potential of Killer Control. Key differences from the free plan: <ul class=\"mt-4 space-y-2 list-none\"><li class=\"flex gap-2 text-slate-300\"><span class=\"text-[#4F46E5]\">•</span> <span><strong>Unlimited subscriptions</strong> — Connect all your services without a ceiling: streaming, software, gyms, paid newsletters, domains, cloud storage, and any recurring fee.</span></li><li class=\"flex gap-2 text-slate-300\"><span class=\"text-[#4F46E5]\">•</span> <span><strong>Real-time smart alerts</strong> — We notify you the exact moment a platform raises prices, launches a cheaper plan, or changes conditions.</span></li><li class=\"flex gap-2 text-slate-300\"><span class=\"text-[#4F46E5]\">•</span> <span><strong>Complete price history</strong> — Visualize the evolution of each fee month by month and detect patterns of hidden hikes.</span></li><li class=\"flex gap-2 text-slate-300\"><span class=\"text-[#4F46E5]\">•</span> <span><strong>Personalized savings recommendations</strong> — Our AI engine analyzes your real usage profile and suggests cheaper alternatives or bundles that reduce your total spend.</span></li><li class=\"flex gap-2 text-slate-300\"><span class=\"text-[#4F46E5]\">•</span> <span><strong>Data export</strong> — Download your subscription report in CSV or PDF for accounting, tax returns, or simply to have everything documented.</span></li></ul>",
-    "q3": "Can I cancel anytime?",
-    "a3": "Absolutely, with no fine print. Killer Control has no lock-in periods, cancellation penalties, or minimum commitment times on any of its plans. <br><br>If you cancel Premium, your account isn't deactivated immediately: <strong>you will continue enjoying all Premium features until the last day of the period you've already paid for</strong>. Upon finishing that cycle, your account will automatically switch to the free plan, keeping all your data, history, and settings intact. <br>You can reactivate Premium at any time if you change your mind, and everything will be exactly where you left it. Cancellation takes less than 30 seconds from your account panel, with no forms or calls to customer service.",
+    "a1_full": "Yes. The free plan is designed so you can verify the tool's real value without risking anything. With it, you can connect and manage up to 3 active subscriptions.",
+    "q3": "Can I cancel at any time?",
     "q4": "Do I need a card to get started?",
-    "a4": "No. To sign up and use the free plan <strong>we do not ask for any payment details</strong>. No credit card, bank account, or PayPal. Just your email. <br><br>We believe you should be able to verify if Killer Control is useful to you before committing any financial data. That's why sign-up is completely free and frictionless. <br>We will only ask for a payment method when you decide to upgrade to Premium voluntarily. At that point, we accept credit/debit cards (Visa, Mastercard, Amex) and PayPal, with transactions encrypted via Stripe.",
-    "q5": "How are savings opportunities detected?",
-    "a5": "Behind every recommendation is an analysis system structured in three layers: <ol class=\"mt-4 space-y-4 list-decimal pl-4 text-slate-300 marker:text-[#4F46E5] marker:font-bold\"><li><strong>Tracking over 500 platforms</strong> — The system collects and periodically updates prices and plans available in major digital services globally: streaming, SaaS tools, storage, security, online education, and more.</li><li><strong>Comparison personalized to your profile</strong> — Your current fees are cross-referenced with available alternatives considering your usage frequency, potential overlaps between services (e.g., two platforms offering the same thing), and discounts for bundles or annual plans you might be missing.</li><li><strong>Prioritization engine</strong> — Internal algorithms rank opportunities according to their real economic impact ($/year saved), ease of switching, and risk of losing important features. This ensures recommendations are clear, practical, and result-oriented.</li></ol> <br>The result appears on your dashboard as a prioritized list of concrete actions, with the estimated annual savings for each."
+    "q5": "How are savings opportunities detected?"
+  },
+  "cta": {
+    "title": "Start taking back control today.",
+    "subtitle": "What you don't control, you keep paying for. Start free in less than a minute.",
+    "button": "Create free account"
+  },
+  "footer": {
+    "legal": "LEGAL",
+    "legal_notice": "LEGAL NOTICE",
+    "privacy": "PRIVACY",
+    "terms": "TERMS",
+    "cookies": "COOKIES",
+    "support": "SUPPORT",
+    "contact": "CONTACT",
+    "email": "EMAIL",
+    "explore": "EXPLORE",
+    "tagline": "YOUR FINANCIAL ALLY FOR SUBSCRIPTIONS."
   },
   "dashboard": {
     "tagline": "Your subscriptions under control",
@@ -148,5 +218,22 @@
     "feature2_desc": "We alert you before your promotions expire.",
     "feature3_title": "Savings Opportunities",
     "feature3_desc": "We analyze your spending and suggest cheaper alternatives."
-  }
+  },
+  "testimonials": [
+    {
+      "name": "Javier M.",
+      "role": "Freelancer",
+      "quote": "I've saved almost €200 a year after detecting 3 applications I no longer used. The app is amazing."
+    },
+    {
+      "name": "Laura S.",
+      "role": "Large family",
+      "quote": "With so many platforms at home we didn't even know what we were paying anymore. <span class=\"text-[#F59E0B]\">Killer</span> Control has put us in order."
+    },
+    {
+      "name": "Carlos P.",
+      "role": "Software Engineer",
+      "quote": "I love the price increase alerts. Netflix raised my fee and I found out instantly through the app."
+    }
+  ]
 }

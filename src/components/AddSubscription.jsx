@@ -15,7 +15,7 @@ export default function AddSubscription() {
   const [step, setStep] = useState(1);
   const [initialData, setInitialData] = useState(null);
   const { t } = useLanguage();
-  
+
   const { canAddSubscription, limits } = usePlan();
   const { count } = useSubscriptions();
   const canAdd = canAddSubscription(count);
@@ -46,7 +46,7 @@ export default function AddSubscription() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#0A0F1E] text-gray-900 dark:text-gray-50 flex flex-col pb-28">
-      <HeroHeader />
+      <HeroHeader darkBackground={true} />
       <div className="p-6 max-w-lg mx-auto pt-20 flex-1">
         <header className="flex items-center gap-4 mb-8">
           <button onClick={() => {
@@ -65,19 +65,19 @@ export default function AddSubscription() {
             {!canAdd && (
               <div className="mb-8 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700/50 rounded-[2rem] p-6 text-center relative overflow-hidden">
                 <div className="relative z-10">
-                   <div className="w-12 h-12 bg-amber-100 dark:bg-amber-900/40 rounded-full flex items-center justify-center mx-auto mb-4 text-amber-600 dark:text-amber-400">
-                     <Lock size={24} />
-                   </div>
-                   <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-2">Límite alcanzado</h3>
-                   <p className="text-sm text-gray-600 dark:text-gray-300 mb-6 font-medium">
-                     Has alcanzado el límite de <strong>{limits.maxSubscriptions} suscripciones</strong> del plan gratuito.
-                   </p>
-                   <button 
-                     onClick={() => navigate('/checkout')}
-                     className="w-full py-3 bg-amber-500 text-white font-bold rounded-xl shadow-lg shadow-amber-500/20 hover:bg-amber-400 transition-all"
-                   >
-                     Desbloquear ilimitadas
-                   </button>
+                  <div className="w-12 h-12 bg-amber-100 dark:bg-amber-900/40 rounded-full flex items-center justify-center mx-auto mb-4 text-amber-600 dark:text-amber-400">
+                    <Lock size={24} />
+                  </div>
+                  <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-2">Límite alcanzado</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 mb-6 font-medium">
+                    Has alcanzado el límite de <strong>{limits.maxSubscriptions} suscripciones</strong> del plan gratuito.
+                  </p>
+                  <button
+                    onClick={() => navigate('/checkout')}
+                    className="w-full py-3 bg-amber-500 text-white font-bold rounded-xl shadow-lg shadow-amber-500/20 hover:bg-amber-400 transition-all"
+                  >
+                    Desbloquear ilimitadas
+                  </button>
                 </div>
                 {/* Background Pattern */}
                 <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#F59E0B 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
@@ -85,8 +85,8 @@ export default function AddSubscription() {
             )}
 
             <div className={`relative mb-8 ${!canAdd ? 'opacity-50 pointer-events-none grayscale' : ''}`}>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 placeholder={t('add.search')}
                 disabled={!canAdd}
                 className="w-full bg-gray-100 dark:bg-[#1a2035] border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-[2rem] py-4 px-6 pr-12 outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition placeholder-gray-400 dark:placeholder-gray-600 font-bold"
@@ -117,7 +117,7 @@ export default function AddSubscription() {
               <div className="flex-1 border-t border-gray-200 dark:border-gray-700"></div>
             </div>
 
-            <button 
+            <button
               onClick={() => handleSelectService({ name: 'Personalizado', color: 'bg-[var(--primary)]', category: 'other' })}
               disabled={!canAdd}
               className={`w-full mt-4 bg-gray-50 dark:bg-[#1a2035] border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-black uppercase tracking-[0.2em] rounded-[2rem] py-5 flex items-center justify-center gap-3 hover:border-[var(--primary)]/50 transition-all shadow-xl ${!canAdd ? 'opacity-50 pointer-events-none grayscale' : ''}`}
@@ -130,8 +130,8 @@ export default function AddSubscription() {
 
         {step === 2 && (
           <div className="animate-in slide-in-from-right-4">
-            <SubscriptionForm 
-              initialData={initialData} 
+            <SubscriptionForm
+              initialData={initialData}
               onSave={handleSave}
               onCancel={() => setStep(1)}
               title={<>{t('add.form_title')}</>}

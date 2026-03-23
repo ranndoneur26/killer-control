@@ -8,20 +8,22 @@ import TermsModal from './TermsModal';
 import PrivacyModal from './PrivacyModal';
 import HeroHeader from './HeroHeader';
 
+import Logo from './Logo';
+
 /* ── Google SVG ─────────────────────────── */
 const GoogleIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-    <path d="M22.56 12.25C22.56 11.47 22.49 10.74 22.37 10.04H12V14.22H17.92C17.65 15.6 16.89 16.74 15.72 17.5V20.22H19.26C21.34 18.32 22.56 15.54 22.56 12.25Z" fill="#4285F4"/>
-    <path d="M12 23C14.97 23 17.46 22.02 19.26 20.22L15.72 17.5C14.73 18.16 13.48 18.57 12 18.57C9.13 18.57 6.7 16.63 5.82 14.04H2.17V16.86C3.99 20.46 7.7 23 12 23Z" fill="#34A853"/>
-    <path d="M5.82 14.04C5.59 13.38 5.46 12.7 5.46 12C5.46 11.3 5.59 10.62 5.82 9.96V7.14H2.17C1.42 8.63 1 10.27 1 12C1 13.73 1.42 15.37 2.17 16.86L5.82 14.04Z" fill="#FBBC05"/>
-    <path d="M12 5.43C13.62 5.43 15.06 5.98 16.21 7.07L19.34 3.94C17.45 2.18 14.97 1 12 1C7.7 1 3.99 3.54 2.17 7.14L5.82 9.96C6.7 7.37 9.13 5.43 12 5.43Z" fill="#EA4335"/>
+    <path d="M22.56 12.25C22.56 11.47 22.49 10.74 22.37 10.04H12V14.22H17.92C17.65 15.6 16.89 16.74 15.72 17.5V20.22H19.26C21.34 18.32 22.56 15.54 22.56 12.25Z" fill="#4285F4" />
+    <path d="M12 23C14.97 23 17.46 22.02 19.26 20.22L15.72 17.5C14.73 18.16 13.48 18.57 12 18.57C9.13 18.57 6.7 16.63 5.82 14.04H2.17V16.86C3.99 20.46 7.7 23 12 23Z" fill="#34A853" />
+    <path d="M5.82 14.04C5.59 13.38 5.46 12.7 5.46 12C5.46 11.3 5.59 10.62 5.82 9.96V7.14H2.17C1.42 8.63 1 10.27 1 12C1 13.73 1.42 15.37 2.17 16.86L5.82 14.04Z" fill="#FBBC05" />
+    <path d="M12 5.43C13.62 5.43 15.06 5.98 16.21 7.07L19.34 3.94C17.45 2.18 14.97 1 12 1C7.7 1 3.99 3.54 2.17 7.14L5.82 9.96C6.7 7.37 9.13 5.43 12 5.43Z" fill="#EA4335" />
   </svg>
 );
 
 /* ── Apple SVG ──────────────────────────── */
 const AppleIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
   </svg>
 );
 
@@ -29,7 +31,7 @@ const AppleIcon = () => (
 function ToastItem({ toast, onDismiss }) {
   const s = {
     success: 'bg-[#10B981]/10 border-[#10B981]/40 text-[#10B981]',
-    error:   'bg-[#EF4444]/10 border-[#EF4444]/40 text-[#EF4444]',
+    error: 'bg-[#EF4444]/10 border-[#EF4444]/40 text-[#EF4444]',
   };
   const Icon = toast.type === 'success' ? CheckCircle2 : XCircle;
   return (
@@ -52,8 +54,8 @@ function AuthButton({ loading, disabled, onClick, type = 'button', variant = 'pr
   const base = 'w-full flex items-center justify-center gap-2 font-bold rounded-full py-3.5 transition shadow-sm';
   const variants = {
     primary: `bg-[var(--primary)] text-white hover:opacity-90 ${(loading || disabled) ? 'opacity-70 cursor-not-allowed' : ''}`,
-    white:   `bg-[var(--bg-surface)] text-[var(--text-primary)] border border-[var(--border)] hover:bg-[var(--bg-elevated)] ${loading ? 'opacity-70 cursor-not-allowed' : ''}`,
-    dark:    `bg-black text-white hover:bg-gray-900 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`,
+    white: `bg-[var(--bg-surface)] text-[var(--text-primary)] border border-[var(--border)] hover:bg-[var(--bg-elevated)] ${loading ? 'opacity-70 cursor-not-allowed' : ''}`,
+    dark: `bg-black text-white hover:bg-gray-900 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`,
   };
   return (
     <button type={type} onClick={onClick} disabled={loading || disabled} className={`${base} ${variants[variant]}`}>
@@ -100,13 +102,8 @@ export default function Login() {
       <div className="flex flex-col flex-1 p-6 max-w-md mx-auto w-full justify-center">
 
         {/* Logo */}
-        <div className="flex justify-center mb-8">
-          <div className="w-16 h-16 bg-[var(--primary)] rounded-2xl flex items-center justify-center shadow-lg shadow-[var(--primary)]/20">
-            <div className="w-8 h-8 border-2 border-white rounded relative flex items-center justify-center">
-              <div className="w-4 h-1 bg-white rounded-full absolute" />
-              <div className="w-1 h-3 bg-white rounded-full absolute" />
-            </div>
-          </div>
+        <div className="flex justify-center mb-10">
+          <Logo className="h-12" />
         </div>
 
         {/* Heading — animates when switching login/register */}
@@ -126,9 +123,9 @@ export default function Login() {
               </div>
             )}
             <h1 className="text-3xl font-bold mb-3 text-[var(--text-primary)]">
-              {auth.isLogin 
-                ? 'Welcome back' 
-                : isPremium 
+              {auth.isLogin
+                ? 'Welcome back'
+                : isPremium
                   ? 'Start your Premium trial'
                   : <>Create your <span className="text-[#F59E0B]">Killer</span> account</>}
             </h1>
@@ -244,8 +241,8 @@ export default function Login() {
                 {/* Forgot password — login only */}
                 {auth.isLogin && (
                   <div className="text-right mt-2">
-                    <button 
-                      type="button" 
+                    <button
+                      type="button"
                       onClick={() => auth.handleForgotPassword()}
                       className="text-xs text-[var(--primary)] font-bold hover:underline"
                     >
