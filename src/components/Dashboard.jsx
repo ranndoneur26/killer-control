@@ -4,7 +4,7 @@ import CategoryDonutChart from './charts/CategoryDonutChart';
 import SavingsAreaChart from './charts/SavingsAreaChart';
 import { useSubscriptionAnalysis } from '../hooks/useSubscriptionAnalysis';
 import { MOCK_SUBSCRIPTIONS } from '../data/mockSubscriptions';
-import { AlertTriangle, Timer, TrendingUp, Info, ChevronRight, Pencil } from 'lucide-react';
+import { AlertTriangle, Timer, TrendingUp, Info, ChevronRight, Pencil , MonitorPlay, Headphones, Gamepad2} from 'lucide-react';
 import HeroHeader from './HeroHeader';
 import { useLanguage } from '../contexts/LanguageContext';
 
