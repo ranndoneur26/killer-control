@@ -40,7 +40,12 @@
     "charges_title": "Próximos cargos centralizados",
     "charges_desc": "Una vista única para saber qué se cobra mañana, la semana que viene o el próximo mes.",
     "savings_title": "Recomendaciones de ahorro",
-    "savings_desc": "Descubre alternativas más baratas o planes compartidos que te funcionen."
+    "savings_desc": "Descubre alternativas más baratas o planes compartidos que te funcionen.",
+    "hero_title": "Todo lo importante, en una sola vista",
+    "hero_subtitle": "Diseño refinado para que la información fluya sin ruido.",
+    "potential_savings": "Ahorro Potencial",
+    "next_charge": "Próximo cobro",
+    "tomorrow": "Mañana"
   },
   "how": {
     "title": "Así de simple",
@@ -72,7 +77,8 @@
     "premium_f3": "Alertas de fin de promoción",
     "premium_f4": "Informes CSV/PDF",
     "premium_f5": "Soporte prioritario",
-    "premium_cta": "Probar Premium"
+    "premium_cta": "Probar Premium",
+    "most_chosen": "MÁS ELEGIDO"
   },
   "faq": {
     "title": "Preguntas frecuentes",
@@ -99,7 +105,8 @@
     "contact": "CONTACTO",
     "email": "EMAIL",
     "explore": "EXPLORAR",
-    "tagline": "TU ALIADO FINANCIERO PARA SUSCRIPCIONES."
+    "tagline": "TU ALIADO FINANCIERO PARA SUSCRIPCIONES.",
+    "brand": "Marca"
   },
   "dashboard": {
     "tagline": "Tus suscripciones bajo control",
@@ -118,17 +125,19 @@
     "add_tooltip": "Añadir datos o nueva suscripción"
   },
   "subscriptions": {
+    "title": "Tus suscripciones <span class=\"text-[#F59E0B]\">Killer</span>",
     "subtitle": "Gestiona tus gastos recurrentes",
-    "search": "Busca una suscripción...",
+    "search_placeholder": "Buscar suscripción...",
     "total_projected": "Total proyectado",
-    "filter_label": "Filtrar colección",
-    "filter_all": "Todas",
-    "monthly": "Mensual",
-    "tomorrow": "Mañana"
+    "filter_label": "Filtrar Colección",
+    "clear": "Limpiar",
+    "no_results": "Sin resultados",
+    "no_results_desc": "Prueba con otra búsqueda o categoría.",
+    "add_tooltip": "añadir datos o nueva suscripción"
   },
   "add": {
     "title": "Añadir suscripción",
-    "search": "Busca un servicio o app...",
+    "search_placeholder": "Busca un servicio o app...",
     "popular": "Populares",
     "custom_button": "Nueva suscripción personalizada",
     "form_title": "Configuración de suscripción",
@@ -142,14 +151,45 @@
     "details_section": "Detalles de Killer Control",
     "killer_mode": "Modo Killer (Alertas y Cancelaciones)",
     "or": "O",
-    "gym": "Gimnasio"
+    "gym": "Gimnasio",
+    "limit_title": "Límite alcanzado",
+    "limit_desc": "Has alcanzado el límite de {count} suscripciones del plan gratuito.",
+    "unlock_btn": "Desbloquear ilimitadas",
+    "custom_service_name": "Personalizado"
   },
   "subscription_detail": {
     "current_spend": "Gasto actual",
     "annual_projected": "Gasto anual proyectado",
     "alert_title": "Subida de precio detectada",
+    "alert_desc": "Han subido la cuota un 23% desde marzo. ¿Sigue valiendo la pena?",
     "see_alternatives": "Ver alternativas más baratas",
-    "cost_history": "Historial de costes"
+    "cost_history": "Historial de costes",
+    "since": "Suscrito desde",
+    "next_charge": "Próximo cargo",
+    "payment_method": "Método de pago",
+    "plan": "Plan actual",
+    "profiles": "Perfiles / Slots",
+    "lock_in_end": "Fin de permanencia",
+    "active_promo": "Promo Activa",
+    "until": "Hasta el",
+    "then": "Luego",
+    "lock_in_period": "Periodo de permanencia",
+    "no_lock_in": "Sin permanencia",
+    "pack": "Pack",
+    "cancel_btn": "Iniciar proceso de cancelación",
+    "edit_title": "Editar registro <span class=\"text-[#F59E0B]\">Killer</span>"
+  },
+  "categories": {
+    "all": "Todas",
+    "entertainment": "Entretenimiento",
+    "music": "Música",
+    "gaming": "Videojuegos",
+    "home": "Hogar",
+    "health": "Salud/Deporte",
+    "software": "Software",
+    "telecom": "Telecomunicaciones",
+    "press": "Prensa",
+    "other": "Otro"
   },
   "profile": {
     "personal_data": "Datos personales",
@@ -213,11 +253,56 @@
     "subtitle": "Domina tu libertad financiera",
     "why_title": "¿Por qué usar Killer Control?",
     "feature1_title": "Control total e inmediato",
-    "feature1_desc": "Centraliza todas tus suscripciones en un solo panel.",
+    "feature1_desc": "Centraliza todas tus suscripciones en un solo panel. Olvida revisar extractos bancarios para saber qué pagas.",
     "feature2_title": "Alertas inteligentes",
-    "feature2_desc": "Te avisamos antes de que tus promociones caduquen.",
+    "feature2_desc": "Te avisamos antes de que tus promociones caduquen y detectamos subidas de precio inesperadas.",
     "feature3_title": "Oportunidades de ahorro",
-    "feature3_desc": "Analizamos tu gasto y sugerimos alternativas más baratas."
+    "feature3_desc": "Nuestro motor encuentra alternativas más baratas con las mismas funciones, ahorrándote cientos de euros al año.",
+    "feature4_title": "Guías reales de cancelación",
+    "feature4_desc": "Se acabaron los laberintos para cancelar. Te damos los pasos exactos y trucos para darte de baja en segundos.",
+    "steps_title": "Cómo empezar en 3 pasos",
+    "step1_title": "Añade tus servicios",
+    "step1_desc": "Registra tus suscripciones actuales indicando precio y fecha de renovación.",
+    "step2_title": "Vigila las alertas",
+    "step2_desc": "Revisa las notificaciones de inteligencia en tu Dashboard sobre subidas o promociones.",
+    "step3_title": "Optimiza y ahorra",
+    "step3_desc": "Usa nuestras comparativas para encontrar mejores planes o guías para cancelar lo que no usas.",
+    "pro_tip_title": "Consejo PRO",
+    "pro_tip_desc": "Revisa la sección de Inteligencia en tu Dashboard semanalmente. Es donde nuestro motor detecta subidas silenciosas de plataformas como Netflix o Adobe.",
+    "cta": "¡Entendido, vamos!"
+  },
+  "login": {
+    "welcome_back": "Bienvenido de nuevo",
+    "premium_trial": "Empieza tu prueba Premium",
+    "create_account": "Crea tu cuenta de <span class=\"text-[#F59E0B]\">Killer</span>",
+    "login_subtitle": "Inicia sesión para acceder a tus suscripciones.",
+    "premium_subtitle": "Regístrate para activar todas las funciones Pro. 4,99 €/mes tras la prueba.",
+    "join_subtitle": "Únete a <span class=\"text-[#F59E0B]\">Killer</span> Control y toma el mando de tus gastos.",
+    "google_login": "Entrar con Google",
+    "google_continue": "Continuar con Google",
+    "apple_login": "Entrar con Apple",
+    "apple_continue": "Continuar con Apple",
+    "or_email": "O CON EMAIL",
+    "email_placeholder": "tu@email.com",
+    "pass_placeholder_login": "Tu contraseña",
+    "pass_placeholder_signup": "Crea una contraseña (mín. 8 caracteres)",
+    "forgot_pass": "¿Has olvidado tu contraseña?",
+    "continue": "Continuar",
+    "login_btn": "Entrar",
+    "signup_btn": "Crear cuenta",
+    "legal_prefix": "Al continuar, aceptas nuestros ",
+    "terms_btn": "Términos y Condiciones",
+    "and_legal": " y ",
+    "privacy_btn": "Política de Privacidad",
+    "no_account": "¿No tienes cuenta? ",
+    "already_account": "¿Ya tienes cuenta? ",
+    "signup_free": "Regístrate gratis",
+    "login_link": "Inicia sesión",
+    "premium_selected": "Plan Premium seleccionado"
+  },
+  "onboarding": {
+    "tagline": "Controla tus suscripciones, vigila el gasto y elimina lo que no usas.",
+    "next": "Siguiente"
   },
   "testimonials": [
     {
@@ -235,5 +320,46 @@
       "role": "Software Engineer",
       "quote": "Me encantan las alertas de subidas de precio. Netflix me subió la cuota y me enteré al momento por la app."
     }
-  ]
+  ],
+  "form": {
+    "search_placeholder": "Busca un servicio popular o añádelo manualmente.",
+    "name_label": "Nombre *",
+    "name_placeholder": "ej. Netflix, Gimnasio...",
+    "autocomplete_label": "Autocompletar",
+    "price_label": "Precio *",
+    "price_placeholder": "15,99",
+    "cycle_label": "Ciclo de facturación *",
+    "cycle_weekly": "Semanal",
+    "cycle_monthly": "Mensual",
+    "cycle_quarterly": "Trimestral",
+    "cycle_semiannual": "Semestral",
+    "cycle_annual": "Anual",
+    "cycle_onetime": "Pago único",
+    "next_charge_label": "Próximo cargo *",
+    "advanced_title": "Detalles de Killer Control",
+    "category_label": "Categoría",
+    "cat_entertainment": "Entretenimiento",
+    "cat_music": "Música",
+    "cat_gaming": "Videojuegos",
+    "cat_home": "Hogar",
+    "cat_health": "Salud/Deporte",
+    "cat_software": "Software",
+    "cat_telecom": "Telecomunicaciones",
+    "cat_press": "Prensa",
+    "cat_other": "Otro",
+    "currency_label": "Moneda",
+    "payment_method_label": "Método de pago",
+    "payment_method_placeholder": "ej. Visa 4242...",
+    "shared_label": "Divido este gasto con alguien",
+    "my_share_label": "Mi parte",
+    "killer_mode_title": "Modo Killer (Alertas y Cancelaciones)",
+    "free_trial_label": "Es una prueba gratuita",
+    "trial_ends_label": "La prueba termina",
+    "notice_label": "Preaviso (Días)",
+    "cancel_url_label": "URL de cancelación",
+    "notes_label": "Notas Killer",
+    "notes_placeholder": "Email de registro, recordatorios...",
+    "update_btn": "Actualizar registro Killer",
+    "save_btn": "Guardar suscripción Killer"
+  }
 }

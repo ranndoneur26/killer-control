@@ -6,38 +6,40 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 
 import Logo from './Logo';
-
-const ADVANTAGES = [
-  {
-    icon: Zap,
-    title: 'Instant Total Control',
-    desc: 'Centralize all your subscriptions in one dashboard. Forget checking bank statements to know what you are paying for.'
-  },
-  {
-    icon: BellRing,
-    title: 'Smart Alerts',
-    desc: 'We warn you before your promotions end and detect unexpected price hikes so you don\'t overpay.'
-  },
-  {
-    icon: TrendingUp,
-    title: 'Savings Opportunities',
-    desc: 'Our engine finds cheaper alternatives with the same features, saving you hundreds of dollars a year.'
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Real Cancellation Guides',
-    desc: 'No more mazes to cancel. We give you the exact steps and tricks to unsubscribe in seconds.'
-  }
-];
-
-const STEPS = [
-  { title: 'Add your services', desc: 'Register your current subscriptions indicating the price and renewal date.' },
-  { title: 'Watch the alerts', desc: 'Check the intelligence notifications on your Dashboard about hikes or promotions.' },
-  { title: 'Optimize and save', desc: 'Use our comparisons to find better plans or guides to cancel what you don\'t use.' }
-];
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function UserManualModal({ open, onClose }) {
+  const { t } = useLanguage();
   if (!open) return null;
+
+  const ADVANTAGES = [
+    {
+      icon: Zap,
+      title: t('manual.feature1_title'),
+      desc: t('manual.feature1_desc')
+    },
+    {
+      icon: BellRing,
+      title: t('manual.feature2_title'),
+      desc: t('manual.feature2_desc')
+    },
+    {
+      icon: TrendingUp,
+      title: t('manual.feature3_title'),
+      desc: t('manual.feature3_desc')
+    },
+    {
+      icon: ShieldCheck,
+      title: t('manual.feature4_title'),
+      desc: t('manual.feature4_desc')
+    }
+  ];
+
+  const STEPS = [
+    { title: t('manual.step1_title'), desc: t('manual.step1_desc') },
+    { title: t('manual.step2_title'), desc: t('manual.step2_desc') },
+    { title: t('manual.step3_title'), desc: t('manual.step3_desc') }
+  ];
 
   return (
     <AnimatePresence>
@@ -126,9 +128,9 @@ export default function UserManualModal({ open, onClose }) {
                 <Zap size={24} />
               </div>
               <div>
-                <p className="text-xs font-bold text-white">PRO Tip</p>
+                <p className="text-xs font-bold text-white">{t('manual.pro_tip_title')}</p>
                 <p className="text-[11px] text-gray-400 mt-1">
-                  Check the "Intelligence" section in your Dashboard weekly. It's where our engine detects silent price hikes from platforms like Netflix or Adobe.
+                  {t('manual.pro_tip_desc')}
                 </p>
               </div>
             </section>
@@ -141,7 +143,7 @@ export default function UserManualModal({ open, onClose }) {
               onClick={onClose}
               className="bg-[var(--primary)] text-[var(--bg)] px-8 py-3 rounded-2xl font-bold text-sm hover:scale-105 active:scale-95 transition shadow-lg shadow-[var(--primary)]/20"
             >
-              Got it, let's go!
+              {t('manual.cta')}
             </button>
           </div>
 

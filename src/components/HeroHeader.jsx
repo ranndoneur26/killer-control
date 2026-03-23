@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { ShieldCheck, Menu, X } from 'lucide-react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import Logo from './Logo';
 import LanguageToggle from './LanguageToggle';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const HeroHeader = ({ darkBackground = false }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const pathname = usePathname();
-  const t = useTranslations();
-  const locale = useLocale();
-  const isHomePage = pathname === '/' || pathname === `/${locale}`;
+  const { pathname } = useLocation();
+  const { t, locale } = useLanguage();
+  const isHomePage = pathname === '/';
 
   const navLinks = [
     { href: isHomePage ? "#features" : "/#features", label: t('nav.features') },
@@ -45,13 +45,13 @@ const HeroHeader = ({ darkBackground = false }) => {
             <LanguageToggle />
 
             {isHomePage ? (
-              <Link to="/login" className="text-sm font-bold bg-amber-500 text-white px-6 py-2.5 rounded-full hover:bg-amber-400 transition-all shadow-sm">
+              <RouterLink to="/login" className="text-sm font-bold bg-amber-500 text-white px-6 py-2.5 rounded-full hover:bg-amber-400 transition-all shadow-sm">
                 {t('nav.login')}
-              </Link>
+              </RouterLink>
             ) : (
-              <Link to="/" className="text-sm font-bold bg-[var(--text-secondary)] text-white px-6 py-2.5 rounded-full hover:opacity-90 transition-all shadow-sm">
+              <RouterLink to="/" className="text-sm font-bold bg-[var(--text-secondary)] text-white px-6 py-2.5 rounded-full hover:opacity-90 transition-all shadow-sm">
                 {t('nav.logout')}
-              </Link>
+              </RouterLink>
             )}
           </div>
 

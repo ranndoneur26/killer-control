@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ChevronDown, ChevronUp, ShieldAlert, CreditCard, CalendarDays, Wallet, Sparkles } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 // Popular services mini-dictionary
 const popularServices = [
@@ -13,13 +14,14 @@ const popularServices = [
   { name: 'PlayStation Plus', price: '71.99', category: 'Gaming', cycle: 'Annual', cancelUrl: 'https://store.playstation.com/', currency: 'EUR' }
 ];
 
-export default function SubscriptionForm({ initialData, onSave, onCancel, title = "Add Subscription" }) {
+export default function SubscriptionForm({ initialData, onSave, onCancel, title }) {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: initialData?.name || '',
     price: initialData?.price || '',
     cycle: initialData?.cycle || 'Monthly',
     nextBillingDate: initialData?.nextBillingDate || initialData?.nextChargeDate || '',
-    category: initialData?.category || 'streaming',
+    category: initialData?.category || 'Entertainment',
     currency: initialData?.currency?.replace(' (€)', '') || 'EUR',
     paymentMethod: initialData?.paymentMethod || initialData?.card || '',
     isShared: initialData?.isShared || false,
@@ -52,7 +54,7 @@ export default function SubscriptionForm({ initialData, onSave, onCancel, title 
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    
+
     setFormData(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value
@@ -60,7 +62,7 @@ export default function SubscriptionForm({ initialData, onSave, onCancel, title 
 
     if (name === 'name') {
       if (value.length > 1) {
-        const filtered = popularServices.filter(service => 
+        const filtered = popularServices.filter(service =>
           service.name.toLowerCase().includes(value.toLowerCase())
         );
         setSuggestions(filtered);
@@ -94,8 +96,8 @@ export default function SubscriptionForm({ initialData, onSave, onCancel, title 
     <div className="w-full bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-[2.5rem] shadow-2xl border border-[var(--border)] overflow-hidden">
       <div className="p-8 border-b border-[var(--border)] flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-black text-[var(--text-primary)] tracking-tight">{title}</h2>
-          <p className="text-[var(--text-secondary)] text-sm mt-1 font-medium">Search for a popular service or add it manually.</p>
+          <h2 className="text-2xl font-black text-[var(--text-primary)] tracking-tight">{title || t('add.form_title')}</h2>
+          <p className="text-[var(--text-secondary)] text-sm mt-1 font-medium">{t('form.search_placeholder')}</p>
         </div>
         {onCancel && (
           <button onClick={onCancel} className="p-2 hover:bg-[var(--bg-elevated)] rounded-full transition text-[var(--text-secondary)]">
@@ -105,34 +107,34 @@ export default function SubscriptionForm({ initialData, onSave, onCancel, title 
       </div>
 
       <form onSubmit={handleSubmit} className="p-8 space-y-6 max-h-[70vh] overflow-y-auto custom-scrollbar">
-        
+
         {/* LEVEL 1: VITAL INFO */}
         <div className="space-y-4 bg-[var(--bg-elevated)] p-6 rounded-3xl border border-[var(--border)]">
-          
+
           <div ref={wrapperRef} className="relative">
-            <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1">Name *</label>
+            <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1">{t('form.name_label')}</label>
             <input
               type="text"
               name="name"
               required
               autoComplete="off"
-              placeholder="e.g. Netflix, Gym..."
+              placeholder={t('form.name_placeholder')}
               value={formData.name}
               onChange={handleChange}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl py-3.5 px-4 text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/20 focus:border-[var(--primary)] transition-all font-bold placeholder-[var(--text-muted)] relative z-10 shadow-sm"
             />
-            
+
             {showSuggestions && suggestions.length > 0 && (
               <ul className="absolute z-20 w-full mt-2 bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl shadow-xl max-h-48 overflow-auto py-2">
                 {suggestions.map((service, index) => (
-                  <li 
+                  <li
                     key={index}
                     onClick={() => handleSelectSuggestion(service)}
                     className="flex items-center justify-between px-5 py-3 hover:bg-[var(--primary)]/10 cursor-pointer transition-colors"
                   >
                     <span className="font-bold text-[var(--text-primary)] text-sm">{service.name}</span>
                     <span className="text-[10px] text-[var(--primary)] font-black uppercase tracking-tighter flex items-center gap-1">
-                      <Sparkles className="w-3 h-3" /> Autocomplete
+                      <Sparkles className="w-3 h-3" /> {t('form.autocomplete_label')}
                     </span>
                   </li>
                 ))}
@@ -142,7 +144,7 @@ export default function SubscriptionForm({ initialData, onSave, onCancel, title 
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1">Price *</label>
+              <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1">{t('form.price_label')}</label>
               <div className="relative">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)] font-bold">€</span>
                 <input
@@ -150,7 +152,7 @@ export default function SubscriptionForm({ initialData, onSave, onCancel, title 
                   name="price"
                   required
                   step="0.01"
-                  placeholder="15.99"
+                  placeholder={t('form.price_placeholder')}
                   value={formData.price}
                   onChange={handleChange}
                   className="w-full bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl py-3.5 pl-10 pr-4 text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/20 focus:border-[var(--primary)] font-bold text-lg shadow-sm"
@@ -158,25 +160,25 @@ export default function SubscriptionForm({ initialData, onSave, onCancel, title 
               </div>
             </div>
             <div>
-              <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1">Billing Cycle *</label>
+              <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1">{t('form.cycle_label')}</label>
               <select
                 name="cycle"
                 value={formData.cycle}
                 onChange={handleChange}
                 className="w-full h-[58px] bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl px-4 text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/20 focus:border-[var(--primary)] font-bold shadow-sm"
               >
-                <option value="Weekly">Weekly</option>
-                <option value="Monthly">Monthly</option>
-                <option value="Quarterly">Quarterly</option>
-                <option value="Semiannual">Semiannual</option>
-                <option value="Annual">Annual</option>
-                <option value="OneTime">One-Time</option>
+                <option value="Weekly">{t('form.cycle_weekly')}</option>
+                <option value="Monthly">{t('form.cycle_monthly')}</option>
+                <option value="Quarterly">{t('form.cycle_quarterly')}</option>
+                <option value="Semiannual">{t('form.cycle_semiannual')}</option>
+                <option value="Annual">{t('form.cycle_annual')}</option>
+                <option value="OneTime">{t('form.cycle_onetime')}</option>
               </select>
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1">Next Charge *</label>
+            <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1">{t('form.next_charge_label')}</label>
             <div className="relative">
               <CalendarDays className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--text-muted)]" />
               <input
@@ -200,7 +202,7 @@ export default function SubscriptionForm({ initialData, onSave, onCancel, title 
           >
             <div className="flex items-center gap-3">
               <Wallet className="h-5 w-5" />
-              <span><span className="text-[#F59E0B]">Killer</span> Control Details</span>
+              <span><span className="text-[#F59E0B]">Killer</span> {t('form.advanced_title')}</span>
             </div>
             {showAdvanced ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
           </button>
@@ -209,26 +211,26 @@ export default function SubscriptionForm({ initialData, onSave, onCancel, title 
             <div className="p-6 bg-[var(--bg-elevated)] space-y-5 border-t border-[var(--border)]">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1">Category</label>
+                  <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1">{t('form.category_label')}</label>
                   <select
                     name="category"
                     value={formData.category}
                     onChange={handleChange}
                     className="w-full bg-[var(--bg-surface)] border border-[var(--border)] rounded-xl py-2.5 px-4 text-[var(--text-primary)] text-sm font-bold focus:ring-2 focus:ring-[var(--primary)]/20 outline-none"
                   >
-                    <option value="Entertainment">Entertainment</option>
-                    <option value="Music">Music</option>
-                    <option value="Gaming">Gaming</option>
-                    <option value="Home">Home</option>
-                    <option value="Health">Health/Sport</option>
-                    <option value="Software">Software</option>
-                    <option value="Telecom">Telecom</option>
-                    <option value="Press">Press</option>
-                    <option value="Other">Other</option>
+                    <option value="Entertainment">{t('form.cat_entertainment')}</option>
+                    <option value="Music">{t('form.cat_music')}</option>
+                    <option value="Gaming">{t('form.cat_gaming')}</option>
+                    <option value="Home">{t('form.cat_home')}</option>
+                    <option value="Health">{t('form.cat_health')}</option>
+                    <option value="Software">{t('form.cat_software')}</option>
+                    <option value="Telecom">{t('form.cat_telecom')}</option>
+                    <option value="Press">{t('form.cat_press')}</option>
+                    <option value="Other">{t('form.cat_other')}</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1">Currency</label>
+                  <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1">{t('form.currency_label')}</label>
                   <select
                     name="currency"
                     value={formData.currency}
@@ -243,13 +245,13 @@ export default function SubscriptionForm({ initialData, onSave, onCancel, title 
               </div>
 
               <div>
-                <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1">Payment Method</label>
+                <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1">{t('form.payment_method_label')}</label>
                 <div className="relative">
                   <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)]" />
                   <input
                     type="text"
                     name="paymentMethod"
-                    placeholder="e.g. Visa 4242..."
+                    placeholder={t('form.payment_method_placeholder')}
                     value={formData.paymentMethod}
                     onChange={handleChange}
                     className="w-full bg-[var(--bg-surface)] border border-[var(--border)] rounded-xl py-2.5 pl-10 pr-4 text-[var(--text-primary)] text-sm font-bold shadow-sm"
@@ -266,11 +268,11 @@ export default function SubscriptionForm({ initialData, onSave, onCancel, title 
                     onChange={handleChange}
                     className="form-checkbox h-5 w-5 text-[var(--primary)] rounded-lg bg-[var(--bg-elevated)] border-[var(--border)] transition-all"
                   />
-                  <span className="text-sm font-bold text-[var(--text-secondary)] group-hover:text-[var(--text-primary)]">I split this cost with someone</span>
+                  <span className="text-sm font-bold text-[var(--text-secondary)] group-hover:text-[var(--text-primary)]">{t('form.shared_label')}</span>
                 </label>
                 {formData.isShared && (
                   <div className="mt-4 pl-8 animate-in slide-in-from-left-2">
-                    <label className="block text-[10px] uppercase font-black tracking-widest text-[var(--text-muted)] mb-1.5 font-bold">My Share</label>
+                    <label className="block text-[10px] uppercase font-black tracking-widest text-[var(--text-muted)] mb-1.5 font-bold">{t('form.my_share_label')}</label>
                     <div className="relative">
                       <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)] font-bold">€</span>
                       <input
@@ -298,7 +300,7 @@ export default function SubscriptionForm({ initialData, onSave, onCancel, title 
           >
             <div className="flex items-center gap-3">
               <ShieldAlert className="h-5 w-5" />
-              <span><span className="text-[#F59E0B]">Killer</span> Mode (Alerts & Cancellations)</span>
+              <span><span className="text-[#F59E0B]">Killer</span> {t('form.killer_mode_title')}</span>
             </div>
             {showKiller ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
           </button>
@@ -314,11 +316,11 @@ export default function SubscriptionForm({ initialData, onSave, onCancel, title 
                     onChange={handleChange}
                     className="form-checkbox h-5 w-5 text-[var(--primary)] rounded-lg bg-[var(--bg-surface)] border-[var(--border)]"
                   />
-                  <span className="text-sm font-black text-[var(--primary)]/80 group-hover:text-[var(--primary)]">It's a Free Trial</span>
+                  <span className="text-sm font-black text-[var(--primary)]/80 group-hover:text-[var(--primary)]">{t('form.free_trial_label')}</span>
                 </label>
                 {formData.isFreeTrial && (
                   <div className="mt-4 pl-8 animate-in slide-in-from-left-2">
-                    <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2">Trial Ends</label>
+                    <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2">{t('form.trial_ends_label')}</label>
                     <input
                       type="date"
                       name="trialEndDate"
@@ -332,7 +334,7 @@ export default function SubscriptionForm({ initialData, onSave, onCancel, title 
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1">Notice (Days)</label>
+                  <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1">{t('form.notice_label')}</label>
                   <input
                     type="number"
                     name="alertDays"
@@ -342,7 +344,7 @@ export default function SubscriptionForm({ initialData, onSave, onCancel, title 
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1">Cancel URL</label>
+                  <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1">{t('form.cancel_url_label')}</label>
                   <input
                     type="url"
                     name="cancelUrl"
@@ -354,13 +356,13 @@ export default function SubscriptionForm({ initialData, onSave, onCancel, title 
               </div>
 
               <div>
-                <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1"><span className="text-[#F59E0B]">Killer</span> Notes</label>
+                <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1">{t('form.notes_label')}</label>
                 <textarea
                   name="notes"
                   rows="3"
                   value={formData.notes}
                   onChange={handleChange}
-                  placeholder="Registration email, reminders..."
+                  placeholder={t('form.notes_placeholder')}
                   className="w-full bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl py-3 px-4 text-[var(--text-primary)] text-sm resize-none font-medium focus:ring-2 focus:ring-[var(--primary)]/20 outline-none shadow-sm"
                 ></textarea>
               </div>
@@ -372,7 +374,11 @@ export default function SubscriptionForm({ initialData, onSave, onCancel, title 
           type="submit"
           className="w-full bg-[var(--primary)] text-white font-black uppercase tracking-[0.2em] py-5 px-6 rounded-3xl shadow-xl shadow-[var(--primary)]/20 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all text-sm mb-4"
         >
-          {initialData ? <>Update <span className="text-[#F59E0B]">Killer</span> Record</> : <>Save <span className="text-[#F59E0B]">Killer</span> Subscription</>}
+          {initialData ? (
+            <>{t('form.update_btn')}</>
+          ) : (
+            <>{t('form.save_btn')}</>
+          )}
         </button>
       </form>
     </div>

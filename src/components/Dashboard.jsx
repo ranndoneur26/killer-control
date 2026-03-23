@@ -1,8 +1,4 @@
-'use client';
-import React from 'react';
-import { Calendar, CreditCard, Gamepad2, Headphones, MonitorPlay, TrendingDown } from 'lucide-react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { useRouter } from 'next/navigation';
+import { useNavigate } from 'react-router-dom';
 import Navigation from './Navigation';
 import CategoryDonutChart from './charts/CategoryDonutChart';
 import SavingsAreaChart from './charts/SavingsAreaChart';
@@ -10,7 +6,7 @@ import { useSubscriptionAnalysis } from '../hooks/useSubscriptionAnalysis';
 import { MOCK_SUBSCRIPTIONS } from '../data/mockSubscriptions';
 import { AlertTriangle, Timer, TrendingUp, Info, ChevronRight, Pencil } from 'lucide-react';
 import HeroHeader from './HeroHeader';
-import { useTranslations } from 'next-intl';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const mockChartData = [
   { name: 'Ene', gasto: 120 },
@@ -36,9 +32,9 @@ const COLOR_MAP = {
 };
 
 export default function Dashboard() {
-  const router = useRouter();
+  const navigate = useNavigate();
   const { alerted, potentialSavings } = useSubscriptionAnalysis(MOCK_SUBSCRIPTIONS);
-  const t = useTranslations();
+  const { t } = useLanguage();
 
   const totalMonthlySpend = MOCK_SUBSCRIPTIONS.reduce((acc, sub) => acc + sub.amount, 0);
 
@@ -55,7 +51,7 @@ export default function Dashboard() {
           <div className="flex items-center gap-3">
             <div className="group relative">
               <button
-                onClick={() => router.push('/add')}
+                onClick={() => navigate('/add')}
                 className="w-10 h-10 rounded-full bg-[var(--primary)] flex items-center justify-center text-white shadow-lg shadow-[var(--primary)]/20 hover:scale-110 active:scale-95 transition-all cursor-pointer"
               >
                 <Pencil size={18} strokeWidth={3} />
@@ -65,7 +61,7 @@ export default function Dashboard() {
               </span>
             </div>
             <button
-              onClick={() => router.push('/profile')}
+              onClick={() => navigate('/profile')}
               className="w-10 h-10 rounded-full bg-[var(--bg-surface)] border border-[var(--border)] shadow-sm flex items-center justify-center hover:border-[var(--primary)] transition-colors hover:scale-105 active:scale-95"
             >
               <span className="font-bold text-[var(--primary)]">N</span>
@@ -75,7 +71,7 @@ export default function Dashboard() {
 
         {/* Main KPI */}
         <button
-          onClick={() => router.push('/profile')}
+          onClick={() => navigate('/profile')}
           className="w-full text-left bg-[var(--bg-surface)] border border-[var(--border)] rounded-[2.5rem] p-8 mb-6 relative overflow-hidden group hover:border-[var(--primary)]/50 transition-all shadow-sm"
         >
           <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
@@ -125,7 +121,7 @@ export default function Dashboard() {
                       <p className={`text-xs ${textColor} font-medium leading-[1.3] opacity-80`}>{alert.message}</p>
                       {analysis.alternatives.length > 0 && (
                         <button
-                          onClick={() => router.push(`/guide/${sub.id}`)}
+                          onClick={() => navigate(`/guide/${sub.id}`)}
                           className="mt-3 flex items-center gap-1 text-[11px] font-black text-[var(--primary)] hover:underline uppercase tracking-tight"
                         >
                           {t('dashboard.see_alternative')} {analysis.alternatives[0].savings}€ <ChevronRight size={12} />
@@ -148,7 +144,7 @@ export default function Dashboard() {
               <p className="text-[10px] text-[var(--text-secondary)] font-medium truncate">{t('dashboard.offers_detected', { count: alerted.length })}</p>
             </div>
             <button
-              onClick={() => router.push('/subscriptions')}
+              onClick={() => navigate('/subscriptions')}
               className="bg-[var(--primary)] text-white text-xs font-black px-5 py-2.5 rounded-xl hover:opacity-90 active:scale-95 shadow-lg shadow-[var(--primary)]/20 transition-all"
             >
               {t('dashboard.optimize')}
@@ -160,7 +156,7 @@ export default function Dashboard() {
         <div className="mb-8">
           <div className="flex justify-between items-center mb-4">
             <h3 className="font-black text-lg text-[var(--primary)]">{t('dashboard.upcoming_charges')}</h3>
-            <button onClick={() => router.push('/subscriptions')} className="text-xs text-[var(--primary)] font-black uppercase tracking-wider">{t('dashboard.see_all')}</button>
+            <button onClick={() => navigate('/subscriptions')} className="text-xs text-[var(--primary)] font-black uppercase tracking-wider">{t('dashboard.see_all')}</button>
           </div>
 
           <div className="space-y-4">
@@ -181,7 +177,7 @@ export default function Dashboard() {
                   <div className="text-right">
                     <div className="font-black text-[var(--text-primary)]">{sub.amount} &euro;</div>
                     <button
-                      onClick={() => router.push(`/guide/${sub.id}`)}
+                      onClick={() => navigate(`/guide/${sub.id}`)}
                       className="text-[10px] text-[var(--primary)] mt-1 font-black hover:underline cursor-pointer uppercase tracking-tight"
                     >
                       {t('dashboard.auto_cancel')}

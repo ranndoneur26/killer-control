@@ -3,30 +3,31 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import Navigation from './Navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import HeroHeader from './HeroHeader';
-import { 
-  Search, Filter, ChevronDown, Plus, Pencil,
-  Tv, Music, Gamepad2, HeartPulse, Smartphone, Newspaper, MoreHorizontal 
+import { useLanguage } from '../contexts/LanguageContext';
+import {
+  Search, Filter, ChevronDown, Pencil,
+  Tv, Music, Gamepad2, HeartPulse, Smartphone, Newspaper, MoreHorizontal
 } from 'lucide-react';
 
 const CATEGORIES = [
-  { id: 'all', label: 'Todas' },
-  { id: 'streaming', label: 'Streaming', icon: Tv },
-  { id: 'music', label: 'Música', icon: Music },
-  { id: 'gaming', label: 'Gaming', icon: Gamepad2 },
-  { id: 'health', label: 'Salud', icon: HeartPulse },
-  { id: 'telecom', label: 'Telecom', icon: Smartphone },
-  { id: 'press', label: 'Prensa', icon: Newspaper },
-  { id: 'other', label: 'Otras', icon: MoreHorizontal },
+  { id: 'all', labelKey: 'categories.all', icon: Filter },
+  { id: 'streaming', labelKey: 'categories.entertainment', icon: Tv },
+  { id: 'music', labelKey: 'categories.music', icon: Music },
+  { id: 'gaming', labelKey: 'categories.gaming', icon: Gamepad2 },
+  { id: 'health', labelKey: 'categories.health', icon: HeartPulse },
+  { id: 'telecom', labelKey: 'categories.telecom', icon: Smartphone },
+  { id: 'press', labelKey: 'categories.press', icon: Newspaper },
+  { id: 'other', labelKey: 'categories.other', icon: MoreHorizontal },
 ];
 
 const MOCK_SUBSCRIPTIONS = [
-  { id: 1, name: 'Netflix', price: 15.99, cycle: 'Mensual', category: 'streaming', nextBilling: 'Mañana', color: 'text-[#EF4444]' },
-  { id: 2, name: 'Spotify', price: 10.99, cycle: 'Mensual', category: 'music', nextBilling: '12 May', color: 'text-[#10B981]' },
-  { id: 3, name: 'Xbox Game Pass', price: 14.99, cycle: 'Mensual', category: 'gaming', nextBilling: '15 May', color: 'text-[#10B981]' },
-  { id: 4, name: 'Seguro Dental Sanitas', price: 18.50, cycle: '28 Días', category: 'health', nextBilling: '25 May', color: 'text-[#4F46E5]' },
-  { id: 5, name: 'Movistar Fusion+', price: 65.00, cycle: 'Mensual', category: 'telecom', nextBilling: '01 Jun', color: 'text-[#4F46E5]' },
-  { id: 6, name: 'The New York Times', price: 1.00, cycle: 'Mensual (Promo)', category: 'press', nextBilling: '01 Jun', color: 'text-[#64748B]' },
-  { id: 7, name: 'Gestor de Contraseñas', price: 2.99, cycle: 'Mensual', category: 'other', nextBilling: '10 Jun', color: 'text-[#64748B]' },
+  { id: 1, name: 'Netflix', price: 15.99, cycleKey: 'form.cycle_monthly', category: 'streaming', nextBillingKey: 'subscriptions.tomorrow', color: 'text-[#EF4444]' },
+  { id: 2, name: 'Spotify', price: 10.99, cycleKey: 'form.cycle_monthly', category: 'music', nextBilling: '12 May', color: 'text-[#10B981]' },
+  { id: 3, name: 'Xbox Game Pass', price: 14.99, cycleKey: 'form.cycle_monthly', category: 'gaming', nextBilling: '15 May', color: 'text-[#10B981]' },
+  { id: 4, name: 'Sanitas Dental', price: 18.50, cycle: '28 Días', category: 'health', nextBilling: '25 May', color: 'text-[#4F46E5]' },
+  { id: 5, name: 'Movistar Fusion+', price: 65.00, cycleKey: 'form.cycle_monthly', category: 'telecom', nextBilling: '01 Jun', color: 'text-[#4F46E5]' },
+  { id: 6, name: 'The New York Times', price: 1.00, cycle: 'Promo', category: 'press', nextBilling: '01 Jun', color: 'text-[#64748B]' },
+  { id: 7, name: 'Bitwarden', price: 2.99, cycleKey: 'form.cycle_monthly', category: 'other', nextBilling: '10 Jun', color: 'text-[#64748B]' },
 ];
 
 const getCategoryIcon = (categoryId) => {
@@ -35,6 +36,7 @@ const getCategoryIcon = (categoryId) => {
 };
 
 export default function SubscriptionList() {
+  const { t } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
   const initialCategory = location.state?.initialTab || 'all';
@@ -43,7 +45,7 @@ export default function SubscriptionList() {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('date'); // 'price' | 'date' | 'name'
-  
+
   const activeCategory = CATEGORIES.find(c => c.id === activeTab);
 
   const filteredSubs = MOCK_SUBSCRIPTIONS
@@ -63,34 +65,34 @@ export default function SubscriptionList() {
       <div className="p-6 max-w-lg mx-auto">
         <header className="mb-6 flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-black mb-1">Tus suscripciones <span className="text-[#F59E0B]">Killer</span></h1>
-            <p className="text-[var(--text-secondary)] text-sm font-medium">Gestiona tus gastos recurrentes</p>
+            <h1 className="text-2xl font-black mb-1" dangerouslySetInnerHTML={{ __html: t('subscriptions.title') }}></h1>
+            <p className="text-[var(--text-secondary)] text-sm font-medium">{t('subscriptions.subtitle')}</p>
           </div>
           <div className="group relative">
-            <button 
+            <button
               onClick={() => navigate('/add')}
               className="w-10 h-10 rounded-full bg-[var(--primary)] flex items-center justify-center text-white shadow-lg shadow-[var(--primary)]/20 hover:scale-110 active:scale-95 transition-all cursor-pointer"
             >
               <Pencil size={18} strokeWidth={3} />
             </button>
             <span className="absolute right-0 top-full mt-2 w-max bg-[var(--text-primary)] text-[var(--bg)] text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20 shadow-xl">
-              añadir datos o nueva suscripcion
+              {t('subscriptions.add_tooltip')}
             </span>
           </div>
         </header>
 
         <div className="flex gap-3 mb-6">
           <div className="relative flex-1">
-            <input 
-              type="text" 
-              placeholder="Buscar suscripción..." 
+            <input
+              type="text"
+              placeholder={t('subscriptions.search_placeholder')}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border)] rounded-xl py-3 pl-11 pr-4 outline-none focus:border-[var(--primary)] focus:ring-4 focus:ring-[var(--primary)]/10 shadow-sm transition font-bold text-[var(--text-primary)] placeholder:text-[var(--text-muted)] placeholder:font-medium"
             />
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" size={18} />
           </div>
-          <button 
+          <button
             onClick={() => setSortBy(prev => prev === 'price' ? 'name' : 'price')}
             className={`w-12 h-12 bg-[var(--bg-surface)] border rounded-xl flex items-center justify-center transition shadow-sm ${sortBy !== 'date' ? 'text-[var(--primary)] border-[var(--primary)]' : 'text-[var(--text-secondary)] border-[var(--border)] hover:border-[var(--primary)] hover:text-[var(--primary)]'}`}
           >
@@ -100,18 +102,18 @@ export default function SubscriptionList() {
 
         {/* Total Indicator */}
         <div className="flex items-end justify-between mb-8 px-2">
-            <div className="space-y-1">
-                <p className="text-[10px] text-[var(--text-muted)] font-black uppercase tracking-[0.2em]">Total proyectado</p>
-                <p className="text-2xl font-black text-[var(--text-primary)]">{totalMonthly.toFixed(2)}€<span className="text-[var(--text-secondary)] text-xs ml-1 font-bold">/mes</span></p>
-            </div>
-            {searchTerm && (
-                <button 
-                    onClick={() => setSearchTerm('')}
-                    className="text-xs text-[var(--primary)] font-black uppercase tracking-widest hover:underline"
-                >
-                    Limpiar
-                </button>
-            )}
+          <div className="space-y-1">
+            <p className="text-[10px] text-[var(--text-muted)] font-black uppercase tracking-[0.2em]">{t('subscriptions.total_projected')}</p>
+            <p className="text-2xl font-black text-[var(--text-primary)]">{totalMonthly.toFixed(2)}€<span className="text-[var(--text-secondary)] text-xs ml-1 font-bold">/mes</span></p>
+          </div>
+          {searchTerm && (
+            <button
+              onClick={() => setSearchTerm('')}
+              className="text-xs text-[var(--primary)] font-black uppercase tracking-widest hover:underline"
+            >
+              {t('subscriptions.clear')}
+            </button>
+          )}
         </div>
 
         {/* Modern Category Selector (Accordion) */}
@@ -122,12 +124,12 @@ export default function SubscriptionList() {
           >
             <div className="flex items-center gap-4">
               <div className="w-14 h-14 rounded-2xl bg-[var(--primary)]/10 flex items-center justify-center text-[var(--primary)] shadow-sm group-hover:scale-110 transition-transform">
-                {activeCategory?.icon ? <activeCategory.icon size={26} /> : <Filter size={26} />}
+                {activeCategory?.icon ? <activeCategory.icon size={26} /> : <Filter size={filterSize(26)} />}
               </div>
               <div className="text-left">
-                <p className="text-[10px] uppercase tracking-[0.25em] font-black text-[var(--text-muted)] mb-0.5">Filtrar Colección</p>
+                <p className="text-[10px] uppercase tracking-[0.25em] font-black text-[var(--text-muted)] mb-0.5">{t('subscriptions.filter_label')}</p>
                 <p className="font-black text-xl text-[var(--text-primary)] tracking-tight">
-                  {activeCategory?.label || 'Todas'}
+                  {activeCategory ? t(activeCategory.labelKey) : t('categories.all')}
                 </p>
               </div>
             </div>
@@ -152,18 +154,16 @@ export default function SubscriptionList() {
                         setActiveTab(category.id);
                         setIsCategoryOpen(false);
                       }}
-                      className={`flex items-center gap-3 p-4 rounded-2xl transition-all ${
-                        activeTab === category.id 
-                          ? 'bg-[var(--primary)] text-white shadow-lg shadow-[var(--primary)]/20' 
+                      className={`flex items-center gap-3 p-4 rounded-2xl transition-all ${activeTab === category.id
+                          ? 'bg-[var(--primary)] text-white shadow-lg shadow-[var(--primary)]/20'
                           : 'bg-[var(--bg)] text-[var(--text-secondary)] border border-[var(--border)] hover:border-[var(--primary)]/50 hover:bg-[var(--bg-elevated)]'
-                      }`}
+                        }`}
                     >
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
-                        activeTab === category.id ? 'bg-white/20' : 'bg-[var(--bg-surface)] border border-[var(--border)]'
-                      }`}>
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${activeTab === category.id ? 'bg-white/20' : 'bg-[var(--bg-surface)] border border-[var(--border)]'
+                        }`}>
                         {category.icon ? <category.icon size={20} /> : <Filter size={20} />}
                       </div>
-                      <span className="text-sm font-black tracking-tight">{category.label}</span>
+                      <span className="text-sm font-black tracking-tight">{t(category.labelKey)}</span>
                     </button>
                   ))}
                 </div>
@@ -175,9 +175,11 @@ export default function SubscriptionList() {
         <div className="space-y-3">
           {filteredSubs.length > 0 ? filteredSubs.map((sub, index) => {
             const Icon = getCategoryIcon(sub.category);
-            
+            const cycleText = sub.cycleKey ? t(sub.cycleKey) : sub.cycle;
+            const billingText = sub.nextBillingKey ? t(sub.nextBillingKey) : sub.nextBilling;
+
             return (
-              <motion.div 
+              <motion.div
                 key={sub.id}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -188,14 +190,14 @@ export default function SubscriptionList() {
                 <div className={`w-12 h-12 rounded-xl bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center ${sub.color}`}>
                   <Icon size={24} />
                 </div>
-                
+
                 <div className="flex-1 min-w-0">
                   <h3 className="font-black text-[var(--text-primary)] truncate">{sub.name}</h3>
                   <div className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] mt-1 flex items-center gap-2">
-                    <span>{sub.cycle}</span>
+                    <span>{cycleText}</span>
                     <span className="w-1 h-1 bg-[var(--border)] rounded-full"></span>
-                    <span className={sub.nextBilling === 'Mañana' ? 'text-[#EF4444]' : ''}>
-                      {sub.nextBilling}
+                    <span className={sub.nextBillingKey === 'subscriptions.tomorrow' ? 'text-[#EF4444]' : ''}>
+                      {billingText}
                     </span>
                   </div>
                 </div>
@@ -210,14 +212,18 @@ export default function SubscriptionList() {
               <div className="w-20 h-20 bg-[var(--bg-surface)] border border-[var(--border)] rounded-3xl flex items-center justify-center mx-auto mb-4 opacity-50 shadow-sm">
                 <Search size={32} className="text-[var(--text-muted)]" />
               </div>
-              <h3 className="text-lg font-black text-[var(--text-secondary)]">Sin resultados</h3>
-              <p className="text-sm text-[var(--text-muted)] mt-1 font-medium">Prueba con otra búsqueda o categoría.</p>
+              <h3 className="text-lg font-black text-[var(--text-secondary)]">{t('subscriptions.no_results')}</h3>
+              <p className="text-sm text-[var(--text-muted)] mt-1 font-medium">{t('subscriptions.no_results_desc')}</p>
             </div>
           )}
         </div>
       </div>
-      
+
       <Navigation />
     </div>
   );
+}
+
+function filterSize(size) {
+  return size;
 }

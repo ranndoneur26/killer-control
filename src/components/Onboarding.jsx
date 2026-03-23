@@ -4,9 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 import Logo from './Logo';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function Onboarding() {
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   return (
     <div className="flex flex-col min-h-screen p-6 max-w-md mx-auto justify-between bg-[var(--bg)] text-[var(--text-primary)]">
@@ -64,7 +66,7 @@ export default function Onboarding() {
         </div>
 
         <p className="text-[var(--text-secondary)] mb-8 mx-auto max-w-[280px]">
-          Control your subscriptions, track spending, and eliminate what you don't use.
+          {t('onboarding.tagline')}
         </p>
 
         {/* Pagination Dots */}
@@ -78,7 +80,7 @@ export default function Onboarding() {
           onClick={() => navigate('/login')}
           className="w-full bg-[var(--primary)] text-white font-bold rounded-full py-4 flex items-center justify-center gap-2 hover:opacity-90 transition group"
         >
-          Next <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+          {t('onboarding.next')} <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
     </div>

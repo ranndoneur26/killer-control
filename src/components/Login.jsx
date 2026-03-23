@@ -119,22 +119,22 @@ export default function Login() {
             {isPremium && !auth.isLogin && (
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-bold uppercase tracking-wider mb-4 border border-amber-200">
                 <Crown size={14} className="fill-amber-500 text-amber-600" />
-                Premium Plan Selected
+                {t('login.premium_selected')}
               </div>
             )}
             <h1 className="text-3xl font-bold mb-3 text-[var(--text-primary)]">
               {auth.isLogin
-                ? 'Welcome back'
+                ? t('login.welcome_back')
                 : isPremium
-                  ? 'Start your Premium trial'
-                  : <>Create your <span className="text-[#F59E0B]">Killer</span> account</>}
+                  ? t('login.premium_trial')
+                  : <span dangerouslySetInnerHTML={{ __html: t('login.create_account') }} />}
             </h1>
             <p className="text-[var(--text-secondary)] text-sm leading-relaxed font-medium">
               {auth.isLogin
-                ? 'Log in to access your subscriptions.'
+                ? t('login.login_subtitle')
                 : isPremium
-                  ? 'Sign up to activate all Pro features. 4.99€/mo after trial.'
-                  : <>Join <span className="text-[#F59E0B]">Killer</span> Control and take charge of your expenses.</>}
+                  ? t('login.premium_subtitle')
+                  : <span dangerouslySetInnerHTML={{ __html: t('login.join_subtitle') }} />}
             </p>
           </motion.div>
         </AnimatePresence>
@@ -147,7 +147,7 @@ export default function Login() {
             disabled={anyLoading}
             onClick={() => auth.handleOAuth('Google')}
           >
-            <GoogleIcon /> {auth.isLogin ? 'Log in with Google' : 'Continue with Google'}
+            <GoogleIcon /> {auth.isLogin ? t('login.google_login') : t('login.google_continue')}
           </AuthButton>
           <AuthButton
             variant="dark"
@@ -155,7 +155,7 @@ export default function Login() {
             disabled={anyLoading}
             onClick={() => auth.handleOAuth('Apple')}
           >
-            <AppleIcon /> {auth.isLogin ? 'Log in with Apple' : 'Continue with Apple'}
+            <AppleIcon /> {auth.isLogin ? t('login.apple_login') : t('login.apple_continue')}
           </AuthButton>
         </div>
 
@@ -163,7 +163,7 @@ export default function Login() {
         <div className="flex items-center mb-6">
           <div className="flex-1 border-t border-[var(--border)]" />
           <span className="px-4 text-xs text-[var(--text-muted)] font-bold tracking-wider uppercase">
-            OR WITH EMAIL
+            {t('login.or_email')}
           </span>
           <div className="flex-1 border-t border-[var(--border)]" />
         </div>
@@ -182,7 +182,7 @@ export default function Login() {
                 inputMode="email"
                 value={auth.email}
                 onChange={e => { auth.setEmail(e.target.value); auth.setEmailError(''); }}
-                placeholder="you@email.com"
+                placeholder={t('login.email_placeholder')}
                 disabled={auth.step === 'password' || anyLoading}
                 className={`w-full bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-2xl py-4 px-5 pr-12 outline-none border border-[var(--border)] shadow-sm
                   focus:ring-2 focus:ring-[var(--primary)]/20 focus:border-[var(--primary)] transition placeholder-[var(--text-muted)] font-medium
@@ -246,7 +246,7 @@ export default function Login() {
                       onClick={() => auth.handleForgotPassword()}
                       className="text-xs text-[var(--primary)] font-bold hover:underline"
                     >
-                      Forgot your password?
+                      {t('login.forgot_pass')}
                     </button>
                   </div>
                 )}
@@ -262,30 +262,30 @@ export default function Login() {
             disabled={anyLoading && auth.loadingBtn !== 'email'}
           >
             {auth.step === 'email'
-              ? <>Continue <ArrowRight size={18} /></>
-              : auth.isLogin ? 'Log In' : 'Create Account'
+              ? <>{t('login.continue')} <ArrowRight size={18} /></>
+              : auth.isLogin ? t('login.login_btn') : t('login.signup_btn')
             }
           </AuthButton>
         </form>
 
         {/* ── Legal & Toggle ── */}
         <div className="mt-8 text-center space-y-5 pb-4">
-          <p className="text-xs text-[var(--text-muted)] leading-relaxed font-medium">
-            By continuing, you agree to our{' '}
+          <p className="text-xs text-[var(--muted)] leading-relaxed font-medium">
+            {t('login.legal_prefix')}
             <button type="button" onClick={() => setShowTerms(true)} className="text-[var(--primary)] hover:underline font-bold">
-              Terms & Conditions
+              {t('login.terms_btn')}
             </button>
-            {' '}and{' '}
-            <button type="button" onClick={() => setShowPrivacy(true)} className="text-[var(--primary)] hover:underline font-bold">Privacy Policy</button>.
+            {t('login.and_legal')}
+            <button type="button" onClick={() => setShowPrivacy(true)} className="text-[var(--primary)] hover:underline font-bold">{t('login.privacy_btn')}</button>.
           </p>
           <p className="text-sm text-[var(--text-secondary)] font-medium">
-            {auth.isLogin ? "Don't have an account? " : 'Already have an account? '}
+            {auth.isLogin ? t('login.no_account') : t('login.already_account')}
             <button
               type="button"
               onClick={auth.toggleMode}
               className="text-[var(--text-primary)] font-bold hover:text-[var(--primary)] transition"
             >
-              {auth.isLogin ? 'Sign up for free' : 'Log in'}
+              {auth.isLogin ? t('login.signup_free') : t('login.login_link')}
             </button>
           </p>
         </div>

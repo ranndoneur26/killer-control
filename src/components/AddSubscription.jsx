@@ -31,14 +31,14 @@ export default function AddSubscription() {
 
   const handleSelectService = (service) => {
     setInitialData({
-      name: service.name === 'Personalizado' ? '' : service.name,
+      name: service.id === 'custom' ? '' : service.name,
       category: service.category || 'streaming'
     });
     setStep(2);
   };
 
   const handleSave = (formData) => {
-    addToast('success', `¡Suscripción a ${formData.name} guardada correctamente!`);
+    addToast('success', t('form.save_btn') + `: ${formData.name}`);
     setTimeout(() => {
       navigate('/dashboard');
     }, 1000);
@@ -68,15 +68,15 @@ export default function AddSubscription() {
                   <div className="w-12 h-12 bg-amber-100 dark:bg-amber-900/40 rounded-full flex items-center justify-center mx-auto mb-4 text-amber-600 dark:text-amber-400">
                     <Lock size={24} />
                   </div>
-                  <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-2">Límite alcanzado</h3>
+                  <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-2">{t('add.limit_title')}</h3>
                   <p className="text-sm text-gray-600 dark:text-gray-300 mb-6 font-medium">
-                    Has alcanzado el límite de <strong>{limits.maxSubscriptions} suscripciones</strong> del plan gratuito.
+                    {t('add.limit_desc', { count: limits.maxSubscriptions })}
                   </p>
                   <button
                     onClick={() => navigate('/checkout')}
                     className="w-full py-3 bg-amber-500 text-white font-bold rounded-xl shadow-lg shadow-amber-500/20 hover:bg-amber-400 transition-all"
                   >
-                    Desbloquear ilimitadas
+                    {t('add.unlock_btn')}
                   </button>
                 </div>
                 {/* Background Pattern */}
@@ -87,7 +87,7 @@ export default function AddSubscription() {
             <div className={`relative mb-8 ${!canAdd ? 'opacity-50 pointer-events-none grayscale' : ''}`}>
               <input
                 type="text"
-                placeholder={t('add.search')}
+                placeholder={t('add.search_placeholder')}
                 disabled={!canAdd}
                 className="w-full bg-gray-100 dark:bg-[#1a2035] border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-[2rem] py-4 px-6 pr-12 outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition placeholder-gray-400 dark:placeholder-gray-600 font-bold"
               />
@@ -118,7 +118,7 @@ export default function AddSubscription() {
             </div>
 
             <button
-              onClick={() => handleSelectService({ name: 'Personalizado', color: 'bg-[var(--primary)]', category: 'other' })}
+              onClick={() => handleSelectService({ id: 'custom', name: t('add.custom_service_name'), color: 'bg-[var(--primary)]', category: 'other' })}
               disabled={!canAdd}
               className={`w-full mt-4 bg-gray-50 dark:bg-[#1a2035] border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-black uppercase tracking-[0.2em] rounded-[2rem] py-5 flex items-center justify-center gap-3 hover:border-[var(--primary)]/50 transition-all shadow-xl ${!canAdd ? 'opacity-50 pointer-events-none grayscale' : ''}`}
             >

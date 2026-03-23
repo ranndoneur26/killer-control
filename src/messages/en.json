@@ -40,7 +40,12 @@
     "charges_title": "Centralized upcoming charges",
     "charges_desc": "A single view to know what gets charged tomorrow, next week or next month.",
     "savings_title": "Savings recommendations",
-    "savings_desc": "Discover cheaper alternatives or shared plans that work for you."
+    "savings_desc": "Discover cheaper alternatives or shared plans that work for you.",
+    "hero_title": "Everything that matters, in one view",
+    "hero_subtitle": "Refined design so information flows without noise.",
+    "potential_savings": "Potential Savings",
+    "next_charge": "Next charge",
+    "tomorrow": "Tomorrow"
   },
   "how": {
     "title": "That simple",
@@ -72,7 +77,8 @@
     "premium_f3": "End-of-promotion alerts",
     "premium_f4": "CSV/PDF reports",
     "premium_f5": "Priority support",
-    "premium_cta": "Try Premium"
+    "premium_cta": "Try Premium",
+    "most_chosen": "MOST CHOSEN"
   },
   "faq": {
     "title": "Frequently asked questions",
@@ -99,7 +105,8 @@
     "contact": "CONTACT",
     "email": "EMAIL",
     "explore": "EXPLORE",
-    "tagline": "YOUR FINANCIAL ALLY FOR SUBSCRIPTIONS."
+    "tagline": "YOUR FINANCIAL ALLY FOR SUBSCRIPTIONS.",
+    "brand": "Brand"
   },
   "dashboard": {
     "tagline": "Your subscriptions under control",
@@ -118,17 +125,19 @@
     "add_tooltip": "Add data or new subscription"
   },
   "subscriptions": {
+    "title": "Your <span class=\"text-[#F59E0B]\">Killer</span> subscriptions",
     "subtitle": "Manage your recurring expenses",
-    "search": "Search a subscription...",
+    "search_placeholder": "Search a subscription...",
     "total_projected": "Projected total",
-    "filter_label": "Filter collection",
-    "filter_all": "All",
-    "monthly": "Monthly",
-    "tomorrow": "Tomorrow"
+    "filter_label": "Filter Collection",
+    "clear": "Clear",
+    "no_results": "No results",
+    "no_results_desc": "Try another search or category.",
+    "add_tooltip": "Add data or new subscription"
   },
   "add": {
     "title": "Add Subscription",
-    "search": "Search a service or app...",
+    "search_placeholder": "Search a service or app...",
     "popular": "Popular",
     "custom_button": "New Custom Subscription",
     "form_title": "Subscription Setup",
@@ -142,14 +151,45 @@
     "details_section": "Killer Control Details",
     "killer_mode": "Killer Mode (Alerts & Cancellations)",
     "or": "OR",
-    "gym": "Gym"
+    "gym": "Gym",
+    "limit_title": "Limit reached",
+    "limit_desc": "You have reached the limit of {count} subscriptions on the free plan.",
+    "unlock_btn": "Unlock unlimited",
+    "custom_service_name": "Custom"
   },
   "subscription_detail": {
     "current_spend": "Current spend",
     "annual_projected": "Projected annual spend",
     "alert_title": "Price increase detected",
+    "alert_desc": "They raised the fee by 23% since March. Is it still worth it?",
     "see_alternatives": "See cheaper alternatives",
-    "cost_history": "Cost history"
+    "cost_history": "Cost history",
+    "since": "Subscribed since",
+    "next_charge": "Next Charge",
+    "payment_method": "Payment Method",
+    "plan": "Current Plan",
+    "profiles": "Profiles / Slots",
+    "lock_in_end": "Lock-in End",
+    "active_promo": "Active Promo",
+    "until": "Until",
+    "then": "Then",
+    "lock_in_period": "Lock-in Period",
+    "no_lock_in": "No lock-in",
+    "pack": "Pack",
+    "cancel_btn": "Start Cancellation Process",
+    "edit_title": "Edit <span class=\"text-[#F59E0B]\">Killer</span> Record"
+  },
+  "categories": {
+    "all": "All",
+    "entertainment": "Entertainment",
+    "music": "Music",
+    "gaming": "Gaming",
+    "home": "Home",
+    "health": "Health/Sport",
+    "software": "Software",
+    "telecom": "Telecom",
+    "press": "Press",
+    "other": "Other"
   },
   "profile": {
     "personal_data": "Personal Data",
@@ -213,11 +253,56 @@
     "subtitle": "Master your financial freedom",
     "why_title": "Why use Killer Control?",
     "feature1_title": "Total & Instant Control",
-    "feature1_desc": "Centralize all your subscriptions in one dashboard.",
+    "feature1_desc": "Centralize all your subscriptions in one dashboard. Forget checking bank statements to know what you are paying for.",
     "feature2_title": "Smart Alerts",
-    "feature2_desc": "We alert you before your promotions expire.",
+    "feature2_desc": "We warn you before your promotions end and detect unexpected price hikes so you don't overpay.",
     "feature3_title": "Savings Opportunities",
-    "feature3_desc": "We analyze your spending and suggest cheaper alternatives."
+    "feature3_desc": "Our engine finds cheaper alternatives with the same features, saving you hundreds of dollars a year.",
+    "feature4_title": "Real Cancellation Guides",
+    "feature4_desc": "No more mazes to cancel. We give you the exact steps and tricks to unsubscribe in seconds.",
+    "steps_title": "How to start in 3 steps",
+    "step1_title": "Add your services",
+    "step1_desc": "Register your current subscriptions indicating the price and renewal date.",
+    "step2_title": "Watch the alerts",
+    "step2_desc": "Check the intelligence notifications on your Dashboard about hikes or promotions.",
+    "step3_title": "Optimize and save",
+    "step3_desc": "Use our comparisons to find better plans or guides to cancel what you don't use.",
+    "pro_tip_title": "PRO Tip",
+    "pro_tip_desc": "Check the 'Intelligence' section in your Dashboard weekly. It's where our engine detects silent price hikes from platforms like Netflix or Adobe.",
+    "cta": "Got it, let's go!"
+  },
+  "login": {
+    "welcome_back": "Welcome back",
+    "premium_trial": "Start your Premium trial",
+    "create_account": "Create your <span class=\"text-[#F59E0B]\">Killer</span> account",
+    "login_subtitle": "Log in to access your subscriptions.",
+    "premium_subtitle": "Sign up to activate all Pro features. €4.99/mo after trial.",
+    "join_subtitle": "Join <span class=\"text-[#F59E0B]\">Killer</span> Control and take charge of your expenses.",
+    "google_login": "Log in with Google",
+    "google_continue": "Continue with Google",
+    "apple_login": "Log in with Apple",
+    "apple_continue": "Continue with Apple",
+    "or_email": "OR WITH EMAIL",
+    "email_placeholder": "you@email.com",
+    "pass_placeholder_login": "Your password",
+    "pass_placeholder_signup": "Create a password (min. 8 chars)",
+    "forgot_pass": "Forgot your password?",
+    "continue": "Continue",
+    "login_btn": "Log In",
+    "signup_btn": "Create Account",
+    "legal_prefix": "By continuing, you agree to our ",
+    "terms_btn": "Terms & Conditions",
+    "and_legal": " and ",
+    "privacy_btn": "Privacy Policy",
+    "no_account": "Don't have an account? ",
+    "already_account": "Already have an account? ",
+    "signup_free": "Sign up for free",
+    "login_link": "Log in",
+    "premium_selected": "Premium Plan Selected"
+  },
+  "onboarding": {
+    "tagline": "Control your subscriptions, track spending, and eliminate what you don't use.",
+    "next": "Next"
   },
   "testimonials": [
     {
@@ -235,5 +320,46 @@
       "role": "Software Engineer",
       "quote": "I love the price increase alerts. Netflix raised my fee and I found out instantly through the app."
     }
-  ]
+  ],
+  "form": {
+    "search_placeholder": "Search for a popular service or add it manually.",
+    "name_label": "Name *",
+    "name_placeholder": "e.g. Netflix, Gym...",
+    "autocomplete_label": "Autocomplete",
+    "price_label": "Price *",
+    "price_placeholder": "15.99",
+    "cycle_label": "Billing Cycle *",
+    "cycle_weekly": "Weekly",
+    "cycle_monthly": "Monthly",
+    "cycle_quarterly": "Quarterly",
+    "cycle_semiannual": "Semiannual",
+    "cycle_annual": "Annual",
+    "cycle_onetime": "One-Time",
+    "next_charge_label": "Next Charge *",
+    "advanced_title": "Killer Control Details",
+    "category_label": "Category",
+    "cat_entertainment": "Entertainment",
+    "cat_music": "Music",
+    "cat_gaming": "Gaming",
+    "cat_home": "Home",
+    "cat_health": "Health/Sport",
+    "cat_software": "Software",
+    "cat_telecom": "Telecom",
+    "cat_press": "Press",
+    "cat_other": "Other",
+    "currency_label": "Currency",
+    "payment_method_label": "Payment Method",
+    "payment_method_placeholder": "e.g. Visa 4242...",
+    "shared_label": "I split this cost with someone",
+    "my_share_label": "My Share",
+    "killer_mode_title": "Killer Mode (Alerts & Cancellations)",
+    "free_trial_label": "It's a Free Trial",
+    "trial_ends_label": "Trial Ends",
+    "notice_label": "Notice (Days)",
+    "cancel_url_label": "Cancel URL",
+    "notes_label": "Killer Notes",
+    "notes_placeholder": "Registration email, reminders...",
+    "update_btn": "Update Killer Record",
+    "save_btn": "Save Killer Subscription"
+  }
 }

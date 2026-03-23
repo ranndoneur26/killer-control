@@ -19,8 +19,7 @@ import {
   Search
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { useNavigate, Link } from 'react-router-dom';
 import HeroSlider from './HeroSlider';
 import Logo from './Logo';
 import TermsModal from './TermsModal';
@@ -30,11 +29,13 @@ import LegalNoticeModal from './LegalNoticeModal';
 import ContactModal from './ContactModal';
 import DemoModal from './DemoModal';
 import CookieConsent from './CookieConsent';
-import { useTranslations } from 'next-intl';
+import { useLanguage } from '../contexts/LanguageContext';
+import HeroHeader from './HeroHeader';
+import HeroCopy from './HeroCopy';
 
 const LandingPage = () => {
-  const router = useRouter();
-  const t = useTranslations();
+  const navigate = useNavigate();
+  const { t } = useLanguage();
   const [showTerms, setShowTerms] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showCookies, setShowCookies] = useState(false);
@@ -65,7 +66,7 @@ const LandingPage = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div {...fadeIn}>
               <HeroCopy
-                onStart={() => router.push('/signup?plan=free')}
+                onStart={() => navigate('/signup?plan=free')}
                 onDemo={() => setShowDemo(true)}
               />
             </motion.div>
@@ -142,18 +143,18 @@ const LandingPage = () => {
             <div className="lg:w-1/2 relative px-4 sm:px-0">
               <div className="bg-[#F8FAFC] rounded-[2.5rem] p-8 lg:p-12 relative z-10 shadow-xl overflow-hidden border border-[#E2E8F0]">
                 <div className="mb-8">
-                  <h3 className="text-[#0F172A] text-xl font-bold mb-2">Todo lo importante, en una sola vista</h3>
-                  <p className="text-[#64748B] text-sm font-medium">Diseño refinado para que la información fluya sin ruido.</p>
+                  <h3 className="text-[#0F172A] text-xl font-bold mb-2">{t('features.hero_title')}</h3>
+                  <p className="text-[#64748B] text-sm font-medium">{t('features.hero_subtitle')}</p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-white p-6 rounded-[2rem] border border-[#E2E8F0] shadow-sm">
-                    <div className="text-[#64748B] text-[10px] font-bold uppercase mb-1">Ahorro Potencial</div>
+                    <div className="text-[#64748B] text-[10px] font-bold uppercase mb-1">{t('features.potential_savings')}</div>
                     <div className="text-2xl font-black text-[#10B981]">-32,00€</div>
                   </div>
                   <div className="bg-white p-6 rounded-[2rem] border border-[#E2E8F0] shadow-sm">
-                    <div className="text-[#64748B] text-[10px] font-bold uppercase mb-1">Próximo cobro</div>
-                    <div className="text-lg font-bold text-[#0F172A]">Mañana</div>
+                    <div className="text-[#64748B] text-[10px] font-bold uppercase mb-1">{t('features.next_charge')}</div>
+                    <div className="text-lg font-bold text-[#0F172A]">{t('features.tomorrow')}</div>
                   </div>
                   <div className="col-span-2 bg-white p-6 rounded-[2rem] border border-[#E2E8F0] h-40 flex items-center justify-center shadow-inner">
                     <BarChart3 size={48} className="text-[#E2E8F0]" />
@@ -222,14 +223,14 @@ const LandingPage = () => {
                 ))}
               </ul>
 
-              <button onClick={() => router.push('/signup?plan=free')} className="mt-auto w-full py-4 px-6 bg-white border border-[#E2E8F0] text-amber-500 rounded-2xl font-bold hover:bg-[#F8FAFC] transition-all">
+              <button onClick={() => navigate('/signup?plan=free')} className="mt-auto w-full py-4 px-6 bg-white border border-[#E2E8F0] text-amber-500 rounded-2xl font-bold hover:bg-[#F8FAFC] transition-all">
                 {t('pricing.freemium_cta')}
               </button>
             </div>
 
             {/* Premium Plan */}
             <div className="bg-[#FFF8E1] p-10 rounded-[2.5rem] border-2 border-amber-500 shadow-xl relative overflow-hidden flex flex-col items-center text-center group translate-y-[-10px]">
-              <div className="absolute top-0 right-0 bg-[#0F172A] text-white text-[10px] font-bold px-4 py-2 rounded-bl-2xl">MÁS ELEGIDO</div>
+              <div className="absolute top-0 right-0 bg-[#0F172A] text-white text-[10px] font-bold px-4 py-2 rounded-bl-2xl">{t('pricing.most_chosen')}</div>
 
               <span className="text-amber-500 font-bold uppercase tracking-widest text-[10px] mb-4 flex items-center gap-1">
                 <ShieldCheck size={14} /> <span translate="no">{t('pricing.premium_label')}</span>
@@ -250,7 +251,7 @@ const LandingPage = () => {
                 ))}
               </ul>
 
-              <button onClick={() => router.push('/signup?plan=premium')} className="mt-auto w-full py-4 px-6 bg-amber-500 text-white rounded-2xl font-bold hover:bg-amber-400 transition-all shadow-lg shadow-amber-500/30">
+              <button onClick={() => navigate('/signup?plan=premium')} className="mt-auto w-full py-4 px-6 bg-amber-500 text-white rounded-2xl font-bold hover:bg-amber-400 transition-all shadow-lg shadow-amber-500/30">
                 {t('pricing.premium_cta')}
               </button>
             </div>
@@ -258,7 +259,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* ─── Social Proof ─────────────────────────────── */}
+      {/* ── Social Proof ─────────────────────────────── */}
       <section className="py-24 bg-[#F8FAFC] border-y border-[#E2E8F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-8">
@@ -362,7 +363,7 @@ const LandingPage = () => {
             <div className="relative z-10">
               <h2 className="text-4xl lg:text-5xl font-black text-white mb-6">{t('cta.title')}</h2>
               <p className="text-[#94A3B8] text-lg mb-10 max-w-2xl mx-auto font-medium">{t('cta.subtitle')}</p>
-              <button onClick={() => router.push('/signup?plan=free')} className="px-12 py-5 bg-amber-500 text-white font-bold rounded-2xl hover:bg-amber-400 active:scale-95 transition-all shadow-xl shadow-amber-900/40">
+              <button onClick={() => navigate('/signup?plan=free')} className="px-12 py-5 bg-amber-500 text-white font-bold rounded-2xl hover:bg-amber-400 active:scale-95 transition-all shadow-xl shadow-amber-900/40">
                 {t('cta.button')}
               </button>
             </div>
@@ -398,7 +399,7 @@ const LandingPage = () => {
               <a href="#faq" className="hover:text-[#4F46E5] transition-colors uppercase">{t('nav.faq')}</a>
             </div>
             <div className="flex flex-col gap-3">
-              <span className="text-gray-400 mb-1 pb-2 border-b border-[#f1f5f9]">Marca</span>
+              <span className="text-gray-400 mb-1 pb-2 border-b border-[#f1f5f9]">{t('footer.brand')}</span>
               <div className="flex items-center gap-2 justify-center md:justify-start">
                 <Logo className="h-7" />
               </div>
