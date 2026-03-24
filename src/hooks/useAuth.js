@@ -8,10 +8,8 @@ import {
   OAuthProvider,
   sendPasswordResetEmail
 } from 'firebase/auth';
-import { app } from '../lib/firebase';
+import { auth } from '../lib/firebase';
 import { createUserProfile } from '../lib/db';
-
-const auth = getAuth(app);
 
 /* ── Validation ── */
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
