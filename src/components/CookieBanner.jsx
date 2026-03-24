@@ -50,6 +50,7 @@ export default function CookieBanner({ onOpenPolicy }) {
     <AnimatePresence>
       {visible && (
         <motion.div
+          key="cookie-banner-box"
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
