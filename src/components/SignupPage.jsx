@@ -66,20 +66,13 @@ export default function SignupPage() {
         </div>
 
         {/* ── OAuth ── */}
-        <div className="space-y-3 mb-6">
+        <div className="flex flex-col gap-3 mb-8">
           <button
             onClick={() => auth.handleOAuth('Google')}
             disabled={anyLoading}
             className="w-full flex items-center justify-center gap-2 font-bold rounded-full py-3.5 bg-[var(--bg-surface)] text-[var(--text-primary)] border border-[var(--border)] hover:bg-[var(--bg-elevated)] transition shadow-sm disabled:opacity-70"
           >
             {auth.loadingBtn === 'google' ? <Loader2 key="goog-l" size={18} className="animate-spin" /> : <><GoogleIcon key="goog-i" /> {t('login.google_continue')}</>}
-          </button>
-          <button
-            onClick={() => auth.handleOAuth('Apple')}
-            disabled={anyLoading}
-            className="w-full flex items-center justify-center gap-2 font-bold rounded-full py-3.5 bg-black text-white hover:bg-gray-900 transition shadow-sm disabled:opacity-70"
-          >
-            {auth.loadingBtn === 'apple' ? <Loader2 key="appl-l" size={18} className="animate-spin" /> : <><AppleIcon key="appl-i" /> {t('login.apple_continue')}</>}
           </button>
         </div>
 

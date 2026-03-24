@@ -16,6 +16,7 @@ import CheckEmailPage from './components/CheckEmailPage';
 import VerifyEmailPage from './components/VerifyEmailPage';
 import SignupPage from './components/SignupPage';
 import ResetPasswordPage from './components/ResetPasswordPage';
+import LegalPage from './components/LegalPage';
 import CookieBanner from './components/CookieBanner';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
               <Route path="/check-email" element={<CheckEmailPage />} />
               <Route path="/verify-email" element={<VerifyEmailPage />} />
               <Route path="/reset-password" element={<ResetPasswordPage />} />
+              <Route path="/privacidad" element={<LegalPage />} />
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/guide/:id" element={<CancellationGuide />} />

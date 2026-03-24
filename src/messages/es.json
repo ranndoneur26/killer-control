@@ -600,5 +600,21 @@
     "stats_potential": "AHORRO POTENCIAL",
     "this_month": "Este mes",
     "vs_prev": "-12,5% vs abril"
+  },
+  "cookies_banner": {
+    "title": "Valoramos tu privacidad",
+    "description": "Utilizamos cookies propias y de terceros para analizar el uso de la web y mejorar tu experiencia. Puedes aceptar todas o personalizarlas.",
+    "accept_all": "Aceptar todas",
+    "reject_all": "Rechazar todas",
+    "customize": "Personalizar",
+    "hide_options": "Ocultar opciones",
+    "save_prefs": "Guardar preferencias",
+    "policy_link": "Ver política",
+    "necessary_label": "Necesarias",
+    "necessary_desc": "Siempre activas",
+    "analytics_label": "Analítica",
+    "analytics_desc": "Mejorar la app",
+    "marketing_label": "Marketing",
+    "marketing_desc": "Publicidad personalizada"
   }
 }

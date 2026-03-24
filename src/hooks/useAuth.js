@@ -5,7 +5,6 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
-  OAuthProvider,
   sendPasswordResetEmail,
   sendEmailVerification
 } from 'firebase/auth';
@@ -117,8 +116,6 @@ export function useAuth(addToast, navigate) {
       let provider;
       if (providerName === 'Google') {
         provider = new GoogleAuthProvider();
-      } else if (providerName === 'Apple') {
-        provider = new OAuthProvider('apple.com');
       }
 
       const result = await signInWithPopup(auth, provider);

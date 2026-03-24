@@ -147,23 +147,14 @@ export default function Login() {
         </AnimatePresence>
 
         {/* ── OAuth ── */}
-        <div className="space-y-3 mb-6">
-          <AuthButton
-            variant="white"
-            loading={auth.loadingBtn === 'google'}
-            disabled={anyLoading}
+        <div className="flex flex-col gap-3 mb-8">
+          <button
             onClick={() => auth.handleOAuth('Google')}
-          >
-            <GoogleIcon /> {auth.isLogin ? t('login.google_login') : t('login.google_continue')}
-          </AuthButton>
-          <AuthButton
-            variant="dark"
-            loading={auth.loadingBtn === 'apple'}
             disabled={anyLoading}
-            onClick={() => auth.handleOAuth('Apple')}
+            className="w-full flex items-center justify-center gap-2 font-bold rounded-full py-3.5 bg-[var(--bg-surface)] text-[var(--text-primary)] border border-[var(--border)] hover:bg-[var(--bg-elevated)] transition shadow-sm disabled:opacity-70"
           >
-            <AppleIcon /> {auth.isLogin ? t('login.apple_login') : t('login.apple_continue')}
-          </AuthButton>
+            {auth.loadingBtn === 'google' ? <Loader2 key="l-goog" size={18} className="animate-spin" /> : <><GoogleIcon key="i-goog" /> {t('login.google_continue') || t('login.google_login')}</>}
+          </button>
         </div>
 
         {/* ── Divider ── */}

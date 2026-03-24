@@ -28,7 +28,6 @@ import CookiesModal from './CookiesModal';
 import LegalNoticeModal from './LegalNoticeModal';
 import ContactModal from './ContactModal';
 import DemoModal from './DemoModal';
-import CookieConsent from './CookieConsent';
 import { useLanguage } from '../contexts/LanguageContext';
 import HeroHeader from './HeroHeader';
 import HeroCopy from './HeroCopy';
@@ -443,9 +442,6 @@ const LandingPage = () => {
       <LegalNoticeModal open={showLegal} onClose={() => setShowLegal(false)} />
       <ContactModal open={showContact} onClose={() => setShowContact(false)} />
       <DemoModal open={showDemo} onClose={() => setShowDemo(false)} />
-
-      {/* Cookie Consent Banner */}
-      <CookieConsent onOpenPolicy={() => setShowCookies(true)} />
     </div>
   );
 };
