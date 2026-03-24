@@ -52,7 +52,7 @@ export default function SignupPage() {
 
         {/* Logo */}
         <div className="flex justify-center mb-10">
-          <Logo className="h-12" />
+          <Logo className="h-14" />
         </div>
 
         {/* Heading */}

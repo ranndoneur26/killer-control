@@ -63,7 +63,7 @@ export default function ResetPasswordPage() {
         <div className="min-h-screen bg-[var(--bg)] flex items-center justify-center p-4">
             <div className="max-w-md w-full bg-[var(--bg-surface)] border border-[var(--border)] rounded-[2.5rem] p-8 shadow-xl text-center">
                 <div className="mb-8 flex justify-center">
-                    <Logo className="h-10" />
+                    <Logo className="h-12" />
                 </div>
 
                 {status === 'loading' && (

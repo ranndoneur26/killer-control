@@ -21,7 +21,7 @@ export default function LegalPage() {
                     >
                         <ArrowLeft size={18} /> {t('common.back') || 'Volver'}
                     </button>
-                    <Logo className="h-8" />
+                    <Logo className="h-10" />
                 </div>
 
                 <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[2.5rem] p-8 md:p-12 shadow-xl">

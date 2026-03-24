@@ -424,7 +424,7 @@ const LandingPage = () => {
             <div className="flex flex-col gap-3">
               <span className="text-gray-400 mb-1 pb-2 border-b border-[#f1f5f9]">{t('footer.brand')}</span>
               <div className="flex items-center gap-2 justify-center md:justify-start">
-                <Logo className="h-7" />
+                <Logo className="h-9" />
               </div>
             </div>
           </div>

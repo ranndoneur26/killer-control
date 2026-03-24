@@ -62,7 +62,7 @@ export default function Onboarding() {
       {/* Content Area */}
       <div className="text-center pb-8">
         <div className="flex justify-center mb-6">
-          <Logo className="h-10" />
+          <Logo className="h-12" />
         </div>
 
         <p className="text-[var(--text-secondary)] mb-8 mx-auto max-w-[280px]">
