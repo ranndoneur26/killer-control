@@ -5,7 +5,6 @@ import {
   TrendingUp,
   Timer,
   ShieldCheck,
-  BarChart3,
   Bell,
   ArrowRight,
   CreditCard,
@@ -19,6 +18,7 @@ import {
   Search
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import MockupChart from './charts/MockupChart';
 import { useNavigate, Link } from 'react-router-dom';
 import HeroSlider from './HeroSlider';
 import Logo from './Logo';
@@ -155,8 +155,8 @@ const LandingPage = () => {
                     <div className="text-[#64748B] text-[10px] font-bold uppercase mb-1">{t('features.next_charge')}</div>
                     <div className="text-lg font-bold text-[#0F172A]">{t('features.tomorrow')}</div>
                   </div>
-                  <div className="col-span-2 bg-white p-6 rounded-[2rem] border border-[#E2E8F0] h-40 flex items-center justify-center shadow-inner">
-                    <BarChart3 size={48} className="text-[#E2E8F0]" />
+                  <div className="col-span-2 bg-white p-4 rounded-[2rem] border border-[#E2E8F0] h-44 flex items-center justify-center shadow-inner overflow-hidden">
+                    <MockupChart />
                   </div>
                 </div>
 
