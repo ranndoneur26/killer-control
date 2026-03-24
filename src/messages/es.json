@@ -301,7 +301,11 @@
     "already_account": "¿Ya tienes cuenta? ",
     "signup_free": "Regístrate gratis",
     "login_link": "Inicia sesión",
-    "premium_selected": "Plan Premium seleccionado"
+    "premium_selected": "Plan Premium seleccionado",
+    "forgot_pass_title": "Recuperar Contraseña",
+    "forgot_pass_subtitle": "Te enviaremos un enlace para restablecer tu cuenta.",
+    "send_reset_link": "Enviar enlace de recuperación",
+    "back_to_login": "Volver al inicio de sesión"
   },
   "onboarding": {
     "tagline": "Controla tus suscripciones, vigila el gasto y elimina lo que no usas.",

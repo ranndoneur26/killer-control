@@ -136,7 +136,11 @@ export function useAuth(addToast, navigate) {
         navigate('/dashboard');
       }
     } catch (ex) {
-      console.error("OAuth error:", ex);
+      console.error(`[Auth Debug] Details with ${providerName}:`, {
+        code: ex.code,
+        message: ex.message,
+        full: ex
+      });
       addToast('error', `Failed to authenticate with ${providerName}.`);
     } finally {
       setLoadingBtn(null);
@@ -146,15 +150,17 @@ export function useAuth(addToast, navigate) {
   const handleForgotPassword = useCallback(async () => {
     if (!email) {
       setEmailError('Enter your email to recover your password.');
-      return;
+      return false;
     }
     setLoadingBtn('email');
     try {
       await sendPasswordResetEmail(auth, email);
       addToast('success', 'We have sent you an email to reset your password.');
+      return true;
     } catch (error) {
       console.error("Forgot password error", error);
       addToast('error', 'Could not send reset email. Verify your address.');
+      return false;
     } finally {
       setLoadingBtn(null);
     }

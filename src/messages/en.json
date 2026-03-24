@@ -301,7 +301,11 @@
     "already_account": "Already have an account? ",
     "signup_free": "Sign up for free",
     "login_link": "Log in",
-    "premium_selected": "Premium Plan Selected"
+    "premium_selected": "Premium Plan Selected",
+    "forgot_pass_title": "Recover Password",
+    "forgot_pass_subtitle": "We will send you a link to reset your account.",
+    "send_reset_link": "Send recovery link",
+    "back_to_login": "Back to login"
   },
   "onboarding": {
     "tagline": "Control your subscriptions, track spending, and eliminate what you don't use.",

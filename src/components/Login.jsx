@@ -86,6 +86,7 @@ export default function Login() {
   const anyLoading = !!auth.loadingBtn;
   const [showTerms, setShowTerms] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
+  const [isResettingPassword, setIsResettingPassword] = useState(false);
 
   return (
     <div className="relative flex flex-col min-h-screen bg-[var(--bg)] text-[var(--text-primary)]">
@@ -108,35 +109,39 @@ export default function Login() {
           <Logo className="h-12" />
         </div>
 
-        {/* Heading — animates when switching login/register */}
+        {/* Heading — animates when switching login/register/reset */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={auth.isLogin ? 'login' : 'register'}
+            key={isResettingPassword ? 'reset' : (auth.isLogin ? 'login' : 'register')}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.2 }}
             className="text-center mb-8"
           >
-            {isPremium && !auth.isLogin && (
+            {isPremium && !auth.isLogin && !isResettingPassword && (
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-bold uppercase tracking-wider mb-4 border border-amber-200">
                 <Crown size={14} className="fill-amber-500 text-amber-600" />
                 {t('login.premium_selected')}
               </div>
             )}
             <h1 className="text-3xl font-bold mb-3 text-[var(--text-primary)]">
-              {auth.isLogin
-                ? t('login.welcome_back')
-                : isPremium
-                  ? t('login.premium_trial')
-                  : <span dangerouslySetInnerHTML={{ __html: t('login.create_account') }} />}
+              {isResettingPassword
+                ? t('login.forgot_pass_title') || 'Recuperar Contraseña'
+                : auth.isLogin
+                  ? t('login.welcome_back')
+                  : isPremium
+                    ? t('login.premium_trial')
+                    : <span dangerouslySetInnerHTML={{ __html: t('login.create_account') }} />}
             </h1>
             <p className="text-[var(--text-secondary)] text-sm leading-relaxed font-medium">
-              {auth.isLogin
-                ? t('login.login_subtitle')
-                : isPremium
-                  ? t('login.premium_subtitle')
-                  : <span dangerouslySetInnerHTML={{ __html: t('login.join_subtitle') }} />}
+              {isResettingPassword
+                ? t('login.forgot_pass_subtitle') || 'Te enviaremos un enlace para restablecer tu cuenta.'
+                : auth.isLogin
+                  ? t('login.login_subtitle')
+                  : isPremium
+                    ? t('login.premium_subtitle')
+                    : <span dangerouslySetInnerHTML={{ __html: t('login.join_subtitle') }} />}
             </p>
           </motion.div>
         </AnimatePresence>
@@ -170,106 +175,159 @@ export default function Login() {
           <div className="flex-1 border-t border-[var(--border)]" />
         </div>
 
-        {/* ── Email → Password flow ── */}
-        <form
-          onSubmit={auth.step === 'email' ? auth.handleEmailContinue : auth.handlePasswordSubmit}
-          className="space-y-4"
-          noValidate
-        >
-          {/* Email field */}
-          <div>
-            <div className="relative">
-              <input
-                type="email"
-                inputMode="email"
-                value={auth.email}
-                onChange={e => { auth.setEmail(e.target.value); auth.setEmailError(''); }}
-                placeholder={t('login.email_placeholder')}
-                disabled={auth.step === 'password' || anyLoading}
-                className={`w-full bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-2xl py-4 px-5 pr-12 outline-none border border-[var(--border)] shadow-sm
-                  focus:ring-2 focus:ring-[var(--primary)]/20 focus:border-[var(--primary)] transition placeholder-[var(--text-muted)] font-medium
-                  disabled:opacity-60 disabled:cursor-default
-                  ${auth.emailError ? 'border-red-500 ring-2 ring-red-500/10' : ''}`}
-              />
-              {auth.step === 'password'
-                ? (
-                  <button
-                    type="button"
-                    onClick={auth.backToEmail}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white transition"
-                    title="Change email"
-                  >
-                    <ArrowLeft size={18} />
-                  </button>
-                )
-                : <Mail className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={20} />
-              }
-            </div>
-            {auth.emailError && <p className="text-xs text-red-400 mt-1.5 pl-1">{auth.emailError}</p>}
-          </div>
-
-          {/* Password field — slides in when email is confirmed */}
-          <AnimatePresence>
-            {auth.step === 'password' && (
-              <motion.div
-                key="password-field-wrap"
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ type: 'spring', damping: 26, stiffness: 280 }}
-                className="overflow-hidden"
-              >
+        {/* ── Forms ── */}
+        <AnimatePresence mode="wait">
+          {isResettingPassword ? (
+            <motion.form
+              key="reset-form"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              onSubmit={async (e) => {
+                e.preventDefault();
+                const success = await auth.handleForgotPassword();
+                if (success) setIsResettingPassword(false);
+              }}
+              className="space-y-4"
+            >
+              <div>
                 <div className="relative">
                   <input
-                    type={auth.showPassword ? 'text' : 'password'}
-                    value={auth.password}
-                    onChange={e => { auth.setPassword(e.target.value); auth.setPassError(''); }}
-                    placeholder={auth.isLogin ? 'Your password' : 'Create a password (min. 8 chars)'}
-                    autoFocus
+                    type="email"
+                    value={auth.email}
+                    onChange={e => { auth.setEmail(e.target.value); auth.setEmailError(''); }}
+                    placeholder={t('login.email_placeholder')}
                     disabled={anyLoading}
+                    className={`w-full bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-2xl py-4 px-5 pr-12 outline-none border border-[var(--border)] shadow-sm focus:ring-2 focus:ring-[var(--primary)]/20 focus:border-[var(--primary)] transition font-medium ${auth.emailError ? 'border-red-500' : ''}`}
+                  />
+                  <Mail className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                </div>
+                {auth.emailError && <p className="text-xs text-red-400 mt-1.5 pl-1">{auth.emailError}</p>}
+              </div>
+
+              <AuthButton
+                type="submit"
+                variant="primary"
+                loading={auth.loadingBtn === 'email'}
+                disabled={anyLoading && auth.loadingBtn !== 'email'}
+              >
+                {t('login.send_reset_link') || 'Enviar enlace de recuperación'}
+              </AuthButton>
+
+              <button
+                type="button"
+                onClick={() => setIsResettingPassword(false)}
+                className="w-full text-center text-sm font-bold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition"
+              >
+                {t('login.back_to_login') || 'Volver al inicio de sesión'}
+              </button>
+            </motion.form>
+          ) : (
+            <motion.form
+              key="login-form"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
+              onSubmit={auth.step === 'email' ? auth.handleEmailContinue : auth.handlePasswordSubmit}
+              className="space-y-4"
+              noValidate
+            >
+              {/* Email field */}
+              <div>
+                <div className="relative">
+                  <input
+                    type="email"
+                    inputMode="email"
+                    value={auth.email}
+                    onChange={e => { auth.setEmail(e.target.value); auth.setEmailError(''); }}
+                    placeholder={t('login.email_placeholder')}
+                    disabled={auth.step === 'password' || anyLoading}
                     className={`w-full bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-2xl py-4 px-5 pr-12 outline-none border border-[var(--border)] shadow-sm
                       focus:ring-2 focus:ring-[var(--primary)]/20 focus:border-[var(--primary)] transition placeholder-[var(--text-muted)] font-medium
-                      disabled:opacity-60 ${auth.passError ? 'border-red-500 ring-2 ring-red-500/10' : ''}`}
+                      disabled:opacity-60 disabled:cursor-default
+                      ${auth.emailError ? 'border-red-500 ring-2 ring-red-500/10' : ''}`}
                   />
-                  <button
-                    type="button"
-                    onClick={() => auth.setShowPassword(v => !v)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)] hover:text-[var(--primary)] transition"
-                  >
-                    {auth.showPassword ? <EyeOff size={19} /> : <Eye size={19} />}
-                  </button>
+                  {auth.step === 'password'
+                    ? (
+                      <button
+                        type="button"
+                        onClick={auth.backToEmail}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white transition"
+                        title="Change email"
+                      >
+                        <ArrowLeft size={18} />
+                      </button>
+                    )
+                    : <Mail className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={20} />
+                  }
                 </div>
-                {auth.passError && <p className="text-xs text-red-400 mt-1.5 pl-1">{auth.passError}</p>}
+                {auth.emailError && <p className="text-xs text-red-400 mt-1.5 pl-1">{auth.emailError}</p>}
+              </div>
 
-                {/* Forgot password — login only */}
-                {auth.isLogin && (
-                  <div className="text-right mt-2">
-                    <button
-                      type="button"
-                      onClick={() => auth.handleForgotPassword()}
-                      className="text-xs text-[var(--primary)] font-bold hover:underline"
-                    >
-                      {t('login.forgot_pass')}
-                    </button>
-                  </div>
+              {/* Password field — slides in when email is confirmed */}
+              <AnimatePresence>
+                {auth.step === 'password' && (
+                  <motion.div
+                    key="password-field-wrap"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ type: 'spring', damping: 26, stiffness: 280 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="relative">
+                      <input
+                        type={auth.showPassword ? 'text' : 'password'}
+                        value={auth.password}
+                        onChange={e => { auth.setPassword(e.target.value); auth.setPassError(''); }}
+                        placeholder={auth.isLogin ? 'Your password' : 'Create a password (min. 8 chars)'}
+                        autoFocus
+                        disabled={anyLoading}
+                        className={`w-full bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-2xl py-4 px-5 pr-12 outline-none border border-[var(--border)] shadow-sm
+                          focus:ring-2 focus:ring-[var(--primary)]/20 focus:border-[var(--primary)] transition placeholder-[var(--text-muted)] font-medium
+                          disabled:opacity-60 ${auth.passError ? 'border-red-500 ring-2 ring-red-500/10' : ''}`}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => auth.setShowPassword(v => !v)}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)] hover:text-[var(--primary)] transition"
+                      >
+                        {auth.showPassword ? <EyeOff size={19} /> : <Eye size={19} />}
+                      </button>
+                    </div>
+                    {auth.passError && <p className="text-xs text-red-400 mt-1.5 pl-1">{auth.passError}</p>}
+
+                    {/* Forgot password — login only */}
+                    {auth.isLogin && (
+                      <div className="text-right mt-2">
+                        <button
+                          type="button"
+                          onClick={() => setIsResettingPassword(true)}
+                          className="text-xs text-[var(--primary)] font-bold hover:underline"
+                        >
+                          {t('login.forgot_pass')}
+                        </button>
+                      </div>
+                    )}
+                  </motion.div>
                 )}
-              </motion.div>
-            )}
-          </AnimatePresence>
+              </AnimatePresence>
 
-          {/* CTA Button */}
-          <AuthButton
-            type="submit"
-            variant="primary"
-            loading={auth.loadingBtn === 'email'}
-            disabled={anyLoading && auth.loadingBtn !== 'email'}
-          >
-            {auth.step === 'email'
-              ? <>{t('login.continue')} <ArrowRight size={18} /></>
-              : auth.isLogin ? t('login.login_btn') : t('login.signup_btn')
-            }
-          </AuthButton>
-        </form>
+              {/* CTA Button */}
+              <AuthButton
+                type="submit"
+                variant="primary"
+                loading={auth.loadingBtn === 'email'}
+                disabled={anyLoading && auth.loadingBtn !== 'email'}
+              >
+                {auth.step === 'email'
+                  ? <>{t('login.continue')} <ArrowRight size={18} /></>
+                  : auth.isLogin ? t('login.login_btn') : t('login.signup_btn')
+                }
+              </AuthButton>
+            </motion.form>
+          )}
+        </AnimatePresence>
 
         {/* ── Legal & Toggle ── */}
         <div className="mt-8 text-center space-y-5 pb-4">
