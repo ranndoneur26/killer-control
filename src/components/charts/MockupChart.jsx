@@ -61,16 +61,16 @@ export default function MockupChart() {
 
                     {/* Labels */}
                     <div className="absolute top-0 left-2 flex flex-col pt-1">
-                        <span className="text-[10px] font-black text-[#64748B] uppercase tracking-tighter">Antes</span>
-                        <span className="text-sm font-black text-[#EF4444]">62,00€/año</span>
+                        <span className="text-[10px] font-black text-[#64748B] uppercase tracking-tighter">{t('features.hero_chart_before')}</span>
+                        <span className="text-sm font-black text-[#EF4444]">62,00€/{t('features.hero_chart_year')}</span>
                     </div>
 
                     <div className="absolute bottom-0 right-4 flex flex-col items-end pb-1">
                         <div className="bg-[#10B981] text-white text-[9px] font-black px-2 py-0.5 rounded-full mb-1 flex items-center gap-1 animate-bounce">
-                            <Zap size={8} /> KILLER ACTION
+                            <Zap size={8} /> {t('features.hero_chart_action')}
                         </div>
-                        <span className="text-[10px] font-black text-[#64748B] uppercase tracking-tighter">Después</span>
-                        <span className="text-sm font-black text-[#10B981]">0,00€/año</span>
+                        <span className="text-[10px] font-black text-[#64748B] uppercase tracking-tighter">{t('features.hero_chart_after')}</span>
+                        <span className="text-sm font-black text-[#10B981]">0,00€/{t('features.hero_chart_year')}</span>
                     </div>
                 </div>
 
