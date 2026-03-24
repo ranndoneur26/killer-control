@@ -80,13 +80,13 @@ const HeroHeader = () => {
             </a>
           ))}
           {isHomePage ? (
-            <Link to="/login" onClick={handleLinkClick} className="block text-center bg-amber-500 hover:bg-amber-400 text-white px-5 py-3 rounded-xl font-bold">
+            <RouterLink to="/login" onClick={handleLinkClick} className="block text-center bg-amber-500 hover:bg-amber-400 text-white px-5 py-3 rounded-xl font-bold">
               {t('nav.login')}
-            </Link>
+            </RouterLink>
           ) : (
-            <Link to="/" onClick={handleLinkClick} className="block text-center bg-[#64748B] text-white px-5 py-3 rounded-xl font-bold">
+            <RouterLink to="/" onClick={handleLinkClick} className="block text-center bg-[#64748B] text-white px-5 py-3 rounded-xl font-bold">
               {t('nav.logout')}
-            </Link>
+            </RouterLink>
           )}
         </div>
       )}

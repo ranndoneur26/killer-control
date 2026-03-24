@@ -4,6 +4,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAuth } from '../hooks/useAuth';
 import { useToast } from '../hooks/useToast';
+import { useLanguage } from '../contexts/LanguageContext';
 import TermsModal from './TermsModal';
 import PrivacyModal from './PrivacyModal';
 import HeroHeader from './HeroHeader';
@@ -80,6 +81,7 @@ export default function Login() {
   }, [plan]);
 
   const { toasts, addToast, dismissToast } = useToast();
+  const { t } = useLanguage();
   const auth = useAuth(addToast, navigate);
   const anyLoading = !!auth.loadingBtn;
   const [showTerms, setShowTerms] = useState(false);
