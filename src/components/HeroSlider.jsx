@@ -1,45 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const AUTOPLAY_MS = 5000;
 
-const slides = [
-  {
-    id: 1,
-    label: "DETECTA SUBIDAS",
-    title: "Netflix subirá su precio",
-    body: "Te avisamos de que tu plan Estándar pasará de 12,99€ a 13,99€ el próximo mes.",
-    highlight: "+1€/mes",
-    badge: "Alerta de precio"
-  },
-  {
-    id: 2,
-    label: "EVITA OLVIDOS",
-    title: "Periodo de prueba finaliza",
-    body: "Tu prueba gratuita de Adobe Creative Cloud termina en 3 días. Cancela a tiempo.",
-    highlight: "3 días restantes",
-    badge: "Fin de promo"
-  },
-  {
-    id: 3,
-    label: "AHORRO INTELIGENTE",
-    title: "Suscripción duplicada",
-    body: "Parece que tienes Apple Music y Spotify activos. Podrías ahorrar 10,99€/mes.",
-    highlight: "Ahorra 130€/año",
-    badge: "Oportunidad"
-  },
-  {
-    id: 4,
-    label: "VISTA GLOBAL",
-    title: "Gasto mensual bajo control",
-    body: "Has reducido tus gastos fijos un 15% respecto al mes anterior. ¡Buen trabajo!",
-    highlight: "-15% vs mes anterior",
-    badge: "Informe mensual"
-  }
-];
-
 export default function HeroSlider() {
+  const { t } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const slides = t('hero_slides') || [];
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -82,7 +51,7 @@ export default function HeroSlider() {
         <div className="space-y-2 h-[130px]">
           <AnimatePresence mode="wait">
             <motion.div
-              key={activeSlide.id}
+              key={activeIndex}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
@@ -107,18 +76,17 @@ export default function HeroSlider() {
         </div>
 
         {/* Mini resumen inferior tipo dashboard */}
-        <div className="mt-6 grid grid-cols-2 gap-3 text-xs">
-          <div className="rounded-2xl bg-slate-900 px-3 py-2 transition-all duration-300 hover:bg-slate-800 border border-slate-800/50">
-            <p className="text-[10px] uppercase text-slate-500">GASTO MENSUAL</p>
-            <p className="text-base font-semibold text-white">124,50 €</p>
-            <p className="text-[11px] text-amber-500">-12,5% vs abril</p>
+        <div className="mt-6 flex items-center justify-around rounded-2xl border border-slate-800/50 bg-slate-900 px-3 py-2 text-xs transition-all duration-300 hover:bg-slate-800">
+          <div>
+            <div className="text-[10px] text-gray-500 font-medium">{t('hero_slider.stats_monthly')}</div>
+            <div className="text-sm font-bold text-white">42,97€</div>
+            <div className="text-[8px] text-gray-500 mt-0.5">{t('hero_slider.this_month')}</div>
           </div>
-          <div className="rounded-2xl bg-amber-500/10 px-3 py-2 transition-all duration-300 hover:bg-amber-500/20 border border-amber-500/20">
-            <p className="text-[10px] uppercase text-amber-500">
-              AHORRO POTENCIAL
-            </p>
-            <p className="text-base font-semibold text-amber-400">45,20 €</p>
-            <p className="text-[11px] text-amber-500">Este mes</p>
+          <div className="w-px h-8 bg-white/5" />
+          <div>
+            <div className="text-[10px] text-[var(--primary)] font-medium">{t('hero_slider.stats_potential')}</div>
+            <div className="text-sm font-bold text-white">10,99€</div>
+            <div className="text-[8px] text-[var(--primary)]/70 mt-0.5">{t('hero_slider.vs_prev')}</div>
           </div>
         </div>
 
@@ -126,14 +94,13 @@ export default function HeroSlider() {
         <div className="mt-4 flex justify-center gap-2">
           {slides.map((slide, index) => (
             <button
-              key={slide.id}
+              key={index}
               onClick={() => setActiveIndex(index)}
-              className={`h-2.5 rounded-full transition-all duration-300 ${
-                index === activeIndex
-                  ? "w-5 bg-amber-500"
-                  : "w-2.5 bg-slate-600 hover:bg-slate-400"
-              }`}
-              aria-label={slide.label}
+              className={`h-2.5 rounded-full transition-all duration-300 ${index === activeIndex
+                ? "w-5 bg-amber-500"
+                : "w-2.5 bg-slate-600 hover:bg-slate-400"
+                }`}
+              aria-label={`Slide ${index + 1}`}
             />
           ))}
         </div>

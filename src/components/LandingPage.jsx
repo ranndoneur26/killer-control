@@ -263,7 +263,7 @@ const LandingPage = () => {
       <section className="py-24 bg-[#F8FAFC] border-y border-[#E2E8F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-8">
-            {t.raw('testimonials').map((testi, i) => (
+            {t('testimonials').map((testi, i) => (
               <div key={i} className="bg-white p-8 rounded-[2.5rem] border border-[#E2E8F0] shadow-sm relative italic">
                 <div className="flex items-center gap-2 mb-4">
                   {[...Array(5)].map((_, j) => <Star key={j} size={14} fill="#F59E0B" className="text-[#F59E0B]" />)}
@@ -291,61 +291,85 @@ const LandingPage = () => {
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0F0F1A] to-[#1A1040] pointer-events-none"></div>
 
-        <div className="max-w-[780px] mx-auto px-6 relative z-10">
+        <style>
+          {`
+            @keyframes softPurpleGlow {
+              0%, 100% { box-shadow: 0 0 8px #8B5CF6, inset 0 0 2px #8B5CF6; opacity: 0.7; }
+              50% { box-shadow: 0 0 20px #8B5CF6, inset 0 0 6px #8B5CF6; opacity: 1; }
+            }
+            .animate-purple-glow {
+              animation: softPurpleGlow 3s infinite ease-in-out;
+            }
+          `}
+        </style>
+
+        <div className="max-w-[780px] mx-auto px-4 sm:px-6 relative z-10">
           <h2 className="text-3xl lg:text-4xl font-black text-center mb-12 bg-gradient-to-r from-amber-500 to-amber-300 bg-clip-text text-transparent tracking-tight">
             {t('faq.title')}
           </h2>
 
           <div className="space-y-3">
             {[1, 2, 3, 4, 5].map((num, i) => {
-              const Icon = faqIcons[i];
               const isActive = activeFAQ === i;
 
               return (
                 <div
                   key={i}
                   className={`group rounded-2xl overflow-hidden transition-all duration-300 ${isActive
-                    ? 'bg-white/5 border-white/10 shadow-[0_0_20px_rgba(245,158,11,0.15)] border-l-4 border-l-amber-500 border-t border-r border-b'
-                    : 'bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] hover:shadow-[0_0_20px_rgba(245,158,11,0.15)] border-l border-l-transparent'
+                    ? 'bg-white/5 border-white/10 shadow-[0_0_20px_rgba(139,92,246,0.15)] border-t border-r border-b'
+                    : 'bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] hover:shadow-[0_0_20px_rgba(139,92,246,0.1)] border-l border-l-transparent'
                     } backdrop-blur-md relative`}
                 >
-                  {/* Left Border Glow Animation */}
+                  {/* Left Border Glow Animation (Morado) */}
                   {isActive && (
-                    <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-amber-500 animate-pulse shadow-[0_0_15px_#F59E0B]"></div>
+                    <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-[#8B5CF6] animate-purple-glow z-20"></div>
                   )}
 
                   <button
                     onClick={() => toggleFAQ(i)}
-                    className="w-full px-6 py-5 flex items-center justify-between cursor-pointer text-left relative z-10"
+                    className="w-full px-4 py-4 md:px-6 md:py-5 flex items-center justify-between cursor-pointer text-left relative z-10"
                   >
-                    <div className="flex items-center gap-4">
-                      <div className={`shrink-0 transition-colors duration-300 ${isActive ? 'text-amber-500' : 'text-slate-400 group-hover:text-white'}`}>
-                        {Icon && <Icon size={20} />}
-                      </div>
-                      <span className="text-white font-bold text-[17px] leading-snug">
-                        {t(`faq.q${num}`)}
+                    <div className="flex items-center gap-3">
+                      <span className="text-white font-bold text-[15px] md:text-[17px] leading-snug flex items-start gap-3">
+                        {(() => {
+                          const questionText = t(`faq.q${num}`);
+                          // Assuming format is "Emoji ¿Questiontext?"
+                          const spaceIdx = questionText.indexOf(' ');
+                          const emoji = questionText.substring(0, spaceIdx);
+                          const restText = questionText.substring(spaceIdx + 1);
+                          return (
+                            <>
+                              <span className="text-[18px] md:text-[20px] shrink-0 mt-[2px] opacity-80 md:opacity-100">{emoji}</span>
+                              <span className="mt-[3px]">{restText}</span>
+                            </>
+                          );
+                        })()}
                       </span>
                     </div>
 
-                    <div className={`w-8 h-8 rounded-full border border-white/10 flex items-center justify-center shrink-0 transition-all duration-300 ${isActive ? 'bg-amber-500 border-amber-500 rotate-45' : 'bg-transparent group-hover:border-white/30'
+                    <div className={`w-8 h-8 rounded-full border border-white/10 flex items-center justify-center shrink-0 transition-all duration-300 ml-4 ${isActive ? 'bg-[#8B5CF6] border-[#8B5CF6] rotate-45' : 'bg-transparent group-hover:border-white/30'
                       }`}>
                       <Plus size={18} className="text-white" />
                     </div>
                   </button>
 
-                  <AnimatePresence>
+                  <AnimatePresence initial={false}>
                     {isActive && (
                       <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
+                        initial={{ height: 0 }}
+                        animate={{ height: 'auto' }}
+                        exit={{ height: 0 }}
                         transition={{ duration: 0.35, ease: [0.04, 0.62, 0.23, 0.98] }}
+                        className="overflow-hidden"
                       >
-                        <div
-                          className="px-6 pb-6 pl-[60px] text-[#CBD5E1] text-[15px] leading-[1.7] font-medium"
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.25, delay: 0.05 }}
+                          className="px-4 pb-5 md:px-6 md:pb-6 md:pl-[56px] text-[#CBD5E1] text-[14px] md:text-[15px] leading-[1.7] font-medium"
                           dangerouslySetInnerHTML={{ __html: t(`faq.a${num}`) }}
-                        >
-                        </div>
+                        />
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -406,8 +430,8 @@ const LandingPage = () => {
             </div>
           </div>
 
-          <div className="pt-8 border-t border-[#f1f5f9] text-center text-[10px] font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500">
-            © 2026 <span className="text-[#F59E0B]" translate="no">Killer</span> <span translate="no">Control</span>. {t('footer.tagline')}
+          <div className="pt-8 border-t border-[#f1f5f9] text-center text-[10px] font-bold uppercase tracking-widest text-[#94A3B8]">
+            © 2026, <span className="text-[#F59E0B]" translate="no">Killer</span> <span translate="no">Control</span> | {t('footer.tagline')}
           </div>
         </div>
       </footer>

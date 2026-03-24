@@ -1,27 +1,12 @@
 import React from 'react';
 import { X, Cookie, ShieldCheck } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
-
-const SECTIONS = [
-  {
-    n: '1', title: 'What are cookies?',
-    body: `Cookies are small text files that are stored on your device (computer, tablet, or mobile) when you visit a website. They are used to make the site work correctly, be more secure, and to provide information to site owners about how it is used.`,
-  },
-  {
-    n: '2', title: 'Types of cookies we use',
-    body: `In Killer Control we use the following categories of cookies:\n\n• Technical Cookies: Necessary for the operation of the platform, such as session management or security preferences.\n• Analysis Cookies: Allow us to measure traffic and understand which sections are the most visited to improve the service.\n• Preference Cookies: Save settings such as language or visual theme.`,
-  },
-  {
-    n: '3', title: 'Management and deactivation',
-    body: `You can configure your browser to block or alert you about these cookies, but some parts of the site will stop working. Most browsers allow you to manage cookie preferences through their settings or privacy configuration.`,
-  },
-  {
-    n: '4', title: 'Policy updates',
-    body: `We may update this Cookie Policy in the future. We recommend reviewing it periodically to be informed about how we protect your privacy.`,
-  }
-];
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function CookiesModal({ open, onClose }) {
+  const { t } = useLanguage();
+  const SECTIONS = t('legal.cookies.sections') || [];
+
   return (
     <AnimatePresence>
       {open && (
@@ -45,8 +30,8 @@ export default function CookiesModal({ open, onClose }) {
                 <Cookie size={20} className="text-orange-400" />
               </div>
               <div className="flex-1 min-w-0">
-                <h2 className="font-bold text-lg leading-tight text-white">Cookie Policy</h2>
-                <p className="text-xs text-gray-500 mt-0.5"><span className="text-[#F59E0B]">Killer</span> Control · Full transparency</p>
+                <h2 className="font-bold text-lg leading-tight text-white">{t('legal.cookies.title')}</h2>
+                <p className="text-xs text-gray-500 mt-0.5"><span className="text-[#F59E0B]">Killer</span> Control · {t('legal.cookies.subtitle')}</p>
               </div>
               <button
                 onClick={onClose}
@@ -61,14 +46,14 @@ export default function CookiesModal({ open, onClose }) {
               <div className="flex items-start gap-3 bg-orange-500/5 border border-orange-500/15 rounded-2xl px-4 py-3 text-white">
                 <ShieldCheck size={16} className="text-orange-400 shrink-0 mt-0.5" />
                 <p className="text-xs text-gray-300 leading-relaxed">
-                  We use minimal cookies to ensure the best technical and analytical experience in Killer Control.
+                  {t('legal.cookies.intro')}
                 </p>
               </div>
 
-              {SECTIONS.map(s => (
-                <div key={s.n} className="space-y-2">
+              {SECTIONS.map((s, idx) => (
+                <div key={idx} className="space-y-2">
                   <h3 className="font-bold text-white text-sm flex items-center gap-2">
-                    <span className="text-[10px] text-orange-400 bg-orange-400/10 px-1.5 py-0.5 rounded">0{s.n}</span>
+                    <span className="text-[10px] text-orange-400 bg-orange-400/10 px-1.5 py-0.5 rounded">0{idx + 1}</span>
                     {s.title}
                   </h3>
                   <div className="text-sm text-gray-400 leading-relaxed pl-6 border-l border-[#1e293b]">
@@ -89,7 +74,7 @@ export default function CookiesModal({ open, onClose }) {
                 onClick={onClose}
                 className="w-full bg-[#F59E0B]/10 text-[#F59E0B] border border-[#F59E0B]/20 font-bold rounded-2xl py-3.5 hover:bg-[#F59E0B]/20 transition text-sm"
               >
-                Understood
+                {t('legal.understood')}
               </button>
             </div>
           </motion.div>

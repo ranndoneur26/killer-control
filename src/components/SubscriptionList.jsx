@@ -35,6 +35,8 @@ const getCategoryIcon = (categoryId) => {
   return cat ? cat.icon : Tv;
 };
 
+import { useSubscriptions } from '../hooks/useSubscriptions';
+
 export default function SubscriptionList() {
   const { t } = useLanguage();
   const navigate = useNavigate();
@@ -46,18 +48,21 @@ export default function SubscriptionList() {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('date'); // 'price' | 'date' | 'name'
 
+  const { subscriptions: firebaseSubs, loading } = useSubscriptions();
+
   const activeCategory = CATEGORIES.find(c => c.id === activeTab);
 
-  const filteredSubs = MOCK_SUBSCRIPTIONS
-    .filter(sub => (activeTab === 'all' || sub.category === activeTab))
-    .filter(sub => sub.name.toLowerCase().includes(searchTerm.toLowerCase()))
+  const filteredSubs = firebaseSubs
+    .filter(sub => (activeTab === 'all' || sub.categoria === activeTab.charAt(0).toUpperCase() + activeTab.slice(1) || sub.categoria === activeTab))
+    .filter(sub => sub.nombre?.toLowerCase().includes(searchTerm.toLowerCase()))
     .sort((a, b) => {
-      if (sortBy === 'price') return b.price - a.price;
-      if (sortBy === 'name') return a.name.localeCompare(b.name);
+      if (sortBy === 'price') return b.precio - a.precio;
+      if (sortBy === 'name') return (a.nombre || '').localeCompare(b.nombre || '');
+      // Example sorting by date; in real life parse timestamp
       return 0; // default order
     });
 
-  const totalMonthly = filteredSubs.reduce((acc, s) => acc + s.price, 0);
+  const totalMonthly = filteredSubs.reduce((acc, s) => acc + (s.precio || 0), 0);
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text-primary)] pb-28">
@@ -155,8 +160,8 @@ export default function SubscriptionList() {
                         setIsCategoryOpen(false);
                       }}
                       className={`flex items-center gap-3 p-4 rounded-2xl transition-all ${activeTab === category.id
-                          ? 'bg-[var(--primary)] text-white shadow-lg shadow-[var(--primary)]/20'
-                          : 'bg-[var(--bg)] text-[var(--text-secondary)] border border-[var(--border)] hover:border-[var(--primary)]/50 hover:bg-[var(--bg-elevated)]'
+                        ? 'bg-[var(--primary)] text-white shadow-lg shadow-[var(--primary)]/20'
+                        : 'bg-[var(--bg)] text-[var(--text-secondary)] border border-[var(--border)] hover:border-[var(--primary)]/50 hover:bg-[var(--bg-elevated)]'
                         }`}
                     >
                       <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${activeTab === category.id ? 'bg-white/20' : 'bg-[var(--bg-surface)] border border-[var(--border)]'
@@ -173,10 +178,13 @@ export default function SubscriptionList() {
         </div>
 
         <div className="space-y-3">
-          {filteredSubs.length > 0 ? filteredSubs.map((sub, index) => {
-            const Icon = getCategoryIcon(sub.category);
-            const cycleText = sub.cycleKey ? t(sub.cycleKey) : sub.cycle;
-            const billingText = sub.nextBillingKey ? t(sub.nextBillingKey) : sub.nextBilling;
+          {loading ? (
+            <div className="py-20 text-center"><p>{t('login.continue')}...</p></div>
+          ) : filteredSubs.length > 0 ? filteredSubs.map((sub, index) => {
+            const Icon = getCategoryIcon(sub.categoria?.toLowerCase() || 'other');
+            // Basic mapping for cycle and nextBilling for now
+            const cycleText = sub.ciclo || 'Mensual';
+            const billingText = sub.proximo_cobro || '---';
 
             return (
               <motion.div
@@ -187,23 +195,21 @@ export default function SubscriptionList() {
                 onClick={() => navigate(`/subscriptions/${sub.id}`)}
                 className="bg-[var(--bg-surface)] flex items-center gap-4 p-4 rounded-2xl cursor-pointer hover:bg-[var(--bg-elevated)] border border-[var(--border)] hover:border-[var(--primary)] shadow-sm transition-all"
               >
-                <div className={`w-12 h-12 rounded-xl bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center ${sub.color}`}>
+                <div className={`w-12 h-12 rounded-xl bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center text-[var(--primary)]`}>
                   <Icon size={24} />
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-black text-[var(--text-primary)] truncate">{sub.name}</h3>
+                  <h3 className="font-black text-[var(--text-primary)] truncate">{sub.nombre}</h3>
                   <div className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] mt-1 flex items-center gap-2">
                     <span>{cycleText}</span>
                     <span className="w-1 h-1 bg-[var(--border)] rounded-full"></span>
-                    <span className={sub.nextBillingKey === 'subscriptions.tomorrow' ? 'text-[#EF4444]' : ''}>
-                      {billingText}
-                    </span>
+                    <span>{billingText}</span>
                   </div>
                 </div>
 
                 <div className="text-right">
-                  <div className="font-black text-[var(--text-primary)] text-sm">{sub.price} €</div>
+                  <div className="font-black text-[var(--text-primary)] text-sm">{sub.precio} €</div>
                 </div>
               </motion.div>
             )

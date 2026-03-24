@@ -1,21 +1,21 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
+import { useUserProfile } from '../hooks/useUserProfile';
 
 const AppearanceContext = createContext();
 
 export function AppearanceProvider({ children }) {
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
-  const [density, setDensity] = useState(() => localStorage.getItem('kc-density') || 'normal');
+  const [theme, setThemeState] = useState(() => localStorage.getItem('theme') || 'light');
+  const [density, setDensityState] = useState(() => localStorage.getItem('kc-density') || 'normal');
+  const { profile, updateProfile } = useUserProfile();
 
   // Apply theme to <html>
   useEffect(() => {
     const root = document.documentElement;
-
     if (theme === 'dark') {
       root.classList.add('dark');
     } else {
       root.classList.remove('dark');
     }
-
     localStorage.setItem('theme', theme);
   }, [theme]);
 
@@ -24,6 +24,29 @@ export function AppearanceProvider({ children }) {
     document.documentElement.setAttribute('data-density', density);
     localStorage.setItem('kc-density', density);
   }, [density]);
+
+  // Sync with Firestore profile when it loads
+  useEffect(() => {
+    if (profile) {
+      if (profile.tema && profile.tema !== theme) setThemeState(profile.tema);
+      if (profile.densidad && profile.densidad !== density) setDensityState(profile.densidad);
+    }
+  }, [profile]);
+
+  // Wrappers to update both local state and Firestore
+  const setTheme = useCallback(async (newTheme) => {
+    setThemeState(newTheme);
+    if (profile) {
+      try { await updateProfile({ tema: newTheme }); } catch (e) { }
+    }
+  }, [profile, updateProfile]);
+
+  const setDensity = useCallback(async (newDensity) => {
+    setDensityState(newDensity);
+    if (profile) {
+      try { await updateProfile({ densidad: newDensity }); } catch (e) { }
+    }
+  }, [profile, updateProfile]);
 
   return (
     <AppearanceContext.Provider value={{ theme, setTheme, density, setDensity }}>

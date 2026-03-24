@@ -1,23 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { User, Mail, Shield, Check, Loader2 } from 'lucide-react';
+import { useUserProfile } from '../../hooks/useUserProfile';
+import { useToast } from '../../hooks/useToast';
 
 export default function PersonalDataSettings() {
+  const { profile, loading: profileLoading, updateProfile } = useUserProfile();
+  const { addToast } = useToast();
+
   const [loading, setLoading] = useState(false);
   const [saved, setSaved] = useState(false);
-  const [form, setForm] = useState({
-    name: 'Killer User',
-    email: 'user@killercontrol.app',
-    phone: '+34 600 000 000'
-  });
+  const [form, setForm] = useState({ name: '', email: '' });
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    if (profile) {
+      setForm({
+        name: profile.nombre || '',
+        email: profile.email || ''
+      });
+    }
+  }, [profile]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (profileLoading || loading) return;
+
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      await updateProfile({ nombre: form.name, email: form.email });
       setSaved(true);
+      addToast('success', 'Profile updated successfully!');
       setTimeout(() => setSaved(false), 2000);
-    }, 1000);
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      addToast('error', 'Could not update profile data.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -36,7 +54,7 @@ export default function PersonalDataSettings() {
               <input
                 type="text"
                 value={form.name}
-                onChange={e => setForm({...form, name: e.target.value})}
+                onChange={e => setForm({ ...form, name: e.target.value })}
                 className="w-full bg-[var(--bg-elevated)] border border-[var(--border)] rounded-2xl py-3.5 pl-12 pr-4 text-[var(--text-primary)] focus:outline-none focus:border-[var(--primary)] transition font-bold shadow-inner"
               />
             </div>
@@ -49,7 +67,7 @@ export default function PersonalDataSettings() {
               <input
                 type="email"
                 value={form.email}
-                onChange={e => setForm({...form, email: e.target.value})}
+                onChange={e => setForm({ ...form, email: e.target.value })}
                 className="w-full bg-[var(--bg-elevated)] border border-[var(--border)] rounded-2xl py-3.5 pl-12 pr-4 text-[var(--text-primary)] focus:outline-none focus:border-[var(--primary)] transition font-bold shadow-inner"
               />
             </div>
@@ -58,10 +76,9 @@ export default function PersonalDataSettings() {
 
         <button
           type="submit"
-          disabled={loading}
-          className={`w-full py-4 rounded-2xl font-black flex items-center justify-center gap-2 transition-all shadow-lg ${
-            saved ? 'bg-[#10B981] text-white' : 'bg-[var(--primary)] text-white hover:opacity-90 shadow-[var(--primary)]/20'
-          }`}
+          disabled={loading || profileLoading}
+          className={`w-full py-4 rounded-2xl font-black flex items-center justify-center gap-2 transition-all shadow-lg ${saved ? 'bg-[#10B981] text-white' : 'bg-[var(--primary)] text-white hover:opacity-90 shadow-[var(--primary)]/20'
+            } ${(loading || profileLoading) ? 'opacity-70 cursor-not-allowed' : ''}`}
         >
           {loading ? <Loader2 size={18} className="animate-spin" /> : saved ? <><Check size={18} /> Changes saved</> : 'Update Profile'}
         </button>

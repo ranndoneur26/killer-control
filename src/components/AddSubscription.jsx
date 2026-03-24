@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { auth } from '../lib/firebase';
+import { addSubscription } from '../lib/db';
 import { ArrowLeft, Search, Plus, Lock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Navigation from './Navigation';
@@ -37,16 +39,45 @@ export default function AddSubscription() {
     setStep(2);
   };
 
-  const handleSave = (formData) => {
-    addToast('success', t('form.save_btn') + `: ${formData.name}`);
-    setTimeout(() => {
-      navigate('/dashboard');
-    }, 1000);
+
+
+  const handleSave = async (formData) => {
+    try {
+      if (!auth.currentUser) {
+        addToast('error', "User not authenticated");
+        return;
+      }
+
+      const mappedData = {
+        nombre: formData.name,
+        precio: Number(formData.price),
+        ciclo: formData.cycle,
+        proximo_cobro: formData.nextBillingDate,
+        categoria: formData.category,
+        moneda: formData.currency,
+        metodo_pago: formData.paymentMethod,
+        compartido: formData.isShared,
+        es_prueba_gratuita: formData.isFreeTrial,
+        preaviso_dias: Number(formData.alertDays) || 3,
+        cancelacion_url: formData.cancelUrl,
+        notas: formData.notes
+      };
+
+      await addSubscription(auth.currentUser.uid, mappedData);
+
+      addToast('success', t('form.save_btn') + `: ${formData.name}`);
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 1000);
+    } catch (error) {
+      console.error("Error saving subscription:", error);
+      addToast('error', "Could not save subscription");
+    }
   };
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#0A0F1E] text-gray-900 dark:text-gray-50 flex flex-col pb-28">
-      <HeroHeader darkBackground={true} />
+      <HeroHeader />
       <div className="p-6 max-w-lg mx-auto pt-20 flex-1">
         <header className="flex items-center gap-4 mb-8">
           <button onClick={() => {

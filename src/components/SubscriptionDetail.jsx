@@ -6,103 +6,96 @@ import { motion } from 'framer-motion';
 import SubscriptionForm from './SubscriptionForm';
 import HeroHeader from './HeroHeader';
 import { useLanguage } from '../contexts/LanguageContext';
-
-// Mock data until DB is connected
-const mockHistoryData = [
-  { month: 'Jan', price: 12.99 },
-  { month: 'Feb', price: 12.99 },
-  { month: 'Mar', price: 15.99 }, // Price hike detected
-  { month: 'Apr', price: 15.99 },
-  { month: 'May', price: 15.99 },
-];
+import { useSubscriptions } from '../hooks/useSubscriptions';
+import { auth } from '../lib/firebase';
+import { updateSubscription, deleteSubscription } from '../lib/db';
+import { useToast } from '../hooks/useToast';
 
 export default function SubscriptionDetail() {
   const { t } = useLanguage();
   const navigate = useNavigate();
   const { id } = useParams();
   const [isEditing, setIsEditing] = useState(false);
+  const { addToast } = useToast();
 
-  // Setup dynamic mock data - one customised entry per category
-  const MOCK_DATA = {
-    // STREAMING - Netflix
-    '1': {
-      name: 'Netflix', price: 15.99, cycle: 'Monthly', webUrl: 'https://netflix.com',
-      startDate: '2021-03-10', annualPrice: 191.88, category: 'streaming',
-      card: 'Visa •••• 4242', color: 'bg-red-600', hikeDetected: true,
-      planType: 'Premium', familySlots: 4, altPlanCost: 119.88,
-      noticeDays: '3 Days before', currency: 'EUR (€)', nextChargeDate: '2026-05-14'
-    },
-    // MUSIC - Spotify
-    '2': {
-      name: 'Spotify', price: 10.99, cycle: 'Monthly', webUrl: 'https://spotify.com',
-      startDate: '2020-07-15', annualPrice: 131.88, category: 'music',
-      card: 'Mastercard •••• 8810', color: 'bg-green-600', hikeDetected: false,
-      planType: 'Individual Premium', familySlots: 1, altPlanCost: 99.99,
-      noticeDays: '3 Days before', currency: 'EUR (€)', nextChargeDate: '2026-05-12'
-    },
-    // GAMING - Xbox Game Pass
-    '3': {
-      name: 'Xbox Game Pass', price: 14.99, cycle: 'Monthly', webUrl: 'https://xbox.com',
-      startDate: '2023-01-01', annualPrice: 179.88, category: 'gaming',
-      card: 'Visa •••• 4242', color: 'bg-green-500', hikeDetected: false,
-      planType: 'Ultimate', familySlots: 1, altPlanCost: 129.99,
-      noticeDays: '1 Day before', currency: 'EUR (€)', nextChargeDate: '2026-05-15'
-    },
-    // HEALTH - Seguro Dental
-    '4': {
-      name: 'Sanitas Dental Insurance', price: 18.50, cycle: '28 Days', webUrl: 'https://sanitas.es',
-      startDate: '2025-12-01', annualPrice: 240.50, category: 'health',
-      card: 'Bank Account ES12', color: 'bg-blue-400', hikeDetected: false,
-      permanenceEnd: '2026-12-01',
-      noticeDays: '7 Days before', currency: 'EUR (€)', nextChargeDate: '2026-05-25'
-    },
-    // TELECOM - Movistar
-    '5': {
-      name: 'Movistar Fusion+', price: 65.00, cycle: 'Monthly', webUrl: 'https://movistar.es',
-      startDate: '2024-03-01', annualPrice: 780.00, category: 'telecom',
-      card: 'Bank Debit BBVA', color: 'bg-blue-600', hikeDetected: true,
-      permanenceEnd: '2026-03-01', packServices: 'Fiber 1Gb + 2 Mobile Lines + TV',
-      noticeDays: '7 Days before', currency: 'EUR (€)', nextChargeDate: '2026-06-01'
-    },
-    // PRESS - New York Times
-    '6': {
-      name: 'The New York Times', price: 1.00, cycle: 'Monthly', webUrl: 'https://nytimes.com',
-      startDate: '2026-01-01', annualPrice: 12.00, category: 'press',
-      card: 'PayPal', color: 'bg-gray-700', hikeDetected: false,
-      isPromo: true, postPromoPrice: 15.99, promoEnd: '2026-07-01',
-      noticeDays: '3 Days before', currency: 'USD ($)', nextChargeDate: '2026-06-01'
-    },
-    // OTHER - Gestor de Contraseñas
-    '7': {
-      name: 'Password Manager', price: 2.99, cycle: 'Monthly', webUrl: 'https://bitwarden.com',
-      startDate: '2025-06-01', annualPrice: 35.88, category: 'other',
-      card: 'Visa •••• 4242', color: 'bg-gray-600', hikeDetected: false,
-      noticeDays: '3 Days before', currency: 'EUR (€)', nextChargeDate: '2026-06-10'
-    },
-  };
+  const { subscriptions: firebaseSubs, loading } = useSubscriptions();
+  const initialData = firebaseSubs.find(s => s.id === id);
+  const [subData, setSubData] = useState(null);
 
-  const initialMock = MOCK_DATA[id] || MOCK_DATA['1'];
-  const [subData, setSubData] = useState(initialMock);
-
-  // Update mock if URL id changes (useful during testing)
   useEffect(() => {
-    if (MOCK_DATA[id]) {
-      setSubData(MOCK_DATA[id]);
+    if (initialData) {
+      setSubData(initialData);
     }
-  }, [id]);
+  }, [initialData]);
 
-  const handleSave = () => {
-    // Save to DB...
-    setIsEditing(false);
+  const handleSave = async (formData) => {
+    try {
+      if (!auth.currentUser) return;
+
+      const mappedData = {
+        nombre: formData.name,
+        precio: Number(formData.price),
+        ciclo: formData.cycle,
+        proximo_cobro: formData.nextBillingDate,
+        categoria: formData.category,
+        moneda: formData.currency,
+        metodo_pago: formData.paymentMethod,
+        compartido: formData.isShared,
+        es_prueba_gratuita: formData.isFreeTrial,
+        preaviso_dias: Number(formData.alertDays) || 3,
+        cancelacion_url: formData.cancelUrl,
+        notas: formData.notes
+      };
+
+      await updateSubscription(auth.currentUser.uid, id, mappedData);
+      setIsEditing(false);
+      addToast('success', t('form.save_btn') + "!");
+    } catch (error) {
+      console.error("Error updating subscription:", error);
+      addToast('error', "Could not update subscription");
+    }
   };
 
-  const categoryName = subData.category === 'streaming' ? t('categories.entertainment') :
-    subData.category === 'music' ? t('categories.music') :
-      subData.category === 'gaming' ? t('categories.gaming') :
-        subData.category === 'health' ? t('categories.health') :
-          subData.category === 'telecom' ? t('categories.telecom') :
-            subData.category === 'press' ? t('categories.press') :
-              subData.category === 'other' ? t('categories.other') : subData.category;
+  const handleDelete = async () => {
+    if (window.confirm("Are you sure you want to delete this subscription?")) {
+      try {
+        await deleteSubscription(auth.currentUser.uid, id);
+        addToast('success', "Subscription deleted");
+        navigate('/subscriptions');
+      } catch (error) {
+        console.error("Error deleting subscription:", error);
+        addToast('error', "Could not delete subscription");
+      }
+    }
+  };
+
+  if (loading || !subData) {
+    return <div className="min-h-screen bg-[var(--bg)] flex items-center justify-center p-6 text-[var(--text-primary)]">{t('login.continue')}...</div>;
+  }
+
+  const categoryName = subData.categoria?.toLowerCase() === 'streaming' ? t('categories.entertainment') :
+    subData.categoria?.toLowerCase() === 'music' ? t('categories.music') :
+      subData.categoria?.toLowerCase() === 'gaming' ? t('categories.gaming') :
+        subData.categoria?.toLowerCase() === 'health' ? t('categories.health') :
+          subData.categoria?.toLowerCase() === 'telecom' ? t('categories.telecom') :
+            subData.categoria?.toLowerCase() === 'press' ? t('categories.press') :
+              subData.categoria?.toLowerCase() === 'other' ? t('categories.other') : subData.categoria;
+
+  // Prepare data format for the Form component
+  const formInitialData = {
+    name: subData.nombre,
+    price: subData.precio,
+    cycle: subData.ciclo,
+    nextBillingDate: subData.proximo_cobro,
+    category: subData.categoria,
+    currency: subData.moneda,
+    paymentMethod: subData.metodo_pago,
+    isShared: subData.compartido,
+    isFreeTrial: subData.es_prueba_gratuita,
+    alertDays: subData.preaviso_dias?.toString(),
+    cancelUrl: subData.cancelacion_url,
+    notes: subData.notas,
+  };
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text-primary)] flex flex-col">
@@ -132,11 +125,8 @@ export default function SubscriptionDetail() {
           // --- EDIT MODE (Unified Form) ---
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="pb-10">
             <SubscriptionForm
-              initialData={subData}
-              onSave={(formData) => {
-                setSubData({ ...subData, ...formData });
-                setIsEditing(false);
-              }}
+              initialData={formInitialData}
+              onSave={handleSave}
               onCancel={() => setIsEditing(false)}
               title={<span dangerouslySetInnerHTML={{ __html: t('subscription_detail.edit_title') }}></span>}
             />
@@ -146,10 +136,10 @@ export default function SubscriptionDetail() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             {/* Hero Info */}
             <div className="flex flex-col items-center mb-10 text-center">
-              <div className={`w-24 h-24 rounded-3xl ${subData.color} flex items-center justify-center text-white text-3xl font-black shadow-xl mb-4 border-4 border-[var(--bg)]`}>
-                {subData.name.charAt(0)}
+              <div className={`w-24 h-24 rounded-3xl bg-[var(--bg-elevated)] border border-[var(--border)] flex items-center justify-center text-[var(--primary)] text-3xl font-black shadow-xl mb-4`}>
+                {subData.nombre?.charAt(0) || '?'}
               </div>
-              <h1 className="text-3xl font-black mb-1 text-[var(--text-primary)]">{subData.name}</h1>
+              <h1 className="text-3xl font-black mb-1 text-[var(--text-primary)]">{subData.nombre}</h1>
               <div className="text-[var(--primary)] font-black bg-[var(--primary)]/10 px-4 py-1.5 rounded-full text-xs uppercase tracking-widest border border-[var(--primary)]/10">
                 {categoryName}
               </div>
@@ -162,11 +152,11 @@ export default function SubscriptionDetail() {
               </div>
               <div className="relative z-10">
                 <p className="text-xs text-[var(--text-secondary)] font-black uppercase tracking-widest mb-2">{t('subscription_detail.current_spend')}</p>
-                <div className="text-5xl font-black text-[var(--text-primary)] tracking-tight">{subData.price}€<span className="text-lg text-[var(--text-secondary)] font-medium ml-1">/{subData.cycle.toLowerCase() === 'annual' ? t('pricing.premium_annual').split(' ')[0].toLowerCase() : 'mo'}</span></div>
+                <div className="text-5xl font-black text-[var(--text-primary)] tracking-tight">{subData.precio}€<span className="text-lg text-[var(--text-secondary)] font-medium ml-1">/{subData.ciclo?.toLowerCase() === 'annual' ? t('pricing.premium_annual').split(' ')[0].toLowerCase() : 'mo'}</span></div>
               </div>
               <div className="text-right relative z-10">
                 <p className="text-[10px] text-[var(--text-secondary)] font-black uppercase tracking-tighter mb-1">{t('subscription_detail.annual_projected')}</p>
-                <p className="font-black text-[#10B981] text-lg">{subData.annualPrice}€</p>
+                <p className="font-black text-[#10B981] text-lg">{(subData.precio * 12).toFixed(2)}€</p>
               </div>
             </div>
 
@@ -214,28 +204,28 @@ export default function SubscriptionDetail() {
 
             {/* Details List */}
             <div className="space-y-4 mb-10">
-              {subData.webUrl && (
+              {subData.cancelacion_url && (
                 <div className="flex items-center justify-between py-4 border-b border-[var(--border)]">
                   <div className="flex items-center gap-3 text-[var(--text-secondary)]">
                     <span className="font-black text-xs uppercase tracking-widest">Web</span>
                   </div>
                   <a
-                    href={subData.webUrl.startsWith('http') ? subData.webUrl : `https://${subData.webUrl}`}
+                    href={subData.cancelacion_url.startsWith('http') ? subData.cancelacion_url : `https://${subData.cancelacion_url}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-black text-[var(--primary)] text-sm hover:underline block truncate max-w-[200px] text-right"
                   >
-                    {subData.webUrl.replace('https://', '').replace('http://', '')}
+                    {subData.cancelacion_url.replace('https://', '').replace('http://', '')}
                   </a>
                 </div>
               )}
-              {subData.startDate && (
+              {subData.creado_en && (
                 <div className="flex items-center justify-between py-4 border-b border-[var(--border)]">
                   <div className="flex items-center gap-3 text-[var(--text-secondary)]">
                     <Calendar size={18} />
                     <span className="font-black text-xs uppercase tracking-widest">{t('subscription_detail.since')}</span>
                   </div>
-                  <span className="font-black text-[var(--text-primary)] text-sm block">{new Date(subData.startDate).toLocaleDateString()}</span>
+                  <span className="font-black text-[var(--text-primary)] text-sm block">{subData.creado_en.toDate ? subData.creado_en.toDate().toLocaleDateString() : new Date(subData.creado_en).toLocaleDateString()}</span>
                 </div>
               )}
               <div className="flex items-center justify-between py-4 border-b border-[var(--border)]">
@@ -244,8 +234,8 @@ export default function SubscriptionDetail() {
                   <span className="font-black text-xs uppercase tracking-widest">{t('subscription_detail.next_charge')}</span>
                 </div>
                 <div className="text-right">
-                  <span className="font-black text-[var(--text-primary)] text-sm block">{new Date(subData.nextChargeDate).toLocaleDateString()}</span>
-                  <span className="text-[10px] font-black uppercase text-[var(--primary)]">{subData.noticeDays}</span>
+                  <span className="font-black text-[var(--text-primary)] text-sm block">{subData.proximo_cobro ? new Date(subData.proximo_cobro).toLocaleDateString() : 'N/A'}</span>
+                  <span className="text-[10px] font-black uppercase text-[var(--primary)]">{subData.preaviso_dias || 3} días antes</span>
                 </div>
               </div>
               <div className="flex items-center justify-between py-4 border-b border-[var(--border)]">
@@ -253,7 +243,7 @@ export default function SubscriptionDetail() {
                   <CreditCard size={18} />
                   <span className="font-black text-xs uppercase tracking-widest">{t('subscription_detail.payment_method')}</span>
                 </div>
-                <span className="font-black text-[var(--text-primary)] text-sm">{subData.card}</span>
+                <span className="font-black text-[var(--text-primary)] text-sm">{subData.metodo_pago || 'N/A'}</span>
               </div>
               {/* Dynamic Read-only Fields */}
               {(subData.category === 'streaming' || subData.category === 'music' || subData.category === 'gaming') && (
@@ -314,9 +304,8 @@ export default function SubscriptionDetail() {
               )}
             </div>
 
-            {/* Killer Action */}
             <button
-              onClick={() => navigate(`/guide/${id}`)}
+              onClick={handleDelete}
               className="w-full bg-red-950/20 text-red-400 border border-red-900/30 font-black uppercase tracking-widest rounded-3xl py-4 flex items-center justify-center gap-2 hover:bg-red-900 hover:text-white transition shadow-sm"
             >
               <Trash2 size={20} /> {t('subscription_detail.cancel_btn')}

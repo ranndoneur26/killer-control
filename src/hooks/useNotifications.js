@@ -1,40 +1,13 @@
 import { useState, useCallback, useRef } from 'react';
-
-/* ─── Mock async API ─────────────────────────────
-   Simulates a PATCH /user/notification-settings call.
-   Pass failKey to simulate a specific key failing (for testing).
-─────────────────────────────────────────────────── */
-async function patchNotificationSettings(key, value) {
-  await new Promise(r => setTimeout(r, 700)); // simulate network latency
-
-  // Simulate a random failure (10% chance) so you can see rollback in action
-  if (Math.random() < 0.1) {
-    throw new Error(`Error al guardar "${key}". Inténtalo de nuevo.`);
-  }
-
-  return { ok: true, key, value };
-}
-
-/* ─── Initial preferences ─────────────────────── */
-const INITIAL_PREFS = {
-  emailNews:         true,
-  emailSummary:      true,
-  emailRenewals:     true,
-  pushEnabled:       false,
-  pushRenewals:      true,
-  alertLogin:        true,
-  alertAccountChange: true,
-};
+import { useUserProfile } from './useUserProfile';
 
 /* ═══════════════════════════════════════════════
    HOOK: useNotifications
-   - Optimistic update on toggle
-   - Auto-save via mock API call
-   - Rollback on failure
+   - Uses Firestore (via useUserProfile) for state
    - Returns toasts array + dismiss helper
 ═══════════════════════════════════════════════ */
 export function useNotifications() {
-  const [prefs, setPrefs]   = useState(INITIAL_PREFS);
+  const { profile, updateProfile } = useUserProfile();
   const [saving, setSaving] = useState({}); // { [key]: boolean }
   const [toasts, setToasts] = useState([]); // { id, type, msg }
   const toastId = useRef(0);
@@ -50,27 +23,33 @@ export function useNotifications() {
     setToasts(p => p.filter(t => t.id !== id));
   }, []);
 
-  /* Optimistic toggle with rollback */
+  /* Toggle handler */
   const handleToggle = useCallback(async (key) => {
-    const previousValue = prefs[key];
-    const nextValue     = !previousValue;
+    if (!profile) return;
+    const previousValue = profile[key] !== undefined ? profile[key] : true; // default true except pushEnabled handled below
+    const nextValue = !previousValue;
 
-    // 1. Optimistic update
-    setPrefs(p => ({ ...p, [key]: nextValue }));
     setSaving(s => ({ ...s, [key]: true }));
 
     try {
-      // 2. Async save
-      await patchNotificationSettings(key, nextValue);
+      await updateProfile({ [key]: nextValue });
       addToast('success', 'Preferencias actualizadas correctamente.');
     } catch (err) {
-      // 3. Rollback
-      setPrefs(p => ({ ...p, [key]: previousValue }));
-      addToast('error', err.message);
+      addToast('error', err.message || 'Error occurred while saving');
     } finally {
       setSaving(s => ({ ...s, [key]: false }));
     }
-  }, [prefs, addToast]);
+  }, [profile, updateProfile, addToast]);
+
+  const prefs = {
+    notif_novedades: profile?.notif_novedades ?? true,
+    notif_resumenes_mensuales: profile?.notif_resumenes_mensuales ?? true,
+    notif_alertas_proximos_cargos: profile?.notif_alertas_proximos_cargos ?? true,
+    notif_push_activada: profile?.notif_push_activada ?? false,
+    notif_push_renovaciones: profile?.notif_push_renovaciones ?? true,
+    notif_alertas_login: profile?.notif_alertas_login ?? true,
+    notif_alertas_cambios: profile?.notif_alertas_cambios ?? true,
+  };
 
   return { prefs, saving, toasts, dismissToast, handleToggle };
 }

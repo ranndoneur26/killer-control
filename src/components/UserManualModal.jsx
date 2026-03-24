@@ -67,7 +67,7 @@ export default function UserManualModal({ open, onClose }) {
                 <BookOpen size={24} />
               </div>
               <div>
-                <Logo className="h-6 mb-1" darkBackground={true} />
+                <Logo className="h-6 mb-1" />
                 <p className="text-[10px] text-gray-400 uppercase tracking-widest font-black">User Guide</p>
               </div>
             </div>

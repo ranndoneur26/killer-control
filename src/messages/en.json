@@ -33,7 +33,7 @@
     "drip_desc": "Payments of €5 or €10 that, added up, cost hundreds of euros a year."
   },
   "features": {
-    "title": "Killer Control watches it for you",
+    "title": "watches it for you",
     "subtitle": "The app that alerts you when a subscription deserves your attention, so only you decide.",
     "promo_title": "End-of-promotion alerts",
     "promo_desc": "Never pay full price again by mistake.",
@@ -82,13 +82,16 @@
   },
   "faq": {
     "title": "Frequently asked questions",
-    "q1": "Can I use Killer Control for free?",
-    "a1": "Yes, Killer Control has a free plan that lets you manage up to 3 subscriptions and receive basic alerts. If you need more, our Premium plans unlock advanced features.",
-    "q2": "What does the Premium plan include?",
-    "a1_full": "Yes. The free plan is designed so you can verify the tool's real value without risking anything. With it, you can connect and manage up to 3 active subscriptions.",
-    "q3": "Can I cancel at any time?",
-    "q4": "Do I need a card to get started?",
-    "q5": "How are savings opportunities detected?"
+    "q1": "🆓 Can I use Killer Control for free?",
+    "a1": "Yes. The free plan is designed so you can verify the tool's real value without risking anything. With it, you can connect and manage up to <strong>3 active subscriptions</strong>, receive basic alerts when a fee changes price, and view a monthly summary of your spending on digital services.<br/><br/>It is not an artificially limited trial plan: it is a functional tier designed for users with few subscriptions who want control without complications. If you ever need more capacity, scale to Premium with a single click and without losing any of your previous data or configurations.",
+    "q2": "💎 What does the Premium plan include?",
+    "a2": "Premium unlocks the full potential of Killer Control. These are the key differences compared to the free plan:<br/><br/>• <strong>Unlimited subscriptions</strong> — Connect all your services without a ceiling: streaming, software, gyms, paid newsletters, domains, cloud storage and any recurring fee.<br/><br/>• <strong>Real-time smart alerts</strong> — We notify you exactly when a platform raises its prices, launches a cheaper plan or changes its conditions.<br/><br/>• <strong>Complete price history</strong> — Visualize the evolution of each fee month by month and detect patterns of hidden increases.<br/><br/>• <strong>Personalized savings recommendations</strong> — Our AI engine analyzes your real usage profile and suggests cheaper alternatives or combos that reduce your total spend.<br/><br/>• <strong>Data export</strong> — Download your subscription report in CSV or PDF for accounting, freelance taxes or simply to have everything documented.",
+    "q3": "❌ Can I cancel at any time?",
+    "a3": "Absolutely, and no fine print. Killer Control has no lock-in periods, cancellation penalties or minimum commitment periods on any of its plans.<br/><br/>If you cancel Premium, your account is not deactivated abruptly: <strong>you will continue to enjoy all Premium features until the last day of the period you have already paid for</strong>. At the end of that cycle, your account will automatically switch back to the free plan keeping all your data, history and configurations intact.<br/><br/>You can reactivate Premium at any time if you change your mind, and everything will be exactly where you left it. Cancellation is managed in less than 30 seconds from your account dashboard, no forms or calls to customer service.",
+    "q4": "💳 Do I need a card to get started?",
+    "a4": "No. To sign up and use the free plan <strong>we do not ask for any payment details</strong>. No credit card, no bank account, no PayPal. Just your email.<br/><br/>We believe you should be able to verify if Killer Control is useful to you before committing any financial data. That's why signing up is completely free and frictionless.<br/><br/>We will only ask for a payment method when you decide to upgrade to Premium voluntarily. At that point we accept credit/debit cards (Visa, Mastercard, Amex) and PayPal, with a secure encrypted transaction via Stripe.",
+    "q5": "🔍 How are savings opportunities detected?",
+    "a5": "Behind every recommendation is an analysis system structured in three layers:<br/><br/>1. <strong>Tracking over 500 platforms</strong> — The system periodically collects and updates the prices and plans available across major digital services in the Spanish and international market: streaming, SaaS tools, storage, security, online education and more.<br/><br/>2. <strong>Personalized comparison with your profile</strong> — Your current fees are cross-referenced with available alternatives considering your usage frequency, potential overlaps between services (e.g., two platforms offering the same thing) and discounts for combos or annual plans you might not be utilizing.<br/><br/>3. <strong>Prioritization engine</strong> — Internal algorithms sort the opportunities based on their real economic impact (€/year saved), ease of switching, and risk of losing important features. This ensures recommendations are clear, practical, and results-oriented.<br/><br/>The result appears in your dashboard as a prioritized list of concrete actions, showing the estimated annual savings for each."
   },
   "cta": {
     "title": "Start taking back control today.",
@@ -313,7 +316,7 @@
     {
       "name": "Laura S.",
       "role": "Large family",
-      "quote": "With so many platforms at home we didn't even know what we were paying anymore. <span class=\"text-[#F59E0B]\">Killer</span> Control has put us in order."
+      "quote": "With so many platforms at home we didn't even know what we were paying anymore. <span class=\"text-[#F59E0B]\">Killer Control</span> has put us in order."
     },
     {
       "name": "Carlos P.",
@@ -361,5 +364,237 @@
     "notes_placeholder": "Registration email, reminders...",
     "update_btn": "Update Killer Record",
     "save_btn": "Save Killer Subscription"
+  },
+  "hero_slides": [
+    {
+      "label": "DETECT PRICE HIKES",
+      "title": "Netflix price increase",
+      "body": "We'll notify you that your Standard plan will go from €12.99 to €13.99 next month.",
+      "highlight": "+€1/month",
+      "badge": "Price alert"
+    },
+    {
+      "label": "AVOID OVERLOOKS",
+      "title": "Trial period ending",
+      "body": "Your Adobe Creative Cloud free trial ends in 3 days. Cancel on time.",
+      "highlight": "3 days left",
+      "badge": "Promo end"
+    },
+    {
+      "label": "SMART SAVINGS",
+      "title": "Duplicate subscription",
+      "body": "It looks like you have both Apple Music and Spotify active. You could save €10.99/month.",
+      "highlight": "Save €130/year",
+      "badge": "Opportunity"
+    },
+    {
+      "label": "GLOBAL VIEW",
+      "title": "Monthly spend under control",
+      "body": "You've reduced your fixed expenses by 15% compared to last month. Good job!",
+      "highlight": "-15% vs last month",
+      "badge": "Monthly report"
+    }
+  ],
+  "legal": {
+    "close": "Close",
+    "understood": "Understood",
+    "notice": {
+      "title": "Legal Notice",
+      "subtitle": "LSSI-CE Compliance",
+      "intro": "Legal information required for the provision of digital services in Spanish territory and the EU.",
+      "sections": [
+        {
+          "title": "General Information",
+          "body": "In compliance with the duty of information contained in Article 10 of Law 34/2002, of July 11, on Information Society Services and Electronic Commerce (LSSI-CE), the following information is provided:\n\n• Owner: Marc Xicola\n• CIF/NIF: 52172995w\n• Address: C/ Pau Claris 15, baixos. 08100 Mollet del Vallès\n• Email: Killercontrolsupport@gmail.com"
+        },
+        {
+          "title": "Intellectual Property",
+          "body": "All intellectual property rights of the content of this website and its graphic design are the exclusive property of Killer Control, and their reproduction, distribution, or public communication is prohibited without express authorization."
+        },
+        {
+          "title": "Liability",
+          "body": "Killer Control is not responsible for damages of any kind that may cause, by way of example: errors or omissions in the content, lack of availability of the portal, or the transmission of viruses or malicious programs, despite having adopted all possible technological measures to prevent it."
+        }
+      ]
+    },
+    "terms": {
+      "title": "Terms & Conditions",
+      "subtitle": "Last update: March 2026",
+      "intro": "Please read these terms carefully before using Killer Control. By accessing or using the platform, you agree to these conditions in their entirety.",
+      "sections": [
+        {
+          "title": "Owner Identification",
+          "body": "These Terms and Conditions regulate the access, navigation, and use of the website, application, and services associated with Killer Control, owned by Marc Xicola Tugas..."
+        },
+        {
+          "title": "Service Object",
+          "body": "Killer Control is a digital platform designed to help users centralize, visualize, analyze, and manage their subscriptions..."
+        },
+        {
+          "title": "Acceptance of Conditions",
+          "body": "Access to or use of the platform attributes the condition of user and implies full acceptance of these Terms and Conditions..."
+        },
+        {
+          "title": "Usage Requirements",
+          "body": "To use certain services, the user must:\n• Be over 18 years old...\n• Provide truthful information...\n• Safeguard credentials..."
+        },
+        {
+          "title": "Account Registration",
+          "body": "Some features may require creating an account using an email and password..."
+        },
+        {
+          "title": "Service Description and Limits",
+          "body": "The platform is informative, organizational, and supportive of personal subscription management..."
+        },
+        {
+          "title": "Plans, Prices, and Payments",
+          "body": "Access to certain features may be subject to payment of a subscription or fee..."
+        },
+        {
+          "title": "Renewal, Cancellation, and Refunds",
+          "body": "Paid subscriptions will automatically renew at the end of each period, unless previously cancelled..."
+        },
+        {
+          "title": "User Obligations",
+          "body": "The user agrees not to: Introduce false data, interfere with operation, etc."
+        },
+        {
+          "title": "Intellectual and Industrial Property",
+          "body": "All contents, designs, texts, logos, etc. of Killer Control are owned by Marc Xicola..."
+        },
+        {
+          "title": "Third-Party Services and Links",
+          "body": "The platform may show, integrate, or link to third-party services..."
+        },
+        {
+          "title": "Exclusion of Guarantees",
+          "body": "The platform is offered \"as is\" and subject to availability..."
+        },
+        {
+          "title": "Limitation of Liability",
+          "body": "To the maximum extent permitted by law, Marc Xicola shall not be liable for indirect damages..."
+        },
+        {
+          "title": "Account Suspension or Cancellation",
+          "body": "Killer Control may suspend or cancel accounts if it detects breach of terms..."
+        },
+        {
+          "title": "Data Protection",
+          "body": "The processing of personal data is governed by the platform's Privacy Policy..."
+        },
+        {
+          "title": "Modifications",
+          "body": "Marc Xicola may modify these Terms and Conditions at any time for legal or technical reasons."
+        },
+        {
+          "title": "Applicable Legislation and Jurisdiction",
+          "body": "These Terms and Conditions shall be governed by the legislation of Spain."
+        },
+        {
+          "title": "Contact",
+          "body": "For any questions about these Terms and Conditions: Killercontrolsupport@gmail.com"
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "subtitle": "Last update: March 2026",
+      "intro": "Your privacy is important to us. This document explains what data we collect, how we use it, and what rights you have over it.",
+      "sections": [
+        {
+          "title": "Data Controller",
+          "body": "The data controller for personal data collected through Killer Control is Marc Xicola Tugas..."
+        },
+        {
+          "title": "Purpose of Processing",
+          "body": "The user's personal data may be processed for managing account, access, subscriptions, etc."
+        },
+        {
+          "title": "Data We Collect",
+          "body": "Identification data, contact, access, usage, subscription, billing, communications."
+        },
+        {
+          "title": "Data Origin",
+          "body": "Information provided by user, use of platform, authentication providers, payment providers."
+        },
+        {
+          "title": "Legal Basis for Processing",
+          "body": "Execution of contract, consent, legal obligation, legitimate interest."
+        },
+        {
+          "title": "Data Retention",
+          "body": "Data will be kept for the time necessary to fulfill the purpose..."
+        },
+        {
+          "title": "Recipients and Data Processors",
+          "body": "Hosting, authentication, analytics, email, customer service, payments."
+        },
+        {
+          "title": "International Transfers",
+          "body": "Data may be subject to international transfers with appropriate guarantees."
+        },
+        {
+          "title": "User Rights",
+          "body": "Access, rectification, deletion, opposition, limitation, portability, withdrawal of consent."
+        },
+        {
+          "title": "Information Security",
+          "body": "Technical and organizational measures to protect personal data."
+        },
+        {
+          "title": "Minors",
+          "body": "The platform is not directed at minors under 18 years of age."
+        },
+        {
+          "title": "Cookies and Similar Technologies",
+          "body": "The platform may use cookies for technical and analytical purposes."
+        },
+        {
+          "title": "Commercial Communications",
+          "body": "Sent only with consent or prior relationship."
+        },
+        {
+          "title": "Automated Decisions and Profiling",
+          "body": "Automated logic to offer savings recommendations or alerts."
+        },
+        {
+          "title": "Changes to this Policy",
+          "body": "Policy may be updated for regulatory or technical reasons."
+        },
+        {
+          "title": "Contact",
+          "body": "Privacy Email: digitalformacio@gmail.com"
+        }
+      ]
+    },
+    "cookies": {
+      "title": "Cookie Policy",
+      "subtitle": "Full transparency",
+      "intro": "We use minimal cookies to ensure the best technical and analytical experience in Killer Control.",
+      "sections": [
+        {
+          "title": "What are cookies?",
+          "body": "Cookies are small text files stored on your device..."
+        },
+        {
+          "title": "Types of cookies we use",
+          "body": "Technical, Analysis, and Preference cookies."
+        },
+        {
+          "title": "Management and deactivation",
+          "body": "Manage cookie preferences through browser settings."
+        },
+        {
+          "title": "Policy updates",
+          "body": "Recommended to review the policy periodically."
+        }
+      ]
+    }
+  },
+  "hero_slider": {
+    "stats_monthly": "MONTHLY SPENDING",
+    "stats_potential": "POTENTIAL SAVINGS",
+    "this_month": "This month",
+    "vs_prev": "-12.5% vs April"
   }
 }

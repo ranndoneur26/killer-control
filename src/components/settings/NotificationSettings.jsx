@@ -79,8 +79,8 @@ function Toast({ toast, onDismiss }) {
       key={toast.id}
       layout
       initial={{ opacity: 0, y: 20, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0,  scale: 1 }}
-      exit={{    opacity: 0, y: 10, scale: 0.9, transition: { duration: 0.2 } }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: 10, scale: 0.9, transition: { duration: 0.2 } }}
       className={`
         flex items-start gap-3 px-4 py-3 rounded-2xl shadow-xl border text-sm font-black
         max-w-sm w-full pointer-events-auto transition-all uppercase tracking-widest
@@ -91,7 +91,7 @@ function Toast({ toast, onDismiss }) {
     >
       {isSuccess
         ? <CheckCircle2 size={18} className="shrink-0 mt-0.5" />
-        : <XCircle     size={18} className="shrink-0 mt-0.5" />}
+        : <XCircle size={18} className="shrink-0 mt-0.5" />}
       <span className="flex-1">{toast.msg}</span>
       <button onClick={() => onDismiss(toast.id)} className="opacity-60 hover:opacity-100 transition shrink-0 mt-0.5">
         <X size={15} />
@@ -122,21 +122,21 @@ function ToastContainer({ toasts, onDismiss }) {
 ═══════════════════════════════════════════════ */
 const EMAIL_ROWS = [
   {
-    prefKey: 'emailNews',
+    prefKey: 'notif_novedades',
     icon: Bell,
     color: 'text-[var(--primary)]',
     label: <>Novedades de <span className="text-[#F59E0B]">Killer</span> Control</>,
     description: 'Nuevas funciones, mejoras y actualizaciones del producto.',
   },
   {
-    prefKey: 'emailSummary',
+    prefKey: 'notif_resumenes_mensuales',
     icon: Mail,
     color: 'text-[var(--primary)]',
     label: 'Resúmenes mensuales de facturación',
     description: 'Un resumen mensual de cuánto gastaste en suscripciones.',
   },
   {
-    prefKey: 'emailRenewals',
+    prefKey: 'notif_alertas_proximos_cargos',
     icon: Bell,
     color: 'text-[var(--primary)]',
     label: 'Alertas de próximos cargos',
@@ -146,14 +146,14 @@ const EMAIL_ROWS = [
 
 const PUSH_ROWS = [
   {
-    prefKey: 'pushEnabled',
+    prefKey: 'notif_push_activada',
     icon: Bell,
     color: 'text-[#F59E0B]',
     label: 'Activar notificaciones push',
     description: 'Permite que el navegador envíe alertas a tu dispositivo.',
   },
   {
-    prefKey: 'pushRenewals',
+    prefKey: 'notif_push_renovaciones',
     icon: Bell,
     color: 'text-[#F59E0B]',
     label: 'Push de renovaciones',
@@ -163,14 +163,14 @@ const PUSH_ROWS = [
 
 const SECURITY_ROWS = [
   {
-    prefKey: 'alertLogin',
+    prefKey: 'notif_alertas_login',
     icon: Lock,
     color: 'text-red-500',
     label: 'Nuevos inicios de sesión',
     description: 'Alerta si se inicia sesión desde un dispositivo no reconocido.',
   },
   {
-    prefKey: 'alertAccountChange',
+    prefKey: 'notif_alertas_cambios',
     icon: Shield,
     color: 'text-red-500',
     label: 'Cambios en la cuenta',
@@ -205,7 +205,7 @@ export default function NotificationSettings() {
         {/* Push Category */}
         <CategoryCard icon={Bell} iconColor="text-[#F59E0B]" title="Notificaciones Push">
           {PUSH_ROWS.map(r => <PrefRow key={r.prefKey} {...r} {...rowProps} />)}
-          {!prefs.pushEnabled && (
+          {!prefs.notif_push_activada && (
             <p className="text-xs text-[var(--text-muted)] py-3 italic font-medium px-2">
               Activa las notificaciones push para gestionar las alertas de renovación.
             </p>

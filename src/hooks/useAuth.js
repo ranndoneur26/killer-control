@@ -1,4 +1,17 @@
 import { useState, useCallback } from 'react';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+  OAuthProvider,
+  sendPasswordResetEmail
+} from 'firebase/auth';
+import { app } from '../lib/firebase';
+import { createUserProfile } from '../lib/db';
+
+const auth = getAuth(app);
 
 /* ── Validation ── */
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -15,33 +28,18 @@ const validatePassword = (v, isLogin) => {
   return '';
 };
 
-/* ── Mock APIs ── */
-async function mockOAuth(provider) {
-  await new Promise(r => setTimeout(r, 1500));
-  if (Math.random() < 0.07) throw new Error(`Connection error with ${provider}. Please try again.`);
-  return { user: { email: `user@${provider.toLowerCase()}.com` } };
-}
-
-async function mockEmailAuth(email, password, isLogin) {
-  await new Promise(r => setTimeout(r, 1200));
-  // Simulate known bad password for demo
-  if (password === 'wrong') throw new Error('Incorrect password. Please try again.');
-  if (!isLogin && Math.random() < 0.05) throw new Error('This email is already registered.');
-  return { user: { email } };
-}
-
 /* ═══════════════════════════════════════════
    HOOK: useAuth
 ═══════════════════════════════════════════ */
 export function useAuth(addToast, navigate) {
-  const [isLogin,       setIsLogin]       = useState(false);    // false = Register
-  const [step,          setStep]          = useState('email');   // 'email' | 'password'
-  const [email,         setEmail]         = useState('');
-  const [password,      setPassword]      = useState('');
-  const [showPassword,  setShowPassword]  = useState(false);
-  const [emailError,    setEmailError]    = useState('');
-  const [passError,     setPassError]     = useState('');
-  const [loadingBtn,    setLoadingBtn]    = useState(null); // null | 'email' | 'google' | 'apple'
+  const [isLogin, setIsLogin] = useState(false);    // false = Register
+  const [step, setStep] = useState('email');   // 'email' | 'password'
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [emailError, setEmailError] = useState('');
+  const [passError, setPassError] = useState('');
+  const [loadingBtn, setLoadingBtn] = useState(null); // null | 'email' | 'google' | 'apple'
 
   const toggleMode = useCallback(() => {
     setIsLogin(v => !v);
@@ -76,55 +74,84 @@ export function useAuth(addToast, navigate) {
 
     setLoadingBtn('email');
     try {
-      await mockEmailAuth(email, password, isLogin);
+      let userCredential;
+      if (isLogin) {
+        userCredential = await signInWithEmailAndPassword(auth, email, password);
+      } else {
+        userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      }
+
+      // Ensure the user profile exists in Firestore (critical for new signups)
+      await createUserProfile(userCredential.user);
+
       addToast('success', isLogin ? 'Welcome back!' : 'Account created successfully!');
-      
-      setTimeout(() => {
-        const plan = sessionStorage.getItem('selected_plan');
-        if (plan === 'premium') {
-          navigate('/checkout');
-        } else {
-          navigate('/dashboard');
-        }
-      }, 600);
+
+      const plan = sessionStorage.getItem('selected_plan') || 'free';
+      if (plan === 'premium' && !isLogin) {
+        navigate('/checkout'); // e.g. stripe integration
+      } else {
+        navigate('/dashboard');
+      }
+
     } catch (ex) {
-      addToast('error', ex.message);
+      console.error("Auth error:", ex);
+      let errMsg = "Authentication failed.";
+      if (ex.code === 'auth/email-already-in-use') errMsg = "This email is already registered.";
+      if (ex.code === 'auth/wrong-password' || ex.code === 'auth/invalid-credential') errMsg = "Incorrect credentials. Please try again.";
+      if (ex.code === 'auth/user-not-found') errMsg = "No account found for this email.";
+      addToast('error', errMsg);
     } finally {
       setLoadingBtn(null);
     }
   }, [email, password, isLogin, addToast, navigate]);
 
-  const handleOAuth = useCallback(async (provider) => {
-    setLoadingBtn(provider.toLowerCase());
+  const handleOAuth = useCallback(async (providerName) => {
+    setLoadingBtn(providerName.toLowerCase());
     try {
-      await mockOAuth(provider);
-      addToast('success', `Session started with ${provider}.`);
-      
-      setTimeout(() => {
-        const plan = sessionStorage.getItem('selected_plan');
-        if (plan === 'premium') {
-          navigate('/checkout');
-        } else {
-          navigate('/dashboard');
-        }
-      }, 600);
+      let provider;
+      if (providerName === 'Google') {
+        provider = new GoogleAuthProvider();
+      } else if (providerName === 'Apple') {
+        provider = new OAuthProvider('apple.com');
+      }
+
+      const result = await signInWithPopup(auth, provider);
+
+      // Ensure profile exists. If it's a first-time OAuth login, it creates it.
+      await createUserProfile(result.user);
+
+      addToast('success', `Session started with ${providerName}.`);
+
+      const plan = sessionStorage.getItem('selected_plan') || 'free';
+      // Basic logic: if they want premium from landing page
+      if (plan === 'premium') {
+        navigate('/checkout');
+      } else {
+        navigate('/dashboard');
+      }
     } catch (ex) {
-      addToast('error', ex.message);
+      console.error("OAuth error:", ex);
+      addToast('error', `Failed to authenticate with ${providerName}.`);
     } finally {
       setLoadingBtn(null);
     }
   }, [addToast, navigate]);
 
-  const handleForgotPassword = useCallback(() => {
+  const handleForgotPassword = useCallback(async () => {
     if (!email) {
       setEmailError('Enter your email to recover your password.');
       return;
     }
     setLoadingBtn('email');
-    setTimeout(() => {
-      setLoadingBtn(null);
+    try {
+      await sendPasswordResetEmail(auth, email);
       addToast('success', 'We have sent you an email to reset your password.');
-    }, 1000);
+    } catch (error) {
+      console.error("Forgot password error", error);
+      addToast('error', 'Could not send reset email. Verify your address.');
+    } finally {
+      setLoadingBtn(null);
+    }
   }, [email, addToast]);
 
   return {

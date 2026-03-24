@@ -3,8 +3,8 @@ import Navigation from './Navigation';
 import CategoryDonutChart from './charts/CategoryDonutChart';
 import SavingsAreaChart from './charts/SavingsAreaChart';
 import { useSubscriptionAnalysis } from '../hooks/useSubscriptionAnalysis';
-import { MOCK_SUBSCRIPTIONS } from '../data/mockSubscriptions';
-import { AlertTriangle, Timer, TrendingUp, Info, ChevronRight, Pencil } from 'lucide-react';
+import { useSubscriptions } from '../hooks/useSubscriptions';
+import { AlertTriangle, Timer, TrendingUp, TrendingDown, Info, ChevronRight, Pencil, MonitorPlay, Headphones, Gamepad2, CreditCard, Calendar } from 'lucide-react';
 import HeroHeader from './HeroHeader';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -33,10 +33,11 @@ const COLOR_MAP = {
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const { alerted, potentialSavings } = useSubscriptionAnalysis(MOCK_SUBSCRIPTIONS);
+  const { subscriptions: firebaseSubs, loading } = useSubscriptions();
+  const { alerted, potentialSavings } = useSubscriptionAnalysis(firebaseSubs);
   const { t } = useLanguage();
 
-  const totalMonthlySpend = MOCK_SUBSCRIPTIONS.reduce((acc, sub) => acc + sub.amount, 0);
+  const totalMonthlySpend = firebaseSubs.reduce((acc, sub) => acc + (sub.precio || 0), 0);
 
   return (
     <div className="flex flex-col min-h-screen bg-[var(--bg)]">
@@ -160,22 +161,24 @@ export default function Dashboard() {
           </div>
 
           <div className="space-y-4">
-            {MOCK_SUBSCRIPTIONS.slice(0, 3).map(sub => {
-              const Icon = ICON_MAP[sub.name] || MonitorPlay;
-              const color = COLOR_MAP[sub.name] || 'text-[#64748B]';
+            {loading ? (
+              <div className="py-10 text-center"><p>{t('login.continue')}...</p></div>
+            ) : firebaseSubs.length > 0 ? firebaseSubs.slice(0, 3).map(sub => {
+              const Icon = ICON_MAP[sub.nombre] || MonitorPlay;
+              const color = COLOR_MAP[sub.nombre] || 'text-[#64748B]';
               return (
                 <div key={sub.id} className="bg-[var(--bg-surface)] border border-[var(--border)] p-5 rounded-[2rem] flex items-center gap-4 shadow-sm group hover:border-[var(--primary)]/20 transition-all">
                   <div className={`w-12 h-12 rounded-2xl bg-[var(--bg)] flex items-center justify-center transition-colors ${color}`}>
                     <Icon size={24} />
                   </div>
                   <div className="flex-1">
-                    <div className="font-bold text-[var(--text-primary)]">{sub.name}</div>
+                    <div className="font-bold text-[var(--text-primary)]">{sub.nombre}</div>
                     <div className="text-xs text-[var(--text-secondary)] flex items-center gap-1 mt-1 font-medium">
-                      <Calendar size={12} /> {sub.renewalDate ? new Date(sub.renewalDate).toLocaleDateString('en-US', { day: 'numeric', month: 'short' }) : t('subscriptions.tomorrow')}
+                      <Calendar size={12} /> {sub.proximo_cobro ? new Date(sub.proximo_cobro).toLocaleDateString('en-US', { day: 'numeric', month: 'short' }) : t('subscriptions.tomorrow')}
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="font-black text-[var(--text-primary)]">{sub.amount} &euro;</div>
+                    <div className="font-black text-[var(--text-primary)]">{sub.precio} &euro;</div>
                     <button
                       onClick={() => navigate(`/guide/${sub.id}`)}
                       className="text-[10px] text-[var(--primary)] mt-1 font-black hover:underline cursor-pointer uppercase tracking-tight"
@@ -185,7 +188,11 @@ export default function Dashboard() {
                   </div>
                 </div>
               );
-            })}
+            }) : (
+              <div className="text-center py-6">
+                <p className="text-sm text-[var(--text-muted)] font-medium">No upcoming charges found.</p>
+              </div>
+            )}
           </div>
         </div>
 

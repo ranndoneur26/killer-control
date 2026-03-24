@@ -5,7 +5,7 @@ import Logo from './Logo';
 import LanguageToggle from './LanguageToggle';
 import { useLanguage } from '../contexts/LanguageContext';
 
-const HeroHeader = ({ darkBackground = false }) => {
+const HeroHeader = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { pathname } = useLocation();
   const { t, locale } = useLanguage();
@@ -26,7 +26,7 @@ const HeroHeader = ({ darkBackground = false }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <RouterLink to="/" className="flex items-center gap-2">
-            <Logo className="h-8" darkBackground={darkBackground} />
+            <Logo className="h-8" />
           </RouterLink>
 
           {/* Desktop Menu */}

@@ -1,23 +1,12 @@
 import React from 'react';
 import { X, FileText, Scale } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
-
-const SECTIONS = [
-  {
-    n: '1', title: 'General Information',
-    body: `In compliance with the duty of information contained in Article 10 of Law 34/2002, of July 11, on Information Society Services and Electronic Commerce (LSSI-CE), the following information is provided:\n\n• Owner: Marc Xicola\n• CIF/NIF: 52172995w\n• Address: C/ Pau Claris 15, baixos. 08100 Mollet del Vallès\n• Email: Killercontrolsupport@gmail.com`,
-  },
-  {
-    n: '2', title: 'Intellectual Property',
-    body: `All intellectual property rights of the content of this website and its graphic design are the exclusive property of Killer Control, and their reproduction, distribution, or public communication is prohibited without express authorization.`,
-  },
-  {
-    n: '3', title: 'Liability',
-    body: `Killer Control is not responsible for damages of any kind that may cause, by way of example: errors or omissions in the content, lack of availability of the portal, or the transmission of viruses or malicious programs, despite having adopted all possible technological measures to prevent it.`,
-  }
-];
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function LegalNoticeModal({ open, onClose }) {
+  const { t } = useLanguage();
+  const SECTIONS = t('legal.notice.sections') || [];
+
   return (
     <AnimatePresence>
       {open && (
@@ -41,8 +30,8 @@ export default function LegalNoticeModal({ open, onClose }) {
                 <Scale size={20} className="text-[var(--primary)]" />
               </div>
               <div className="flex-1 min-w-0">
-                <h2 className="font-bold text-lg leading-tight">Legal Notice</h2>
-                <p className="text-xs text-gray-500 mt-0.5"><span className="text-[#F59E0B]">Killer</span> Control · LSSI-CE Compliance</p>
+                <h2 className="font-bold text-lg leading-tight">{t('legal.notice.title')}</h2>
+                <p className="text-xs text-gray-500 mt-0.5"><span className="text-[#F59E0B]">Killer</span> Control · {t('legal.notice.subtitle')}</p>
               </div>
               <button
                 onClick={onClose}
@@ -57,7 +46,7 @@ export default function LegalNoticeModal({ open, onClose }) {
               <div className="flex items-start gap-3 bg-[var(--primary)]/5 border border-[var(--primary)]/15 rounded-2xl px-4 py-3">
                 <FileText size={16} className="text-[var(--primary)] shrink-0 mt-0.5" />
                 <p className="text-xs text-gray-300 leading-relaxed">
-                  Legal information required for the provision of digital services in Spanish territory and the EU.
+                  {t('legal.notice.intro')}
                 </p>
               </div>
 
@@ -85,7 +74,7 @@ export default function LegalNoticeModal({ open, onClose }) {
                 onClick={onClose}
                 className="w-full bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/20 font-bold rounded-2xl py-3.5 hover:bg-[var(--primary)]/20 transition text-sm"
               >
-                Close
+                {t('legal.close')}
               </button>
             </div>
           </motion.div>

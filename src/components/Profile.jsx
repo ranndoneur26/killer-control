@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { 
-  User, CreditCard, Bell, Shield, Moon, LogOut, 
-  ChevronRight, ArrowLeft, BookOpen, Camera 
+import {
+  User, CreditCard, Bell, Shield, Moon, LogOut,
+  ChevronRight, ArrowLeft, BookOpen, Camera
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Navigation from './Navigation';
@@ -14,13 +14,14 @@ import UserManualModal from './UserManualModal';
 import AvatarSelectorModal from './AvatarSelectorModal';
 import PersonalDataSettings from './settings/PersonalDataSettings';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useUserProfile } from '../hooks/useUserProfile';
 
 const CONTENT_MAP = {
-  personal:      <PersonalDataSettings />,
-  payment:       <PaymentSettings />,
+  personal: <PersonalDataSettings />,
+  payment: <PaymentSettings />,
   notifications: <NotificationSettings />,
-  security:      <SecuritySettings />,
-  appearance:    <AppearanceSettings />,
+  security: <SecuritySettings />,
+  appearance: <AppearanceSettings />,
 };
 
 export default function Profile() {
@@ -30,13 +31,31 @@ export default function Profile() {
   const [showAvatarSelector, setShowAvatarSelector] = useState(false);
   const [currentAvatar, setCurrentAvatar] = useState('/avatars/ghostface.png');
   const { t } = useLanguage();
+  const { profile, updateProfile } = useUserProfile();
+
+  React.useEffect(() => {
+    if (profile && profile.avatarUrl) {
+      setCurrentAvatar(profile.avatarUrl);
+    }
+  }, [profile]);
+
+  const handleAvatarSelect = async (avatarUrl) => {
+    setCurrentAvatar(avatarUrl);
+    if (profile) {
+      try {
+        await updateProfile({ avatarUrl });
+      } catch (err) {
+        console.error("Could not save avatar", err);
+      }
+    }
+  };
 
   const SECTIONS = [
-    { id: 'personal',      label: t('profile.personal_data'),        icon: User,       color: 'text-[var(--primary)]',      bg: 'bg-[var(--primary)]/10' },
-    { id: 'payment',       label: t('profile.payments'),         icon: CreditCard, color: 'text-[var(--primary)]',      bg: 'bg-[var(--primary)]/10' },
-    { id: 'notifications', label: t('profile.notifications'), icon: Bell,       color: 'text-amber-400',      bg: 'bg-amber-950/20' },
-    { id: 'security',      label: t('profile.privacy'),   icon: Shield,     color: 'text-red-400',      bg: 'bg-red-950/20' },
-    { id: 'appearance',    label: t('profile.appearance'),               icon: Moon,       color: 'text-[var(--primary)]',      bg: 'bg-[var(--primary)]/10' },
+    { id: 'personal', label: t('profile.personal_data'), icon: User, color: 'text-[var(--primary)]', bg: 'bg-[var(--primary)]/10' },
+    { id: 'payment', label: t('profile.payments'), icon: CreditCard, color: 'text-[var(--primary)]', bg: 'bg-[var(--primary)]/10' },
+    { id: 'notifications', label: t('profile.notifications'), icon: Bell, color: 'text-amber-400', bg: 'bg-amber-950/20' },
+    { id: 'security', label: t('profile.privacy'), icon: Shield, color: 'text-red-400', bg: 'bg-red-950/20' },
+    { id: 'appearance', label: t('profile.appearance'), icon: Moon, color: 'text-[var(--primary)]', bg: 'bg-[var(--primary)]/10' },
   ];
 
   return (
@@ -78,28 +97,30 @@ export default function Profile() {
             {/* User Card */}
             <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-none md:rounded-3xl overflow-hidden shadow-sm">
               <div className="flex items-center gap-4 p-5 border-b border-[var(--border)]">
-              <button 
-                onClick={() => setShowAvatarSelector(true)}
-                className="relative group cursor-pointer"
-              >
-                <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[var(--primary)]/20 to-[var(--primary)]/5 flex items-center justify-center overflow-hidden border-2 border-[var(--border)] group-hover:border-[var(--primary)]/30 transition-all">
-                  {currentAvatar ? (
-                    <img src={currentAvatar} alt="Profile" className="w-full h-full object-cover" />
-                  ) : (
-                    <User size={28} className="text-[var(--primary)]" />
-                  )}
-                  {/* Overlay camera icon on hover */}
-                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Camera size={18} className="text-white" />
+                <button
+                  onClick={() => setShowAvatarSelector(true)}
+                  className="relative group cursor-pointer"
+                >
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[var(--primary)]/20 to-[var(--primary)]/5 flex items-center justify-center overflow-hidden border-2 border-[var(--border)] group-hover:border-[var(--primary)]/30 transition-all">
+                    {currentAvatar ? (
+                      <img src={currentAvatar} alt="Profile" className="w-full h-full object-cover" />
+                    ) : (
+                      <User size={28} className="text-[var(--primary)]" />
+                    )}
+                    {/* Overlay camera icon on hover */}
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <Camera size={18} className="text-white" />
+                    </div>
                   </div>
+                  {profile?.plan === 'pro' && (
+                    <span className="absolute bottom-0 right-0 bg-[var(--primary)] text-white text-[9px] font-black px-1.5 py-0.5 rounded-full border-2 border-[var(--bg-surface)]">{t('profile.pro_badge')}</span>
+                  )}
+                </button>
+                <div>
+                  <p className="font-black text-lg leading-tight text-[var(--text-primary)]">{profile?.nombre || t('profile.user_killer')} <span className="text-[#F59E0B]">Killer</span></p>
+                  <p className="text-sm text-[var(--text-secondary)] font-medium">{profile?.email || t('profile.user_email')}</p>
                 </div>
-                <span className="absolute bottom-0 right-0 bg-[var(--primary)] text-white text-[9px] font-black px-1.5 py-0.5 rounded-full border-2 border-[var(--bg-surface)]">{t('profile.pro_badge')}</span>
-              </button>
-              <div>
-                <p className="font-black text-lg leading-tight text-[var(--text-primary)]">{t('profile.user_killer')} <span className="text-[#F59E0B]">Killer</span></p>
-                <p className="text-sm text-[var(--text-secondary)] font-medium">{t('profile.user_email')}</p>
               </div>
-            </div>
 
               {/* Section Links */}
               <nav className="divide-y divide-[var(--border)]">
@@ -168,14 +189,14 @@ export default function Profile() {
       </div>
 
       <Navigation />
-      
+
       <UserManualModal open={showManual} onClose={() => setShowManual(false)} />
 
-      <AvatarSelectorModal 
-        open={showAvatarSelector} 
+      <AvatarSelectorModal
+        open={showAvatarSelector}
         currentAvatar={currentAvatar}
-        onSelect={setCurrentAvatar}
-        onClose={() => setShowAvatarSelector(false)} 
+        onSelect={handleAvatarSelect}
+        onClose={() => setShowAvatarSelector(false)}
       />
     </div>
   );
