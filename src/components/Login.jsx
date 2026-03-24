@@ -288,17 +288,6 @@ export default function Login() {
                     </div>
                     {auth.passError && <p className="text-xs text-red-400 mt-1.5 pl-1">{auth.passError}</p>}
 
-                    {/* Forgot password — login only */}
-                    {auth.isLogin && (
-                      <div className="text-right mt-2">
-                        <button
-                          type="button"
-                          onClick={() => setIsResettingPassword(true)}
-                          className="text-xs text-[var(--primary)] font-bold hover:underline"
-                        >
-                          {t('login.forgot_pass')}
-                        </button>
-                      </div>
                     )}
                   </motion.div>
                 )}
@@ -316,6 +305,18 @@ export default function Login() {
                   : auth.isLogin ? t('login.login_btn') : t('login.signup_btn')
                 }
               </AuthButton>
+
+              {auth.isLogin && (
+                <div className="text-center mt-4">
+                  <button
+                    type="button"
+                    onClick={() => setIsResettingPassword(true)}
+                    className="text-xs text-[var(--primary)] font-bold hover:underline"
+                  >
+                    {t('login.forgot_pass')}
+                  </button>
+                </div>
+              )}
             </motion.form>
           )}
         </AnimatePresence>
