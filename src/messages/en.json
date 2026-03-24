@@ -46,7 +46,11 @@
     "potential_savings": "Potential Savings",
     "next_charge": "Next charge",
     "tomorrow": "Tomorrow",
-    "hero_chart_desc": "Annual spend eliminated: Cancelled subscription."
+    "hero_chart_desc": "Annual spend eliminated: Cancelled subscription.",
+    "hero_chart_before": "Before",
+    "hero_chart_after": "After",
+    "hero_chart_year": "year",
+    "hero_chart_action": "KILLER ACTION"
   },
   "how": {
     "title": "That simple",

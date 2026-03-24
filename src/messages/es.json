@@ -46,7 +46,11 @@
     "potential_savings": "Ahorro Potencial",
     "next_charge": "Próximo cobro",
     "tomorrow": "Mañana",
-    "hero_chart_desc": "Gasto anual eliminado: Suscripción anulada."
+    "hero_chart_desc": "Gasto anual eliminado: Suscripción anulada.",
+    "hero_chart_before": "Antes",
+    "hero_chart_after": "Después",
+    "hero_chart_year": "año",
+    "hero_chart_action": "KILLER ACTION"
   },
   "how": {
     "title": "Así de simple",
