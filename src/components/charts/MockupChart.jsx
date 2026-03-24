@@ -1,80 +1,86 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { useLanguage } from '../../contexts/LanguageContext';
-
-const DATA = [
-    { day: 'Lun', value: 35, label: '8,50€' },
-    { day: 'Mar', value: 25, label: '6,20€' },
-    { day: 'Mié', value: 55, label: '14,30€' },
-    { day: 'Jue', value: 30, label: '7,40€' },
-    { day: 'Vie', value: 75, label: '19,90€' },
-    { day: 'Sáb', value: 45, label: '11,20€' },
-    { day: 'Dom', value: 65, label: '16,80€' },
-];
+import { TrendingDown, Zap } from 'lucide-react';
 
 export default function MockupChart() {
-    const [activeIdx, setActiveIdx] = useState(null);
     const { t } = useLanguage();
 
     return (
-        <div className="w-full h-full flex flex-col justify-between p-2 pt-8">
-            <div className="flex items-end justify-between h-[120px] w-full gap-2 px-1">
-                {DATA.map((item, i) => (
-                    <div
-                        key={i}
-                        className="flex-1 flex flex-col items-center gap-2 group relative cursor-pointer"
-                        onClick={() => setActiveIdx(activeIdx === i ? null : i)}
-                    >
-                        {/* Price Label (Visible on click/active) */}
-                        <AnimatePresence>
-                            {activeIdx === i && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 10, scale: 0.8 }}
-                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                    exit={{ opacity: 0, y: 5, scale: 0.8 }}
-                                    className="absolute -top-10 left-1/2 -translate-x-1/2 bg-[#0F172A] text-white text-[11px] font-black py-1.5 px-2.5 rounded-xl shadow-lg z-20 whitespace-nowrap border border-[#4F46E5]/30"
-                                >
-                                    {item.label}
-                                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#0F172A] rotate-45 border-r border-b border-[#4F46E5]/30" />
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-
-                        {/* Bar Container */}
-                        <div className="w-full bg-[#F1F5F9] rounded-2xl h-full relative overflow-hidden group-hover:bg-[#E2E8F0] transition-colors">
-                            <motion.div
-                                initial={{ height: 0 }}
-                                animate={{ height: `${item.value}%` }}
-                                transition={{
-                                    duration: 1.2,
-                                    delay: i * 0.1,
-                                    type: 'spring',
-                                    bounce: 0.2
-                                }}
-                                className={`absolute bottom-0 left-0 right-0 rounded-2xl transition-all duration-300
-                  ${activeIdx === i
-                                        ? 'bg-gradient-to-t from-[#4F46E5] to-[#818CF8] shadow-[0_0_20px_rgba(79,70,229,0.4)]'
-                                        : 'bg-gradient-to-t from-[#94A3B8] to-[#CBD5E1] opacity-60'
-                                    } group-hover:opacity-100`}
-                            >
-                                {/* Visual texture/glow line */}
-                                <div className="absolute top-2 left-1/2 -translate-x-1/2 w-1/2 h-1 bg-white/20 rounded-full" />
-                            </motion.div>
-                        </div>
-
-                        {/* Label */}
-                        <span className={`text-[9px] font-black uppercase tracking-widest transition-colors duration-300 ${activeIdx === i ? 'text-[#4F46E5]' : 'text-[#94A3B8]'}`}>
-                            {item.day}
-                        </span>
-                    </div>
+        <div className="w-full h-full flex flex-col justify-between p-4 pt-6 relative overflow-hidden">
+            {/* Background Grid */}
+            <div className="absolute inset-0 flex flex-col justify-between opacity-5">
+                {[...Array(5)].map((_, i) => (
+                    <div key={i} className="border-t border-[#0F172A] w-full" />
                 ))}
             </div>
 
-            {/* Description text at bottom */}
-            <div className="mt-4 pt-3 border-t border-[#F1F5F9] text-center">
-                <p className="text-[10px] text-[#64748B] font-medium leading-relaxed italic">
-                    {t('features.hero_chart_desc')}
-                </p>
+            <div className="relative z-10 flex flex-col h-full">
+                {/* Chart Area */}
+                <div className="flex-1 relative">
+                    <svg viewBox="0 0 400 150" className="w-full h-full preserve-3d">
+                        {/* The "Before" area (High cost) */}
+                        <motion.path
+                            initial={{ pathLength: 0, opacity: 0 }}
+                            animate={{ pathLength: 1, opacity: 1 }}
+                            transition={{ duration: 1.5, ease: "easeOut" }}
+                            d="M 0,40 L 150,40 L 200,130 L 400,130"
+                            fill="none"
+                            stroke="#EF4444"
+                            strokeWidth="4"
+                            strokeLinecap="round"
+                            className="drop-shadow-lg"
+                        />
+
+                        {/* The Area fill */}
+                        <motion.path
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 0.1 }}
+                            transition={{ delay: 1, duration: 1 }}
+                            d="M 0,40 L 150,40 L 200,130 L 400,130 L 400,150 L 0,150 Z"
+                            fill="url(#descendingGradient)"
+                        />
+
+                        <defs>
+                            <linearGradient id="descendingGradient" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stopColor="#EF4444" />
+                                <stop offset="100%" stopColor="#EF4444" stopOpacity="0" />
+                            </linearGradient>
+                        </defs>
+
+                        {/* "Killer" Point */}
+                        <motion.circle
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ delay: 0.8, type: "spring" }}
+                            cx="200" cy="130" r="6"
+                            fill="#10B981"
+                            className="drop-shadow-[0_0_8px_rgba(16,185,129,0.8)]"
+                        />
+                    </svg>
+
+                    {/* Labels */}
+                    <div className="absolute top-2 left-2 flex flex-col">
+                        <span className="text-[10px] font-black text-[#64748B] uppercase tracking-tighter">Antes</span>
+                        <span className="text-sm font-black text-[#EF4444]">62,00€/año</span>
+                    </div>
+
+                    <div className="absolute bottom-2 right-2 flex flex-col items-end">
+                        <div className="bg-[#10B981] text-white text-[9px] font-black px-2 py-0.5 rounded-full mb-1 flex items-center gap-1 animate-bounce">
+                            <Zap size={8} /> KILLER ACTION
+                        </div>
+                        <span className="text-[10px] font-black text-[#64748B] uppercase tracking-tighter">Después</span>
+                        <span className="text-sm font-black text-[#10B981]">0,00€/año</span>
+                    </div>
+                </div>
+
+                {/* Legend / Context */}
+                <div className="mt-4 flex items-center justify-center gap-3 border-t border-[#F1F5F9] pt-3">
+                    <div className="flex items-center gap-1.5 bg-[#F8FAFC] px-3 py-1.5 rounded-full border border-[#E2E8F0]">
+                        <TrendingDown size={14} className="text-[#10B981]" />
+                        <span className="text-[10px] font-black text-[#0F172A]">{t('features.hero_chart_desc')}</span>
+                    </div>
+                </div>
             </div>
         </div>
     );

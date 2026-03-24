@@ -149,7 +149,7 @@ const LandingPage = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-white p-6 rounded-[2rem] border border-[#E2E8F0] shadow-sm">
                     <div className="text-[#64748B] text-[10px] font-bold uppercase mb-1">{t('features.potential_savings')}</div>
-                    <div className="text-2xl font-black text-[#10B981]">-32,00€</div>
+                    <div className="text-2xl font-black text-[#10B981]">-62,00€</div>
                   </div>
                   <div className="bg-white p-6 rounded-[2rem] border border-[#E2E8F0] shadow-sm">
                     <div className="text-[#64748B] text-[10px] font-bold uppercase mb-1">{t('features.next_charge')}</div>
