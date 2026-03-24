@@ -15,6 +15,7 @@ import Alternatives from './components/Alternatives';
 import CheckEmailPage from './components/CheckEmailPage';
 import VerifyEmailPage from './components/VerifyEmailPage';
 import SignupPage from './components/SignupPage';
+import ResetPasswordPage from './components/ResetPasswordPage';
 import CookieBanner from './components/CookieBanner';
 
 function App() {
@@ -23,21 +24,22 @@ function App() {
       <LanguageProvider>
         <Router>
           <div className="min-h-screen bg-transparent">
-          <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/check-email" element={<CheckEmailPage />} />
-          <Route path="/verify-email" element={<VerifyEmailPage />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/guide/:id" element={<CancellationGuide />} />
-          <Route path="/subscriptions" element={<SubscriptionList />} />
-          <Route path="/subscriptions/:id" element={<SubscriptionDetail />} />
-          <Route path="/alternatives/:id" element={<Alternatives />} />
-          <Route path="/add" element={<AddSubscription />} />
-          <Route path="/profile" element={<Profile />} />
-          </Routes>
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignupPage />} />
+              <Route path="/check-email" element={<CheckEmailPage />} />
+              <Route path="/verify-email" element={<VerifyEmailPage />} />
+              <Route path="/reset-password" element={<ResetPasswordPage />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/guide/:id" element={<CancellationGuide />} />
+              <Route path="/subscriptions" element={<SubscriptionList />} />
+              <Route path="/subscriptions/:id" element={<SubscriptionDetail />} />
+              <Route path="/alternatives/:id" element={<Alternatives />} />
+              <Route path="/add" element={<AddSubscription />} />
+              <Route path="/profile" element={<Profile />} />
+            </Routes>
           </div>
           <CookieBanner />
         </Router>
