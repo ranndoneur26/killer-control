@@ -72,14 +72,14 @@ export default function SignupPage() {
             disabled={anyLoading}
             className="w-full flex items-center justify-center gap-2 font-bold rounded-full py-3.5 bg-[var(--bg-surface)] text-[var(--text-primary)] border border-[var(--border)] hover:bg-[var(--bg-elevated)] transition shadow-sm disabled:opacity-70"
           >
-            {auth.loadingBtn === 'google' ? <Loader2 size={18} className="animate-spin" /> : <><GoogleIcon /> {t('login.google_continue')}</>}
+            {auth.loadingBtn === 'google' ? <Loader2 key="goog-l" size={18} className="animate-spin" /> : <><GoogleIcon key="goog-i" /> {t('login.google_continue')}</>}
           </button>
           <button
             onClick={() => auth.handleOAuth('Apple')}
             disabled={anyLoading}
             className="w-full flex items-center justify-center gap-2 font-bold rounded-full py-3.5 bg-black text-white hover:bg-gray-900 transition shadow-sm disabled:opacity-70"
           >
-            {auth.loadingBtn === 'apple' ? <Loader2 size={18} className="animate-spin" /> : <><AppleIcon /> {t('login.apple_continue')}</>}
+            {auth.loadingBtn === 'apple' ? <Loader2 key="appl-l" size={18} className="animate-spin" /> : <><AppleIcon key="appl-i" /> {t('login.apple_continue')}</>}
           </button>
         </div>
 
@@ -117,6 +117,7 @@ export default function SignupPage() {
           <AnimatePresence>
             {auth.step === 'password' && (
               <motion.div
+                key="signup-password-wrap"
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 className="overflow-hidden"

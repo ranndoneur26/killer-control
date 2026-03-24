@@ -210,6 +210,7 @@ export default function Login() {
           <AnimatePresence>
             {auth.step === 'password' && (
               <motion.div
+                key="password-field-wrap"
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
