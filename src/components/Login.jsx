@@ -153,7 +153,7 @@ export default function Login() {
             disabled={anyLoading}
             className="w-full flex items-center justify-center gap-2 font-bold rounded-full py-3.5 bg-[var(--bg-surface)] text-[var(--text-primary)] border border-[var(--border)] hover:bg-[var(--bg-elevated)] transition shadow-sm disabled:opacity-70"
           >
-            {auth.loadingBtn === 'google' ? <Loader2 key="l-goog" size={18} className="animate-spin" /> : <><GoogleIcon key="i-goog" /> {t('login.google_continue') || t('login.google_login')}</>}
+            {auth.loadingBtn === 'google' ? <Loader2 key="l-goog" size={18} className="animate-spin" /> : <span key="google-btn-content" className="flex items-center gap-2"><GoogleIcon key="i-goog" /> {t('login.google_continue') || t('login.google_login')}</span>}
           </button>
         </div>
 

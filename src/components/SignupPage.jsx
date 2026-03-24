@@ -72,7 +72,7 @@ export default function SignupPage() {
             disabled={anyLoading}
             className="w-full flex items-center justify-center gap-2 font-bold rounded-full py-3.5 bg-[var(--bg-surface)] text-[var(--text-primary)] border border-[var(--border)] hover:bg-[var(--bg-elevated)] transition shadow-sm disabled:opacity-70"
           >
-            {auth.loadingBtn === 'google' ? <Loader2 key="goog-l" size={18} className="animate-spin" /> : <><GoogleIcon key="goog-i" /> {t('login.google_continue')}</>}
+            {auth.loadingBtn === 'google' ? <Loader2 key="goog-l" size={18} className="animate-spin" /> : <span key="goog-btn-span" className="flex items-center gap-2"><GoogleIcon key="goog-i" /> {t('login.google_continue')}</span>}
           </button>
         </div>
 
