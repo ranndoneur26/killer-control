@@ -287,8 +287,6 @@ export default function Login() {
                       </button>
                     </div>
                     {auth.passError && <p className="text-xs text-red-400 mt-1.5 pl-1">{auth.passError}</p>}
-
-                    )}
                   </motion.div>
                 )}
               </AnimatePresence>
