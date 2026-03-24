@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 const DATA = [
     { day: 'Lun', value: 35, label: '8,50€' },
@@ -13,6 +14,7 @@ const DATA = [
 
 export default function MockupChart() {
     const [activeIdx, setActiveIdx] = useState(null);
+    const { t } = useLanguage();
 
     return (
         <div className="w-full h-full flex flex-col justify-between p-2 pt-8">
@@ -71,7 +73,7 @@ export default function MockupChart() {
             {/* Description text at bottom */}
             <div className="mt-4 pt-3 border-t border-[#F1F5F9] text-center">
                 <p className="text-[10px] text-[#64748B] font-medium leading-relaxed italic">
-                    * Pulsa en las barras para ver el desglose de ahorro acumulado.
+                    {t('features.hero_chart_desc')}
                 </p>
             </div>
         </div>
