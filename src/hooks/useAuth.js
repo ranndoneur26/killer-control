@@ -6,7 +6,8 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   OAuthProvider,
-  sendPasswordResetEmail
+  sendPasswordResetEmail,
+  sendEmailVerification
 } from 'firebase/auth';
 import { auth } from '../lib/firebase';
 import { createUserProfile } from '../lib/db';
@@ -28,7 +29,7 @@ const validatePassword = (v, isLogin) => {
 
 /* ═══════════════════════════════════════════
    HOOK: useAuth
-═══════════════════════════════════════════ */
+   ═══════════════════════════════════════════ */
 export function useAuth(addToast, navigate) {
   const [isLogin, setIsLogin] = useState(false);    // false = Register
   const [step, setStep] = useState('email');   // 'email' | 'password'
@@ -77,18 +78,25 @@ export function useAuth(addToast, navigate) {
         userCredential = await signInWithEmailAndPassword(auth, email, password);
       } else {
         userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+        // Send Verification Email for new signups
+        await sendEmailVerification(userCredential.user);
       }
 
       // Ensure the user profile exists in Firestore (critical for new signups)
       await createUserProfile(userCredential.user);
 
-      addToast('success', isLogin ? 'Welcome back!' : 'Account created successfully!');
-
-      const plan = sessionStorage.getItem('selected_plan') || 'free';
-      if (plan === 'premium' && !isLogin) {
-        navigate('/checkout'); // e.g. stripe integration
+      if (!isLogin) {
+        // For new signups, go to confirmation page
+        navigate(`/check-email?email=${encodeURIComponent(email)}`);
       } else {
-        navigate('/dashboard');
+        addToast('success', 'Welcome back!');
+        const plan = sessionStorage.getItem('selected_plan') || 'free';
+        if (plan === 'premium' && !isLogin) {
+          navigate('/checkout');
+        } else {
+          navigate('/dashboard');
+        }
       }
 
     } catch (ex) {
