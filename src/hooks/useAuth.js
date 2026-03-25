@@ -22,7 +22,12 @@ const validateEmail = (v) => {
 
 const validatePassword = (v, isLogin) => {
   if (!v) return 'Password is required.';
-  if (!isLogin && v.length < 8) return 'Minimum 8 characters.';
+  if (!isLogin) {
+    if (v.length < 8) return 'Minimum 8 characters.';
+    if (!/[A-Z]/.test(v)) return 'Must include an uppercase letter.';
+    if (!/[0-9]/.test(v)) return 'Must include a number.';
+    if (!/[^A-Za-z0-9]/.test(v)) return 'Must include a special character.';
+  }
   return '';
 };
 
@@ -101,9 +106,15 @@ export function useAuth(addToast, navigate) {
     } catch (ex) {
       console.error("Auth error:", ex);
       let errMsg = "Authentication failed.";
-      if (ex.code === 'auth/email-already-in-use') errMsg = "This email is already registered.";
-      if (ex.code === 'auth/wrong-password' || ex.code === 'auth/invalid-credential') errMsg = "Incorrect credentials. Please try again.";
-      if (ex.code === 'auth/user-not-found') errMsg = "No account found for this email.";
+      if (ex.code === 'auth/email-already-in-use') {
+        errMsg = "Este email ya está registrado. ¿Quieres iniciar sesión o recuperar tu contraseña?";
+      } else if (ex.code === 'auth/wrong-password' || ex.code === 'auth/invalid-credential') {
+        errMsg = "Credenciales incorrectas. Por favor, inténtalo de nuevo.";
+      } else if (ex.code === 'auth/user-not-found') {
+        errMsg = "No se encontró ninguna cuenta con este email.";
+      } else if (ex.code === 'auth/too-many-requests') {
+        errMsg = "Demasiados intentos. Por favor, inténtalo más tarde.";
+      }
       addToast('error', errMsg);
     } finally {
       setLoadingBtn(null);
@@ -152,11 +163,14 @@ export function useAuth(addToast, navigate) {
     setLoadingBtn('email');
     try {
       await sendPasswordResetEmail(auth, email);
-      addToast('success', 'We have sent you an email to reset your password.');
+      addToast('success', 'Te hemos enviado un email para restablecer tu contraseña.');
       return true;
     } catch (error) {
       console.error("Forgot password error", error);
-      addToast('error', 'Could not send reset email. Verify your address.');
+      let errMsg = 'No se pudo enviar el email de recuperación.';
+      if (error.code === 'auth/user-not-found') errMsg = 'No existe una cuenta con este email.';
+      if (error.code === 'auth/too-many-requests') errMsg = 'Demasiados intentos. Prueba más tarde.';
+      addToast('error', errMsg);
       return false;
     } finally {
       setLoadingBtn(null);

@@ -25,6 +25,16 @@ const AppleIcon = () => (
   </svg>
 );
 
+/* ── Criteria Item ──────────────────────── */
+const PasswordCriteria = ({ met, label }) => (
+  <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider">
+    <div className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-colors ${met ? 'bg-green-500/20 text-green-500' : 'bg-red-500/10 text-red-400'}`}>
+      <CheckCircle2 size={10} className={met ? 'opacity-100' : 'opacity-0'} />
+    </div>
+    <span className={met ? 'text-green-500' : 'text-[var(--text-muted)]'}>{label}</span>
+  </div>
+);
+
 export default function SignupPage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -133,6 +143,42 @@ export default function SignupPage() {
                     {auth.showPassword ? <EyeOff size={19} /> : <Eye size={19} />}
                   </button>
                 </div>
+
+                {/* Password Strength Meter & Real-time validation */}
+                {auth.password && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mt-3 space-y-3 px-1"
+                  >
+                    {/* Strength Bars */}
+                    <div className="flex gap-1.5 h-1">
+                      {[1, 2, 3, 4].map((level) => {
+                        const score = (auth.password.length >= 8 ? 1 : 0) +
+                          (/[A-Z]/.test(auth.password) ? 1 : 0) +
+                          (/[0-9]/.test(auth.password) ? 1 : 0) +
+                          (/[^A-Za-z0-9]/.test(auth.password) ? 1 : 0);
+                        const isActive = level <= score;
+                        const colors = ['bg-red-500', 'bg-orange-500', 'bg-yellow-500', 'bg-green-500'];
+                        return (
+                          <div
+                            key={level}
+                            className={`flex-1 rounded-full transition-all duration-500 ${isActive ? colors[score - 1] : 'bg-[var(--border)]'}`}
+                          />
+                        );
+                      })}
+                    </div>
+
+                    {/* Criteria List */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      <PasswordCriteria met={auth.password.length >= 8} label="8+ caracteres" />
+                      <PasswordCriteria met={/[A-Z]/.test(auth.password)} label="Mayúscula" />
+                      <PasswordCriteria met={/[0-9]/.test(auth.password)} label="Número" />
+                      <PasswordCriteria met={/[^A-Za-z0-9]/.test(auth.password)} label="Especial" />
+                    </div>
+                  </motion.div>
+                )}
+
                 {auth.passError && <p className="text-xs text-red-400 mt-1 pl-1">{auth.passError}</p>}
               </motion.div>
             )}

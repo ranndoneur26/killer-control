@@ -7,6 +7,16 @@ import { useToast } from '../hooks/useToast';
 import { useLanguage } from '../contexts/LanguageContext';
 import Logo from './Logo';
 
+/* ── Criteria Item ──────────────────────── */
+const PasswordCriteria = ({ met, label }) => (
+    <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider">
+        <div className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-colors ${met ? 'bg-green-500/20 text-green-500' : 'bg-red-500/10 text-red-400'}`}>
+            <CheckCircle2 size={10} className={met ? 'opacity-100' : 'opacity-0'} />
+        </div>
+        <span className={met ? 'text-green-500' : 'text-[var(--text-muted)]'}>{label}</span>
+    </div>
+);
+
 export default function ResetPasswordPage() {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
@@ -40,8 +50,22 @@ export default function ResetPasswordPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Validation logic
         if (newPassword.length < 8) {
             addToast('error', 'La contraseña debe tener al menos 8 caracteres.');
+            return;
+        }
+        if (!/[A-Z]/.test(newPassword)) {
+            addToast('error', 'La contraseña debe incluir al menos una mayúscula.');
+            return;
+        }
+        if (!/[0-9]/.test(newPassword)) {
+            addToast('error', 'La contraseña debe incluir al menos un número.');
+            return;
+        }
+        if (!/[^A-Za-z0-9]/.test(newPassword)) {
+            addToast('error', 'La contraseña debe incluir al menos un carácter especial.');
             return;
         }
 
@@ -97,6 +121,37 @@ export default function ResetPasswordPage() {
                                 {showPassword ? <EyeOff size={19} /> : <Eye size={19} />}
                             </button>
                         </div>
+
+                        {/* Password Strength Meter & Real-time validation */}
+                        {newPassword && (
+                            <div className="mt-3 space-y-3 px-1">
+                                {/* Strength Bars */}
+                                <div className="flex gap-1.5 h-1">
+                                    {[1, 2, 3, 4].map((level) => {
+                                        const score = (newPassword.length >= 8 ? 1 : 0) +
+                                            (/[A-Z]/.test(newPassword) ? 1 : 0) +
+                                            (/[0-9]/.test(newPassword) ? 1 : 0) +
+                                            (/[^A-Za-z0-9]/.test(newPassword) ? 1 : 0);
+                                        const isActive = level <= score;
+                                        const colors = ['bg-red-500', 'bg-orange-500', 'bg-yellow-500', 'bg-green-500'];
+                                        return (
+                                            <div
+                                                key={level}
+                                                className={`flex-1 rounded-full transition-all duration-500 ${isActive ? colors[score - 1] : 'bg-[var(--border)]'}`}
+                                            />
+                                        );
+                                    })}
+                                </div>
+
+                                {/* Criteria List */}
+                                <div className="grid grid-cols-2 gap-2 text-left">
+                                    <PasswordCriteria met={newPassword.length >= 8} label="8+ chars" />
+                                    <PasswordCriteria met={/[A-Z]/.test(newPassword)} label="Mayúscula" />
+                                    <PasswordCriteria met={/[0-9]/.test(newPassword)} label="Número" />
+                                    <PasswordCriteria met={/[^A-Za-z0-9]/.test(newPassword)} label="Especial" />
+                                </div>
+                            </div>
+                        )}
 
                         <button
                             type="submit"

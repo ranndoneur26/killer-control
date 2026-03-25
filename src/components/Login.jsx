@@ -109,39 +109,25 @@ export default function Login() {
           <Logo className="h-14" />
         </div>
 
-        {/* Heading — animates when switching login/register/reset */}
+        {/* Heading — animates when switching login/reset */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={isResettingPassword ? 'reset' : (auth.isLogin ? 'login' : 'register')}
+            key={isResettingPassword ? 'reset' : 'login'}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.2 }}
             className="text-center mb-8"
           >
-            {isPremium && !auth.isLogin && !isResettingPassword && (
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-bold uppercase tracking-wider mb-4 border border-amber-200">
-                <Crown size={14} className="fill-amber-500 text-amber-600" />
-                {t('login.premium_selected')}
-              </div>
-            )}
             <h1 className="text-3xl font-bold mb-3 text-[var(--text-primary)]">
               {isResettingPassword
                 ? t('login.forgot_pass_title') || 'Recuperar Contraseña'
-                : auth.isLogin
-                  ? t('login.welcome_back')
-                  : isPremium
-                    ? t('login.premium_trial')
-                    : <span dangerouslySetInnerHTML={{ __html: t('login.create_account') }} />}
+                : t('login.welcome_back')}
             </h1>
             <p className="text-[var(--text-secondary)] text-sm leading-relaxed font-medium">
               {isResettingPassword
                 ? t('login.forgot_pass_subtitle') || 'Te enviaremos un enlace para restablecer tu cuenta.'
-                : auth.isLogin
-                  ? t('login.login_subtitle')
-                  : isPremium
-                    ? t('login.premium_subtitle')
-                    : <span dangerouslySetInnerHTML={{ __html: t('login.join_subtitle') }} />}
+                : t('login.login_subtitle')}
             </p>
           </motion.div>
         </AnimatePresence>
@@ -271,7 +257,7 @@ export default function Login() {
                         type={auth.showPassword ? 'text' : 'password'}
                         value={auth.password}
                         onChange={e => { auth.setPassword(e.target.value); auth.setPassError(''); }}
-                        placeholder={auth.isLogin ? 'Your password' : 'Create a password (min. 8 chars)'}
+                        placeholder="Tu contraseña"
                         autoFocus
                         disabled={anyLoading}
                         className={`w-full bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-2xl py-4 px-5 pr-12 outline-none border border-[var(--border)] shadow-sm
@@ -300,21 +286,19 @@ export default function Login() {
               >
                 {auth.step === 'email'
                   ? <>{t('login.continue')} <ArrowRight size={18} /></>
-                  : auth.isLogin ? t('login.login_btn') : t('login.signup_btn')
+                  : t('login.login_btn')
                 }
               </AuthButton>
 
-              {auth.isLogin && (
-                <div className="text-center mt-4">
-                  <button
-                    type="button"
-                    onClick={() => setIsResettingPassword(true)}
-                    className="text-xs text-[var(--primary)] font-bold hover:underline"
-                  >
-                    {t('login.forgot_pass')}
-                  </button>
-                </div>
-              )}
+              <div className="text-center mt-4">
+                <button
+                  type="button"
+                  onClick={() => setIsResettingPassword(true)}
+                  className="text-xs text-[var(--primary)] font-bold hover:underline"
+                >
+                  {t('login.forgot_pass')}
+                </button>
+              </div>
             </motion.form>
           )}
         </AnimatePresence>
@@ -330,13 +314,13 @@ export default function Login() {
             <button type="button" onClick={() => setShowPrivacy(true)} className="text-[var(--primary)] hover:underline font-bold">{t('login.privacy_btn')}</button>.
           </p>
           <p className="text-sm text-[var(--text-secondary)] font-medium">
-            {auth.isLogin ? t('login.no_account') : t('login.already_account')}
+            ¿No tienes una cuenta?{' '}
             <button
               type="button"
-              onClick={auth.toggleMode}
+              onClick={() => navigate('/signup')}
               className="text-[var(--text-primary)] font-bold hover:text-[var(--primary)] transition"
             >
-              {auth.isLogin ? t('login.signup_free') : t('login.login_link')}
+              Registrarse Gratis
             </button>
           </p>
         </div>
