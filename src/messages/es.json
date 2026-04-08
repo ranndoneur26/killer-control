@@ -4,7 +4,7 @@
     "pricing": "Precios",
     "faq": "FAQ",
     "login": "Entrar",
-    "logout": "salir",
+    "logout": "Cerrar sesión",
     "dashboard": "Panel de control",
     "home": "Inicio",
     "subscriptions": "Suscripciones",
@@ -114,8 +114,8 @@
     "contact": "CONTACTO",
     "email": "EMAIL",
     "explore": "EXPLORAR",
-    "tagline": "SU ALIADO FINANCIERO PARA SUSCRIPCIONES.",
-    "brand": "Marca"
+    "tagline": "TU ALIADO FINANCIERO PARA SUSCRIPCIONES.",
+    "brand": "Killer Control"
   },
   "dashboard": {
     "tagline": "Tus suscripciones bajo control",
@@ -250,7 +250,6 @@
       "billing_history": "Historial de facturación",
       "cancel_sub": "Cancelar suscripción",
       "stripe_redirect_note": "Redirige al portal seguro de clientes de Stripe",
-      "logout": "salir"
     },
     "notifications": {
       "title": "Preferencias",
