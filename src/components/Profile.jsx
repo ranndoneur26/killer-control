@@ -53,7 +53,7 @@ export default function Profile() {
   const SECTIONS = [
     { id: 'personal', label: t('profile.personal_data'), icon: User, color: 'text-[var(--primary)]', bg: 'bg-[var(--primary)]/10' },
     { id: 'payment', label: t('profile.payments'), icon: CreditCard, color: 'text-[var(--primary)]', bg: 'bg-[var(--primary)]/10' },
-    { id: 'notifications', label: t('profile.notifications'), icon: Bell, color: 'text-amber-400', bg: 'bg-amber-950/20' },
+    { id: 'notifications', label: t('profile.notifications.preferences_title'), icon: Bell, color: 'text-amber-400', bg: 'bg-amber-950/20' },
     { id: 'security', label: t('profile.privacy'), icon: Shield, color: 'text-red-400', bg: 'bg-red-950/20' },
     { id: 'appearance', label: t('profile.appearance'), icon: Moon, color: 'text-[var(--primary)]', bg: 'bg-[var(--primary)]/10' },
   ];
