@@ -209,6 +209,9 @@
     "pro_badge": "PRO",
     "user_killer": "Usuario",
     "user_email": "correo@ejemplo.com",
+        "privacy": "Privacidad y Seguridad",
+        "logout": "Cerrar sesión",
+        "select_section": "Selecciona una sección",
     "personal": {
       "title": "Perfil personal",
       "subtitle": "Actualiza tus datos personales y tu avatar.",
