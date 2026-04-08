@@ -4,7 +4,8 @@
     "pricing": "Pricing",
     "faq": "FAQ",
     "login": "Log in",
-    "logout": "Log out",
+    "logout": "log out",
+    "dashboard": "Dashboard",
     "home": "Home",
     "subscriptions": "Subscriptions",
     "profile": "Profile"
@@ -200,18 +201,85 @@
     "other": "Other"
   },
   "profile": {
-    "personal_data": "Personal Data",
-    "payments": "Payment Methods",
-    "notifications": "Notifications & Alerts",
-    "privacy": "Privacy & Security",
+    "personal_data": "Killer Profile",
+    "payments": "Subscription Plan",
     "appearance": "Appearance",
     "manual": "User Guide",
-    "logout": "Log Out",
-    "myaccount": "myaccount",
-    "select_section": "Select a section to start",
+    "myaccount": "My Account",
+    "pro_badge": "PRO",
     "user_killer": "User",
-    "user_email": "user@killercontrol.app",
-    "pro_badge": "PRO"
+    "user_email": "email@example.com",
+    "personal": {
+      "title": "Personal Profile",
+      "subtitle": "Update your personal details and avatar.",
+      "avatarUrl": "Avatar URL",
+      "displayName": "Display Name",
+      "namePlaceholder": "Your Killer Name",
+      "email": "Email Address",
+      "emailNote": "To change your email, please contact support for security verification.",
+      "password": "Password",
+      "resetPassword": "Send password reset email",
+      "resetSentNote": "Email sent",
+      "save": "Save Changes",
+      "updateSuccess": "Profile updated successfully!",
+      "updateError": "Could not save changes.",
+      "resetSuccess": "Reset email sent! Check your inbox.",
+      "resetError": "Could not send reset email."
+    },
+    "payment": {
+      "title": "Subscription Plan",
+      "subtitle": "Manage your billing and plan details.",
+      "freePlan": "FREE PLAN",
+      "upgradeTitle": "Upgrade to Premium",
+      "upgradeDesc": "Get unlimited subscriptions, smart alerts, and advanced insights. No commitments, cancel anytime.",
+      "startTrial": "Start Free Trial",
+      "zeroFrictionLabel": "Zero Friction Policy:",
+      "zeroFrictionDesc": "Canceling your subscription does not delete your data. Your account will simply revert to the Free plan at the end of your billing period. You can reactivate anytime to regain full access.",
+      "premium_label": "Premium Plan",
+      "limit_exceeded_title": "Subscription Limit Exceeded",
+      "limit_exceeded_desc": "You currently have more subscriptions than the Free plan allows (3). Your data is safe, but you cannot add new subscriptions or receive smart alerts until you upgrade.",
+      "restore_access": "Restore Premium Access",
+      "cancel_scheduled": "Cancellation Scheduled",
+      "cancel_grace_note": "Your Premium benefits remain active until {date}. After this date, your account will switch to Free, but we will keep your data safe.",
+      "reactivate_btn": "Reactivate Premium Instantly",
+      "payment_method": "Payment Method",
+      "next_billing": "Next billing date: {date}",
+      "billing_history": "Billing History",
+      "cancel_sub": "Cancel Subscription",
+      "stripe_redirect_note": "Redirects to Stripe Secure Customer Portal",
+      "logout": "log out"
+    },
+    "notifications": {
+      "title": "Preferences",
+      "subtitle": "Customize your Killer Control experience.",
+      "currency": "Base Currency",
+      "currencyDesc": "Your dashboard will display totals in this currency.",
+      "sectionTitle": "NOTIFICATIONS & ALERTS",
+      "monthlySummary": "Monthly Summary",
+      "monthlySummaryDesc": "Receive a monthly report of your spending.",
+      "smartAlerts": "Smart Price Alerts",
+      "smartAlertsDesc": "Get notified when subscriptions increase price.",
+      "premiumOnly": "PREMIUM ONLY",
+      "preferences_title": "Preferences & Notifications",
+      "currencyUpdated": "Currency updated to {val}",
+      "currencyError": "Failed to update currency",
+      "preferenceError": "Failed to update preference"
+    },
+    "danger": {
+      "title": "Danger Zone",
+      "subtitle": "Irreversible actions. Proceed with caution.",
+      "exportSection": "EXPORT DATA",
+      "exportTitle": "Download your data",
+      "exportDesc": "Get a copy of your subscriptions and profile.",
+      "exportBtn": "Export CSV / PDF",
+      "deleteSection": "DELETE ACCOUNT",
+      "deleteTitle": "Permanently delete account",
+      "deleteDesc": "Once you delete your account, there is no going back. All your subscriptions, history and settings will be permanently erased.",
+      "deleteBtn": "Killer the Killer",
+      "danger_zone_title": "Danger Zone",
+      "deleting": "Deleting...",
+      "tooltipText": "\"Who kills a Killer, is a Killer?. Good luck and thanks for being a great Killer.\""
+    }
   },
   "appearance": {
     "title": "Appearance",
@@ -302,9 +370,11 @@
     "terms_btn": "Terms & Conditions",
     "and_legal": " and ",
     "privacy_btn": "Privacy Policy",
-    "no_account": "Don't have an account? ",
-    "already_account": "Already have an account? ",
-    "signup_free": "Sign up for free",
+    "no_account": "Don't have an account?",
+    "already_have_account": "Already have an account?",
+    "signup_now": "Sign up now",
+    "login_now": "Log in now",
+    "signup_free": "Sign up free",
     "login_link": "Log in",
     "premium_selected": "Premium Plan Selected",
     "forgot_pass_title": "Recover Password",
@@ -406,7 +476,8 @@
   ],
   "legal": {
     "close": "Close",
-    "understood": "Understood",
+    "understood": "Understood, close",
+    "rights": "All rights reserved.",
     "notice": {
       "title": "Legal Notice",
       "subtitle": "LSSI-CE Compliance",
@@ -621,5 +692,16 @@
     "analytics_desc": "Improve the app",
     "marketing_label": "Marketing",
     "marketing_desc": "Personalized ads"
+  },
+  "plan_gate": {
+    "upgrade_btn": "Upgrade to Premium"
+  },
+  "common": {
+    "back": "Back",
+    "go_home": "Go Home"
+  },
+  "error": {
+    "not_found_title": "Page Not Found",
+    "not_found_desc": "Sorry, the corner of Killer Control you're looking for doesn't exist or has been moved."
   }
 }

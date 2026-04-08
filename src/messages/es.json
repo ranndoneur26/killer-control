@@ -4,7 +4,8 @@
     "pricing": "Precios",
     "faq": "FAQ",
     "login": "Entrar",
-    "logout": "Salir",
+    "logout": "salir",
+    "dashboard": "Panel de control",
     "home": "Inicio",
     "subscriptions": "Suscripciones",
     "profile": "Perfil"
@@ -22,7 +23,7 @@
   },
   "pain": {
     "title": "Pagas más de lo que crees cada mes.",
-    "subtitle": "Suscripciones olvidadas, subidas ocultas y promociones que caducan sin previo aviso... drenando tu cuenta.",
+    "subtitle": "Suscripciones olvidadas, subidas ocultas y promociones que caducan sin previo aviso... arruinando tu cuenta.",
     "forgotten_title": "Servicios olvidados",
     "forgotten_desc": "Esa app que probaste una vez, pero que sigues pagando cada mes sin darte cuenta.",
     "silent_title": "Subidas silenciosas",
@@ -200,18 +201,85 @@
     "other": "Otro"
   },
   "profile": {
-    "personal_data": "Datos personales",
-    "payments": "Métodos de pago",
-    "notifications": "Notificaciones y alertas",
-    "privacy": "Privacidad y seguridad",
+    "personal_data": "Perfil killer",
+    "payments": "Plan de suscripción",
     "appearance": "Apariencia",
-    "manual": "Guía de usuario",
-    "logout": "Cerrar sesión",
-    "myaccount": "micuenta",
-    "select_section": "Selecciona una sección para empezar",
+    "manual": "Guía del usuario",
+    "myaccount": "Mi cuenta",
+    "pro_badge": "PRO",
     "user_killer": "Usuario",
-    "user_email": "usuario@killercontrol.app",
-    "pro_badge": "PRO"
+    "user_email": "correo@ejemplo.com",
+    "personal": {
+      "title": "Perfil personal",
+      "subtitle": "Actualiza tus datos personales y tu avatar.",
+      "avatarUrl": "URL del avatar",
+      "displayName": "Nombre para mostrar",
+      "namePlaceholder": "Tu nombre Killer",
+      "email": "Dirección de correo electrónico",
+      "emailNote": "Para cambiar tu correo, ponte en contacto con el servicio de asistencia para la verificación de seguridad.",
+      "password": "Contraseña",
+      "resetPassword": "Enviar correo electrónico para restablecer la contraseña",
+      "resetSentNote": "Correo enviado",
+      "save": "Guardar cambios",
+      "updateSuccess": "¡Perfil actualizado correctamente!",
+      "updateError": "No se pudieron guardar los cambios.",
+      "resetSuccess": "¡Correo enviado! Revisa tu bandeja de entrada.",
+      "resetError": "No se pudo enviar el correo de restablecimiento."
+    },
+    "payment": {
+      "title": "Plan de suscripción",
+      "subtitle": "Gestiona tu facturación y los detalles de tu plan.",
+      "freePlan": "PLAN GRATUITO",
+      "upgradeTitle": "Actualiza a Premium",
+      "upgradeDesc": "Obtén suscripciones ilimitadas, alertas inteligentes y análisis avanzados. Sin compromisos, cancela cuando quieras.",
+      "startTrial": "Hazte premium",
+      "zeroFrictionLabel": "Política de cero fricciones:",
+      "zeroFrictionDesc": "Cancelar tu suscripción no elimina tus datos. Tu cuenta simplemente volverá al plan gratuito al final de tu período de facturación. Puedes reactivarla cuando quieras para recuperar el acceso completo.",
+      "premium_label": "Plan Premium",
+      "limit_exceeded_title": "Límite de suscripciones excedido",
+      "limit_exceeded_desc": "Actualmente tienes más suscripciones de las que permite el plan gratuito (3). Tus datos están seguros, pero no puedes añadir más ni recibir alertas inteligentes hasta que actualices.",
+      "restore_access": "Restaurar acceso Premium",
+      "cancel_scheduled": "Cancelación programada",
+      "cancel_grace_note": "Tus beneficios Premium siguen activos hasta el {date}. Después, tu cuenta pasará a ser gratuita, pero mantendremos tus datos seguros.",
+      "reactivate_btn": "Reactivar Premium al instante",
+      "payment_method": "Método de pago",
+      "next_billing": "Próxima fecha de facturación: {date}",
+      "billing_history": "Historial de facturación",
+      "cancel_sub": "Cancelar suscripción",
+      "stripe_redirect_note": "Redirige al portal seguro de clientes de Stripe",
+      "logout": "salir"
+    },
+    "notifications": {
+      "title": "Preferencias",
+      "subtitle": "Personaliza tu experiencia con Killer Control.",
+      "currency": "Moneda base",
+      "currencyDesc": "Tu panel de control mostrará los totales en esta moneda.",
+      "sectionTitle": "NOTIFICACIONES Y ALERTAS",
+      "monthlySummary": "Resumen mensual",
+      "monthlySummaryDesc": "Recibe un informe mensual de tus gastos.",
+      "smartAlerts": "Alertas de precios inteligentes",
+      "smartAlertsDesc": "Recibe notificaciones cuando aumenten los precios de las suscripciones.",
+      "premiumOnly": "SOLO PREMIUM",
+      "preferences_title": "Preferencias y Notificaciones",
+      "currencyUpdated": "Moneda actualizada a {val}",
+      "currencyError": "Error al actualizar la moneda",
+      "preferenceError": "Error al actualizar la preferencia"
+    },
+    "danger": {
+      "title": "Zona de peligro",
+      "subtitle": "Acciones irreversibles. Procede con precaución.",
+      "exportSection": "EXPORTAR DATOS",
+      "exportTitle": "Descarga tu información",
+      "exportDesc": "Obtén una copia de tus suscripciones y perfil.",
+      "exportBtn": "Exportar CSV / PDF",
+      "deleteSection": "ELIMINAR CUENTA",
+      "deleteTitle": "Eliminar cuenta permanentemente",
+      "deleteDesc": "Una vez que elimines tu cuenta, no hay vuelta atrás. Todas tus suscripciones, historial y configuraciones se borrarán para siempre.",
+      "deleteBtn": "Killer the Killer",
+      "danger_zone_title": "Zona de peligro",
+      "deleting": "Borrando...",
+      "tooltipText": "\"¿Quien mata a un Killer, es un Killer?. Buena suerte y gracias por haber sido un gran Killer.\""
+    }
   },
   "appearance": {
     "title": "Apariencia",
@@ -302,8 +370,10 @@
     "terms_btn": "Términos y Condiciones",
     "and_legal": " y ",
     "privacy_btn": "Política de Privacidad",
-    "no_account": "¿No tienes cuenta? ",
-    "already_account": "¿Ya tienes cuenta? ",
+    "no_account": "¿No tienes cuenta?",
+    "already_have_account": "¿Ya tienes cuenta?",
+    "signup_now": "Regístrate ahora",
+    "login_now": "Inicia sesión",
     "signup_free": "Regístrate gratis",
     "login_link": "Inicia sesión",
     "premium_selected": "Plan Premium seleccionado",
@@ -407,6 +477,7 @@
   "legal": {
     "close": "Cerrar",
     "understood": "Entendido, cerrar",
+    "rights": "Todos los derechos reservados.",
     "notice": {
       "title": "Aviso Legal",
       "subtitle": "Cumplimiento LSSI-CE",
@@ -414,7 +485,7 @@
       "sections": [
         {
           "title": "Información General",
-          "body": "En cumplimiento del deber de información contenido en el artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y del Comercio Electrónico (LSSI-CE), se facilitan los siguientes datos:\n\n• Titular: Marc Xicola\n• CIF/NIF: 52172995w\n• Dirección: C/ Pau Claris 15, baixos. 08100 Mollet del Vallès\n• Email: Killercontrolsupport@gmail.com"
+          "body": "En cumplimiento del deber de información contenido en el artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y del Comercio Electrónico (LSSI-CE), se facilitan los siguientes datos:\n\n• Titular: Marc Xicola Tugas\n• CIF/NIF: 52172995w\n• Dirección: C/ Pau Claris 15, baixos. 08100 Mollet del Vallès\n• Email: Killercontrolsupport@gmail.com"
         },
         {
           "title": "Propiedad Intelectual",
@@ -469,7 +540,7 @@
         },
         {
           "title": "Propiedad Intelectual e Industrial",
-          "body": "Todos los contenidos, diseños, textos, logotipos, etc. de Killer Control son propiedad de Marc Xicola..."
+          "body": "Todos los contenidos, diseños, textos, logotipos, etc. de Killer Control son propiedad de Marc Xicola Tugas..."
         },
         {
           "title": "Servicios de Terceros y Enlaces",
@@ -481,7 +552,7 @@
         },
         {
           "title": "Limitación de Responsabilidad",
-          "body": "En la medida permitida por la ley, Marc Xicola no será responsable de daños indirectos o lucro cesante..."
+          "body": "En la medida permitida por la ley, Marc Xicola Tugas no será responsable de daños indirectos o lucro cesante..."
         },
         {
           "title": "Suspensión o Cancelación de Cuenta",
@@ -493,7 +564,7 @@
         },
         {
           "title": "Modificaciones",
-          "body": "Marc Xicola podrá modificar estos Términos y Condiciones en cualquier momento por motivos legales o técnicos."
+          "body": "Marc Xicola Tugas podrá modificar estos Términos y Condiciones en cualquier momento por motivos legales o técnicos."
         },
         {
           "title": "Legislación Aplicable y Jurisdicción",
@@ -621,5 +692,16 @@
     "analytics_desc": "Mejorar la app",
     "marketing_label": "Marketing",
     "marketing_desc": "Publicidad personalizada"
+  },
+  "plan_gate": {
+    "upgrade_btn": "Mejorar a Premium"
+  },
+  "common": {
+    "back": "Atrás",
+    "go_home": "Volver al Inicio"
+  },
+  "error": {
+    "not_found_title": "Página no encontrada",
+    "not_found_desc": "Lo sentimos, el rincón de Killer Control que buscas no existe o ha sido movido."
   }
 }
