@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useUserProfile } from './useUserProfile';
+import { useSubscriptions } from './useSubscriptions';
 
 // Limits configuration
 export const PLAN_LIMITS = {
@@ -21,40 +22,49 @@ export const PLAN_LIMITS = {
 };
 
 export function usePlan() {
-  // In a real app with backend, this would come from useAuth().user.plan
-  // For this SPA prototype, we read from the session storage where we stored it during login
-  // We use a state to ensure reactivity if it changes (though usually it changes on login)
+  const { profile, loading: profileLoading } = useUserProfile();
+  const { count } = useSubscriptions();
+
+  // 1. Determine Plan Status
+  // We trust the 'plan' field, but we can double-check expiration if needed.
+  // In a robust system, a backend webhook updates 'plan' to 'free' when the period actually ends.
+  const rawPlan = profile?.plan || 'free';
+  const status = profile?.subscriptionStatus || 'active'; // 'active', 'canceled_at_period_end', 'past_due'
   
-  const [plan, setPlan] = useState('free');
+  // Logic: User is Premium if plan is premium. 
+  // Even if 'canceled_at_period_end', they are still Premium until the date passes.
+  const isPremium = rawPlan === 'premium';
+  
+  // 2. Identify Grace Period (Cancellation scheduled)
+  const isCanceled = profile?.cancelAtPeriodEnd === true || status === 'canceled_at_period_end';
+  
+  // 3. Get Expiration Date
+  // Handle Firestore Timestamp or ISO string
+  let periodEnd = null;
+  if (profile?.currentPeriodEnd) {
+    periodEnd = profile.currentPeriodEnd.toDate ? profile.currentPeriodEnd.toDate() : new Date(profile.currentPeriodEnd);
+  }
 
-  useEffect(() => {
-    // Simulate fetching plan from secure session
-    const storedPlan = sessionStorage.getItem('selected_plan');
-    if (storedPlan === 'premium') {
-      setPlan('premium');
-    } else {
-      setPlan('free');
-    }
-    
-    // Listen for storage changes in case of multi-tab or immediate updates
-    const handleStorage = () => {
-       const p = sessionStorage.getItem('selected_plan');
-       setPlan(p === 'premium' ? 'premium' : 'free');
-    };
-    
-    window.addEventListener('storage', handleStorage);
-    return () => window.removeEventListener('storage', handleStorage);
-  }, []);
+  const limits = PLAN_LIMITS[isPremium ? 'premium' : 'free'];
 
-  const limits = PLAN_LIMITS[plan] || PLAN_LIMITS.free;
+  // 4. Graceful Degradation Logic (The "Zombie Data" State)
+  // If user is Free but has 15 subs, they are "Over Limit".
+  const isOverLimit = !isPremium && count > limits.maxSubscriptions;
 
   return {
-    plan,
+    plan: isPremium ? 'premium' : 'free',
+    status,
     limits,
-    isFree: plan === 'free',
-    isPremium: plan === 'premium',
-    canAddSubscription: (currentCount) => {
-      if (plan === 'premium') return true;
+    loading: profileLoading,
+    isFree: !isPremium,
+    isPremium,
+    isCanceled, // True if user canceled but still has access
+    periodEnd,  // Date object or null
+    isOverLimit, // Use this to show "Archive your subs" banners
+    
+    // Check if user can add more subscriptions based on their current count
+    canAddSubscription: (currentCount = count) => {
+      if (isPremium) return true;
       return currentCount < limits.maxSubscriptions;
     }
   };

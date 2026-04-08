@@ -20,7 +20,7 @@ export function enableMarketing() {
 
 // Helper to check consent before tracking events
 export function hasAnalyticsConsent() {
-  const saved = localStorage.getItem('cookie_consent')
+  const saved = localStorage.getItem('killer_cookie_consent')
   if (!saved) return false
   try {
     return JSON.parse(saved)?.analytics === true

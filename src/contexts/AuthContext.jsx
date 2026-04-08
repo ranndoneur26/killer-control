@@ -1,52 +1,65 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../lib/firebase';
+import { getUserProfile } from '../lib/db';
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check for existing session token in localStorage on mount
-    const token = localStorage.getItem('auth_token');
-    if (token) {
-      // In a real app, you might validate this token with the backend here
-      // For now, we assume if token exists, user is logged in (simplified)
-      const storedUser = localStorage.getItem('auth_user');
-      if (storedUser) {
-        setUser(JSON.parse(storedUser));
+    // Escuchar cambios en el estado de autenticación de Firebase
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      setLoading(true); // Asegurar que loading es true al empezar el cambio
+      try {
+        if (firebaseUser) {
+          setUser(firebaseUser);
+          // Recuperar el perfil de Firestore
+          const userProfile = await getUserProfile(firebaseUser.uid);
+          setProfile(userProfile);
+        } else {
+          setUser(null);
+          setProfile(null);
+        }
+      } catch (error) {
+        console.error("Error in onAuthStateChanged:", error);
+      } finally {
+        setLoading(false);
       }
-    }
-    setLoading(false);
+    });
+    return () => unsubscribe();
   }, []);
-
-  const login = (userData, token) => {
-    setUser(userData);
-    localStorage.setItem('auth_token', token);
-    localStorage.setItem('auth_user', JSON.stringify(userData));
-  };
-
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('auth_token');
-    localStorage.removeItem('auth_user');
-  };
 
   const value = {
     user,
+    profile,
+    dashboardId: profile?.dashboardId || null,
     loading,
-    login,
-    logout,
     isAuthenticated: !!user
   };
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 }
 
-export function useAuth() {
-  return useContext(AuthContext);
+/**
+ * useCurrentUser
+ * Hook global para acceder al usuario autenticado por Firebase
+ * Renombrado para evitar colisiones con useAuth (que maneja formularios)
+ */
+export function useCurrentUser() {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useCurrentUser must be used within an AuthProvider');
+  }
+  return context;
 }
+
+// Alias para compatibilidad con otros archivos que importan useAuth
+export const useAuth = useCurrentUser;

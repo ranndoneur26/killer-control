@@ -1,28 +1,35 @@
 import { useState, useEffect } from 'react';
 import { auth } from '../lib/firebase';
-import { getUserSubscriptions } from '../lib/db';
 import { onAuthStateChanged } from 'firebase/auth';
+import { collection, onSnapshot } from 'firebase/firestore';
+import { db } from '../lib/firebase';
 
 export function useSubscriptions() {
   const [subscriptions, setSubscriptions] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    let unsubscribeUser;
+    let unsubscribeSnapshot;
 
     // Listen to auth changes
-    const unsubscribeAuth = onAuthStateChanged(auth, async (user) => {
+    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
       if (user) {
         setLoading(true);
-        try {
-          const subs = await getUserSubscriptions(user.uid);
+        const subsRef = collection(db, 'users', user.uid, 'subscriptions');
+
+        unsubscribeSnapshot = onSnapshot(subsRef, (snapshot) => {
+          const subs = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          }));
           setSubscriptions(subs);
-        } catch (error) {
-          console.error("Error fetching subscriptions", error);
-        } finally {
           setLoading(false);
-        }
+        }, (error) => {
+          console.error("Error connecting to real-time subscriptions:", error);
+          setLoading(false);
+        });
       } else {
+        if (unsubscribeSnapshot) unsubscribeSnapshot();
         setSubscriptions([]);
         setLoading(false);
       }
@@ -30,6 +37,7 @@ export function useSubscriptions() {
 
     return () => {
       unsubscribeAuth();
+      if (unsubscribeSnapshot) unsubscribeSnapshot();
     };
   }, []);
 

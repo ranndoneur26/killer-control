@@ -48,8 +48,26 @@ export function AppearanceProvider({ children }) {
     }
   }, [profile, updateProfile]);
 
+  const [cookieConsent, setCookieConsentState] = useState(() => {
+    const saved = localStorage.getItem('killer_cookie_consent');
+    return saved ? JSON.parse(saved) : null;
+  });
+
+  const setCookieConsent = useCallback((consent) => {
+    setCookieConsentState(consent);
+    localStorage.setItem('killer_cookie_consent', JSON.stringify(consent));
+    localStorage.setItem('killer_cookie_consent_date', new Date().toISOString());
+  }, []);
+
   return (
-    <AppearanceContext.Provider value={{ theme, setTheme, density, setDensity }}>
+    <AppearanceContext.Provider value={{
+      theme,
+      setTheme,
+      density,
+      setDensity,
+      cookieConsent,
+      setCookieConsent
+    }}>
       {children}
     </AppearanceContext.Provider>
   );

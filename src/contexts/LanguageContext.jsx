@@ -11,7 +11,7 @@ const messages = {
 };
 
 export function LanguageProvider({ children }) {
-  const [locale, setLocaleState] = useState(() => localStorage.getItem('locale') || 'en');
+  const [locale, setLocaleState] = useState(() => localStorage.getItem('locale') || 'es');
   const { profile, updateProfile } = useUserProfile();
 
   useEffect(() => {
@@ -31,7 +31,9 @@ export function LanguageProvider({ children }) {
 
   const t = (key, params = {}) => {
     const keys = key.split('.');
-    let value = messages[locale];
+    let value = messages[locale] || messages['en']; // Fallback to EN if locale invalid
+
+    if (!value) return key; // Safety check if even EN is missing
 
     for (const k of keys) {
       if (value && value[k]) {

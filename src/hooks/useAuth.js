@@ -92,15 +92,14 @@ export function useAuth(addToast, navigate) {
 
       if (!isLogin) {
         // For new signups, go to confirmation page
-        navigate(`/check-email?email=${encodeURIComponent(email)}`);
+        navigate(`/check-email?email=${encodeURIComponent(email)}${plan ? `&plan=${plan}` : ''}`);
       } else {
         addToast('success', 'Welcome back!');
-        const plan = sessionStorage.getItem('selected_plan') || 'free';
-        if (plan === 'premium' && !isLogin) {
-          navigate('/checkout');
-        } else {
-          navigate('/dashboard');
+        const storedPlan = sessionStorage.getItem('selected_plan');
+        if (storedPlan && storedPlan !== 'free') {
+          navigate(`/checkout?plan=${storedPlan}`);
         }
+        // No manual navigate to /dashboard; let RedirectIfAuthenticated handle it
       }
 
     } catch (ex) {
@@ -136,13 +135,11 @@ export function useAuth(addToast, navigate) {
 
       addToast('success', `Session started with ${providerName}.`);
 
-      const plan = sessionStorage.getItem('selected_plan') || 'free';
-      // Basic logic: if they want premium from landing page
-      if (plan === 'premium') {
-        navigate('/checkout');
-      } else {
-        navigate('/dashboard');
+      const storedPlan = sessionStorage.getItem('selected_plan');
+      if (storedPlan && storedPlan !== 'free') {
+        navigate(`/checkout?plan=${storedPlan}`);
       }
+      // No manual navigate to /dashboard; let RedirectIfAuthenticated handle it
     } catch (ex) {
       console.error(`[Auth Debug] Details with ${providerName}:`, {
         code: ex.code,
