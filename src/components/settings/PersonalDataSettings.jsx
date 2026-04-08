@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { User, Mail, Shield, Check, Loader2 } from 'lucide-react';
 import { useUserProfile } from '../../hooks/useUserProfile';
 import { useToast } from '../../hooks/useToast';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 export default function PersonalDataSettings() {
   const { profile, loading: profileLoading, updateProfile } = useUserProfile();
   const { addToast } = useToast();
+  const { t } = useLanguage();
 
   const [loading, setLoading] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -41,18 +43,19 @@ export default function PersonalDataSettings() {
   return (
     <section className="space-y-8 animate-in fade-in slide-in-from-bottom-2">
       <div>
-        <h2 className="text-xl font-black mb-1 text-[var(--text-primary)]">Personal Data</h2>
-        <p className="text-sm text-[var(--text-secondary)] font-medium">Update your contact information and how you appear in the app.</p>
+        <h2 className="text-xl font-black mb-1 text-[var(--text-primary)]">{t('profile.personal.title')}</h2>
+        <p className="text-sm text-[var(--text-secondary)] font-medium">{t('profile.personal.subtitle')}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-3xl p-6 space-y-6 shadow-sm">
         <div className="space-y-4">
           <div>
-            <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1">Full Name</label>
+            <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1">{t('profile.personal.displayName')}</label>
             <div className="relative">
               <User size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" />
               <input
                 type="text"
+                placeholder={t('profile.personal.namePlaceholder')}
                 value={form.name}
                 onChange={e => setForm({ ...form, name: e.target.value })}
                 className="w-full bg-[var(--bg-elevated)] border border-[var(--border)] rounded-2xl py-3.5 pl-12 pr-4 text-[var(--text-primary)] focus:outline-none focus:border-[var(--primary)] transition font-bold shadow-inner"
@@ -61,7 +64,7 @@ export default function PersonalDataSettings() {
           </div>
 
           <div>
-            <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1">Email</label>
+            <label className="block text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-2 ml-1">{t('profile.personal.email')}</label>
             <div className="relative">
               <Mail size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" />
               <input
@@ -80,7 +83,7 @@ export default function PersonalDataSettings() {
           className={`w-full py-4 rounded-2xl font-black flex items-center justify-center gap-2 transition-all shadow-lg ${saved ? 'bg-[#10B981] text-white' : 'bg-[var(--primary)] text-white hover:opacity-90 shadow-[var(--primary)]/20'
             } ${(loading || profileLoading) ? 'opacity-70 cursor-not-allowed' : ''}`}
         >
-          {loading ? <Loader2 size={18} className="animate-spin" /> : saved ? <><Check size={18} /> Changes saved</> : 'Update Profile'}
+          {loading ? <Loader2 size={18} className="animate-spin" /> : saved ? <><Check size={18} /> Changes saved</> : t('profile.personal.save')}
         </button>
       </form>
 

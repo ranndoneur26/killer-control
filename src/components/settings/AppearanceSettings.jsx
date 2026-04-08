@@ -4,7 +4,7 @@ import { useAppearance } from '../../contexts/AppearanceContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 export default function AppearanceSettings() {
-  const { theme, setTheme, density, setDensity } = useAppearance();
+  const { theme, setTheme } = useAppearance();
   const { t, locale, setLocale } = useLanguage();
 
   const THEMES = [
@@ -32,11 +32,6 @@ export default function AppearanceSettings() {
     { code: 'ca', label: '🏳️ Català', active: false },
   ];
 
-  const DENSITIES = [
-    { id: 'compact',     label: t('appearance.compact'),  description: t('appearance.compact_desc') },
-    { id: 'normal',      label: t('appearance.normal'),    description: t('appearance.normal_desc') },
-    { id: 'comfortable', label: t('appearance.comfort'),    description: t('appearance.comfort_desc') },
-  ];
 
   return (
     <section className="space-y-8">
@@ -59,11 +54,10 @@ export default function AppearanceSettings() {
                 onClick={() => setTheme(t_item.id)}
                 role="radio"
                 aria-checked={isActive}
-                className={`relative flex flex-col items-center text-center gap-2.5 p-4 rounded-2xl transition-all duration-200 ${
-                  isActive
+                className={`relative flex flex-col items-center text-center gap-2.5 p-4 rounded-2xl transition-all duration-200 ${isActive
                     ? 'bg-indigo-50 dark:bg-indigo-900/20 border-2 border-indigo-600'
                     : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-indigo-300'
-                }`}
+                  }`}
               >
                 {/* Active indicator */}
                 {isActive && (
@@ -91,63 +85,7 @@ export default function AppearanceSettings() {
         </div>
       </div>
 
-      {/* ── DENSITY ── */}
-      <div>
-        <h3 className="font-black text-[var(--text-primary)] text-lg mb-4">{t('appearance.density_title')}</h3>
-        <div className="space-y-2">
-          {DENSITIES.map(d => {
-            const isActive = density === d.id;
-            return (
-              <button
-                key={d.id}
-                onClick={() => setDensity(d.id)}
-                className={`w-full flex items-center gap-4 p-4 rounded-2xl border text-left transition-all active:scale-[0.99] shadow-sm ${
-                  isActive
-                    ? 'bg-[var(--primary)]/10 border-[var(--primary)]/30'
-                    : 'bg-[var(--bg-surface)] border-[var(--border)] hover:border-[var(--text-muted)]'
-                }`}
-              >
-                {/* Radio circle */}
-                <div className={`w-5 h-5 rounded-full border-2 shrink-0 flex items-center justify-center transition ${
-                  isActive ? 'border-[var(--primary)]' : 'border-[var(--border)]'
-                }`}>
-                  {isActive && <span className="w-2.5 h-2.5 rounded-full bg-[var(--primary)]" />}
-                </div>
-                {/* Density visual preview */}
-                <div className="w-10 shrink-0 space-y-1">
-                  {d.id === 'compact' && (
-                    <>
-                      <div className="h-0.5 bg-[var(--border)] rounded w-full" />
-                      <div className="h-0.5 bg-[var(--border)] rounded w-full" />
-                      <div className="h-0.5 bg-[var(--border)] rounded w-3/4" />
-                      <div className="h-0.5 bg-[var(--border)] rounded w-full" />
-                    </>
-                  )}
-                  {d.id === 'normal' && (
-                    <>
-                      <div className="h-1 bg-[var(--border)] rounded w-full" />
-                      <div className="h-1 bg-[var(--border)] rounded w-3/4" />
-                      <div className="h-1 bg-[var(--border)] rounded w-full" />
-                    </>
-                  )}
-                  {d.id === 'comfortable' && (
-                    <>
-                      <div className="h-1.5 bg-[var(--border)] rounded w-full" />
-                      <div className="h-1.5 bg-[var(--border)] rounded w-2/3" />
-                    </>
-                  )}
-                </div>
-                <div>
-                  <p className={`font-black text-sm leading-none ${isActive ? 'text-[var(--primary)]' : 'text-[var(--text-primary)]'}`}>
-                    {d.label}
-                  </p>
-                  <p className="text-xs text-[var(--text-secondary)] font-medium mt-1">{d.description}</p>
-                </div>
-              </button>
-            );
-          })}
-        </div>
-      </div>
+
 
       {/* ── LANGUAGE ── */}
       <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-3xl p-6 shadow-sm">
@@ -155,9 +93,9 @@ export default function AppearanceSettings() {
         <div className="grid grid-cols-2 gap-2">
           {LANGUAGES.map(lang => {
             const isActive = locale === lang.code;
-            
+
             if (!lang.active) {
-               return (
+              return (
                 <div
                   key={lang.code}
                   title={`${t('appearance.coming_soon')} / Coming soon`}
@@ -165,18 +103,17 @@ export default function AppearanceSettings() {
                 >
                   {lang.label}
                 </div>
-               );
+              );
             }
 
             return (
               <button
                 key={lang.code}
                 onClick={() => setLocale(lang.code)}
-                className={`py-3 px-4 rounded-xl text-sm font-black transition-all duration-150 border flex items-center justify-center ${
-                  isActive
+                className={`py-3 px-4 rounded-xl text-sm font-black transition-all duration-150 border flex items-center justify-center ${isActive
                     ? 'border-2 border-indigo-600 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300'
                     : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:border-indigo-300'
-                }`}
+                  }`}
               >
                 {lang.label}
               </button>
