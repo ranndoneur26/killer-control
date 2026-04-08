@@ -115,7 +115,7 @@
     "email": "EMAIL",
     "explore": "EXPLORE",
     "tagline": "YOUR FINANCIAL ALLY FOR SUBSCRIPTIONS.",
-    "brand": "Brand"
+    "brand": "Killer Control"
   },
   "dashboard": {
     "tagline": "Your subscriptions under control",
@@ -250,7 +250,6 @@
       "billing_history": "Billing History",
       "cancel_sub": "Cancel Subscription",
       "stripe_redirect_note": "Redirects to Stripe Secure Customer Portal",
-      "logout": "log out"
     },
     "notifications": {
       "title": "Preferences",
