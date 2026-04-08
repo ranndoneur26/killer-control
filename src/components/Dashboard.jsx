@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { ResponsiveContainer, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Line } from 'recharts';
 import Navigation from './Navigation';
 import CategoryDonutChart from './charts/CategoryDonutChart';
 import SavingsAreaChart from './charts/SavingsAreaChart';

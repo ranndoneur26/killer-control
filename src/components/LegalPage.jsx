@@ -4,12 +4,19 @@ import { ArrowLeft, Shield } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import Logo from './Logo';
 
-export default function LegalPage() {
+export default function LegalPage({ type = 'privacy' }) {
     const { t } = useLanguage();
     const navigate = useNavigate();
 
-    // Reusing translations from legal.cookies
-    const cookieData = t('legal.cookies', { returnObjects: true });
+    // Map types to i18n keys
+    const typeMap = {
+        privacy: 'legal.privacy',
+        terms: 'legal.terms',
+        cookies: 'legal.cookies'
+    };
+
+    const legalKey = typeMap[type] || 'legal.privacy';
+    const legalData = t(legalKey, { returnObjects: true });
 
     return (
         <div className="min-h-screen bg-[var(--bg)] py-12 px-4 sm:px-6 lg:px-8">
@@ -24,28 +31,28 @@ export default function LegalPage() {
                     <Logo className="h-10" />
                 </div>
 
-                <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[2.5rem] p-8 md:p-12 shadow-xl">
+                <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[2.5rem] p-8 md:p-12 shadow-xl overflow-hidden">
                     <div className="flex items-center gap-4 mb-8">
                         <div className="w-12 h-12 bg-[var(--primary)]/10 text-[var(--primary)] rounded-2xl flex items-center justify-center">
                             <Shield size={24} />
                         </div>
                         <div>
                             <h1 className="text-3xl font-black text-[var(--text-primary)] tracking-tight">
-                                {cookieData.title}
+                                {legalData.title || t('legal.notice.title')}
                             </h1>
                             <p className="text-[var(--text-secondary)] font-medium">
-                                {cookieData.subtitle}
+                                {legalData.subtitle || t('legal.notice.subtitle')}
                             </p>
                         </div>
                     </div>
 
-                    <div className="prose prose-invert max-w-none">
+                    <div className="prose prose-invert max-w-none break-words">
                         <p className="text-lg text-[var(--text-primary)] mb-8 leading-relaxed font-medium">
-                            {cookieData.intro}
+                            {legalData.intro}
                         </p>
 
                         <div className="space-y-10">
-                            {cookieData.sections?.map((section, idx) => (
+                            {legalData.sections?.map((section, idx) => (
                                 <section key={idx} className="space-y-3">
                                     <h2 className="text-xl font-bold text-[var(--text-primary)] flex items-center gap-2">
                                         <span className="w-6 h-6 bg-[var(--bg)] border border-[var(--border)] rounded-lg flex items-center justify-center text-xs text-[var(--text-muted)]">
@@ -53,7 +60,7 @@ export default function LegalPage() {
                                         </span>
                                         {section.title}
                                     </h2>
-                                    <p className="text-[var(--text-secondary)] leading-relaxed">
+                                    <p className="text-[var(--text-secondary)] leading-relaxed whitespace-pre-line">
                                         {section.body}
                                     </p>
                                 </section>

@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
+import { Home, List, PlusCircle, User } from 'lucide-react';
 
 export default function Navigation() {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ export default function Navigation() {
           return (
             <button
               key={item.id}
-              onClick={() => router.push(item.path)}
+              onClick={() => navigate(item.path)}
               className={`flex flex-col items-center gap-1.5 min-w-[64px] transition-all duration-300 ${isActive ? 'text-[var(--primary)]' : 'text-[var(--text-secondary)] hover:text-[var(--primary)]'}`}
             >
               <div className={`p-1 rounded-xl transition-all ${isActive ? 'bg-[var(--primary)]/10' : ''}`}>

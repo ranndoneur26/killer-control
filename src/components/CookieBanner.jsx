@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Cookie, X, ChevronDown, ChevronUp } from 'lucide-react'
 import { useLanguage } from '../contexts/LanguageContext'
+import { useAppearance } from '../contexts/AppearanceContext'
 import { enableAnalytics, enableMarketing } from '../lib/analytics'
 
 export default function CookieBanner({ onOpenPolicy }) {
   const { t } = useLanguage()
+  const { cookieConsent, setCookieConsent } = useAppearance()
   const [visible, setVisible] = useState(false)
   const [showDetails, setShowDetails] = useState(false)
 
@@ -17,25 +19,19 @@ export default function CookieBanner({ onOpenPolicy }) {
   })
 
   useEffect(() => {
-    const saved = localStorage.getItem('killer_cookie_consent')
-    if (!saved) {
+    if (!cookieConsent) {
       // Show after a small delay for better UX
       const timer = setTimeout(() => setVisible(true), 1500)
       return () => clearTimeout(timer)
     } else {
-      try {
-        const consent = JSON.parse(saved)
-        if (consent.analytics) enableAnalytics()
-        if (consent.marketing) enableMarketing()
-      } catch (e) {
-        setVisible(true)
-      }
+      if (cookieConsent.analytics) enableAnalytics()
+      if (cookieConsent.marketing) enableMarketing()
+      setVisible(false)
     }
-  }, [])
+  }, [cookieConsent])
 
   const saveConsent = (consent) => {
-    localStorage.setItem('killer_cookie_consent', JSON.stringify(consent))
-    localStorage.setItem('killer_cookie_consent_date', new Date().toISOString())
+    setCookieConsent(consent)
     setVisible(false)
 
     if (consent.analytics) enableAnalytics()
@@ -50,13 +46,14 @@ export default function CookieBanner({ onOpenPolicy }) {
     <AnimatePresence>
       {visible && (
         <motion.div
-          key="cookie-banner-box"
+          layout
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
-          className="fixed bottom-0 left-0 right-0 z-[100] p-4 md:p-6 flex justify-center pointer-events-none"
+          data-state={visible ? 'open' : 'closed'}
+          className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-md px-4 py-10 flex items-center justify-center overflow-y-auto no-scrollbar"
         >
-          <div className="bg-[#0F172A] text-white p-6 md:p-8 rounded-[2.5rem] shadow-2xl max-w-3xl w-full border border-white/10 pointer-events-auto overflow-hidden">
+          <div className="bg-[#0F172A] text-white p-6 md:p-8 rounded-[2.5rem] shadow-2xl max-w-2xl w-full border border-white/10 overflow-hidden relative">
             <div className="flex flex-col gap-6">
               {/* Header */}
               <div className="flex items-start gap-5">
@@ -69,14 +66,7 @@ export default function CookieBanner({ onOpenPolicy }) {
                     {t('cookies_banner.description')}
                   </p>
                 </div>
-                <button
-                  onClick={() => setVisible(false)}
-                  className="text-[#94A3B8] hover:text-white transition-colors"
-                >
-                  <X size={20} />
-                </button>
               </div>
-
               {/* Advanced Options */}
               <AnimatePresence>
                 {showDetails && (
@@ -161,7 +151,8 @@ export default function CookieBanner({ onOpenPolicy }) {
             </div>
           </div>
         </motion.div>
-      )}
-    </AnimatePresence>
+      )
+      }
+    </AnimatePresence >
   )
 }

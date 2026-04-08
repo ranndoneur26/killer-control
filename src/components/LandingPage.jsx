@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { PLANS } from '../constants/plans';
 import {
   Check,
   ChevronRight,
@@ -19,7 +21,6 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MockupChart from './charts/MockupChart';
-import { useNavigate, Link } from 'react-router-dom';
 import HeroSlider from './HeroSlider';
 import Logo from './Logo';
 import TermsModal from './TermsModal';
@@ -29,12 +30,14 @@ import LegalNoticeModal from './LegalNoticeModal';
 import ContactModal from './ContactModal';
 import DemoModal from './DemoModal';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useCurrentUser } from '../contexts/AuthContext';
 import HeroHeader from './HeroHeader';
 import HeroCopy from './HeroCopy';
 
 const LandingPage = () => {
   const navigate = useNavigate();
   const { t } = useLanguage();
+  const { isAuthenticated } = useCurrentUser();
   const [showTerms, setShowTerms] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showCookies, setShowCookies] = useState(false);
@@ -42,6 +45,14 @@ const LandingPage = () => {
   const [showContact, setShowContact] = useState(false);
   const [showDemo, setShowDemo] = useState(false);
   const [activeFAQ, setActiveFAQ] = useState(0); // Open first by default
+
+  const handleStart = (planType) => {
+    if (planType === 'premium') {
+      navigate(`/login?plan=${PLANS.PREMIUM_MONTHLY}`);
+      return;
+    }
+    navigate('/login');
+  };
 
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
@@ -65,7 +76,7 @@ const LandingPage = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div {...fadeIn}>
               <HeroCopy
-                onStart={() => navigate('/signup?plan=free')}
+                onStart={() => handleStart('free')}
                 onDemo={() => setShowDemo(true)}
               />
             </motion.div>
@@ -222,7 +233,7 @@ const LandingPage = () => {
                 ))}
               </ul>
 
-              <button onClick={() => navigate('/signup?plan=free')} className="mt-auto w-full py-4 px-6 bg-white border border-[#E2E8F0] text-amber-500 rounded-2xl font-bold hover:bg-[#F8FAFC] transition-all">
+              <button onClick={() => handleStart('free')} className="mt-auto w-full py-4 px-6 bg-white border border-[#E2E8F0] text-amber-500 rounded-2xl font-bold hover:bg-[#F8FAFC] transition-all">
                 {t('pricing.freemium_cta')}
               </button>
             </div>
@@ -250,7 +261,7 @@ const LandingPage = () => {
                 ))}
               </ul>
 
-              <button onClick={() => navigate('/signup?plan=premium')} className="mt-auto w-full py-4 px-6 bg-amber-500 text-white rounded-2xl font-bold hover:bg-amber-400 transition-all shadow-lg shadow-amber-500/30">
+              <button onClick={() => handleStart('premium')} className="mt-auto w-full py-4 px-6 bg-amber-500 text-white rounded-2xl font-bold hover:bg-amber-400 transition-all shadow-lg shadow-amber-500/30">
                 {t('pricing.premium_cta')}
               </button>
             </div>
@@ -386,7 +397,7 @@ const LandingPage = () => {
             <div className="relative z-10">
               <h2 className="text-4xl lg:text-5xl font-black text-white mb-6">{t('cta.title')}</h2>
               <p className="text-[#94A3B8] text-lg mb-10 max-w-2xl mx-auto font-medium">{t('cta.subtitle')}</p>
-              <button onClick={() => navigate('/signup?plan=free')} className="px-12 py-5 bg-amber-500 text-white font-bold rounded-2xl hover:bg-amber-400 active:scale-95 transition-all shadow-xl shadow-amber-900/40">
+              <button onClick={() => handleStart('free')} className="px-12 py-5 bg-amber-500 text-white font-bold rounded-2xl hover:bg-amber-400 active:scale-95 transition-all shadow-xl shadow-amber-900/40">
                 {t('cta.button')}
               </button>
             </div>
@@ -405,10 +416,10 @@ const LandingPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 text-[10px] font-black uppercase tracking-[0.2em] text-[#94A3B8] text-center md:text-left mb-12">
             <div className="flex flex-col gap-3">
               <span className="text-gray-400 mb-1 pb-2 border-b border-[#f1f5f9]">{t('footer.legal')}</span>
-              <button onClick={() => setShowLegal(true)} className="hover:text-[#4F46E5] transition-colors md:text-left uppercase">{t('footer.legal_notice')}</button>
-              <button onClick={() => setShowPrivacy(true)} className="hover:text-[#4F46E5] transition-colors md:text-left uppercase">{t('footer.privacy')}</button>
-              <button onClick={() => setShowTerms(true)} className="hover:text-[#4F46E5] transition-colors md:text-left uppercase">{t('footer.terms')}</button>
-              <button onClick={() => setShowCookies(true)} className="hover:text-[#4F46E5] transition-colors md:text-left uppercase">{t('footer.cookies')}</button>
+              <Link to="/legal" className="hover:text-[#4F46E5] transition-colors md:text-left uppercase">{t('footer.legal_notice')}</Link>
+              <Link to="/privacidad" className="hover:text-[#4F46E5] transition-colors md:text-left uppercase">{t('footer.privacy')}</Link>
+              <Link to="/terms" className="hover:text-[#4F46E5] transition-colors md:text-left uppercase">{t('footer.terms')}</Link>
+              <Link to="/cookies" className="hover:text-[#4F46E5] transition-colors md:text-left uppercase">{t('footer.cookies')}</Link>
             </div>
             <div className="flex flex-col gap-3">
               <span className="text-gray-400 mb-1 pb-2 border-b border-[#f1f5f9]">{t('footer.support')}</span>

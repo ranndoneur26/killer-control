@@ -86,7 +86,7 @@ export default function UserManualModal({ open, onClose }) {
             <section>
               <div className="flex items-center gap-2 mb-6 text-[#F59E0B] uppercase tracking-widest text-[10px] font-black">
                 <Sparkles size={14} />
-                <span>Why use <span className="text-[#F59E0B]">Killer</span> Control?</span>
+                <span>{t('manual.why_title')}</span>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {ADVANTAGES.map((adv, i) => (
@@ -103,9 +103,9 @@ export default function UserManualModal({ open, onClose }) {
 
             {/* How to use */}
             <section className="bg-gradient-to-br from-[var(--primary)]/10 to-transparent p-8 rounded-[2rem] border border-[var(--primary)]/10">
-              <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
+              <h3 className="text-lg font-black mb-6 flex items-center gap-2 text-black">
                 <MousePointer2 size={20} className="text-[var(--primary)]" />
-                How to start in 3 steps
+                {t('manual.steps_title')}
               </h3>
               <div className="space-y-6">
                 {STEPS.map((step, i) => (

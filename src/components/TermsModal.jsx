@@ -22,7 +22,7 @@ export default function TermsModal({ open, onClose }) {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 40, opacity: 0 }}
             transition={{ type: 'spring', damping: 30, stiffness: 320 }}
-            className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-t-3xl sm:rounded-3xl w-full sm:max-w-2xl flex flex-col max-h-[92vh]"
+            className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-t-3xl sm:rounded-3xl w-full sm:max-w-2xl flex flex-col max-h-[92vh] overflow-hidden"
           >
             {/* ── Header ── */}
             <div className="flex items-center gap-4 px-6 py-5 border-b border-[var(--border)] shrink-0">

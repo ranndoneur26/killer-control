@@ -81,6 +81,13 @@ export default function SubscriptionDetail() {
             subData.categoria?.toLowerCase() === 'press' ? t('categories.press') :
               subData.categoria?.toLowerCase() === 'other' ? t('categories.other') : subData.categoria;
 
+  // Chart data fallback safely extracting from Firebase true history, or defaulting to an empty array to prevent crashes
+  const historyData = Array.isArray(subData.costHistory)
+    ? subData.costHistory
+    : Array.isArray(subData.historial)
+      ? subData.historial
+      : [];
+
   // Prepare data format for the Form component
   const formInitialData = {
     name: subData.nombre,
@@ -184,7 +191,7 @@ export default function SubscriptionDetail() {
               </h3>
               <div className="h-40 w-full ml-[-1rem]">
                 <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={mockHistoryData}>
+                  <AreaChart data={historyData}>
                     <defs>
                       <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="5%" stopColor="var(--primary)" stopOpacity={0.15} />

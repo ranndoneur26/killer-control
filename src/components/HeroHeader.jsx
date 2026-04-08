@@ -4,14 +4,29 @@ import { Link as RouterLink, useLocation } from 'react-router-dom';
 import Logo from './Logo';
 import LanguageToggle from './LanguageToggle';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useCurrentUser } from '../contexts/AuthContext';
+import { auth } from '../lib/firebase';
+import { signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 const HeroHeader = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const { t, locale } = useLanguage();
+  const { isAuthenticated } = useCurrentUser();
   const isHomePage = pathname === '/';
   const authPaths = ['/login', '/signup', '/register', '/reset-password', '/check-email', '/verify-email'];
   const isAuthPage = authPaths.includes(pathname);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate('/');
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
 
   const navLinks = [
     { href: isHomePage ? "#features" : "/#features", label: t('nav.features') },
@@ -47,15 +62,24 @@ const HeroHeader = () => {
             <LanguageToggle />
 
             {!isAuthPage && (
-              isHomePage ? (
+              isAuthenticated ? (
+                <RouterLink to="/dashboard" className="text-sm font-bold bg-amber-500 text-white px-6 py-2.5 rounded-full hover:bg-amber-400 transition-all shadow-sm">
+                  {t('nav.dashboard')}
+                </RouterLink>
+              ) : (
                 <RouterLink to="/login" className="text-sm font-bold bg-amber-500 text-white px-6 py-2.5 rounded-full hover:bg-amber-400 transition-all shadow-sm">
                   {t('nav.login')}
                 </RouterLink>
-              ) : (
-                <RouterLink to="/" className="text-sm font-bold bg-[var(--text-secondary)] text-white px-6 py-2.5 rounded-full hover:opacity-90 transition-all shadow-sm">
-                  {t('nav.logout')}
-                </RouterLink>
               )
+            )}
+
+            {isAuthenticated && (
+              <button
+                onClick={handleLogout}
+                className="text-sm font-bold text-[var(--text-secondary)] hover:text-red-500 transition-colors"
+              >
+                {t('profile.logout')}
+              </button>
             )}
           </div>
 
@@ -84,15 +108,23 @@ const HeroHeader = () => {
             </a>
           ))}
           {!isAuthPage && (
-            isHomePage ? (
+            isAuthenticated ? (
+              <RouterLink to="/dashboard" onClick={handleLinkClick} className="block text-center bg-amber-500 hover:bg-amber-400 text-white px-5 py-3 rounded-xl font-bold">
+                {t('nav.dashboard')}
+              </RouterLink>
+            ) : (
               <RouterLink to="/login" onClick={handleLinkClick} className="block text-center bg-amber-500 hover:bg-amber-400 text-white px-5 py-3 rounded-xl font-bold">
                 {t('nav.login')}
               </RouterLink>
-            ) : (
-              <RouterLink to="/" onClick={handleLinkClick} className="block text-center bg-[#64748B] text-white px-5 py-3 rounded-xl font-bold">
-                {t('nav.logout')}
-              </RouterLink>
             )
+          )}
+          {isAuthenticated && (
+            <button
+              onClick={() => { handleLogout(); handleLinkClick(); }}
+              className="w-full text-center py-3 text-red-500 font-bold border border-red-500/20 rounded-xl"
+            >
+              {t('profile.logout')}
+            </button>
           )}
         </div>
       )}

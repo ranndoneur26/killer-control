@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import { useToast } from '../hooks/useToast';
 import { useAuth } from '../hooks/useAuth';
+import { useCurrentUser } from '../contexts/AuthContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Loader2, Mail, ArrowRight, Eye, EyeOff, ShieldCheck, CheckCircle2, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -41,8 +42,11 @@ export default function SignupPage() {
   const { addToast } = useToast();
   const { t } = useLanguage();
 
-  const plan = searchParams.get('plan') || 'free';
-  const isPremium = plan === 'premium';
+  const plan = searchParams.get('plan');
+  const isPremium = !!plan;
+
+  const { user, loading: authLoading } = useCurrentUser();
+
 
   /* Initialize Auth Hook (Signup mode) */
   const auth = useAuth(addToast, navigate);
@@ -55,44 +59,42 @@ export default function SignupPage() {
   }, [plan]);
 
   return (
-    <div className="relative flex flex-col min-h-screen bg-[var(--bg)] text-[var(--text-primary)]">
+    <div className="relative flex flex-col min-h-screen bg-white text-slate-900 font-sans">
 
       {/* Container */}
       <div className="flex flex-col flex-1 p-6 max-w-md mx-auto w-full justify-center">
 
         {/* Logo */}
-        <div className="flex justify-center mb-10">
-          <Logo className="h-14" />
+        <div className="flex justify-center mb-6">
+          <Logo className="h-16" />
         </div>
 
-        {/* Heading */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold mb-3 text-[var(--text-primary)]">
+          <h1 className="text-4xl font-extrabold mb-3 text-slate-900 leading-tight">
             {isPremium ? t('login.premium_trial') : <span dangerouslySetInnerHTML={{ __html: t('login.create_account') }} />}
           </h1>
-          <p className="text-[var(--text-secondary)] text-sm leading-relaxed font-medium">
+          <p className="text-slate-500 text-base font-medium leading-relaxed">
             {isPremium ? t('login.premium_subtitle') : <span dangerouslySetInnerHTML={{ __html: t('login.join_subtitle') }} />}
           </p>
         </div>
 
-        {/* ── OAuth ── */}
         <div className="flex flex-col gap-3 mb-8">
           <button
             onClick={() => auth.handleOAuth('Google')}
             disabled={anyLoading}
-            className="w-full flex items-center justify-center gap-2 font-bold rounded-full py-3.5 bg-[var(--bg-surface)] text-[var(--text-primary)] border border-[var(--border)] hover:bg-[var(--bg-elevated)] transition shadow-sm disabled:opacity-70"
+            className="w-full flex items-center justify-center gap-3 font-bold rounded-full py-4 bg-white text-slate-900 border border-slate-200 hover:bg-slate-50 transition shadow-sm disabled:opacity-70"
           >
-            {auth.loadingBtn === 'google' ? <Loader2 key="goog-l" size={18} className="animate-spin" /> : <span key="goog-btn-span" className="flex items-center gap-2"><GoogleIcon key="goog-i" /> {t('login.google_continue')}</span>}
+            {auth.loadingBtn === 'google' ? <Loader2 key="goog-l" size={18} className="animate-spin text-indigo-600" /> : <span key="goog-btn-span" className="flex items-center gap-3"><GoogleIcon key="goog-i" /> {t('login.google_continue')}</span>}
           </button>
         </div>
 
         {/* ── Divider ── */}
-        <div className="flex items-center mb-6">
-          <div className="flex-1 border-t border-[var(--border)]" />
-          <span className="px-4 text-xs text-[var(--text-muted)] font-bold tracking-wider uppercase">
+        <div className="flex items-center mb-8">
+          <div className="flex-1 border-t border-slate-200" />
+          <span className="px-6 text-[10px] text-slate-400 font-bold tracking-[0.2em] uppercase">
             {t('login.or_email')}
           </span>
-          <div className="flex-1 border-t border-[var(--border)]" />
+          <div className="flex-1 border-t border-slate-200" />
         </div>
 
         {/* ── Email → Password flow ── */}
@@ -109,11 +111,11 @@ export default function SignupPage() {
                 onChange={e => { auth.setEmail(e.target.value); auth.setEmailError(''); }}
                 placeholder={t('login.email_placeholder')}
                 disabled={auth.step === 'password' || anyLoading}
-                className={`w-full bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-2xl py-4 px-5 pr-12 outline-none border border-[var(--border)] shadow-sm focus:ring-2 focus:ring-[var(--primary)]/20 focus:border-[var(--primary)] transition placeholder-[var(--text-muted)] font-medium ${auth.emailError ? 'border-red-500' : ''}`}
+                className={`w-full bg-white text-slate-900 rounded-2xl py-4.5 px-5 pr-12 outline-none border border-slate-200 shadow-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition placeholder-slate-400 font-medium h-14 ${auth.emailError ? 'border-red-500' : ''}`}
               />
-              <Mail className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+              <Mail className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-400" size={22} />
             </div>
-            {auth.emailError && <p className="text-xs text-red-400 mt-1 pl-1">{auth.emailError}</p>}
+            {auth.emailError && <p className="text-xs text-red-500 mt-2 pl-1 font-semibold">{auth.emailError}</p>}
           </div>
 
           {/* Password field */}
@@ -130,17 +132,17 @@ export default function SignupPage() {
                     type={auth.showPassword ? 'text' : 'password'}
                     value={auth.password}
                     onChange={e => { auth.setPassword(e.target.value); auth.setPassError(''); }}
-                    placeholder={t('login.password_placeholder') || "Crea una contraseña (mín. 8 caract.)"}
+                    placeholder={t('login.pass_placeholder_signup') || "Crea una contraseña (mín. 8 caract.)"}
                     autoFocus
                     disabled={anyLoading}
-                    className={`w-full bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-2xl py-4 px-5 pr-12 outline-none border border-[var(--border)] shadow-sm focus:ring-2 focus:ring-[var(--primary)]/20 focus:border-[var(--primary)] transition font-medium ${auth.passError ? 'border-red-500' : ''}`}
+                    className={`w-full bg-white text-slate-900 rounded-2xl py-4.5 px-5 pr-12 outline-none border border-slate-200 shadow-sm h-14 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition font-medium ${auth.passError ? 'border-red-500' : ''}`}
                   />
                   <button
                     type="button"
                     onClick={() => auth.setShowPassword(v => !v)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]"
+                    className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition"
                   >
-                    {auth.showPassword ? <EyeOff size={19} /> : <Eye size={19} />}
+                    {auth.showPassword ? <EyeOff size={22} /> : <Eye size={22} />}
                   </button>
                 </div>
 
@@ -169,8 +171,7 @@ export default function SignupPage() {
                       })}
                     </div>
 
-                    {/* Criteria List */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4">
                       <PasswordCriteria met={auth.password.length >= 8} label="8+ caracteres" />
                       <PasswordCriteria met={/[A-Z]/.test(auth.password)} label="Mayúscula" />
                       <PasswordCriteria met={/[0-9]/.test(auth.password)} label="Número" />
@@ -179,7 +180,7 @@ export default function SignupPage() {
                   </motion.div>
                 )}
 
-                {auth.passError && <p className="text-xs text-red-400 mt-1 pl-1">{auth.passError}</p>}
+                {auth.passError && <p className="text-xs text-red-500 mt-2 pl-1 font-semibold">{auth.passError}</p>}
               </motion.div>
             )}
           </AnimatePresence>
@@ -188,27 +189,24 @@ export default function SignupPage() {
           <button
             type="submit"
             disabled={anyLoading}
-            className="w-full flex items-center justify-center gap-2 font-bold rounded-full py-4 bg-[var(--primary)] text-white hover:opacity-90 transition shadow-lg shadow-[var(--primary)]/20 disabled:opacity-70"
+            className="w-full flex items-center justify-center gap-2 font-bold rounded-2xl py-4 bg-indigo-600 text-white hover:bg-indigo-700 transition shadow-lg shadow-indigo-200 disabled:opacity-70 h-14"
           >
-            {auth.loadingBtn === 'email' ? <Loader2 size={18} className="animate-spin" /> : (
-              auth.step === 'email' ? <>{t('login.continue')} <ArrowRight size={18} /></> : t('login.signup_btn')
+            {auth.loadingBtn === 'email' ? <Loader2 size={24} className="animate-spin" /> : (
+              auth.step === 'email' ? <>{t('login.continue')} <ArrowRight size={20} /></> : t('login.signup_btn')
             )}
           </button>
         </form>
 
         {/* Footer Link */}
-        <div className="mt-8 text-center">
-          <p className="text-sm text-[var(--text-secondary)] font-medium">
-            {t('login.already_account')}{' '}
-            <button
-              type="button"
-              onClick={() => navigate('/login')}
-              className="text-[var(--text-primary)] font-bold hover:text-[var(--primary)] transition"
-            >
-              {t('login.login_link')}
-            </button>
-          </p>
-        </div>
+        <p className="mt-8 text-center text-sm font-bold text-slate-400 tracking-wide uppercase">
+          {t('login.already_have_account')} {' '}
+          <Link
+            to={`/login${plan ? `?plan=${plan}` : ''}`}
+            className="text-indigo-600 hover:text-indigo-700 transition-all hover:underline"
+          >
+            {t('login.login_now')}
+          </Link>
+        </p>
       </div>
     </div>
   );

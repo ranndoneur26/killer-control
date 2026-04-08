@@ -34,11 +34,11 @@ export default function Alternatives() {
         </header>
 
         <div className="bg-gradient-to-r from-primary/20 to-transparent p-6 rounded-3xl border border-primary/20 mb-8">
-            <div className="flex items-center gap-3 mb-2">
-               <Sparkles className="text-[#F59E0B]" size={24} />
-               <span className="font-bold text-lg text-[#F59E0B]">Killer Insight</span>
-            </div>
-           <p className="text-sm text-gray-300">Hemos analizado el mercado y estos servicios ofrecen lo mismo por menos dinero.</p>
+          <div className="flex items-center gap-3 mb-2">
+            <Sparkles className="text-[#F59E0B]" size={24} />
+            <span className="font-bold text-lg text-[#F59E0B]">Killer Insight</span>
+          </div>
+          <p className="text-sm text-gray-300">Hemos analizado el mercado y estos servicios ofrecen lo mismo por menos dinero.</p>
         </div>
 
         <div className="space-y-4">
@@ -57,11 +57,11 @@ export default function Alternatives() {
                 </div>
                 <p className="text-xs text-gray-400 mb-3">{opt.reason}</p>
                 <div className="flex items-center gap-4">
-                   <span className="font-bold text-white">{opt.price}€<span className="text-[10px] text-gray-500 ml-0.5">/mes</span></span>
-                   <div className="flex items-center gap-1 text-primary text-xs font-bold">
-                      <TrendingDown size={14} />
-                      Ahorras {opt.savings}€
-                   </div>
+                  <span className="font-bold text-white">{opt.price}€<span className="text-[10px] text-gray-500 ml-0.5">/mes</span></span>
+                  <div className="flex items-center gap-1 text-primary text-xs font-bold">
+                    <TrendingDown size={14} />
+                    Ahorras {opt.savings}€
+                  </div>
                 </div>
               </div>
               <ChevronRight className="text-gray-600 group-hover:text-primary transition-colors" />
@@ -69,8 +69,8 @@ export default function Alternatives() {
           ))}
         </div>
 
-        <button 
-          onClick={() => navigate('/dashboard')}
+        <button
+          onClick={() => navigate('/')}
           className="w-full mt-10 bg-primary text-[#07101E] font-bold py-4 rounded-2xl hover:bg-[#00e600] transition shadow-lg shadow-primary/20"
         >
           Ver Plan de Optimización Completo
