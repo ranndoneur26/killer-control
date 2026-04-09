@@ -4,19 +4,24 @@ import { ArrowLeft, Shield } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import Logo from './Logo';
 
-export default function LegalPage({ type = 'privacy' }) {
+
+export default function LegalPage({ type = 'notice' }) {
     const { t } = useLanguage();
     const navigate = useNavigate();
 
+
     // Map types to i18n keys
     const typeMap = {
-        privacy: 'legal.privacy',
+        notice: 'legal.notice',
         terms: 'legal.terms',
-        cookies: 'legal.cookies'
+        cookies: 'legal.cookies',
+        privacy: 'legal.privacy'
     };
 
-    const legalKey = typeMap[type] || 'legal.privacy';
+
+    const legalKey = typeMap[type] || 'legal.notice';
     const legalData = t(legalKey, { returnObjects: true });
+
 
     return (
         <div className="min-h-screen bg-[var(--bg)] py-12 px-4 sm:px-6 lg:px-8">
@@ -31,6 +36,7 @@ export default function LegalPage({ type = 'privacy' }) {
                     <Logo className="h-10" />
                 </div>
 
+
                 <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[2.5rem] p-8 md:p-12 shadow-xl overflow-hidden">
                     <div className="flex items-center gap-4 mb-8">
                         <div className="w-12 h-12 bg-[var(--primary)]/10 text-[var(--primary)] rounded-2xl flex items-center justify-center">
@@ -38,18 +44,20 @@ export default function LegalPage({ type = 'privacy' }) {
                         </div>
                         <div>
                             <h1 className="text-3xl font-black text-[var(--text-primary)] tracking-tight">
-                                {legalData.title || t('legal.notice.title')}
+                                {legalData.title}
                             </h1>
                             <p className="text-[var(--text-secondary)] font-medium">
-                                {legalData.subtitle || t('legal.notice.subtitle')}
+                                {legalData.subtitle}
                             </p>
                         </div>
                     </div>
+
 
                     <div className="prose prose-invert max-w-none break-words">
                         <p className="text-lg text-[var(--text-primary)] mb-8 leading-relaxed font-medium">
                             {legalData.intro}
                         </p>
+
 
                         <div className="space-y-10">
                             {legalData.sections?.map((section, idx) => (
@@ -67,6 +75,7 @@ export default function LegalPage({ type = 'privacy' }) {
                             ))}
                         </div>
                     </div>
+
 
                     <div className="mt-12 pt-8 border-t border-[var(--border)] text-center text-[var(--text-muted)] text-sm">
                         <p>© {new Date().getFullYear()} Killer Control. {t('legal.rights') || 'Todos los derechos reservados.'}</p>
