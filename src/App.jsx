@@ -32,7 +32,11 @@ function App() {
               <Route path="/check-email" element={<CheckEmailPage />} />
               <Route path="/verify-email" element={<VerifyEmailPage />} />
               <Route path="/reset-password" element={<ResetPasswordPage />} />
-              <Route path="/privacidad" element={<LegalPage />} />
+              <Route path="/privacidad" element={<LegalPage type="notice" />} />
+              <Route path="/legal" element={<LegalPage type="notice" />} />
+              <Route path="/terms" element={<LegalPage type="terms" />} />
+              <Route path="/cookies" element={<LegalPage type="cookies" />} />
+              <Route path="/privacy" element={<LegalPage type="privacy" />} />
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/guide/:id" element={<CancellationGuide />} />
