@@ -253,7 +253,7 @@
     },
     "notifications": {
       "title": "Preferences",
-      "subtitle": "Customize your Killer Control experience."
+      "subtitle": "Customize your Killer Control experience.",
       "currency": "Base Currency",
       "currencyDesc": "Your dashboard will display totals in this currency.",
       "sectionTitle": "NOTIFICATIONS & ALERTS",
