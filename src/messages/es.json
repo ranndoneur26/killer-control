@@ -249,7 +249,7 @@
       "next_billing": "Próxima fecha de facturación: {date}",
       "billing_history": "Historial de facturación",
       "cancel_sub": "Cancelar suscripción",
-      "stripe_redirect_note": "Redirige al portal seguro de clientes de Stripe",
+      "stripe_redirect_note": "Redirige al portal seguro de clientes de Stripe"
     },
     "notifications": {
       "title": "Preferencias",
