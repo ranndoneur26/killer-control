@@ -249,11 +249,11 @@
       "next_billing": "Next billing date: {date}",
       "billing_history": "Billing History",
       "cancel_sub": "Cancel Subscription",
-      "stripe_redirect_note": "Redirects to Stripe Secure Customer Portal",
+      "stripe_redirect_note": "Redirects to Stripe Secure Portal"
     },
     "notifications": {
       "title": "Preferences",
-      "subtitle": "Customize your Killer Control experience.",
+      "subtitle": "Customize your Killer Control experience."
       "currency": "Base Currency",
       "currencyDesc": "Your dashboard will display totals in this currency.",
       "sectionTitle": "NOTIFICATIONS & ALERTS",
